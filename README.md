@@ -27,6 +27,11 @@ node scripts/serve.mjs     # http://localhost:5173
 Flags: `node scripts/fetch.mjs --offline` usa o cache em `.cache/`;
 `node scripts/build.mjs presidente` roda só uma corrida.
 
+## No ar
+
+- Netlify: **https://unique-snickerdoodle-a7d284.netlify.app/** (builda `site/` a cada push)
+- GitHub Pages: https://fcairo1.github.io/agregador-br/ (espelho)
+
 ## Publicar (GitHub Pages)
 
 1. `git remote add origin git@github.com:<você>/agregador-br.git && git push -u origin main`

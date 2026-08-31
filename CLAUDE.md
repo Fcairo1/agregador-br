@@ -143,7 +143,9 @@ navegador. **Mudou o modelo ou os params no server? Reflita em `agg.js` e no `da
 Roda `node scripts/build.mjs`; commita **só `data/`** se algum CSV mudou (`chore: atualiza
 pesquisas (bot)`). `site/data/*.json` é derivado (gitignored) e rebuildado a cada deploy.
 GitHub Pages publica `site/` via `actions/deploy-pages`.
-Repo: `Fcairo1/agregador-br` · site: https://fcairo1.github.io/agregador-br/
+Repo: `Fcairo1/agregador-br` · site: https://unique-snickerdoodle-a7d284.netlify.app/
+(Netlify builda `site/` a cada push; o GitHub Pages em fcairo1.github.io/agregador-br segue
+como espelho. Renomear o site no Netlify → atualizar `og:url`/`og:image` em `site/index.html`.)
 
 ## Rodar local
 
