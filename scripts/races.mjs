@@ -36,6 +36,8 @@ export function partyInfo(p) {
 // ---- regras de seção (numeração dos artigos da Wikipédia) ----
 const presFirstRound = (s) => /^1\.1\.\d+$/.test(s.number);
 const govFirstRound = (s) => /^2\.1\.\d+$/.test(s.number);
+const govSecondRound = (s) => /^3\.1\.\d+$/.test(s.number) && /202[0-9]/.test(s.line); // 1º confronto
+const senado = (s) => /^4\.1\.\d+$/.test(s.number);
 const exact = (want) => (s) => s.number === want;
 // 2º turno presidencial: seções "202X" sob um pai "Lula e <fulano>"
 const lulaVs = (rx) => (s, all) => {
@@ -111,31 +113,51 @@ export const RACES = {
     display: [C("tarcisio", "Tarcísio", "REP"), C("haddad", "Haddad", "PT")],
   }),
 
-  "mg-governador": race({
-    group: "Minas Gerais",
-    label: "Governador de MG",
-    wikiPage: "Pesquisas eleitorais para a eleição estadual de 2026 em Minas Gerais",
-    sectionRule: govFirstRound,
-  }),
-  "rj-governador": race({
-    group: "Rio de Janeiro",
-    label: "Governador do RJ",
-    wikiPage: "Pesquisas eleitorais para a eleição estadual de 2026 no Rio de Janeiro",
-    sectionRule: govFirstRound,
-  }),
-  "pr-governador": race({
-    group: "Paraná",
-    label: "Governador do PR",
-    wikiPage: "Pesquisas eleitorais para a eleição estadual de 2026 no Paraná",
-    sectionRule: govFirstRound,
-  }),
-  "rs-governador": race({
-    group: "Rio Grande do Sul",
-    label: "Governador do RS",
-    wikiPage: "Pesquisas eleitorais para a eleição estadual de 2026 no Rio Grande do Sul",
-    sectionRule: govFirstRound,
+  ...stateRaces("mg", "MG", "Minas Gerais", "em Minas Gerais", [C("cleitinho", "Cleitinho", "PSD")]),
+  ...stateRaces("rj", "RJ", "Rio de Janeiro", "no Rio de Janeiro"),
+  ...stateRaces("pr", "PR", "Paraná", "no Paraná"),
+  ...stateRaces("rs", "RS", "Rio Grande do Sul", "no Rio Grande do Sul"),
+
+  // SP já tem gov 1T/2T acima; falta o Senado
+  "sp-senado": race({
+    group: "São Paulo",
+    round: "SEN",
+    label: "Senado — São Paulo",
+    wikiPage: "Pesquisas eleitorais para a eleição estadual de 2026 em São Paulo",
+    sectionRule: senado,
+    optional: true,
   }),
 };
+
+// gera gov 1º turno + gov 2º turno + Senado de um estado
+function stateRaces(slug, uf, group, suffix, display = []) {
+  const page = `Pesquisas eleitorais para a eleição estadual de 2026 ${suffix}`;
+  return {
+    [`${slug}-governador`]: race({
+      group,
+      label: `Governador ${uf} — 1º turno`,
+      wikiPage: page,
+      sectionRule: govFirstRound,
+      display,
+    }),
+    [`${slug}-governador-2t`]: race({
+      group,
+      round: "2T",
+      label: `Governador ${uf} — 2º turno`,
+      wikiPage: page,
+      sectionRule: govSecondRound,
+      optional: true,
+    }),
+    [`${slug}-senado`]: race({
+      group,
+      round: "SEN",
+      label: `Senado — ${group}`,
+      wikiPage: page,
+      sectionRule: senado,
+      optional: true,
+    }),
+  };
+}
 
 // Um candidato só entra no gráfico se tiver pelo menos isto:
 export const PLOT_MIN_POLLS = 6;

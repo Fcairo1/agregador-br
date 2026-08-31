@@ -162,8 +162,11 @@ npm run serve      # http://localhost:5173  (servidor estático, Node puro)
   0.88–1.12, encolhido por nº de ciclos). Entra no `r_i` do Kalman. Mostrado na tabela (`.rt`).
   `build.mjs` roda como best-effort (não derruba o build).
 - ✅ Filtro de institutos + **período** (recomputo no cliente).
-- ✅ Cenários múltiplos: usa o mais completo. 2º turno: SP + 4 cenários presidenciais.
-- ✅ Mais estados: MG, RJ, PR, RS. House effects. Selo/cor de partido. Vencedor na tabela.
+- ✅ Cenários múltiplos: usa o mais completo. 2º turno: presidente (4 cenários) + SP/RJ/PR.
+- ✅ Mais estados: MG, RJ, PR, RS. **Senado** dos 5 estados. House effects. Selo/cor de partido.
+- ✅ "O que mudou" (∆ ~30d) na legenda. Geometria responsiva no celular. Meta OG + og.svg.
+- Corridas `optional: true` (2º turno de estado sem pesquisa ainda) são puladas sem quebrar o build.
+  Sub-abas por `round`: `1T` / `2T` / `SEN` (ROUND_LABEL no app.js). Estados gerados por `stateRaces()`.
 
 ## TODO / fase 2
 

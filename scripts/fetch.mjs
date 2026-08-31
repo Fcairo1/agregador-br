@@ -27,6 +27,11 @@ async function run(raceKey) {
   console.log(`\n== ${raceKey} : ${race.wikiPage} ==`);
   const { polls, candidates } = await fetchRacePolls(race, { offline });
   console.log(`  ${polls.length} linhas de pesquisa, ${candidates.length} candidatos`);
+  if (!polls.length) {
+    if (race.optional) return; // corrida futura (ex.: 2º turno de estado sem pesquisa ainda)
+    console.warn(`  ${raceKey}: sem pesquisas`);
+    return;
+  }
 
   // ordena colunas de candidato: display primeiro, resto por frequência
   const freq = new Map();

@@ -442,7 +442,7 @@ function renderLegend() {
     box.append(b);
   }
 }
-const ROUND_LABEL = { "1T": "1º turno", "2T": "2º turno" };
+const ROUND_LABEL = { "1T": "1º turno", "2T": "2º turno", SEN: "Senado" };
 function renderMeta() {
   const d = state.data;
   const rc = state.index.find((r) => r.key === state.race);

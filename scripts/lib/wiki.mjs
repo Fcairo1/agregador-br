@@ -499,7 +499,13 @@ export function parsePollTable(tableHtml, { year, warn = () => {}, refMap = new 
 export async function fetchRacePolls(race, opts) {
   const sections = await getSections(race.wikiPage, opts);
   const targets = sections.filter((s) => race.sectionRule(s, sections));
-  if (!targets.length) throw new Error(`nenhuma seção casou a regra para ${race.wikiPage}`);
+  if (!targets.length) {
+    if (race.optional) {
+      console.warn(`  (opcional) nenhuma seção ainda para ${race.wikiPage} — pulando`);
+      return { polls: [], candidates: [] };
+    }
+    throw new Error(`nenhuma seção casou a regra para ${race.wikiPage}`);
+  }
   let refMap = new Map();
   try {
     refMap = buildRefMap(await getPageWikitext(race.wikiPage, opts));
