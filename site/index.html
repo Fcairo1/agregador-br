@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Agregador de pesquisas · Brasil 2026</title>
+    <meta name="description" content="Agregador de pesquisas eleitorais para presidente do Brasil e governador de São Paulo — tendência e margem de incerteza." />
+    <link rel="stylesheet" href="style.css" />
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Ctext y='26' font-size='26'%3E%F0%9F%93%88%3C/text%3E%3C/svg%3E" />
+  </head>
+  <body>
+    <header class="top">
+      <div class="wrap">
+        <h1>Agregador de pesquisas <span>· Brasil 2026</span></h1>
+        <div class="races" id="races" role="tablist"></div>
+      </div>
+    </header>
+
+    <main class="wrap">
+      <section class="chartcard">
+        <div class="chart-head">
+          <div>
+            <h2 id="race-title">Presidente</h2>
+            <p class="sub" id="race-sub">—</p>
+          </div>
+          <div class="legend" id="legend"></div>
+        </div>
+
+        <div class="chart-holder" id="holder">
+          <svg id="chart" viewBox="0 0 1000 560" preserveAspectRatio="xMidYMid meet" role="img" aria-label="Gráfico de tendência das pesquisas"></svg>
+          <div class="tooltip" id="tooltip" hidden></div>
+        </div>
+
+        <p class="foot">
+          Linha = média ponderada (LOESS) das pesquisas; recência e tamanho da amostra pesam mais.
+          A faixa é a incerteza da tendência (bootstrap + erro amostral).
+          Fonte: <a id="src-link" href="#" target="_blank" rel="noopener">Wikipédia</a> (CC BY-SA) + curadoria.
+        </p>
+      </section>
+    </main>
+
+    <script src="app.js" type="module"></script>
+  </body>
+</html>

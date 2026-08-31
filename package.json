@@ -1,0 +1,14 @@
+{
+  "name": "agregador-br",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "Agregador de pesquisas eleitorais (Brasil 2026) — presidente e governador de SP, com gráfico de tendência e faixa de incerteza.",
+  "scripts": {
+    "fetch": "node scripts/fetch.mjs",
+    "aggregate": "node scripts/aggregate.mjs",
+    "build": "node scripts/build.mjs",
+    "serve": "node scripts/serve.mjs"
+  },
+  "engines": { "node": ">=20" }
+}
