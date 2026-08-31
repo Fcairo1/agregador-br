@@ -163,7 +163,7 @@ function stateRaces(slug, uf, group, suffix, display = []) {
 export const PLOT_MIN_POLLS = 6;
 export const PLOT_MIN_RECENT = 5;
 export const PLOT_MIN_SUPPORT = 4.0;
-export const PLOT_MAX_LINES = 7;
+export const PLOT_MAX_LINES = 8;
 
 export const AGG = {
   span: 0.35,

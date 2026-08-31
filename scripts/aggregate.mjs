@@ -92,9 +92,12 @@ function aggregateRace(raceKey) {
   if (outIdx[outIdx.length - 1] !== maxX) outIdx.push(maxX);
   const gridDates = outIdx.map((x) => iso(minEnd + x * DAY));
 
-  // quais candidatos plotar: precisa estar ATIVO (pesquisas recentes), não só ter histórico
+  // quais candidatos plotar: precisa estar ATIVO (pesquisas recentes), não só ter histórico.
+  // candidatos "de destaque" (lista `display` da corrida) pulam o piso de % — se um nome
+  // conhecido está sendo perguntado, ele aparece mesmo baixo (ex.: Zema pra presidente).
   const RECENT_WIN = 75; // dias
   const STALE = 25; // sem pesquisa há mais que isto -> fora da corrida
+  const isDisp = (k) => !!dispEntry(race, k);
   const plotable = candKeys
     .map((k) => ({ k, pts: series[k], recent: series[k].filter((p) => p.x >= maxX - RECENT_WIN) }))
     .filter(
@@ -106,10 +109,10 @@ function aggregateRace(raceKey) {
     .map(({ k, pts, recent }) => {
       const last = [...recent].sort((a, b) => b.x - a.x).slice(0, 5);
       const recentAvg = last.reduce((s, p) => s + p.y, 0) / last.length;
-      return { k, pts, recentAvg };
+      return { k, pts, recentAvg, disp: isDisp(k) };
     })
-    .filter(({ recentAvg }) => recentAvg >= PLOT_MIN_SUPPORT) // média recente, não pico
-    .sort((a, b) => b.recentAvg - a.recentAvg)
+    .filter(({ recentAvg, disp }) => disp || recentAvg >= PLOT_MIN_SUPPORT)
+    .sort((a, b) => (b.disp ? 1e4 : 0) + b.recentAvg - ((a.disp ? 1e4 : 0) + a.recentAvg))
     .slice(0, PLOT_MAX_LINES);
 
   const kOpts = { q: polls.length < 25 ? 0.02 : 0.032, designEffect: 1.6, z: 1.64 };
