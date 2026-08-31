@@ -29,7 +29,7 @@ Flags: `node scripts/fetch.mjs --offline` usa o cache em `.cache/`;
 
 ## No ar
 
-- Netlify: **https://unique-snickerdoodle-a7d284.netlify.app/** (builda `site/` a cada push)
+- Netlify: **https://agregador-eleicoes-2026.netlify.app/** (builda `site/` a cada push)
 - GitHub Pages: https://fcairo1.github.io/agregador-br/ (espelho)
 
 ## Publicar (GitHub Pages)
