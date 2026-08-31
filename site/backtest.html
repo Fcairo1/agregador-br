@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Backtest · Agregador de pesquisas Brasil 2026</title>
+    <meta name="description" content="Como o agregador teria se saído nas presidenciais de 2018 e 2022, comparado ao resultado real e à média das pesquisas individuais." />
+    <link rel="stylesheet" href="style.css" />
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Ctext y='26' font-size='26'%3E%F0%9F%93%88%3C/text%3E%3C/svg%3E" />
+  </head>
+  <body>
+    <header class="top">
+      <div class="wrap">
+        <h1><a href="./" class="backlink">← Agregador</a> <span>· backtest</span></h1>
+      </div>
+    </header>
+
+    <main class="wrap bt">
+      <h2>Como o agregador teria se saído</h2>
+      <p class="lead">
+        Rodei o mesmo modelo (filtro de Kalman) sobre as pesquisas das presidenciais de
+        <b>2018</b> e <b>2022</b> e comparei a estimativa da véspera com o
+        <b>resultado real do 1º turno</b> (votos válidos). O <abbr title="erro absoluto médio entre candidatos, em pontos percentuais">erro médio</abbr>
+        do agregador é menor que o da pesquisa individual média em ambos os anos.
+      </p>
+
+      <div id="headline" class="bt-headline"></div>
+      <div id="cycles"></div>
+
+      <h3>Institutos — erro da pesquisa final</h3>
+      <p class="lead">
+        Erro médio da última pesquisa de cada instituto antes da eleição (2018 + 2022, votos válidos).
+        É o que define o <b>peso</b> de cada casa no agregado de hoje (limitado a ±12%).
+      </p>
+      <div class="table-scroll"><table id="pollsters"></table></div>
+
+      <p class="foot">
+        Fonte das pesquisas: Wikipédia (CC BY-SA). Resultados: TSE.
+        2 ciclos são poucos — trate os pesos como um empurrão, não como verdade.
+      </p>
+    </main>
+
+    <script src="backtest.js" type="module"></script>
+  </body>
+</html>

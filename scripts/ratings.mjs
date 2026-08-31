@@ -9,7 +9,8 @@
 //
 // Uso: node scripts/ratings.mjs [--offline]
 import fs from "node:fs";
-import { getSectionHTML, parsePollTable } from "./lib/wiki.mjs";
+import { getSectionHTML, parsePollTable, moeFromN } from "./lib/wiki.mjs";
+import { trendKalman } from "./lib/kalman.mjs";
 import { writeCSV } from "./lib/csv.mjs";
 
 const DATA = new URL("../data/", import.meta.url);
@@ -53,6 +54,21 @@ const RATED = [
   ["Vox Populi", /vox\s*populi/i],
   ["Quaest", /\bquaest\b/i],
 ];
+// converte % da pesquisa pra base "votos válidos" (candidatos-only), como o resultado oficial.
+// vsum inclui TODOS os candidatos da linha; devolve só os que estão no mapa de resultado.
+function toValidVotes(rawValues, remap, result) {
+  const remapped = {};
+  for (const [k, v] of Object.entries(rawValues)) {
+    if (!Number.isFinite(v)) continue;
+    remapped[remap?.[k] || alias(k)] = v;
+  }
+  const vsum = Object.values(remapped).reduce((a, b) => a + b, 0);
+  if (vsum < 40) return {}; // linha estranha
+  const out = {};
+  for (const [k, v] of Object.entries(remapped)) if (k in result) out[k] = (v / vsum) * 100;
+  return out;
+}
+
 const alias = (k) =>
   ({
     "jair-bolsonaro": "bolsonaro",
@@ -83,14 +99,8 @@ async function cycleErrors(cy) {
       if (!(endT >= cutoff && endT <= voteT)) continue;
       const hit = RATED.find(([, re]) => re.test(p.pollster));
       if (!hit) continue;
-      // normaliza chaves (nome->slug conhecido, ou partido->candidato no ciclo de 2018)
-      const values = {};
-      for (const [k, v] of Object.entries(p.values)) {
-        const nk = cy.remap?.[k] || alias(k);
-        values[nk] = v;
-      }
-      const known = Object.keys(values).filter((k) => k in cy.result);
-      if (known.length < 3) continue; // garante 1º turno
+      const values = toValidVotes(p.values, cy.remap, cy.result); // base votos válidos
+      if (Object.keys(values).length < 3) continue; // garante 1º turno
       const prev = finalByRated.get(hit[0]);
       if (!prev || endT > prev.endT) finalByRated.set(hit[0], { endT, values });
     }
@@ -110,7 +120,92 @@ async function cycleErrors(cy) {
   return errs;
 }
 
+// ---- backtest do AGREGADOR: roda o modelo no ciclo inteiro e compara com o resultado ----
+async function cycleBacktest(cy) {
+  const html = await getSectionHTML(cy.page, cy.section, { offline });
+  const tables = html.match(/<table\b[^>]*wikitable[^>]*>[\s\S]*?<\/table>/gi) || [];
+  const voteT = Date.parse(cy.voteDay + "T00:00:00Z");
+  const DAY_ = 86400000;
+
+  const all = []; // { endT, values:{cand:%}, n }
+  for (const tbl of tables) {
+    const parsed = parsePollTable(tbl, { year: cy.year, warn: () => {} });
+    if (!parsed) continue;
+    for (const p of parsed.polls) {
+      const endT = Date.parse(p.end + "T00:00:00Z");
+      if (!(endT <= voteT && endT >= voteT - 320 * DAY_)) continue;
+      const values = toValidVotes(p.values, cy.remap, cy.result); // base votos válidos
+      if (Object.keys(values).length < 3) continue;
+      all.push({ endT, values, n: p.n || null });
+    }
+  }
+  if (all.length < 10) return null;
+
+  const minT = Math.min(...all.map((p) => p.endT));
+  const maxT = Math.max(...all.map((p) => p.endT));
+  const xOf = (t) => Math.round((t - minT) / DAY_);
+  const maxX = xOf(maxT);
+  const grid = [];
+  for (let x = 0; x <= maxX; x++) grid.push(x);
+  const isoOf = (ms) => new Date(ms).toISOString().slice(0, 10);
+
+  const cands = Object.keys(cy.result);
+  const est = {};
+  const series = {};
+  let aggSum = 0;
+  let aggN = 0;
+  for (const c of cands) {
+    const pts = all
+      .filter((p) => p.values[c] != null)
+      .map((p) => ({ x: xOf(p.endT), y: p.values[c], n: p.n, moeHalf: moeFromN(p.n) || 2 }));
+    if (pts.length < 5) continue;
+    const { line } = trendKalman(pts, grid, { q: 0.032, designEffect: 1.6, z: 1.64 });
+    let last = null;
+    for (let i = line.length - 1; i >= 0; i--) if (line[i] != null) { last = line[i]; break; }
+    if (last == null) continue;
+    const err = Math.round((last - cy.result[c]) * 10) / 10;
+    est[c] = { est: Math.round(last * 10) / 10, err, result: cy.result[c] };
+    aggSum += Math.abs(err);
+    aggN++;
+    // série reamostrada (a cada 4 dias) pro mini-gráfico
+    series[c] = [];
+    for (let i = 0; i < line.length; i += 4) if (line[i] != null) series[c].push({ t: isoOf(minT + i * DAY_), y: Math.round(line[i] * 10) / 10 });
+  }
+
+  // baseline: MAE médio das pesquisas individuais na reta final (~20 dias)
+  const finals = all.filter((p) => p.endT >= voteT - 20 * DAY_);
+  let pollSum = 0;
+  let pollN = 0;
+  for (const p of finals) {
+    let s = 0;
+    let k = 0;
+    for (const [c, v] of Object.entries(p.values)) {
+      if (!(c in cy.result)) continue;
+      s += Math.abs(v - cy.result[c]);
+      k++;
+    }
+    if (k >= 3) {
+      pollSum += s / k;
+      pollN++;
+    }
+  }
+
+  return {
+    year: cy.year,
+    voteDay: cy.voteDay,
+    xDomain: [isoOf(minT), cy.voteDay],
+    result: cy.result,
+    est,
+    aggregatorMAE: aggN ? Math.round((aggSum / aggN) * 100) / 100 : null,
+    pollsFinalMAE: pollN ? Math.round((pollSum / pollN) * 100) / 100 : null,
+    nPolls: all.length,
+    nFinalPolls: pollN,
+    series,
+  };
+}
+
 const perCycle = [];
+const backtests = [];
 for (const cy of CYCLES) {
   try {
     const e = await cycleErrors(cy);
@@ -119,6 +214,15 @@ for (const cy of CYCLES) {
   } catch (err) {
     console.warn(`  ${cy.year}: falhou (${err.message})`);
     perCycle.push(new Map());
+  }
+  try {
+    const bt = await cycleBacktest(cy);
+    if (bt) {
+      backtests.push(bt);
+      console.log(`  ${cy.year} backtest: agregador MAE ${bt.aggregatorMAE} vs pesquisas finais ${bt.pollsFinalMAE} (${bt.nPolls} pesquisas)`);
+    }
+  } catch (err) {
+    console.warn(`  ${cy.year} backtest: falhou (${err.message})`);
   }
 }
 
@@ -151,3 +255,16 @@ fs.writeFileSync(
 );
 writeCSV(new URL("ratings.csv", DATA), rows.sort((a, b) => a.maeFinal - b.maeFinal), ["canon", "cycles", "maeFinal", "weight"]);
 console.log(`  -> data/ratings.json (${rows.length} institutos; mediana MAE final ${medMae.toFixed(2)})`);
+
+if (backtests.length) {
+  const btJSON = JSON.stringify(
+    { updated: new Date().toISOString(), cycles: backtests, pollsters: rows.sort((a, b) => a.maeFinal - b.maeFinal) },
+    null,
+    2
+  );
+  fs.writeFileSync(new URL("backtest.json", DATA), btJSON); // cópia versionável em data/
+  const siteData = new URL("../site/data/", import.meta.url);
+  fs.mkdirSync(siteData, { recursive: true });
+  fs.writeFileSync(new URL("backtest.json", siteData), btJSON); // servida pelo site
+  console.log(`  -> data/backtest.json + site/data/ (${backtests.map((b) => b.year).join(", ")})`);
+}

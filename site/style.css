@@ -171,6 +171,42 @@ h2 { margin: 0; font-size: 22px; letter-spacing: -0.02em; }
 .rt.up { color: #1f9d57; border-color: color-mix(in srgb, #1f9d57 40%, transparent); }
 .rt.down { color: #c9503a; border-color: color-mix(in srgb, #c9503a 40%, transparent); }
 
+/* ---- página de backtest ---- */
+.backlink { color: var(--ink); text-decoration: none; }
+.backlink:hover { color: var(--muted); }
+main.bt { padding: 28px 0 64px; }
+main.bt h2 { font-size: 24px; letter-spacing: -0.02em; margin: 0 0 8px; }
+main.bt h3 { font-size: 16px; margin: 28px 0 4px; }
+main.bt h3 span { color: var(--muted); font-weight: 500; font-size: 13px; }
+.bt .lead { color: var(--muted); font-size: 13.5px; line-height: 1.6; max-width: 70ch; margin: 4px 0 14px; }
+.bt .lead abbr { text-decoration: underline dotted; cursor: help; }
+
+.bt-headline { display: flex; gap: 14px; flex-wrap: wrap; margin: 18px 0 8px; }
+.bt-stat {
+  flex: 1; min-width: 220px; background: var(--panel); border: 1px solid var(--line);
+  border-radius: var(--radius); box-shadow: var(--shadow); padding: 16px 18px;
+}
+.bt-stat .yr { color: var(--muted); font-size: 13px; font-weight: 600; }
+.bt-stat .big { font-size: 40px; font-weight: 750; letter-spacing: -0.02em; line-height: 1.1; }
+.bt-stat .big span { font-size: 16px; font-weight: 500; color: var(--muted); margin-left: 4px; }
+.bt-stat .cmp { color: var(--muted); font-size: 12.5px; margin-top: 4px; }
+
+.bt-cycle { background: var(--panel); border: 1px solid var(--line); border-radius: var(--radius); box-shadow: var(--shadow); padding: 18px 20px; margin-top: 16px; }
+.bt-chart { width: 100%; height: auto; display: block; margin: 6px 0 4px; }
+.bt-chart .gridline { stroke: var(--grid); }
+.bt-chart .voteline { stroke: var(--muted); stroke-dasharray: 4 4; opacity: .6; }
+.bt-chart .axtx { fill: var(--muted); font-size: 12px; }
+.bt-chart .bt-lbl { font-size: 13px; font-weight: 650; }
+
+.bt-tbl, #pollsters { border-collapse: collapse; width: 100%; font-size: 13px; font-variant-numeric: tabular-nums; }
+.bt-tbl th, .bt-tbl td, #pollsters th, #pollsters td { text-align: right; padding: 7px 10px; border-bottom: 1px solid var(--grid); white-space: nowrap; }
+.bt-tbl th, #pollsters th { color: var(--muted); font-weight: 600; }
+.bt-tbl td:first-child, .bt-tbl th:first-child, #pollsters td:first-child, #pollsters th:first-child { text-align: left; }
+.bt-tbl .dot { display: inline-block; width: 9px; height: 9px; border-radius: 999px; margin-right: 7px; }
+.bt-tbl .err-big { font-weight: 700; color: #c9503a; }
+#pollsters td.up { color: #1f9d57; font-weight: 650; }
+#pollsters td.down { color: #c9503a; font-weight: 650; }
+
 @media (max-width: 640px) {
   .chart-head { flex-direction: column; }
   .legend { justify-content: flex-start; }
