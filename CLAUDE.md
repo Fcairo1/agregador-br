@@ -49,9 +49,18 @@ Um por corrida, em `scripts/races.mjs` (`wikiPage`). Estaduais seguem o padrão
 `Pesquisas eleitorais para a eleição estadual de 2026 em/no <Estado>`; presidencial é
 `Pesquisas de opinião para a eleição presidencial no Brasil em 2026`.
 
-Config de cada corrida (grupo, turno, seções-alvo, candidatos, cores) fica em `scripts/races.mjs`.
-Regras de seção reutilizáveis: `presFirstRound` (`^1\.1\.\d+$`), `govFirstRound` (`^2\.1\.\d+$`),
-`exact("2.1.1")` p/ 2º turno. Adicionar estado = uma entrada em `RACES` com `govFirstRound`.
+Config de cada corrida (grupo, turno, candidatos, cores) fica em `scripts/races.mjs`.
+
+**Seleção de tabelas por BREADCRUMB de títulos** (`pathRule(path, ctx)`), não por índice de seção.
+Motivo: a Wikipédia passou a transcluir as tabelas mensais de templates → os índices viram
+`T-1` e o fetch por seção puxava o ano inteiro (2022/2018 juntos). `fetchRacePolls` agora baixa
+o HTML da página toda (`getPageHTML`), monta o breadcrumb h2>h3>h4 de cada `<table wikitable>`
+(`tablesWithHeadings`) e filtra com `race.pathRule`.
+Regras prontas: `presFirstRound` (`["Primeiro turno","2026", …]`), `govFirstRound`
+(`/primeiro turno/i` + `/governador/i` + inclui "2026"), `senado`, `lulaVs(rx)`, `spRunoff`,
+`govSecondRound` (1º confronto via `ctx.firstSub`). Adicionar estado = `stateRaces()`.
+⚠️ `scripts/ratings.mjs` ainda usa `getSectionHTML` por índice (seção "5" de 2018/22) — funciona
+hoje, mas migrar pra `tablesWithHeadings` se aqueles artigos também virarem transclusão.
 
 ## Formato do CSV (`data/polls.<corrida>.csv`)
 

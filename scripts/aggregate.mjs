@@ -256,6 +256,10 @@ for (const k of keys) {
     continue;
   }
   if (!out) continue;
+  if (!out.candidates.length) {
+    console.warn(`  ${k}: nenhum candidato com dados suficientes — fora do índice`);
+    continue;
+  }
   fs.writeFileSync(new URL(`${k}.json`, OUT), JSON.stringify(out, null, 2));
   const r = RACES[k];
   index.push({

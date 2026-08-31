@@ -33,18 +33,25 @@ export function partyInfo(p) {
   return PARTY[p] || PARTY[String(p).toUpperCase()] || null;
 }
 
-// ---- regras de seção (numeração dos artigos da Wikipédia) ----
-const presFirstRound = (s) => /^1\.1\.\d+$/.test(s.number);
-const govFirstRound = (s) => /^2\.1\.\d+$/.test(s.number);
-const govSecondRound = (s) => /^3\.1\.\d+$/.test(s.number) && /202[0-9]/.test(s.line); // 1º confronto
-const senado = (s) => /^4\.1\.\d+$/.test(s.number);
-const exact = (want) => (s) => s.number === want;
-// 2º turno presidencial: seções "202X" sob um pai "Lula e <fulano>"
-const lulaVs = (rx) => (s, all) => {
-  if (!/^2\.\d+\.\d+$/.test(s.number) || !/2026/.test(s.line)) return false;
-  const parent = all.find((p) => p.number === s.number.replace(/\.\d+$/, ""));
-  return !!parent && /^lula e /i.test(parent.line) && rx.test(parent.line);
-};
+// ---- regras por BREADCRUMB de títulos (h2 > h3 > h4). path = ["Primeiro turno","2026","Agosto"]
+// Robusto a transclusão de templates (os índices de seção viram "T-1" e quebram o fetch por seção).
+const yr = "2026";
+const has = (p, i, rx) => rx.test(p[i] || "");
+// presidencial 1º turno: h2 "Primeiro turno" > h3 "2026" > (h4 mês, opcional)
+const presFirstRound = (p) => /^primeiro turno$/i.test(p[0] || "") && p[1] === yr;
+// governador 1º turno: h2 "Primeiro Turno (Governador)" > "2026"
+const govFirstRound = (p) => has(p, 0, /primeiro turno/i) && has(p, 0, /governador/i) && p.includes(yr);
+// governador 2º turno: h2 "Segundo Turno (Governador)" > 1º confronto (h3) > "2026"
+const govSecondRound = (p, ctx) =>
+  has(p, 0, /segundo turno/i) && has(p, 0, /governador/i) && ctx.firstSub && p.includes(yr);
+// senador: h2 "Senador" > "2026"
+const senado = (p) => has(p, 0, /^senador/i) && p.includes(yr);
+// 2º turno presidencial: h2 "Segundo turno" > h3 "Lula e <fulano>" > h4 "2026"
+const lulaVs = (rx) => (p) =>
+  has(p, 0, /segundo turno/i) && has(p, 1, /^lula e /i) && rx.test(p[1] || "") && p.includes(yr);
+// SP 2º turno gov: h2 "Segundo Turno" (SEM "(Governador)" nesse artigo) > h3 "Tarcísio e Haddad"
+const spRunoff = (p) =>
+  has(p, 0, /segundo turno/i) && has(p, 1, /tarc[ií]sio/i) && has(p, 1, /haddad/i) && p.includes(yr);
 
 const PRES_PAGE = "Pesquisas de opinião para a eleição presidencial no Brasil em 2026";
 const wikiUrl = (page) => "https://pt.wikipedia.org/wiki/" + encodeURIComponent(page.replace(/ /g, "_"));
@@ -56,14 +63,14 @@ function race(cfg) {
 const C = (key, name, party, extra = {}) => ({ key, name, party, ...extra });
 
 const LULA = C("lula", "Lula", "PT");
-const runoff = (oppKey, oppName, oppParty, sectionRule, scenario) =>
+const runoff = (oppKey, oppName, oppParty, pathRule, scenario) =>
   race({
     group: "Presidente",
     round: "2T",
     scenario,
     label: `Presidente 2º turno — Lula × ${oppName}`,
     wikiPage: PRES_PAGE,
-    sectionRule,
+    pathRule,
     display: [LULA, C(oppKey, oppName, oppParty)],
   });
 
@@ -72,7 +79,7 @@ export const RACES = {
     group: "Presidente",
     label: "Presidente — 1º turno",
     wikiPage: PRES_PAGE,
-    sectionRule: presFirstRound,
+    pathRule: presFirstRound,
     display: [
       LULA,
       C("flavio", "Flávio", "PL", { aliases: ["flavio-bolsonaro"] }),
@@ -93,7 +100,7 @@ export const RACES = {
     group: "São Paulo",
     label: "Governador de SP — 1º turno",
     wikiPage: "Pesquisas eleitorais para a eleição estadual de 2026 em São Paulo",
-    sectionRule: govFirstRound,
+    pathRule: govFirstRound,
     display: [
       C("tarcisio", "Tarcísio", "REP"),
       C("haddad", "Haddad", "PT"),
@@ -109,7 +116,8 @@ export const RACES = {
     scenario: "Haddad",
     label: "Governador de SP 2º turno — Tarcísio × Haddad",
     wikiPage: "Pesquisas eleitorais para a eleição estadual de 2026 em São Paulo",
-    sectionRule: exact("3.1.1"),
+    pathRule: spRunoff,
+    optional: true,
     display: [C("tarcisio", "Tarcísio", "REP"), C("haddad", "Haddad", "PT")],
   }),
 
@@ -124,7 +132,7 @@ export const RACES = {
     round: "SEN",
     label: "Senado — São Paulo",
     wikiPage: "Pesquisas eleitorais para a eleição estadual de 2026 em São Paulo",
-    sectionRule: senado,
+    pathRule: senado,
     optional: true,
   }),
 };
@@ -137,7 +145,7 @@ function stateRaces(slug, uf, group, suffix, display = []) {
       group,
       label: `Governador ${uf} — 1º turno`,
       wikiPage: page,
-      sectionRule: govFirstRound,
+      pathRule: govFirstRound,
       display,
     }),
     [`${slug}-governador-2t`]: race({
@@ -145,7 +153,7 @@ function stateRaces(slug, uf, group, suffix, display = []) {
       round: "2T",
       label: `Governador ${uf} — 2º turno`,
       wikiPage: page,
-      sectionRule: govSecondRound,
+      pathRule: govSecondRound,
       optional: true,
     }),
     [`${slug}-senado`]: race({
@@ -153,7 +161,7 @@ function stateRaces(slug, uf, group, suffix, display = []) {
       round: "SEN",
       label: `Senado — ${group}`,
       wikiPage: page,
-      sectionRule: senado,
+      pathRule: senado,
       optional: true,
     }),
   };

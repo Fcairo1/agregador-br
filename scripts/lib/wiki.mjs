@@ -80,6 +80,53 @@ export async function getSectionHTML(page, index, opts) {
   return j.parse.text;
 }
 
+// HTML renderizado da página inteira (à prova de transclusão — quando as tabelas
+// mensais vêm de templates, os índices de seção viram "T-1" e o fetch por seção quebra).
+export async function getPageHTML(page, opts) {
+  const j = await apiGet(
+    { action: "parse", page, prop: "text", disablelimitreport: "1" },
+    { ...opts, cacheKey: `html__${page}` }
+  );
+  return j.parse.text;
+}
+
+function cleanHeading(html) {
+  return decode(
+    html
+      .replace(/<span\b[^>]*class="mw-editsection[\s\S]*?<\/span>/gi, "")
+      .replace(/\[\s*editar[\s\S]*?\]/gi, "")
+      .replace(/<[^>]+>/g, "")
+  )
+    .replace(/\s+/g, " ")
+    .trim();
+}
+
+// devolve [{ html, path:[h2,h3,h4,h5], firstSub:bool }] pra cada <table wikitable> da página
+export function tablesWithHeadings(pageHtml) {
+  const toks = [];
+  for (const m of pageHtml.matchAll(/<h([2-6])\b[^>]*>([\s\S]*?)<\/h\1>/gi))
+    toks.push({ pos: m.index, kind: "h", level: +m[1], text: cleanHeading(m[2]) });
+  for (const m of pageHtml.matchAll(/<table\b[^>]*\bwikitable\b[^>]*>[\s\S]*?<\/table>/gi))
+    toks.push({ pos: m.index, kind: "table", html: m[0] });
+  toks.sort((a, b) => a.pos - b.pos);
+
+  const cur = {}; // level -> texto
+  let firstH3Seen = null; // texto do 1º h3 sob o h2 atual
+  const out = [];
+  for (const t of toks) {
+    if (t.kind === "h") {
+      cur[t.level] = t.text;
+      for (let l = t.level + 1; l <= 6; l++) delete cur[l];
+      if (t.level === 2) firstH3Seen = null;
+      if (t.level === 3 && firstH3Seen == null) firstH3Seen = t.text;
+    } else {
+      const path = [cur[2], cur[3], cur[4], cur[5]].filter(Boolean);
+      out.push({ html: t.html, path, firstSub: cur[3] != null && cur[3] === firstH3Seen });
+    }
+  }
+  return out;
+}
+
 export async function getPageWikitext(page, opts) {
   const j = await apiGet(
     { action: "parse", page, prop: "wikitext", disablelimitreport: "1" },
@@ -495,16 +542,18 @@ export function parsePollTable(tableHtml, { year, warn = () => {}, refMap = new 
   return { candidates: candidates.map(({ col, ...c }) => c), polls };
 }
 
-// junta todas as seções-alvo de uma corrida
+// junta as tabelas-alvo de uma corrida, selecionadas pelo BREADCRUMB de títulos
+// (h2 > h3 > h4). Robusto a transclusão de templates.
 export async function fetchRacePolls(race, opts) {
-  const sections = await getSections(race.wikiPage, opts);
-  const targets = sections.filter((s) => race.sectionRule(s, sections));
+  const pageHtml = await getPageHTML(race.wikiPage, opts);
+  const all = tablesWithHeadings(pageHtml);
+  const targets = all.filter((t) => race.pathRule(t.path, { firstSub: t.firstSub }));
   if (!targets.length) {
     if (race.optional) {
-      console.warn(`  (opcional) nenhuma seção ainda para ${race.wikiPage} — pulando`);
+      console.warn(`  (opcional) nenhuma tabela ainda para ${race.wikiPage} — pulando`);
       return { polls: [], candidates: [] };
     }
-    throw new Error(`nenhuma seção casou a regra para ${race.wikiPage}`);
+    throw new Error(`nenhuma tabela casou a regra de títulos para ${race.wikiPage}`);
   }
   let refMap = new Map();
   try {
@@ -514,19 +563,16 @@ export async function fetchRacePolls(race, opts) {
   }
   const allPolls = [];
   const candNames = new Map();
-  for (const sec of targets) {
-    const html = await getSectionHTML(race.wikiPage, sec.index, opts);
-    const tables = html.match(/<table\b[^>]*wikitable[^>]*>[\s\S]*?<\/table>/gi) || [];
-    for (const tbl of tables) {
-      const parsed = parsePollTable(tbl, {
-        year: race.year,
-        refMap,
-        warn: (msg) => console.warn(`  [${sec.line}] ${msg}`),
-      });
-      if (!parsed) continue;
-      for (const c of parsed.candidates) if (c.name) candNames.set(c.key, c);
-      for (const p of parsed.polls) allPolls.push({ ...p, section: sec.line });
-    }
+  for (const tgt of targets) {
+    const sec = tgt.path[tgt.path.length - 1] || "";
+    const parsed = parsePollTable(tgt.html, {
+      year: race.year,
+      refMap,
+      warn: (msg) => console.warn(`  [${sec}] ${msg}`),
+    });
+    if (!parsed) continue;
+    for (const c of parsed.candidates) if (c.name) candNames.set(c.key, c);
+    for (const p of parsed.polls) allPolls.push({ ...p, section: sec });
   }
   return { polls: allPolls, candidates: [...candNames.values()] };
 }
