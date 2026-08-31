@@ -11,7 +11,7 @@ const args = process.argv.slice(2);
 const offline = args.includes("--offline");
 const only = args.find((a) => !a.startsWith("--"));
 
-const META_COLS = ["id", "pollster", "start", "end", "n", "moe", "section"];
+const META_COLS = ["id", "pollster", "start", "end", "n", "moe", "source", "section"];
 
 function slugP(s) {
   return String(s)
@@ -59,7 +59,7 @@ async function run(raceKey) {
       seen.set(id, c);
       id = `${id}-${c}`;
     } else seen.set(id, 1);
-    const row = { id, pollster: p.pollster, start: p.start, end: p.end, n: p.n ?? "", moe: p.moe ?? "", section: p.section || "" };
+    const row = { id, pollster: p.pollster, start: p.start, end: p.end, n: p.n ?? "", moe: p.moe ?? "", source: p.source || "", section: p.section || "" };
     for (const k of candKeys) row[k] = k in p.values ? p.values[k] : "";
     return row;
   });

@@ -16,7 +16,7 @@ import { mulberry32, loessWithBand } from "./lib/loess.mjs";
 
 const DATA = new URL("../data/", import.meta.url);
 const OUT = new URL("../site/data/", import.meta.url);
-const META_COLS = new Set(["id", "pollster", "start", "end", "n", "moe", "section"]);
+const META_COLS = new Set(["id", "pollster", "start", "end", "n", "moe", "source", "section"]);
 
 const DAY = 86400000;
 const toDate = (iso) => new Date(iso + "T00:00:00Z");
@@ -123,16 +123,45 @@ function aggregateRace(raceKey) {
   });
 
   const pollsters = [...new Set(polls.map((p) => p.pollster))].sort();
+  const shownKeys = candidates.map((c) => c.key);
+  const nameByShown = new Map(candidates.map((c) => [c.key, c.name]));
+
+  // tabela crua de pesquisas (mais recentes primeiro) — inclui só os candidatos exibidos
+  const pollTable = polls
+    .map((p) => {
+      const vals = {};
+      for (const k of shownKeys) {
+        const raw = p[k];
+        if (raw === "" || raw == null) continue;
+        const y = parseFloat(String(raw).replace(",", "."));
+        if (Number.isFinite(y)) vals[k] = y;
+      }
+      return {
+        pollster: p.pollster,
+        start: p.start,
+        end: p.end,
+        n: p.n ? parseInt(p.n, 10) : null,
+        moe: p.moe ? parseFloat(p.moe) : null,
+        source: p.source || "",
+        values: vals,
+      };
+    })
+    .filter((p) => Object.keys(p.values).length)
+    .sort((a, b) => (a.end < b.end ? 1 : a.end > b.end ? -1 : 0));
+
   return {
     race: raceKey,
     label: race.label,
     updated: new Date().toISOString(),
     source: "Wikipédia (CC BY-SA) + curadoria",
     nPolls: polls.length,
+    nWithSource: polls.filter((p) => p.source).length,
     lastPoll: iso(maxEnd),
     pollsters,
     xDomain: [iso(minEnd), iso(maxEnd)],
+    shown: candidates.map((c) => ({ key: c.key, name: c.name, color: c.color })),
     candidates,
+    polls: pollTable,
   };
 }
 

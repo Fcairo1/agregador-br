@@ -14,7 +14,7 @@ const RACES = [
 const $ = (s, r = document) => r.querySelector(s);
 const svg = $("#chart");
 const tip = $("#tooltip");
-const state = { race: RACES[0].key, data: null, hidden: new Set(), geom: null };
+const state = { race: RACES[0].key, data: null, hidden: new Set(), geom: null, showAllPolls: false };
 
 function el(tag, attrs = {}, kids = []) {
   const n = document.createElementNS(SVGNS, tag);
@@ -203,6 +203,65 @@ function render() {
 
   renderLegend();
   renderMeta();
+  renderTable();
+}
+
+// ---------- tabela de pesquisas ----------
+const SHORT_MONTH = ["jan", "fev", "mar", "abr", "mai", "jun", "jul", "ago", "set", "out", "nov", "dez"];
+function fmtRange(start, end) {
+  const s = new Date(start + "T00:00:00Z");
+  const e = new Date(end + "T00:00:00Z");
+  const em = SHORT_MONTH[e.getUTCMonth()];
+  if (start === end) return `${e.getUTCDate()} ${em}`;
+  const sm = SHORT_MONTH[s.getUTCMonth()];
+  return sm === em
+    ? `${s.getUTCDate()}–${e.getUTCDate()} ${em}`
+    : `${s.getUTCDate()} ${sm} – ${e.getUTCDate()} ${em}`;
+}
+function renderTable() {
+  const d = state.data;
+  const shown = d.shown;
+  const table = document.querySelector("#polltable");
+  const rows = state.showAllPolls ? d.polls : d.polls.slice(0, 12);
+
+  const head =
+    "<thead><tr><th>Instituto</th><th>Período</th><th>Amostra</th>" +
+    shown.map((s) => `<th style="color:${s.color}">${s.name}</th>`).join("") +
+    "<th></th></tr></thead>";
+
+  const body =
+    "<tbody>" +
+    rows
+      .map((p) => {
+        let lead = -1;
+        for (const s of shown) if ((p.values[s.key] ?? -1) > lead) lead = p.values[s.key] ?? -1;
+        const cells = shown
+          .map((s) => {
+            const v = p.values[s.key];
+            if (v == null) return `<td class="muted">–</td>`;
+            return `<td class="${v === lead ? "lead" : ""}">${v.toFixed(1)}</td>`;
+          })
+          .join("");
+        const src = p.source
+          ? `<td><a href="${p.source}" target="_blank" rel="noopener" title="fonte">↗</a></td>`
+          : `<td></td>`;
+        return `<tr><td class="poll-name">${p.pollster}</td><td class="muted">${fmtRange(
+          p.start,
+          p.end
+        )}</td><td class="muted">${p.n ? p.n.toLocaleString("pt-BR") : "–"}</td>${cells}${src}</tr>`;
+      })
+      .join("") +
+    "</tbody>";
+
+  table.innerHTML = head + body;
+  document.querySelector("#polls-count").textContent = `· ${d.nPolls} no total, ${d.nWithSource} com link de fonte`;
+  const tg = document.querySelector("#polls-toggle");
+  tg.textContent = state.showAllPolls ? "ver menos" : `ver todas (${d.polls.length})`;
+  tg.hidden = d.polls.length <= 12;
+  tg.onclick = () => {
+    state.showAllPolls = !state.showAllPolls;
+    renderTable();
+  };
 }
 
 function txt(s) {

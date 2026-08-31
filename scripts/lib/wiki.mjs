@@ -46,6 +46,36 @@ export async function getSectionHTML(page, index, opts) {
   return j.parse.text;
 }
 
+export async function getPageWikitext(page, opts) {
+  const j = await apiGet(
+    { action: "parse", page, prop: "wikitext", disablelimitreport: "1" },
+    { ...opts, cacheKey: `wt__${page}` }
+  );
+  return j.parse.wikitext;
+}
+
+// mapa  nome-da-ref -> URL de fonte, a partir do wikitext da página inteira
+export function buildRefMap(wikitext) {
+  const map = new Map();
+  const re = /<ref\b[^>]*\bname\s*=\s*"([^"]+)"[^>]*>([\s\S]*?)<\/ref>/gi;
+  let m;
+  while ((m = re.exec(wikitext))) {
+    if (map.has(m[1])) continue;
+    const body = m[2];
+    const url =
+      body.match(/\burl\s*=\s*(https?:\/\/[^\s|}\]]+)/i)?.[1] ||
+      body.match(/\[(https?:\/\/[^\s\]]+)/)?.[1] ||
+      body.match(/(https?:\/\/[^\s|}\]]+)/)?.[1];
+    if (url) map.set(m[1], url.replace(/[.,;]+$/, ""));
+  }
+  return map;
+}
+// extrai o nome da ref citada dentro do HTML de uma célula
+function refNameFromCell(html) {
+  const m = html.match(/#cite[_%23;a-z0-9]*note-(.+?)-\d+"/i) || html.match(/cite[_%23;a-z0-9]*ref-(.+?)_\d+-\d+"/i);
+  return m ? decode(m[1]) : null;
+}
+
 // ---------- parsing de HTML (só o suficiente pra tabelas wikitable) ----------
 
 const ENT = {
@@ -221,15 +251,21 @@ function floatFrom(s) {
 
 // normaliza grafias de instituto (a Wiki tem variações e erros de digitação)
 const POLLSTER_ALIASES = [
-  [/^alt?asintel$|^atlas ?intel$|^atlas$/i, "AtlasIntel"],
-  [/^genial ?\/ ?quaest$|^quaest$/i, "Genial/Quaest"],
-  [/^nexus ?\/ ?btg.*/i, "Nexus/BTG Pactual"],
-  [/^poderdata.*/i, "PoderData"],
-  [/^real ?time ?big ?data$|^rtbd$/i, "Real Time Big Data"],
-  [/^parana pesquisas$/i, "Paraná Pesquisas"],
-  [/^ipesp?e?c?$|^ipec$/i, "Ipec"],
+  [/atlas ?in?stel|atlas ?intel|^atlas$/i, "AtlasIntel"],
+  [/genial ?\/? ?quaest|^quaest$/i, "Genial/Quaest"],
+  [/nexus ?\/? ?btg|^nexus$/i, "Nexus/BTG Pactual"],
+  [/^poderdata/i, "PoderData"],
+  [/real ?time ?big ?data|^rtbd$/i, "Real Time Big Data"],
+  [/paran[aá] pesquisas/i, "Paraná Pesquisas"],
+  [/^ipec$|ipespe?c?$/i, "Ipec"],
   [/^datafolha$/i, "Datafolha"],
-  [/^cnt ?\/ ?mda$|^mda$/i, "CNT/MDA"],
+  [/^cnt ?\/? ?mda$|^mda$/i, "CNT/MDA"],
+  [/^vox\b|vox brasil/i, "Vox Brasil"],
+  [/^indexa/i, "Indexa"],
+  [/^alfa\b/i, "Alfa"],
+  [/american analytics/i, "American Analytics"],
+  [/meio ?\/? ?ideia/i, "Meio/Ideia"],
+  [/apex ?\/? ?futura/i, "Apex/Futura"],
 ];
 export function normPollster(s) {
   const t = String(s).trim().replace(/\s+/g, " ");
@@ -243,8 +279,8 @@ export function moeFromN(n) {
   return Math.round((98 / Math.sqrt(n)) * 10) / 10;
 }
 
-// devolve { candidates:[{key,name,party}], polls:[{pollster,start,end,n,moe,values:{key:num}}] }
-export function parsePollTable(tableHtml, { year, warn = () => {} } = {}) {
+// devolve { candidates:[{key,name,party}], polls:[{pollster,start,end,n,moe,source,values:{key:num}}] }
+export function parsePollTable(tableHtml, { year, warn = () => {}, refMap = new Map() } = {}) {
   const rows = splitRows(tableHtml);
   if (rows.length < 3) return null;
   const grid = buildGrid(rows);
@@ -365,7 +401,16 @@ export function parsePollTable(tableHtml, { year, warn = () => {} } = {}) {
       }
     }
     if (!any) continue;
-    polls.push({ pollster, start: d.start, end: d.end, n, moe, values });
+
+    // rejeita linhas-fantasma (linhas de "evento"/nota mal interpretadas como pesquisa)
+    if (/^\d{1,2}\s+(jan|fev|mar|abr|mai|jun|jul|ago|set|out|nov|dez)/i.test(pollster)) continue;
+    if (n != null && n < 250) continue; // pesquisa real não tem amostra minúscula
+    const vv = Object.values(values);
+    if (vv.length >= 4 && vv.every((x) => x === vv[0])) continue; // todos iguais = não é pesquisa
+
+    const refName = refNameFromCell(cells[metaIdx.pollster]?.html || "");
+    const source = (refName && refMap.get(refName)) || "";
+    polls.push({ pollster, start: d.start, end: d.end, n, moe, source, values });
   }
 
   return { candidates: candidates.map(({ col, ...c }) => c), polls };
@@ -376,6 +421,12 @@ export async function fetchRacePolls(race, opts) {
   const sections = await getSections(race.wikiPage, opts);
   const targets = sections.filter((s) => race.sectionRule(s.number));
   if (!targets.length) throw new Error(`nenhuma seção casou a regra para ${race.wikiPage}`);
+  let refMap = new Map();
+  try {
+    refMap = buildRefMap(await getPageWikitext(race.wikiPage, opts));
+  } catch (e) {
+    console.warn(`  aviso: não consegui o wikitext para links de fonte (${e.message})`);
+  }
   const allPolls = [];
   const candNames = new Map();
   for (const sec of targets) {
@@ -384,6 +435,7 @@ export async function fetchRacePolls(race, opts) {
     for (const tbl of tables) {
       const parsed = parsePollTable(tbl, {
         year: race.year,
+        refMap,
         warn: (msg) => console.warn(`  [${sec.line}] ${msg}`),
       });
       if (!parsed) continue;
