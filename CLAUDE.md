@@ -114,13 +114,24 @@ Por candidato, sobre `end` (dias desde a 1ª pesquisa):
 
 ## Site (`site/`)
 
-- `index.html` + `style.css` + `app.js`, sem framework. Abas montadas de `data/index.json`.
+- `index.html` + `style.css` + `app.js` (+ `agg.js`, `loess.js`), sem framework. Abas de `data/index.json`.
 - Gráfico em **SVG** desenhado à mão: `<path>` da faixa (área) + `<path>` da linha, spline
   Catmull-Rom -> Bézier pra suavizar. Transições em CSS. Séries quebram em buracos > `GAP_DAYS`.
-- Abas de grupo (Presidente, São Paulo, estados…) + sub-abas 1T/2T. Legenda clicável (liga/desliga
-  candidato). Crosshair no hover com os valores do dia. Pontos das pesquisas ao fundo, esmaecidos.
-- Tabela de pesquisas abaixo do gráfico (instituto, período, amostra, %, link de fonte), "ver todas".
+- Abas de grupo + sub-abas 1T/2T. No 2º turno presidencial, `<select>` de cenário (Lula × cada um).
+- **Filtro de institutos**: `agg.js` refaz o LOESS+faixa no cliente com os institutos desmarcados
+  (espelha `aggregate.mjs`; usa `data.params` e `data.polls`). Todos ativos por padrão.
+- **Selo de partido** (`.pbadge`) ao lado do nome na legenda / tooltip / cabeçalho da tabela.
+  Cor do candidato = cor do partido (`PARTY` em `races.mjs`), salvo override no `display`.
+- Legenda clicável (liga/desliga candidato). Crosshair no hover. Pontos das pesquisas ao fundo.
+- Tabela de pesquisas: **vencedor de cada pesquisa** pintado com a cor do partido; linhas de
+  institutos desconsiderados aparecem riscadas. "ver todas".
 - Responsivo, tema claro/escuro por `prefers-color-scheme`.
+
+## Matemática compartilhada
+
+`site/loess.js` é a fonte de `loess` / `loessWithBand` / `mulberry32`; `scripts/lib/loess.mjs`
+só reexporta. `site/agg.js` reimplementa o núcleo de `aggregate.mjs` (pesos, house effects, grade)
+pro recomputo no navegador. **Mudou o modelo no server? Reflita em `agg.js`.**
 
 ## Automação
 
@@ -141,10 +152,11 @@ npm run serve      # http://localhost:5173  (servidor estático, Node puro)
 
 ## Feito
 
-- ✅ 2º turno (presidente, SP) como sub-aba.
+- ✅ 2º turno: SP (Tarcísio×Haddad) + presidencial com 4 cenários (Lula × Flávio/Zema/Caiado/Renan).
 - ✅ Mais estados: MG, RJ, PR, RS (1º turno). Adicionar outro = 1 entrada em `RACES`.
 - ✅ House effects por instituto.
 - ✅ Link de fonte por pesquisa + tabela no site + limpeza de institutos/linhas-fantasma.
+- ✅ Filtro de institutos (recomputo no cliente) · selo + cor de partido · vencedor pintado na tabela.
 
 ## TODO / fase 2
 
@@ -154,4 +166,5 @@ npm run serve      # http://localhost:5173  (servidor estático, Node puro)
 - 2º turno dos estados (matchups variam; hoje só presidente e SP).
 - "O que mudou": variação vs. 1 semana / 1 mês. Probabilidade de 2º turno / vitória.
 - Senado (as páginas estaduais têm a seção).
-- Colunas de partido nos estados novos (hoje cor de fallback).
+- Partido não é lido pra ~2 candidatos estaduais (ex.: Cleitinho/PSD, Garotinho) — cor de fallback.
+  Corrigir no parser (`candFromHeader`) ou via `display` em `races.mjs`.

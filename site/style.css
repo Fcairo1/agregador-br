@@ -41,7 +41,40 @@ h1 span { color: var(--muted); font-weight: 500; }
 
 .tabsets { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
 .races, .rounds { display: flex; gap: 4px; background: var(--grid); padding: 4px; border-radius: 999px; flex-wrap: wrap; }
-.rounds[hidden] { display: none; }
+.rounds[hidden], .scenario[hidden] { display: none; }
+.scenario { display: inline-flex; align-items: center; gap: 6px; font-size: 12px; color: var(--muted); }
+.scenario select {
+  font: inherit; font-size: 12.5px; font-weight: 550; color: var(--ink); background: var(--panel);
+  border: 1px solid var(--line); border-radius: 999px; padding: 5px 10px; cursor: pointer;
+}
+
+.pbadge {
+  display: inline-block; font-size: 9px; font-weight: 700; line-height: 1.4; letter-spacing: .02em;
+  padding: 0 4px; margin-left: 5px; border-radius: 4px; background: var(--c); color: #fff;
+  vertical-align: 1px; text-shadow: 0 1px 1px rgba(0, 0, 0, .28);
+}
+
+.chart-toolbar { display: flex; justify-content: flex-end; margin: 8px 0 -4px; position: relative; }
+#filter-wrap { position: relative; }
+#filter-btn {
+  border: 1px solid var(--line); background: var(--panel); color: var(--ink); font: inherit;
+  font-size: 12px; font-weight: 550; padding: 5px 12px; border-radius: 999px; cursor: pointer;
+}
+#filter-panel {
+  position: absolute; right: 0; top: calc(100% + 6px); z-index: 9; width: 260px; max-height: 320px;
+  overflow-y: auto; background: var(--panel); border: 1px solid var(--line); border-radius: 12px;
+  box-shadow: var(--shadow); padding: 8px;
+}
+#filter-panel[hidden] { display: none; }
+#filter-panel label {
+  display: flex; align-items: center; gap: 8px; padding: 5px 6px; font-size: 12.5px; border-radius: 7px; cursor: pointer;
+}
+#filter-panel label:hover { background: color-mix(in srgb, var(--ink) 5%, transparent); }
+#filter-panel .filter-actions { display: flex; gap: 6px; padding: 2px 4px 8px; border-bottom: 1px solid var(--grid); margin-bottom: 4px; }
+#filter-panel .filter-actions button {
+  flex: 1; border: 1px solid var(--line); background: var(--panel); color: var(--muted); font: inherit;
+  font-size: 11.5px; padding: 4px 6px; border-radius: 7px; cursor: pointer;
+}
 .races button, .rounds button {
   border: 0; background: transparent; color: var(--muted); font: inherit; font-weight: 550;
   border-radius: 999px; cursor: pointer; transition: color .15s, background .15s;
@@ -114,7 +147,13 @@ h2 { margin: 0; font-size: 22px; letter-spacing: -0.02em; }
 #polltable tbody tr:hover td { background: color-mix(in srgb, var(--ink) 4%, transparent); }
 #polltable a { color: var(--muted); text-decoration: none; }
 #polltable a:hover { color: var(--ink); }
-#polltable .lead { font-weight: 700; }
+#polltable td.win {
+  font-weight: 700; color: var(--c);
+  background: color-mix(in srgb, var(--c) 15%, transparent);
+  box-shadow: inset 2px 0 0 var(--c);
+}
+#polltable tr.excluded td { opacity: .32; text-decoration: line-through; }
+#polltable tr.excluded td.win { box-shadow: none; }
 
 @media (max-width: 640px) {
   .chart-head { flex-direction: column; }

@@ -9,6 +9,7 @@ import {
   PLOT_MIN_RECENT,
   PLOT_MIN_SUPPORT,
   PLOT_MAX_LINES,
+  partyInfo,
 } from "./races.mjs";
 import { readCSV } from "./lib/csv.mjs";
 import { moeFromN } from "./lib/wiki.mjs";
@@ -24,13 +25,21 @@ const iso = (d) => new Date(d).toISOString().slice(0, 10);
 const r2 = (x) => (x == null ? null : Math.round(x * 100) / 100);
 const clamp = (x, a, b) => Math.max(a, Math.min(b, x));
 
-function colorFor(race, key, i) {
-  const d = race.display.find((x) => x.key === key || (x.aliases || []).includes(key));
-  return d?.color || FALLBACK_COLORS[i % FALLBACK_COLORS.length];
+const dispEntry = (race, key) =>
+  race.display.find((x) => x.key === key || (x.aliases || []).includes(key));
+
+function partyFor(race, nameMap, key) {
+  return dispEntry(race, key)?.party || nameMap.get(key)?.party || "";
+}
+// cor: override explícito no display > cor do partido > fallback
+function colorFor(race, nameMap, key, i) {
+  const d = dispEntry(race, key);
+  if (d?.color) return d.color;
+  const pi = partyInfo(partyFor(race, nameMap, key));
+  return pi?.color || FALLBACK_COLORS[i % FALLBACK_COLORS.length];
 }
 function nameFor(nameMap, race, key) {
-  const d = race.display.find((x) => x.key === key || (x.aliases || []).includes(key));
-  return d?.name || nameMap.get(key)?.name || key.replace(/-/g, " ");
+  return dispEntry(race, key)?.name || nameMap.get(key)?.name || key.replace(/-/g, " ");
 }
 
 function aggregateRace(raceKey) {
@@ -154,11 +163,14 @@ function aggregateRace(raceKey) {
       bandHi: AGG.bandHi,
       rng,
     });
+    const party = partyFor(race, nameMap, k);
+    const pi = partyInfo(party);
     return {
       key: k,
       name: nameFor(nameMap, race, k),
-      party: nameMap.get(k)?.party || "",
-      color: colorFor(race, k, i),
+      party,
+      partyLabel: pi?.label || party || "",
+      color: colorFor(race, nameMap, k, i),
       line: gridDates.map((t, gi) => (line[gi] == null ? null : { t, y: r2(line[gi]) })).filter(Boolean),
       band: gridDates
         .map((t, gi) => (band[gi] == null ? null : { t, lo: r2(band[gi].lo), hi: r2(band[gi].hi) }))
@@ -207,7 +219,27 @@ function aggregateRace(raceKey) {
     lastPoll: iso(maxEnd),
     pollsters,
     xDomain: [iso(minEnd), iso(maxEnd)],
-    shown: candidates.map((c) => ({ key: c.key, name: c.name, color: c.color })),
+    // parâmetros p/ recomputo no cliente (filtro de institutos)
+    params: {
+      halflifeDays: AGG.halflifeDays,
+      span: AGG.span,
+      minPts: AGG.minPts,
+      bootstrap: AGG.bootstrap,
+      seed: AGG.seed,
+      bandLo: AGG.bandLo,
+      bandHi: AGG.bandHi,
+      gridStepDays: AGG.gridStepDays,
+      houseMaxShift: AGG.houseMaxShift,
+      sparseCutoff: AGG.sparseCutoff,
+      applyHouse,
+    },
+    shown: candidates.map((c) => ({
+      key: c.key,
+      name: c.name,
+      color: c.color,
+      party: c.party,
+      partyLabel: c.partyLabel,
+    })),
     candidates,
     houseEffects: applyHouse
       ? Object.fromEntries(
@@ -238,7 +270,15 @@ for (const k of keys) {
   if (!out) continue;
   fs.writeFileSync(new URL(`${k}.json`, OUT), JSON.stringify(out, null, 2));
   const r = RACES[k];
-  index.push({ key: k, group: r.group, round: r.round, label: r.label, wiki: r.wikiUrl, nPolls: out.nPolls });
+  index.push({
+    key: k,
+    group: r.group,
+    round: r.round,
+    scenario: r.scenario || null,
+    label: r.label,
+    wiki: r.wikiUrl,
+    nPolls: out.nPolls,
+  });
   const names = out.candidates.map((c) => `${c.name} ${c.line.at(-1)?.y ?? "?"}%`).join(", ");
   console.log(`  ${k}: ${out.nPolls} pesquisas, ${out.candidates.length} linhas -> ${names}`);
 }

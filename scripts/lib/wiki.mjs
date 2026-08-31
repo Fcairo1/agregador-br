@@ -453,7 +453,7 @@ export function parsePollTable(tableHtml, { year, warn = () => {}, refMap = new 
 // junta todas as seções-alvo de uma corrida
 export async function fetchRacePolls(race, opts) {
   const sections = await getSections(race.wikiPage, opts);
-  const targets = sections.filter((s) => race.sectionRule(s.number));
+  const targets = sections.filter((s) => race.sectionRule(s, sections));
   if (!targets.length) throw new Error(`nenhuma seção casou a regra para ${race.wikiPage}`);
   let refMap = new Map();
   try {

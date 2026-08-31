@@ -1,3 +1,5 @@
+import { recompute } from "./agg.js";
+
 const SVGNS = "http://www.w3.org/2000/svg";
 const VB = { w: 1000, h: 560 };
 const M = { t: 26, r: 140, b: 40, l: 46 };
@@ -13,13 +15,23 @@ const state = {
   index: [],
   group: null,
   race: null,
-  data: null,
-  hidden: new Set(),
+  baseData: null, // JSON do servidor
+  data: null, // = baseData, ou recomputo do cliente quando há filtro
+  hidden: new Set(), // candidatos ocultos na legenda
+  excluded: new Set(), // institutos desconsiderados
+  filterOpen: false,
   geom: null,
   showAllPolls: false,
 };
 const groupsOf = () => [...new Set(state.index.map((r) => r.group))];
 const racesIn = (g) => state.index.filter((r) => r.group === g);
+const roundsIn = (g) => [...new Set(racesIn(g).map((r) => r.round))];
+
+// selo de partido
+function pbadge(label, color) {
+  if (!label) return "";
+  return `<span class="pbadge" style="--c:${color}">${label}</span>`;
+}
 
 function el(tag, attrs = {}, kids = []) {
   const n = document.createElementNS(SVGNS, tag);
@@ -209,6 +221,7 @@ function render() {
   renderLegend();
   renderMeta();
   renderTable();
+  renderFilter();
 }
 
 // ---------- tabela de pesquisas ----------
@@ -224,14 +237,16 @@ function fmtRange(start, end) {
     : `${s.getUTCDate()} ${sm} – ${e.getUTCDate()} ${em}`;
 }
 function renderTable() {
-  const d = state.data;
+  const d = state.baseData; // tabela sempre mostra todas as pesquisas
   const shown = d.shown;
   const table = document.querySelector("#polltable");
   const rows = state.showAllPolls ? d.polls : d.polls.slice(0, 12);
 
   const head =
     "<thead><tr><th>Instituto</th><th>Período</th><th>Amostra</th>" +
-    shown.map((s) => `<th style="color:${s.color}">${s.name}</th>`).join("") +
+    shown
+      .map((s) => `<th style="color:${s.color}">${s.name}${pbadge(s.partyLabel, s.color)}</th>`)
+      .join("") +
     "<th></th></tr></thead>";
 
   const body =
@@ -239,18 +254,28 @@ function renderTable() {
     rows
       .map((p) => {
         let lead = -1;
-        for (const s of shown) if ((p.values[s.key] ?? -1) > lead) lead = p.values[s.key] ?? -1;
+        let leadKey = null;
+        for (const s of shown) {
+          const v = p.values[s.key];
+          if (v != null && v > lead) {
+            lead = v;
+            leadKey = s.key;
+          }
+        }
         const cells = shown
           .map((s) => {
             const v = p.values[s.key];
             if (v == null) return `<td class="muted">–</td>`;
-            return `<td class="${v === lead ? "lead" : ""}">${v.toFixed(1)}</td>`;
+            if (s.key === leadKey)
+              return `<td class="win" style="--c:${s.color}">${v.toFixed(1)}</td>`;
+            return `<td>${v.toFixed(1)}</td>`;
           })
           .join("");
         const src = p.source
           ? `<td><a href="${p.source}" target="_blank" rel="noopener" title="fonte">↗</a></td>`
           : `<td></td>`;
-        return `<tr><td class="poll-name">${p.pollster}</td><td class="muted">${fmtRange(
+        const out = state.excluded.has(p.pollster);
+        return `<tr class="${out ? "excluded" : ""}"><td class="poll-name">${p.pollster}</td><td class="muted">${fmtRange(
           p.start,
           p.end
         )}</td><td class="muted">${p.n ? p.n.toLocaleString("pt-BR") : "–"}</td>${cells}${src}</tr>`;
@@ -259,7 +284,10 @@ function renderTable() {
     "</tbody>";
 
   table.innerHTML = head + body;
-  document.querySelector("#polls-count").textContent = `· ${d.nPolls} no total, ${d.nWithSource} com link de fonte`;
+  const nOut = state.excluded.size;
+  document.querySelector("#polls-count").textContent =
+    `· ${d.nPolls} no total, ${d.nWithSource} com link de fonte` +
+    (nOut ? ` · ${nOut} instituto${nOut > 1 ? "s" : ""} desconsiderado${nOut > 1 ? "s" : ""}` : "");
   const tg = document.querySelector("#polls-toggle");
   tg.textContent = state.showAllPolls ? "ver menos" : `ver todas (${d.polls.length})`;
   tg.hidden = d.polls.length <= 12;
@@ -326,7 +354,10 @@ function wireHover(overlay, focus, cross, fdots) {
       rows
         .map(
           (r) =>
-            `<div class="row"><span class="nm"><span class="dot" style="background:${r.c.color}"></span>${r.c.name}</span><span class="v">${r.yv.toFixed(1)}%</span></div>`
+            `<div class="row"><span class="nm"><span class="dot" style="background:${r.c.color}"></span>${r.c.name}${pbadge(
+              r.c.partyLabel,
+              r.c.color
+            )}</span><span class="v">${r.yv.toFixed(1)}%</span></div>`
         )
         .join("");
     const holder = $("#holder").getBoundingClientRect();
@@ -357,9 +388,10 @@ function renderLegend() {
     const b = document.createElement("button");
     b.className = off ? "off" : "";
     const last = c.line[c.line.length - 1];
-    b.innerHTML = `<span class="dot" style="background:${c.color}"></span>${c.name} <span class="pct">${
-      last ? last.y.toFixed(1) + "%" : "—"
-    }</span>`;
+    b.innerHTML = `<span class="dot" style="background:${c.color}"></span>${c.name}${pbadge(
+      c.partyLabel,
+      c.color
+    )} <span class="pct">${last ? last.y.toFixed(1) + "%" : "—"}</span>`;
     b.onclick = () => {
       if (state.hidden.has(c.key)) state.hidden.delete(c.key);
       else state.hidden.add(c.key);
@@ -373,8 +405,14 @@ function renderMeta() {
   const d = state.data;
   const rc = state.index.find((r) => r.key === state.race);
   $("#race-title").textContent = rc.group;
-  const bits = [`${d.nPolls} pesquisas`, `última em ${fmtDate(d.lastPoll)}`, `${d.pollsters.length} institutos`];
-  if (d.houseEffects && Object.keys(d.houseEffects).length) bits.push("ajuste de viés por instituto");
+  const nOut = state.excluded.size;
+  const bits = [
+    `${d.nPolls} pesquisas${nOut ? ` (−${nOut})` : ""}`,
+    `última em ${fmtDate(d.lastPoll)}`,
+    `${d.pollsters.length} institutos`,
+  ];
+  if (state.baseData.houseEffects && Object.keys(state.baseData.houseEffects).length)
+    bits.push("ajuste de viés por instituto");
   $("#race-sub").textContent = bits.join(" · ");
   $("#src-link").href = rc.wiki;
 }
@@ -396,23 +434,43 @@ function renderTabs() {
     };
     box.append(b);
   }
-  // sub-abas de turno, se o grupo tiver mais de uma corrida
+  // sub-abas: um botão por TURNO; + <select> de cenário quando o turno tem vários
   const sub = $("#rounds");
   sub.textContent = "";
-  const rs = racesIn(state.group);
-  sub.hidden = rs.length < 2;
-  for (const r of rs) {
+  const rounds = roundsIn(state.group);
+  const curRound = state.index.find((r) => r.key === state.race).round;
+  sub.hidden = rounds.length < 2;
+  for (const rnd of rounds) {
     const b = document.createElement("button");
-    b.textContent = ROUND_LABEL[r.round] || r.round;
-    b.setAttribute("aria-selected", String(r.key === state.race));
+    b.textContent = ROUND_LABEL[rnd] || rnd;
+    b.setAttribute("aria-selected", String(rnd === curRound));
     b.onclick = () => {
-      if (r.key === state.race) return;
-      state.race = r.key;
+      if (rnd === curRound) return;
+      state.race = racesIn(state.group).find((r) => r.round === rnd).key;
       state.hidden.clear();
       renderTabs();
       load();
     };
     sub.append(b);
+  }
+
+  const scenSlot = $("#scenario");
+  const scen = racesIn(state.group).filter((r) => r.round === curRound && r.scenario);
+  if (scen.length > 1) {
+    scenSlot.hidden = false;
+    scenSlot.innerHTML =
+      `<span>cenário</span><select>` +
+      scen.map((r) => `<option value="${r.key}"${r.key === state.race ? " selected" : ""}>Lula × ${r.scenario}</option>`).join("") +
+      `</select>`;
+    scenSlot.querySelector("select").onchange = (e) => {
+      state.race = e.target.value;
+      state.hidden.clear();
+      renderTabs();
+      load();
+    };
+  } else {
+    scenSlot.hidden = true;
+    scenSlot.innerHTML = "";
   }
 }
 
@@ -420,7 +478,9 @@ async function load() {
   svg.style.opacity = 0.25;
   try {
     const res = await fetch(`data/${state.race}.json`, { cache: "no-cache" });
-    state.data = await res.json();
+    state.baseData = await res.json();
+    state.excluded = new Set();
+    state.data = state.baseData;
     render();
   } catch (e) {
     svg.textContent = "";
@@ -430,6 +490,69 @@ async function load() {
   svg.style.transition = "opacity .2s";
   svg.style.opacity = 1;
 }
+
+// ---------- filtro de institutos ----------
+let filterTimer;
+function applyFilter() {
+  clearTimeout(filterTimer);
+  filterTimer = setTimeout(() => {
+    if (state.excluded.size === 0) {
+      state.data = state.baseData;
+    } else {
+      const rc = recompute(state.baseData, state.excluded);
+      if (rc.empty || !rc.candidates.length) {
+        state.data = { ...state.baseData, candidates: [], nPolls: rc.nPolls, pollsters: rc.pollsters || [] };
+      } else {
+        state.data = { ...state.baseData, ...rc };
+      }
+    }
+    render();
+  }, 120);
+}
+function renderFilter() {
+  const all = state.baseData.pollsters;
+  $("#filter-btn").textContent =
+    state.excluded.size === 0 ? `Institutos: todos (${all.length})` : `Institutos: ${all.length - state.excluded.size}/${all.length}`;
+  const panel = $("#filter-panel");
+  panel.hidden = !state.filterOpen;
+  if (!state.filterOpen) return;
+  panel.innerHTML =
+    `<div class="filter-actions"><button data-all>marcar todos</button><button data-none>desmarcar todos</button></div>` +
+    all
+      .map(
+        (p) =>
+          `<label><input type="checkbox" value="${p}"${state.excluded.has(p) ? "" : " checked"}> ${p}</label>`
+      )
+      .join("");
+  panel.querySelector("[data-all]").onclick = () => {
+    state.excluded.clear();
+    renderFilter();
+    applyFilter();
+  };
+  panel.querySelector("[data-none]").onclick = () => {
+    state.baseData.pollsters.forEach((p) => state.excluded.add(p));
+    renderFilter();
+    applyFilter();
+  };
+  panel.querySelectorAll("input").forEach((cb) => {
+    cb.onchange = () => {
+      if (cb.checked) state.excluded.delete(cb.value);
+      else state.excluded.add(cb.value);
+      renderFilter();
+      applyFilter();
+    };
+  });
+}
+$("#filter-btn").onclick = () => {
+  state.filterOpen = !state.filterOpen;
+  renderFilter();
+};
+document.addEventListener("click", (e) => {
+  if (state.filterOpen && !e.target.closest("#filter-wrap")) {
+    state.filterOpen = false;
+    renderFilter();
+  }
+});
 
 let rt;
 addEventListener("resize", () => {
