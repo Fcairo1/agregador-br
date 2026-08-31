@@ -2,11 +2,21 @@ import { recompute } from "./agg.js";
 
 const SVGNS = "http://www.w3.org/2000/svg";
 const VB = { w: 1000, h: 560 };
-const M = { t: 26, r: 140, b: 40, l: 46 };
-const PW = VB.w - M.l - M.r;
-const PH = VB.h - M.t - M.b;
+let M = { t: 26, r: 140, b: 40, l: 46 };
+let PW = VB.w - M.l - M.r;
+let PH = VB.h - M.t - M.b;
 const GAP_DAYS = 9;
 const DAY = 86400000;
+
+// geometria responsiva: no celular o gráfico fica mais alto e com menos margem à direita
+function fitViewport() {
+  const narrow = window.matchMedia("(max-width: 640px)").matches;
+  VB.h = narrow ? 820 : 560;
+  M = narrow ? { t: 22, r: 96, b: 38, l: 40 } : { t: 26, r: 140, b: 40, l: 46 };
+  PW = VB.w - M.l - M.r;
+  PH = VB.h - M.t - M.b;
+  svg.setAttribute("viewBox", `0 0 ${VB.w} ${VB.h}`);
+}
 
 const $ = (s, r = document) => r.querySelector(s);
 const svg = $("#chart");
@@ -94,6 +104,7 @@ function segments(arr) {
 
 // ---------- render ----------
 function render() {
+  fitViewport();
   const data = state.data;
   const g = (state.geom = buildGeom(data));
   svg.textContent = "";
@@ -384,6 +395,32 @@ function wireHover(overlay, focus, cross, fdots) {
   overlay.addEventListener("touchend", leave);
 }
 
+// valor da linha na data mais próxima de `targetT` (ms)
+function yAt(line, targetT) {
+  let best = null;
+  let bd = Infinity;
+  for (const p of line) {
+    const dd = Math.abs(parseT(p.t) - targetT);
+    if (dd < bd) {
+      bd = dd;
+      best = p.y;
+    }
+  }
+  return best;
+}
+function deltaHTML(c) {
+  if (c.line.length < 2) return "";
+  const lastT = parseT(c.line[c.line.length - 1].t);
+  const cur = c.line[c.line.length - 1].y;
+  const ago = yAt(c.line, lastT - 30 * DAY);
+  if (ago == null) return "";
+  const d = cur - ago;
+  if (Math.abs(d) < 0.35) return `<span class="delta flat" title="vs. ~30 dias atrás">±0</span>`;
+  const s = d > 0 ? "up" : "down";
+  const arm = d > 0 ? "▲" : "▼";
+  return `<span class="delta ${s}" title="vs. ~30 dias atrás">${arm}${Math.abs(d).toFixed(1)}</span>`;
+}
+
 // ---------- legend / meta / tabs ----------
 function renderLegend() {
   const box = $("#legend");
@@ -396,7 +433,7 @@ function renderLegend() {
     b.innerHTML = `<span class="dot" style="background:${c.color}"></span>${c.name}${pbadge(
       c.partyLabel,
       c.color
-    )} <span class="pct">${last ? last.y.toFixed(1) + "%" : "—"}</span>`;
+    )} <span class="pct">${last ? last.y.toFixed(1) + "%" : "—"}</span>${deltaHTML(c)}`;
     b.onclick = () => {
       if (state.hidden.has(c.key)) state.hidden.delete(c.key);
       else state.hidden.add(c.key);
