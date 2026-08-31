@@ -11,3 +11,6 @@ if (run("fetch.mjs") !== 0) process.exit(1);
 if (run("ratings.mjs") !== 0) console.warn("ratings.mjs falhou — usando ratings.json anterior (se houver)");
 
 if (run("aggregate.mjs") !== 0) process.exit(1);
+
+// trava de sanidade: barra dado claramente errado antes de commitar/publicar
+if (run("check.mjs") !== 0) process.exit(1);
