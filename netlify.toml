@@ -1,0 +1,14 @@
+# Deploy no Netlify (URL genérica tipo agregador-br.netlify.app, sem username).
+# O GitHub Actions continua fazendo o refresh de 6h e commitando os CSV;
+# cada push (inclusive o do bot) dispara um build aqui.
+[build]
+  command = "node scripts/build.mjs"
+  publish = "site"
+
+[build.environment]
+  NODE_VERSION = "22"
+
+[[headers]]
+  for = "/data/*"
+  [headers.values]
+    Cache-Control = "public, max-age=300"
