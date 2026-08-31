@@ -6,11 +6,17 @@ import path from "node:path";
 
 const API = "https://pt.wikipedia.org/w/api.php";
 const CACHE_DIR = new URL("../../.cache/", import.meta.url);
-const UA = "agregador-br/0.1 (https://github.com/; agregador de pesquisas, uso de pesquisa)";
+// Wikimedia pede User-Agent identificável com contato:
+const UA = "agregador-br/0.2 (https://github.com/Fcairo1/agregador-br) node-fetch";
 
 function cachePath(key) {
   return new URL(key.replace(/[^\w.-]/g, "_") + ".json", CACHE_DIR);
 }
+
+const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
+const memo = new Map(); // dedupe de chamadas idênticas no mesmo processo
+let lastCall = 0;
+const MIN_GAP_MS = 350; // educado com a API
 
 async function apiGet(params, { offline = false, cacheKey } = {}) {
   const cp = cacheKey ? cachePath(cacheKey) : null;
@@ -18,11 +24,39 @@ async function apiGet(params, { offline = false, cacheKey } = {}) {
     if (!cp || !fs.existsSync(cp)) throw new Error(`--offline: falta cache ${cacheKey}`);
     return JSON.parse(fs.readFileSync(cp, "utf8"));
   }
-  const usp = new URLSearchParams({ format: "json", formatversion: "2", ...params });
+  const usp = new URLSearchParams({ format: "json", formatversion: "2", maxlag: "5", ...params });
   const url = `${API}?${usp}`;
-  const res = await fetch(url, { headers: { "user-agent": UA, "accept": "application/json" } });
-  if (!res.ok) throw new Error(`MediaWiki ${res.status} para ${params.page || ""} ${params.section || ""}`);
-  const json = await res.json();
+  if (memo.has(url)) return memo.get(url);
+
+  let json;
+  for (let attempt = 0; attempt < 5; attempt++) {
+    const wait = MIN_GAP_MS - (Date.now() - lastCall);
+    if (wait > 0) await sleep(wait);
+    lastCall = Date.now();
+    let res;
+    try {
+      res = await fetch(url, { headers: { "user-agent": UA, "api-user-agent": UA, accept: "application/json" } });
+    } catch (e) {
+      await sleep(1000 * (attempt + 1));
+      continue;
+    }
+    if (res.status === 429 || res.status === 503) {
+      const ra = parseFloat(res.headers.get("retry-after")) || 2 ** attempt;
+      await sleep(Math.min(30, ra) * 1000);
+      continue;
+    }
+    if (!res.ok) throw new Error(`MediaWiki ${res.status} para ${params.page || ""} ${params.section || ""}`);
+    json = await res.json();
+    if (json?.error?.code === "maxlag") {
+      await sleep(3000);
+      json = undefined;
+      continue;
+    }
+    break;
+  }
+  if (!json) throw new Error(`MediaWiki: sem resposta após retries para ${params.page || ""} ${params.section || ""}`);
+
+  memo.set(url, json);
   if (cp) {
     fs.mkdirSync(CACHE_DIR, { recursive: true });
     fs.writeFileSync(cp, JSON.stringify(json));
