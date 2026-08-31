@@ -300,9 +300,17 @@ const POLLSTER_ALIASES = [
   [/american analytics/i, "American Analytics"],
   [/meio ?\/? ?ideia/i, "Meio/Ideia"],
   [/apex ?\/? ?futura/i, "Apex/Futura"],
+  [/^ipespe$|^ibope$|^ipec$/i, "Ipec"], // Ibope virou Ipec/Ipespe
+  [/^ver[ií]t[aá]/i, "Veritá"],
+  [/^modalmais$|^futura\b/i, "Modalmais/Futura"],
 ];
 export function normPollster(s) {
-  const t = String(s).trim().replace(/\s+/g, " ");
+  let t = String(s)
+    .replace(/\bBR[-\s]?\d{3,}\b/gi, "") // nº de registro TSE que vaza pro nome
+    .replace(/\b\d{4,}\b/g, "")
+    .replace(/\s*\(.*?\)\s*/g, " ")
+    .replace(/\s+/g, " ")
+    .trim();
   for (const [re, name] of POLLSTER_ALIASES) if (re.test(t)) return name;
   return t;
 }
@@ -405,25 +413,36 @@ export function parsePollTable(tableHtml, { year, warn = () => {}, refMap = new 
   }
 
   const polls = [];
+  // Um "bloco" = um instituto/data com um ou mais cenários (linhas de continuação
+  // por rowspan). Guardamos todos e escolhemos o cenário mais COMPLETO (mais
+  // candidatos preenchidos), que costuma ser a lista estimulada principal e atual.
+  let block = null;
+  const isJunk = (vals) => {
+    const vv = Object.values(vals);
+    return vv.length >= 4 && vv.every((x) => x === vv[0]); // tudo igual = linha de nota
+  };
+  const flush = () => {
+    if (block && block.scenarios.length) {
+      let best = block.scenarios[0];
+      for (const s of block.scenarios)
+        if (Object.keys(s).length > Object.keys(best).length) best = s;
+      polls.push({
+        pollster: block.pollster,
+        start: block.start,
+        end: block.end,
+        n: block.n,
+        moe: block.moe,
+        source: block.source,
+        scenarios: block.scenarios.length,
+        values: best,
+      });
+    }
+    block = null;
+  };
+
   for (let i = headEnd; i < grid.length; i++) {
     const { cells, fresh } = grid[i];
-    if (!cells[metaIdx.pollster]) continue;
-    // linha de continuação (cenário 2+): a coluna do instituto veio de rowspan
-    if (fresh[metaIdx.pollster] === false) continue;
-    const pollster = normPollster(cellText(cells[metaIdx.pollster]?.html || ""));
-    if (!pollster || /^\s*$/.test(pollster)) continue;
-    // pula linhas de "evento" (2º turno, datas de eleição etc.)
-    if (/turno|elei[çc][ãa]o|debate|resultado/i.test(pollster) && cells.length < candEnd) continue;
-
-    const datesTxt = cellText(cells[metaIdx.dates]?.html || "");
-    const d = parseDates(datesTxt, year);
-    if (!d) {
-      warn(`data não parseada: "${datesTxt}" (${pollster})`);
-      continue;
-    }
-    const n = intFrom(cellText(cells[metaIdx.n]?.html || ""));
-    let moe = floatFrom(cellText(cells[metaIdx.moe]?.html || ""));
-    if (!moe) moe = moeFromN(n);
+    const isFresh = !!cells[metaIdx.pollster] && fresh[metaIdx.pollster] !== false;
 
     const values = {};
     let any = false;
@@ -434,18 +453,40 @@ export function parsePollTable(tableHtml, { year, warn = () => {}, refMap = new 
         any = true;
       }
     }
-    if (!any) continue;
 
-    // rejeita linhas-fantasma (linhas de "evento"/nota mal interpretadas como pesquisa)
-    if (/^\d{1,2}\s+(jan|fev|mar|abr|mai|jun|jul|ago|set|out|nov|dez)/i.test(pollster)) continue;
-    if (n != null && n < 250) continue; // pesquisa real não tem amostra minúscula
-    const vv = Object.values(values);
-    if (vv.length >= 4 && vv.every((x) => x === vv[0])) continue; // todos iguais = não é pesquisa
+    if (isFresh) {
+      flush();
+      const pollster = normPollster(cellText(cells[metaIdx.pollster]?.html || ""));
+      if (!pollster) continue;
+      if (/turno|elei[çc][ãa]o|debate|resultado/i.test(pollster) && cells.length < candEnd) continue;
+      if (/^\d{1,2}\s+(jan|fev|mar|abr|mai|jun|jul|ago|set|out|nov|dez)/i.test(pollster)) continue;
 
-    const refName = refNameFromCell(cells[metaIdx.pollster]?.html || "");
-    const source = (refName && refMap.get(refName)) || "";
-    polls.push({ pollster, start: d.start, end: d.end, n, moe, source, values });
+      const datesTxt = cellText(cells[metaIdx.dates]?.html || "");
+      const d = parseDates(datesTxt, year);
+      if (!d) {
+        warn(`data não parseada: "${datesTxt}" (${pollster})`);
+        continue;
+      }
+      const n = intFrom(cellText(cells[metaIdx.n]?.html || ""));
+      if (n != null && n < 250) continue; // amostra minúscula = não é pesquisa real
+      let moe = floatFrom(cellText(cells[metaIdx.moe]?.html || ""));
+      if (!moe) moe = moeFromN(n);
+      const refName = refNameFromCell(cells[metaIdx.pollster]?.html || "");
+      block = {
+        pollster,
+        start: d.start,
+        end: d.end,
+        n,
+        moe,
+        source: (refName && refMap.get(refName)) || "",
+        scenarios: [],
+      };
+      if (any && !isJunk(values)) block.scenarios.push(values);
+    } else if (block && any && !isJunk(values)) {
+      block.scenarios.push(values); // cenário adicional do mesmo instituto/data
+    }
   }
+  flush();
 
   return { candidates: candidates.map(({ col, ...c }) => c), polls };
 }

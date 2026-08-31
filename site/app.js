@@ -19,6 +19,7 @@ const state = {
   data: null, // = baseData, ou recomputo do cliente quando há filtro
   hidden: new Set(), // candidatos ocultos na legenda
   excluded: new Set(), // institutos desconsiderados
+  sinceDays: 0, // 0 = período todo
   filterOpen: false,
   geom: null,
   showAllPolls: false,
@@ -407,10 +408,11 @@ function renderMeta() {
   $("#race-title").textContent = rc.group;
   const nOut = state.excluded.size;
   const bits = [
-    `${d.nPolls} pesquisas${nOut ? ` (−${nOut})` : ""}`,
+    `${d.nPolls} pesquisas${nOut ? ` (−${nOut} inst.)` : ""}`,
     `última em ${fmtDate(d.lastPoll)}`,
     `${d.pollsters.length} institutos`,
   ];
+  if (state.sinceDays) bits.push(`só os últimos ${state.sinceDays} dias`);
   if (state.baseData.houseEffects && Object.keys(state.baseData.houseEffects).length)
     bits.push("ajuste de viés por instituto");
   $("#race-sub").textContent = bits.join(" · ");
@@ -480,6 +482,9 @@ async function load() {
     const res = await fetch(`data/${state.race}.json`, { cache: "no-cache" });
     state.baseData = await res.json();
     state.excluded = new Set();
+    state.sinceDays = 0;
+    const psel = $("#period-sel");
+    if (psel) psel.value = "0";
     state.data = state.baseData;
     render();
   } catch (e) {
@@ -496,10 +501,10 @@ let filterTimer;
 function applyFilter() {
   clearTimeout(filterTimer);
   filterTimer = setTimeout(() => {
-    if (state.excluded.size === 0) {
+    if (state.excluded.size === 0 && !state.sinceDays) {
       state.data = state.baseData;
     } else {
-      const rc = recompute(state.baseData, state.excluded);
+      const rc = recompute(state.baseData, { excluded: state.excluded, sinceDays: state.sinceDays });
       if (rc.empty || !rc.candidates.length) {
         state.data = { ...state.baseData, candidates: [], nPolls: rc.nPolls, pollsters: rc.pollsters || [] };
       } else {
@@ -509,6 +514,10 @@ function applyFilter() {
     render();
   }, 120);
 }
+$("#period-sel").onchange = (e) => {
+  state.sinceDays = +e.target.value || 0;
+  applyFilter();
+};
 function renderFilter() {
   const all = state.baseData.pollsters;
   $("#filter-btn").textContent =

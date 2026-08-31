@@ -31,6 +31,17 @@
         </div>
 
         <div class="chart-toolbar">
+          <label class="period">
+            Período
+            <select id="period-sel">
+              <option value="0">tudo</option>
+              <option value="120">últimos 120 dias</option>
+              <option value="90">últimos 90 dias</option>
+              <option value="60">últimos 60 dias</option>
+              <option value="45">últimos 45 dias</option>
+              <option value="30">últimos 30 dias</option>
+            </select>
+          </label>
           <div id="filter-wrap">
             <button id="filter-btn" type="button">Institutos: todos</button>
             <div id="filter-panel" hidden></div>

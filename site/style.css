@@ -54,7 +54,12 @@ h1 span { color: var(--muted); font-weight: 500; }
   vertical-align: 1px; text-shadow: 0 1px 1px rgba(0, 0, 0, .28);
 }
 
-.chart-toolbar { display: flex; justify-content: flex-end; margin: 8px 0 -4px; position: relative; }
+.chart-toolbar { display: flex; justify-content: flex-end; align-items: center; gap: 10px; margin: 8px 0 -4px; position: relative; }
+.period { display: inline-flex; align-items: center; gap: 6px; font-size: 12px; color: var(--muted); }
+.period select {
+  font: inherit; font-size: 12px; font-weight: 550; color: var(--ink); background: var(--panel);
+  border: 1px solid var(--line); border-radius: 999px; padding: 5px 10px; cursor: pointer;
+}
 #filter-wrap { position: relative; }
 #filter-btn {
   border: 1px solid var(--line); background: var(--panel); color: var(--ink); font: inherit;

@@ -9,10 +9,12 @@ const clamp = (x, a, b) => Math.max(a, Math.min(b, x));
 const r2 = (x) => (x == null ? null : Math.round(x * 100) / 100);
 const moeFromN = (n) => (!n || n <= 0 ? null : Math.round((98 / Math.sqrt(n)) * 10) / 10);
 
-export function recompute(data, excluded = new Set()) {
+export function recompute(data, { excluded = new Set(), sinceDays = null } = {}) {
   const P = data.params;
   const shown = data.shown;
-  const polls = data.polls.filter((p) => !excluded.has(p.pollster));
+  const fullMaxEnd = Math.max(...data.polls.map((p) => T(p.end)));
+  const cutoff = sinceDays ? fullMaxEnd - sinceDays * DAY : -Infinity;
+  const polls = data.polls.filter((p) => !excluded.has(p.pollster) && T(p.end) >= cutoff);
   if (polls.length < 3) return { candidates: [], nPolls: polls.length, pollsters: [], empty: true };
 
   const ends = polls.map((p) => T(p.end));
