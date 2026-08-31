@@ -33,13 +33,13 @@ jobs:
       - name: Build (fetch + aggregate)
         run: node scripts/build.mjs
 
-      - name: Commit se houver mudança
+      - name: Commit se houver pesquisa nova
         run: |
           git config user.name  "agregador-bot"
           git config user.email "actions@users.noreply.github.com"
-          git add data site/data
+          git add data                      # só os CSV (fonte); o JSON é rebuildado no deploy
           if git diff --cached --quiet; then
-            echo "sem mudanças"
+            echo "sem pesquisa nova"
           else
             git commit -m "chore: atualiza pesquisas (bot)"
             git push
