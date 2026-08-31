@@ -6,15 +6,20 @@ const PH = VB.h - M.t - M.b;
 const GAP_DAYS = 9;
 const DAY = 86400000;
 
-const RACES = [
-  { key: "presidente", label: "Presidente", wiki: "https://pt.wikipedia.org/wiki/Pesquisas_de_opini%C3%A3o_para_a_elei%C3%A7%C3%A3o_presidencial_no_Brasil_em_2026" },
-  { key: "sp-governador", label: "Governador de SP", wiki: "https://pt.wikipedia.org/wiki/Pesquisas_eleitorais_para_a_elei%C3%A7%C3%A3o_estadual_de_2026_em_S%C3%A3o_Paulo" },
-];
-
 const $ = (s, r = document) => r.querySelector(s);
 const svg = $("#chart");
 const tip = $("#tooltip");
-const state = { race: RACES[0].key, data: null, hidden: new Set(), geom: null, showAllPolls: false };
+const state = {
+  index: [],
+  group: null,
+  race: null,
+  data: null,
+  hidden: new Set(),
+  geom: null,
+  showAllPolls: false,
+};
+const groupsOf = () => [...new Set(state.index.map((r) => r.group))];
+const racesIn = (g) => state.index.filter((r) => r.group === g);
 
 function el(tag, attrs = {}, kids = []) {
   const n = document.createElementNS(SVGNS, tag);
@@ -363,20 +368,42 @@ function renderLegend() {
     box.append(b);
   }
 }
+const ROUND_LABEL = { "1T": "1º turno", "2T": "2º turno" };
 function renderMeta() {
   const d = state.data;
-  $("#race-title").textContent = d.label;
-  $("#race-sub").textContent = `${d.nPolls} pesquisas · última em ${fmtDate(d.lastPoll)} · ${d.pollsters.length} institutos`;
-  const rc = RACES.find((r) => r.key === state.race);
+  const rc = state.index.find((r) => r.key === state.race);
+  $("#race-title").textContent = rc.group;
+  const bits = [`${d.nPolls} pesquisas`, `última em ${fmtDate(d.lastPoll)}`, `${d.pollsters.length} institutos`];
+  if (d.houseEffects && Object.keys(d.houseEffects).length) bits.push("ajuste de viés por instituto");
+  $("#race-sub").textContent = bits.join(" · ");
   $("#src-link").href = rc.wiki;
 }
 function renderTabs() {
   const box = $("#races");
   box.textContent = "";
-  for (const r of RACES) {
+  for (const g of groupsOf()) {
     const b = document.createElement("button");
-    b.textContent = r.label;
+    b.textContent = g;
     b.setAttribute("role", "tab");
+    b.setAttribute("aria-selected", String(g === state.group));
+    b.onclick = () => {
+      if (g === state.group) return;
+      state.group = g;
+      state.race = racesIn(g)[0].key;
+      state.hidden.clear();
+      renderTabs();
+      load();
+    };
+    box.append(b);
+  }
+  // sub-abas de turno, se o grupo tiver mais de uma corrida
+  const sub = $("#rounds");
+  sub.textContent = "";
+  const rs = racesIn(state.group);
+  sub.hidden = rs.length < 2;
+  for (const r of rs) {
+    const b = document.createElement("button");
+    b.textContent = ROUND_LABEL[r.round] || r.round;
     b.setAttribute("aria-selected", String(r.key === state.race));
     b.onclick = () => {
       if (r.key === state.race) return;
@@ -385,7 +412,7 @@ function renderTabs() {
       renderTabs();
       load();
     };
-    box.append(b);
+    sub.append(b);
   }
 }
 
@@ -410,5 +437,19 @@ addEventListener("resize", () => {
   rt = setTimeout(() => state.data && render(), 150);
 });
 
-renderTabs();
-load();
+async function boot() {
+  try {
+    state.index = await (await fetch("data/index.json", { cache: "no-cache" })).json();
+  } catch (e) {
+    state.index = [];
+  }
+  if (!state.index.length) {
+    svg.append(el("text", { x: 40, y: 60, fill: "currentColor" }, [txt("Sem dados. Rode: node scripts/build.mjs")]));
+    return;
+  }
+  state.group = state.index[0].group;
+  state.race = state.index[0].key;
+  renderTabs();
+  load();
+}
+boot();

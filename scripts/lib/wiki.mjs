@@ -176,7 +176,7 @@ function buildGrid(rows) {
 }
 
 const META_RE = /contratante|pesquisa|instituto|data|amostra|margem|erro|cen[aá]?\.?$|cenário/i;
-const TRAIL_RE = /outros|indecis|nulo|branco|n[ãa]o sabe|n[ãa]o respond|ns\/?nr|nenhum|n[ãa]o vota|indef|absten|absten/i;
+const TRAIL_RE = /outros|indecis|nulo|branco|n[ãa]o sabe|n[ãa]o respond|ns\/?nr|nenhum|n[ãa]o vota|indef|absten|vantagem|diferen[çc]a|^dif\.?$|lidera|empate/i;
 const DATEISH = /\d{1,2}\s*(?:de\s+)?(?:jan|fev|mar|abr|mai|jun|jul|ago|set|out|nov|dez)/i;
 
 const MONTHS = { jan: 0, fev: 1, mar: 2, abr: 3, mai: 4, jun: 5, jul: 6, ago: 7, set: 8, out: 9, nov: 10, dez: 11 };

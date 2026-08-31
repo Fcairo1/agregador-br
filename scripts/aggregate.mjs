@@ -12,7 +12,7 @@ import {
 } from "./races.mjs";
 import { readCSV } from "./lib/csv.mjs";
 import { moeFromN } from "./lib/wiki.mjs";
-import { mulberry32, loessWithBand } from "./lib/loess.mjs";
+import { mulberry32, loess, loessWithBand } from "./lib/loess.mjs";
 
 const DATA = new URL("../data/", import.meta.url);
 const OUT = new URL("../site/data/", import.meta.url);
@@ -97,11 +97,58 @@ function aggregateRace(raceKey) {
     .sort((a, b) => b.recentAvg - a.recentAvg)
     .slice(0, PLOT_MAX_LINES);
 
+  // corridas com poucas pesquisas: janela mais larga e suave (menos pico espúrio)
+  const sparse = polls.length < 25;
+  const loessOpts = {
+    span: sparse ? 0.6 : AGG.span,
+    minPts: AGG.minPts,
+    minBandwidthX: sparse ? 26 : 14,
+    maxGapX: sparse ? 40 : 30,
+  };
+  const uniqPollsters = (arr) => new Set(arr.map((p) => p.pollster)).size;
+  const rawSeries = {};
+  for (const { k } of plotable) rawSeries[k] = series[k].slice();
+
+  // ---- house effects: viés sistemático de cada instituto vs. a tendência ----
+  // 1ª passada de tendência (sem bootstrap), resíduos por (instituto, candidato),
+  // encolhidos por contagem e limitados a ±houseMaxShift. Corrige os pontos e refita.
+  const house = {}; // pollster -> { cand -> shift p.p. }
+  const applyHouse = polls.length >= 20 && uniqPollsters(polls) >= 5;
+  if (applyHouse) {
+    const trend0 = {};
+    for (const { k } of plotable) trend0[k] = loess(series[k], grid, loessOpts);
+    const at = (arr, x) => {
+      const g = x / AGG.gridStepDays;
+      const lo = Math.floor(g), hi = Math.ceil(g);
+      if (lo < 0 || hi >= arr.length) return null;
+      const a = arr[lo], b = arr[hi];
+      if (a == null || b == null) return a ?? b;
+      return a + (b - a) * (g - lo);
+    };
+    const raw = {};
+    for (const { k } of plotable)
+      for (const p of series[k]) {
+        const tv = at(trend0[k], p.x);
+        if (tv == null) continue;
+        ((raw[p.pollster] ??= {})[k] ??= []).push(p.y - tv);
+      }
+    for (const [pst, byK] of Object.entries(raw)) {
+      house[pst] = {};
+      for (const [k, rs] of Object.entries(byK)) {
+        const m = rs.reduce((s, v) => s + v, 0) / rs.length;
+        const shrunk = m * (rs.length / (rs.length + 5));
+        house[pst][k] = r2(clamp(shrunk, -AGG.houseMaxShift, AGG.houseMaxShift));
+      }
+    }
+    for (const { k } of plotable)
+      series[k] = series[k].map((p) => ({ ...p, y: p.y - (house[p.pollster]?.[k] || 0) }));
+  }
+
   const rng = mulberry32(AGG.seed);
   const candidates = plotable.map(({ k, pts }, i) => {
+    pts = series[k]; // pode ter sido ajustado por house effect
     const { line, band } = loessWithBand(pts, grid, {
-      span: AGG.span,
-      minPts: AGG.minPts,
+      ...loessOpts,
       bootstrap: AGG.bootstrap,
       bandLo: AGG.bandLo,
       bandHi: AGG.bandHi,
@@ -116,7 +163,8 @@ function aggregateRace(raceKey) {
       band: gridDates
         .map((t, gi) => (band[gi] == null ? null : { t, lo: r2(band[gi].lo), hi: r2(band[gi].hi) }))
         .filter(Boolean),
-      polls: pts
+      polls: rawSeries[k]
+        .slice()
         .sort((a, b) => a.t - b.t)
         .map((p) => ({ t: iso(p.t), y: r2(p.y), pollster: p.pollster, n: p.n || null })),
     };
@@ -161,6 +209,16 @@ function aggregateRace(raceKey) {
     xDomain: [iso(minEnd), iso(maxEnd)],
     shown: candidates.map((c) => ({ key: c.key, name: c.name, color: c.color })),
     candidates,
+    houseEffects: applyHouse
+      ? Object.fromEntries(
+          Object.entries(house)
+            .map(([pst, byK]) => [
+              pst,
+              Object.fromEntries(candidates.map((c) => [c.key, byK[c.key] ?? 0]).filter(([, v]) => v)),
+            ])
+            .filter(([, o]) => Object.keys(o).length)
+        )
+      : {},
     polls: pollTable,
   };
 }
@@ -168,10 +226,21 @@ function aggregateRace(raceKey) {
 const only = process.argv.slice(2).find((a) => !a.startsWith("--"));
 const keys = only ? [only] : Object.keys(RACES);
 fs.mkdirSync(OUT, { recursive: true });
+const index = [];
 for (const k of keys) {
-  const out = aggregateRace(k);
+  let out;
+  try {
+    out = aggregateRace(k);
+  } catch (e) {
+    console.warn(`  ${k}: erro (${e.message}) — pulando`);
+    continue;
+  }
   if (!out) continue;
   fs.writeFileSync(new URL(`${k}.json`, OUT), JSON.stringify(out, null, 2));
+  const r = RACES[k];
+  index.push({ key: k, group: r.group, round: r.round, label: r.label, wiki: r.wikiUrl, nPolls: out.nPolls });
   const names = out.candidates.map((c) => `${c.name} ${c.line.at(-1)?.y ?? "?"}%`).join(", ");
   console.log(`  ${k}: ${out.nPolls} pesquisas, ${out.candidates.length} linhas -> ${names}`);
 }
+// índice só com o que foi gerado (na ordem de RACES), pro front montar as abas
+if (!only) fs.writeFileSync(new URL("index.json", OUT), JSON.stringify(index, null, 2));

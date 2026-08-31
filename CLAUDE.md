@@ -26,24 +26,32 @@ Wikipédia (API MediaWiki)  ──fetch.mjs──▶  data/polls.<corrida>.csv  
 ```
 
 - `build.mjs` = `fetch.mjs` && `aggregate.mjs`.
-- Corridas (`<corrida>`): `presidente`, `sp-governador`.
+- Corridas (`<corrida>` = chave em `RACES`): `presidente`, `presidente-2t`, `sp-governador`,
+  `sp-governador-2t`, `mg-governador`, `rj-governador`, `pr-governador`, `rs-governador`.
+  `aggregate.mjs` também gera `site/data/index.json` (lista `{key,group,round,label,wiki,nPolls}`
+  na ordem de `RACES`) — o front monta as abas a partir dele. Abas = `group`; sub-abas = `round`
+  (1T/2T) quando o grupo tem mais de uma corrida.
 
 ### Fontes
 
 | Fonte | Papel | Como |
 |---|---|---|
 | Wikipédia PT | espinha dorsal (todas as pesquisas, tabelas cronológicas) | API MediaWiki `action=parse`, por seção |
+| citações da Wikipédia | link de fonte por pesquisa (`source`) | `buildRefMap` sobre o wikitext da página; casa `<ref name>` |
 | `data/overrides.*.csv` | curadoria manual — pesquisa nova antes de entrar na Wiki, ou correção | editar à mão, commitar |
-| TSE Dados Abertos | validação futura ("essa pesquisa está registrada?") | dataset "Pesquisas Eleitorais 2026", CKAN API (TODO fase 2) |
+| TSE Dados Abertos | ~~cross-check de registro~~ | **bloqueado** (Akamai 403 na API e no CDN, inclusive do CI). Reavaliar com mirror/proxy BR |
 
-Wikipédia é CC BY-SA: o site credita a fonte no rodapé.
+Wikipédia é CC BY-SA: o site credita a fonte no rodapé + link por pesquisa na tabela.
 
-### Artigos da Wikipédia (títulos exatos)
+### Artigos da Wikipédia
 
-- presidente: `Pesquisas de opinião para a eleição presidencial no Brasil em 2026`
-- sp-governador: `Pesquisas eleitorais para a eleição estadual de 2026 em São Paulo`
+Um por corrida, em `scripts/races.mjs` (`wikiPage`). Estaduais seguem o padrão
+`Pesquisas eleitorais para a eleição estadual de 2026 em/no <Estado>`; presidencial é
+`Pesquisas de opinião para a eleição presidencial no Brasil em 2026`.
 
-Config de cada corrida (seções-alvo, candidatos exibidos, cores) fica em `scripts/races.mjs`.
+Config de cada corrida (grupo, turno, seções-alvo, candidatos, cores) fica em `scripts/races.mjs`.
+Regras de seção reutilizáveis: `presFirstRound` (`^1\.1\.\d+$`), `govFirstRound` (`^2\.1\.\d+$`),
+`exact("2.1.1")` p/ 2º turno. Adicionar estado = uma entrada em `RACES` com `govFirstRound`.
 
 ## Formato do CSV (`data/polls.<corrida>.csv`)
 
@@ -73,41 +81,54 @@ Por candidato, sobre `end` (dias desde a 1ª pesquisa):
    - `w_recencia = 0.5 ^ (idade_em_dias / HALFLIFE)` (HALFLIFE em `races.mjs`, ~28d)
    - `w_amostra = sqrt(n / 1000)`, saturado em [0.5, 2]
    - `bandwidth`: fração dos pontos (`span`, ~0.35) — ajustada p/ ter no mínimo `minPts`.
-2. **Faixa (aura):** bootstrap por reamostragem das pesquisas (com reposição, pesos mantidos),
-   `B` réplicas (default 200), seed fixa (`mulberry32`). Faixa = percentis 10 e 90 das réplicas
-   em cada ponto da grade. Some em quadratura o erro amostral médio local para não subestimar.
-3. Saída: grade diária (ou a cada 2 dias) do 1º ao último `end`.
+2. **House effects:** 1ª passada de tendência (sem bootstrap); resíduo médio de cada
+   `(instituto, candidato)` vs. a tendência, encolhido por `n/(n+5)` e limitado a
+   `±AGG.houseMaxShift` (4 p.p.); subtrai dos pontos e refita. Só quando ≥20 pesquisas e
+   ≥5 institutos. Vai pro JSON em `houseEffects`.
+3. **Faixa (aura):** bootstrap por reamostragem das pesquisas (com reposição, pesos mantidos),
+   `B` réplicas (default 200), seed fixa (`mulberry32`). Meio-intervalo = (p10..p90 das réplicas)
+   ⊕ erro amostral local, simétrico em torno da linha, teto de 8 p.p.
+4. Corridas com <25 pesquisas: `span` e bandwidth maiores (menos pico espúrio).
+5. Só plota candidato ATIVO: ≥6 pesquisas, ≥5 recentes (75d), última há ≤25d, média recente ≥4 p.p.
+6. Saída: grade a cada `gridStepDays` (2) do 1º ao último `end`.
 
 ### `site/data/<corrida>.json`
 
 ```jsonc
 {
-  "race": "presidente",
-  "updated": "2026-08-31T12:00:00Z",
-  "source": "Wikipédia (CC BY-SA) + curadoria",
+  "race": "presidente", "label": "...", "updated": "...Z",
+  "nPolls": 102, "nWithSource": 92, "lastPoll": "2026-08-30",
+  "pollsters": ["AtlasIntel", ...],
   "xDomain": ["2026-01-15", "2026-08-30"],
+  "shown": [{ "key": "lula", "name": "Lula", "color": "#..." }, ...],
   "candidates": [
-    { "key": "lula", "name": "Lula", "party": "PT", "color": "#c4122f",
-      "line":  [{ "t": "2026-01-15", "y": 41.2 }, ...],
-      "band":  [{ "t": "2026-01-15", "lo": 38.1, "hi": 44.0 }, ...],
-      "polls": [{ "t": "2026-08-30", "y": 43.4, "pollster": "AtlasIntel", "n": 5014 }, ...] }
-  ]
+    { "key": "lula", "name": "Lula", "party": "PT", "color": "#...",
+      "line": [{ "t": "2026-01-15", "y": 41.2 }, ...],
+      "band": [{ "t": "2026-01-15", "lo": 38.1, "hi": 44.0 }, ...],
+      "polls": [{ "t": "2026-08-30", "y": 43.4, "pollster": "AtlasIntel", "n": 5014 }, ...] }  // pontos CRUS
+  ],
+  "houseEffects": { "AtlasIntel": { "lula": 1.8, "flavio": -0.4 }, ... },  // {} se não aplicado
+  "polls": [ { "pollster","start","end","n","moe","source","values": {"lula":43.4,...} }, ... ]  // tabela, recentes 1º
 }
 ```
 
 ## Site (`site/`)
 
-- `index.html` + `style.css` + `app.js`, sem framework.
+- `index.html` + `style.css` + `app.js`, sem framework. Abas montadas de `data/index.json`.
 - Gráfico em **SVG** desenhado à mão: `<path>` da faixa (área) + `<path>` da linha, spline
-  Catmull-Rom -> Bézier pra suavizar. Transições em CSS.
-- Toggle Presidente / Governador SP. Legenda clicável (isola candidato). Crosshair no hover
-  com os valores do dia. Pontos das pesquisas ao fundo, esmaecidos.
+  Catmull-Rom -> Bézier pra suavizar. Transições em CSS. Séries quebram em buracos > `GAP_DAYS`.
+- Abas de grupo (Presidente, São Paulo, estados…) + sub-abas 1T/2T. Legenda clicável (liga/desliga
+  candidato). Crosshair no hover com os valores do dia. Pontos das pesquisas ao fundo, esmaecidos.
+- Tabela de pesquisas abaixo do gráfico (instituto, período, amostra, %, link de fonte), "ver todas".
 - Responsivo, tema claro/escuro por `prefers-color-scheme`.
 
 ## Automação
 
-`.github/workflows/update.yml`: cron a cada 6h + `workflow_dispatch`. Roda `npm run build`,
-e se `git status` mudou, commita (`chore: atualiza pesquisas (bot)`). GitHub Pages publica `site/`.
+`.github/workflows/update.yml`: cron a cada 6h + `workflow_dispatch` + push que toca `scripts/`.
+Roda `node scripts/build.mjs`; commita **só `data/`** se algum CSV mudou (`chore: atualiza
+pesquisas (bot)`). `site/data/*.json` é derivado (gitignored) e rebuildado a cada deploy.
+GitHub Pages publica `site/` via `actions/deploy-pages`.
+Repo: `Fcairo1/agregador-br` · site: https://fcairo1.github.io/agregador-br/
 
 ## Rodar local
 
@@ -118,10 +139,19 @@ npm run serve      # http://localhost:5173  (servidor estático, Node puro)
 
 `node scripts/fetch.mjs --offline` usa os HTML já baixados em `.cache/` (dev sem rede).
 
+## Feito
+
+- ✅ 2º turno (presidente, SP) como sub-aba.
+- ✅ Mais estados: MG, RJ, PR, RS (1º turno). Adicionar outro = 1 entrada em `RACES`.
+- ✅ House effects por instituto.
+- ✅ Link de fonte por pesquisa + tabela no site + limpeza de institutos/linhas-fantasma.
+
 ## TODO / fase 2
 
 - Linhas de continuação da Wiki (cenários múltiplos): hoje só o 1º. Decidir política.
-- 2º turno (head-to-head) como visão separada.
-- Cross-check com TSE Dados Abertos (pesquisa registrada? nº de registro).
-- Ajuste de "house effect" por instituto.
+- TSE: achar mirror/proxy BR pro cross-check de registro (API oficial dá 403 via Akamai).
 - Ratings de instituto (histórico de acerto) ponderando o agregado.
+- 2º turno dos estados (matchups variam; hoje só presidente e SP).
+- "O que mudou": variação vs. 1 semana / 1 mês. Probabilidade de 2º turno / vitória.
+- Senado (as páginas estaduais têm a seção).
+- Colunas de partido nos estados novos (hoje cor de fallback).
