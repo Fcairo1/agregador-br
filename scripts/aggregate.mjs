@@ -13,7 +13,7 @@ import {
 } from "./races.mjs";
 import { readCSV } from "./lib/csv.mjs";
 import { moeFromN } from "./lib/wiki.mjs";
-import { mulberry32, loess, loessWithBand } from "./lib/loess.mjs";
+import { trendKalman } from "./lib/kalman.mjs";
 
 const DATA = new URL("../data/", import.meta.url);
 const OUT = new URL("../site/data/", import.meta.url);
@@ -65,26 +65,24 @@ function aggregateRace(raceKey) {
     const t = toDate(p.end).getTime();
     const x = xOf(t);
     const n = p.n ? parseInt(p.n, 10) : null;
-    const ageDays = (latest - t) / DAY;
-    const wRec = Math.pow(0.5, ageDays / AGG.halflifeDays);
-    const wN = n ? clamp(Math.sqrt(n / 1000), 0.5, 2) : 1;
-    const base = wRec * wN;
     const moe = p.moe ? parseFloat(p.moe) : moeFromN(n) || 2.0;
     for (const k of candKeys) {
       const raw = p[k];
       if (raw === "" || raw == null) continue;
       const y = parseFloat(String(raw).replace(",", "."));
       if (!Number.isFinite(y)) continue;
-      series[k].push({ x, y, base, moeHalf: moe, t, pollster: p.pollster, n });
+      series[k].push({ x, y, moeHalf: moe, t, pollster: p.pollster, n });
     }
   }
 
-  // grade
+  // grade diária p/ o Kalman; a saída sai reamostrada a cada gridStepDays
   const maxX = xOf(maxEnd);
-  const grid = [];
-  for (let x = 0; x <= maxX; x += AGG.gridStepDays) grid.push(x);
-  if (grid[grid.length - 1] !== maxX) grid.push(maxX);
-  const gridDates = grid.map((x) => iso(minEnd + x * DAY));
+  const gridDaily = [];
+  for (let x = 0; x <= maxX; x++) gridDaily.push(x);
+  const outIdx = [];
+  for (let x = 0; x <= maxX; x += AGG.gridStepDays) outIdx.push(x);
+  if (outIdx[outIdx.length - 1] !== maxX) outIdx.push(maxX);
+  const gridDates = outIdx.map((x) => iso(minEnd + x * DAY));
 
   // quais candidatos plotar: precisa estar ATIVO (pesquisas recentes), não só ter histórico
   const RECENT_WIN = 75; // dias
@@ -106,34 +104,20 @@ function aggregateRace(raceKey) {
     .sort((a, b) => b.recentAvg - a.recentAvg)
     .slice(0, PLOT_MAX_LINES);
 
-  // corridas com poucas pesquisas: janela mais larga e suave (menos pico espúrio)
-  const sparse = polls.length < 25;
-  const loessOpts = {
-    span: sparse ? 0.6 : AGG.span,
-    minPts: AGG.minPts,
-    minBandwidthX: sparse ? 26 : 14,
-    maxGapX: sparse ? 40 : 30,
-  };
+  const kOpts = { q: polls.length < 25 ? 0.02 : 0.032, designEffect: 1.6, z: 1.64 };
   const uniqPollsters = (arr) => new Set(arr.map((p) => p.pollster)).size;
   const rawSeries = {};
   for (const { k } of plotable) rawSeries[k] = series[k].slice();
 
   // ---- house effects: viés sistemático de cada instituto vs. a tendência ----
-  // 1ª passada de tendência (sem bootstrap), resíduos por (instituto, candidato),
-  // encolhidos por contagem e limitados a ±houseMaxShift. Corrige os pontos e refita.
+  // 1ª passada de tendência (Kalman), resíduo médio por (instituto, candidato),
+  // encolhido por contagem e limitado a ±houseMaxShift. Corrige os pontos e refita.
   const house = {}; // pollster -> { cand -> shift p.p. }
   const applyHouse = polls.length >= 20 && uniqPollsters(polls) >= 5;
   if (applyHouse) {
     const trend0 = {};
-    for (const { k } of plotable) trend0[k] = loess(series[k], grid, loessOpts);
-    const at = (arr, x) => {
-      const g = x / AGG.gridStepDays;
-      const lo = Math.floor(g), hi = Math.ceil(g);
-      if (lo < 0 || hi >= arr.length) return null;
-      const a = arr[lo], b = arr[hi];
-      if (a == null || b == null) return a ?? b;
-      return a + (b - a) * (g - lo);
-    };
+    for (const { k } of plotable) trend0[k] = trendKalman(series[k], gridDaily, kOpts).line;
+    const at = (arr, x) => arr[Math.max(0, Math.min(arr.length - 1, Math.round(x)))];
     const raw = {};
     for (const { k } of plotable)
       for (const p of series[k]) {
@@ -153,16 +137,8 @@ function aggregateRace(raceKey) {
       series[k] = series[k].map((p) => ({ ...p, y: p.y - (house[p.pollster]?.[k] || 0) }));
   }
 
-  const rng = mulberry32(AGG.seed);
-  const candidates = plotable.map(({ k, pts }, i) => {
-    pts = series[k]; // pode ter sido ajustado por house effect
-    const { line, band } = loessWithBand(pts, grid, {
-      ...loessOpts,
-      bootstrap: AGG.bootstrap,
-      bandLo: AGG.bandLo,
-      bandHi: AGG.bandHi,
-      rng,
-    });
+  const candidates = plotable.map(({ k }, i) => {
+    const { line, band } = trendKalman(series[k], gridDaily, kOpts);
     const party = partyFor(race, nameMap, k);
     const pi = partyInfo(party);
     return {
@@ -171,9 +147,9 @@ function aggregateRace(raceKey) {
       party,
       partyLabel: pi?.label || party || "",
       color: colorFor(race, nameMap, k, i),
-      line: gridDates.map((t, gi) => (line[gi] == null ? null : { t, y: r2(line[gi]) })).filter(Boolean),
-      band: gridDates
-        .map((t, gi) => (band[gi] == null ? null : { t, lo: r2(band[gi].lo), hi: r2(band[gi].hi) }))
+      line: outIdx.map((x, gi) => (line[x] == null ? null : { t: gridDates[gi], y: r2(line[x]) })).filter(Boolean),
+      band: outIdx
+        .map((x, gi) => (band[x] == null ? null : { t: gridDates[gi], lo: r2(band[x].lo), hi: r2(band[x].hi) }))
         .filter(Boolean),
       polls: rawSeries[k]
         .slice()
@@ -219,15 +195,12 @@ function aggregateRace(raceKey) {
     lastPoll: iso(maxEnd),
     pollsters,
     xDomain: [iso(minEnd), iso(maxEnd)],
-    // parâmetros p/ recomputo no cliente (filtro de institutos)
+    // parâmetros p/ recomputo no cliente (filtro de institutos / período)
     params: {
-      halflifeDays: AGG.halflifeDays,
-      span: AGG.span,
-      minPts: AGG.minPts,
-      bootstrap: AGG.bootstrap,
-      seed: AGG.seed,
-      bandLo: AGG.bandLo,
-      bandHi: AGG.bandHi,
+      model: "kalman",
+      q: kOpts.q,
+      designEffect: kOpts.designEffect,
+      z: kOpts.z,
       gridStepDays: AGG.gridStepDays,
       houseMaxShift: AGG.houseMaxShift,
       sparseCutoff: AGG.sparseCutoff,

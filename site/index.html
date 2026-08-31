@@ -54,8 +54,9 @@
         </div>
 
         <p class="foot">
-          Linha = média ponderada (LOESS) das pesquisas; recência e tamanho da amostra pesam mais.
-          A faixa é a incerteza da tendência (bootstrap + erro amostral).
+          Linha = tendência estimada por um modelo estado-espaço (filtro de Kalman): cada pesquisa
+          entra com peso pelo tamanho da amostra e pesquisa antiga informa menos o presente.
+          A faixa (~90%) soma a incerteza do modelo e um erro sistemático do setor.
           Fonte: <a id="src-link" href="#" target="_blank" rel="noopener">Wikipédia</a> (CC BY-SA) + curadoria.
         </p>
       </section>

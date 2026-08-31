@@ -1,6 +1,6 @@
-// Recomputo da tendência no cliente, pro filtro de institutos.
-// Espelha a matemática de scripts/aggregate.mjs (mesmo LOESS + house effects).
-import { loess, loessWithBand, mulberry32 } from "./loess.js";
+// Recomputo da tendência no cliente, pro filtro de institutos / período.
+// Espelha a matemática de scripts/aggregate.mjs (mesmo Kalman + house effects).
+import { trendKalman } from "./kalman.js";
 
 const DAY = 86400000;
 const T = (iso) => new Date(iso + "T00:00:00Z").getTime();
@@ -28,27 +28,25 @@ export function recompute(data, { excluded = new Set(), sinceDays = null } = {})
   for (const p of polls) {
     const t = T(p.end);
     const x = xOf(t);
-    const age = (maxEnd - t) / DAY;
-    const base = Math.pow(0.5, age / P.halflifeDays) * (p.n ? clamp(Math.sqrt(p.n / 1000), 0.5, 2) : 1);
     const moe = p.moe || moeFromN(p.n) || 2.0;
     for (const s of shown) {
       const v = p.values[s.key];
       if (v == null) continue;
-      series[s.key].push({ x, y: v, base, moeHalf: moe, t, pollster: p.pollster, n: p.n || null });
+      series[s.key].push({ x, y: v, moeHalf: moe, t, pollster: p.pollster, n: p.n || null });
     }
   }
 
-  const grid = [];
-  for (let x = 0; x <= maxX; x += P.gridStepDays) grid.push(x);
-  if (grid[grid.length - 1] !== maxX) grid.push(maxX);
-  const gd = grid.map((x) => isoOf(minEnd + x * DAY));
+  const gridDaily = [];
+  for (let x = 0; x <= maxX; x++) gridDaily.push(x);
+  const outIdx = [];
+  for (let x = 0; x <= maxX; x += P.gridStepDays) outIdx.push(x);
+  if (outIdx[outIdx.length - 1] !== maxX) outIdx.push(maxX);
+  const gd = outIdx.map((x) => isoOf(minEnd + x * DAY));
 
-  const sparse = polls.length < P.sparseCutoff;
-  const lo = {
-    span: sparse ? 0.6 : P.span,
-    minPts: P.minPts,
-    minBandwidthX: sparse ? 26 : 14,
-    maxGapX: sparse ? 40 : 30,
+  const kOpts = {
+    q: polls.length < (P.sparseCutoff || 25) ? 0.02 : P.q ?? 0.032,
+    designEffect: P.designEffect ?? 1.6,
+    z: P.z ?? 1.64,
   };
 
   const applyHouse = P.applyHouse && polls.length >= 20 && new Set(polls.map((p) => p.pollster)).size >= 5;
@@ -57,17 +55,8 @@ export function recompute(data, { excluded = new Set(), sinceDays = null } = {})
   const house = {};
   if (applyHouse) {
     const trend0 = {};
-    for (const s of shown) trend0[s.key] = loess(series[s.key], grid, lo);
-    const at = (arr, x) => {
-      const g = x / P.gridStepDays;
-      const a = Math.floor(g);
-      const b = Math.ceil(g);
-      if (a < 0 || b >= arr.length) return null;
-      const va = arr[a];
-      const vb = arr[b];
-      if (va == null || vb == null) return va ?? vb;
-      return va + (vb - va) * (g - a);
-    };
+    for (const s of shown) trend0[s.key] = trendKalman(series[s.key], gridDaily, kOpts).line;
+    const at = (arr, x) => arr[Math.max(0, Math.min(arr.length - 1, Math.round(x)))];
     const raw = {};
     for (const s of shown)
       for (const p of series[s.key]) {
@@ -86,19 +75,12 @@ export function recompute(data, { excluded = new Set(), sinceDays = null } = {})
       series[s.key] = series[s.key].map((p) => ({ ...p, y: p.y - (house[p.pollster]?.[s.key] || 0) }));
   }
 
-  const rng = mulberry32(P.seed);
   const candidates = shown
     .map((s) => {
       const pts = series[s.key];
       if (pts.length < 3) return null;
-      const { line, band } = loessWithBand(pts, grid, {
-        ...lo,
-        bootstrap: Math.min(P.bootstrap, 160),
-        bandLo: P.bandLo,
-        bandHi: P.bandHi,
-        rng,
-      });
-      const L = gd.map((t, i) => (line[i] == null ? null : { t, y: r2(line[i]) })).filter(Boolean);
+      const { line, band } = trendKalman(pts, gridDaily, kOpts);
+      const L = outIdx.map((x, i) => (line[x] == null ? null : { t: gd[i], y: r2(line[x]) })).filter(Boolean);
       if (!L.length) return null;
       return {
         key: s.key,
@@ -107,8 +89,8 @@ export function recompute(data, { excluded = new Set(), sinceDays = null } = {})
         party: s.party,
         partyLabel: s.partyLabel,
         line: L,
-        band: gd
-          .map((t, i) => (band[i] == null ? null : { t, lo: r2(band[i].lo), hi: r2(band[i].hi) }))
+        band: outIdx
+          .map((x, i) => (band[x] == null ? null : { t: gd[i], lo: r2(band[x].lo), hi: r2(band[x].hi) }))
           .filter(Boolean),
         polls: rawSeries[s.key]
           .slice()

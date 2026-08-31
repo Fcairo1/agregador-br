@@ -11,7 +11,7 @@ FiveThirtyEight, com a **margem de erro como uma "aura"** (faixa) em volta de ca
 - **Dados versionados no repo.** O pipeline faz commit dos CSVs e do JSON calculado. O histórico
   do git é o histórico do agregador.
 - **O site só lê JSON estático.** Nada de backend. Deploy = GitHub Pages servindo `site/`.
-- **Determinístico.** Mesmo CSV de entrada -> mesmo JSON de saída (seed fixa no bootstrap).
+- **Determinístico.** Mesmo CSV de entrada -> mesmo JSON de saída (Kalman é forma fechada).
 
 ## Fluxo de dados
 
@@ -20,7 +20,7 @@ Wikipédia (API MediaWiki)  ──fetch.mjs──▶  data/polls.<corrida>.csv  
                                                     │
                                        + data/overrides.<corrida>.csv  (edição manual: adiciona/corrige)
                                                     │
-                                          aggregate.mjs (LOESS + bootstrap)
+                                          aggregate.mjs (Kalman + house effects)
                                                     ▼
                                          site/data/<corrida>.json      (tendência + pontos)
 ```
@@ -72,25 +72,27 @@ atlasintel-2026-08-30,AtlasIntel,2026-08-25,2026-08-30,5014,2.0,https://...,esti
 `overrides.<corrida>.csv` tem o mesmo cabeçalho. Merge por `id`: override vence. `id` começando
 com `-` (ex.: `-atlasintel-2026-08-30`) **remove** aquela pesquisa.
 
-## Modelo (aggregate.mjs)
+## Modelo (`site/kalman.js`, usado por `aggregate.mjs` e `agg.js`)
 
-Por candidato, sobre `end` (dias desde a 1ª pesquisa):
+Estado-espaço 1-D por candidato, grade **diária** (dias desde a 1ª pesquisa):
 
-1. **LOESS** ponderado local (grau 1, tricubo). Peso de cada ponto =
-   `w_kernel * w_recencia * w_amostra`:
-   - `w_recencia = 0.5 ^ (idade_em_dias / HALFLIFE)` (HALFLIFE em `races.mjs`, ~28d)
-   - `w_amostra = sqrt(n / 1000)`, saturado em [0.5, 2]
-   - `bandwidth`: fração dos pontos (`span`, ~0.35) — ajustada p/ ter no mínimo `minPts`.
-2. **House effects:** 1ª passada de tendência (sem bootstrap); resíduo médio de cada
-   `(instituto, candidato)` vs. a tendência, encolhido por `n/(n+5)` e limitado a
-   `±AGG.houseMaxShift` (4 p.p.); subtrai dos pontos e refita. Só quando ≥20 pesquisas e
-   ≥5 institutos. Vai pro JSON em `houseEffects`.
-3. **Faixa (aura):** bootstrap por reamostragem das pesquisas (com reposição, pesos mantidos),
-   `B` réplicas (default 200), seed fixa (`mulberry32`). Meio-intervalo = (p10..p90 das réplicas)
-   ⊕ erro amostral local, simétrico em torno da linha, teto de 8 p.p.
-4. Corridas com <25 pesquisas: `span` e bandwidth maiores (menos pico espúrio).
-5. Só plota candidato ATIVO: ≥6 pesquisas, ≥5 recentes (75d), última há ≤25d, média recente ≥4 p.p.
-6. Saída: grade a cada `gridStepDays` (2) do 1º ao último `end`.
+- **Estado:** `x_t = x_{t-1} + η`, `η ~ N(0, q·Δdias)`. `q` = variância de evolução/dia
+  (`0.032`, ou `0.02` p/ corridas < `sparseCutoff`). Passeio aleatório: pesquisa antiga
+  informa menos o "hoje" automaticamente — **não há peso de recência explícito**.
+- **Observação:** `z_i = x_{t_i} + ε`, `ε ~ N(0, r_i)`, `r_i = designEffect · p(1−p)/n · 1e4`
+  (`designEffect = 1.6`; `n=1200` se faltar). Várias pesquisas no mesmo dia = combinação
+  precisão-ponderada. (rating de instituto entra dividindo `r_i` — ver fase 2.)
+- **Inferência:** filtro de Kalman para frente + suavizador RTS para trás. Forma fechada,
+  **determinística** (sem RNG).
+- **Linha** = média suavizada `xS[t]`. **Faixa (~90%)** = `xS ± z·sqrt(PS[t] + sysHalf²)`,
+  `z=1.64`, `sysHalf=1.1` (erro sistemático do setor — todo mundo erra junto), piso `floorHalf`.
+- **House effects:** 1ª passada Kalman como tendência de referência; resíduo médio de cada
+  `(instituto, candidato)`, encolhido por `n/(n+5)`, limitado a `±houseMaxShift` (4 p.p.);
+  subtrai dos pontos e refita. Só com ≥20 pesquisas e ≥5 institutos. Vai pro JSON em `houseEffects`.
+- **Bordas:** a linha some além de `maxGapDays` (45) sem pesquisa por perto; a incerteza
+  cresce sozinha onde há pouco dado (é o ponto do modelo).
+- Só plota candidato ATIVO: ≥6 pesquisas, ≥5 recentes (75d), última há ≤25d, média recente ≥4 p.p.
+- Saída: reamostrada a cada `gridStepDays` (2) da grade diária.
 
 ### `site/data/<corrida>.json`
 
@@ -114,12 +116,13 @@ Por candidato, sobre `end` (dias desde a 1ª pesquisa):
 
 ## Site (`site/`)
 
-- `index.html` + `style.css` + `app.js` (+ `agg.js`, `loess.js`), sem framework. Abas de `data/index.json`.
+- `index.html` + `style.css` + `app.js` (+ `agg.js`, `kalman.js`), sem framework. Abas de `data/index.json`.
 - Gráfico em **SVG** desenhado à mão: `<path>` da faixa (área) + `<path>` da linha, spline
   Catmull-Rom -> Bézier pra suavizar. Transições em CSS. Séries quebram em buracos > `GAP_DAYS`.
 - Abas de grupo + sub-abas 1T/2T. No 2º turno presidencial, `<select>` de cenário (Lula × cada um).
-- **Filtro de institutos**: `agg.js` refaz o LOESS+faixa no cliente com os institutos desmarcados
-  (espelha `aggregate.mjs`; usa `data.params` e `data.polls`). Todos ativos por padrão.
+- **Filtro de institutos + período**: `agg.js` refaz o Kalman+faixa no cliente com os institutos
+  desmarcados / só a janela escolhida (espelha `aggregate.mjs`; usa `data.params` e `data.polls`).
+  Todos os institutos ativos e "período: tudo" por padrão.
 - **Selo de partido** (`.pbadge`) ao lado do nome na legenda / tooltip / cabeçalho da tabela.
   Cor do candidato = cor do partido (`PARTY` em `races.mjs`), salvo override no `display`.
 - Legenda clicável (liga/desliga candidato). Crosshair no hover. Pontos das pesquisas ao fundo.
@@ -129,9 +132,9 @@ Por candidato, sobre `end` (dias desde a 1ª pesquisa):
 
 ## Matemática compartilhada
 
-`site/loess.js` é a fonte de `loess` / `loessWithBand` / `mulberry32`; `scripts/lib/loess.mjs`
-só reexporta. `site/agg.js` reimplementa o núcleo de `aggregate.mjs` (pesos, house effects, grade)
-pro recomputo no navegador. **Mudou o modelo no server? Reflita em `agg.js`.**
+`site/kalman.js` é a fonte de `trendKalman`; `scripts/lib/kalman.mjs` só reexporta. `site/agg.js`
+reimplementa o núcleo de `aggregate.mjs` (pontos, house effects, grade) pro recomputo no
+navegador. **Mudou o modelo ou os params no server? Reflita em `agg.js` e no `data.params`.**
 
 ## Automação
 
