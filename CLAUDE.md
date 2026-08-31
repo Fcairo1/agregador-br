@@ -81,7 +81,8 @@ Estado-espaço 1-D por candidato, grade **diária** (dias desde a 1ª pesquisa):
   informa menos o "hoje" automaticamente — **não há peso de recência explícito**.
 - **Observação:** `z_i = x_{t_i} + ε`, `ε ~ N(0, r_i)`, `r_i = designEffect · p(1−p)/n · 1e4`
   (`designEffect = 1.6`; `n=1200` se faltar). Várias pesquisas no mesmo dia = combinação
-  precisão-ponderada. (rating de instituto entra dividindo `r_i` — ver fase 2.)
+  precisão-ponderada. **Rating do instituto** entra dividindo `r_i` por `ratingW²`
+  (casa que acerta mais pesa mais).
 - **Inferência:** filtro de Kalman para frente + suavizador RTS para trás. Forma fechada,
   **determinística** (sem RNG).
 - **Linha** = média suavizada `xS[t]`. **Faixa (~90%)** = `xS ± z·sqrt(PS[t] + sysHalf²)`,
@@ -155,19 +156,21 @@ npm run serve      # http://localhost:5173  (servidor estático, Node puro)
 
 ## Feito
 
-- ✅ 2º turno: SP (Tarcísio×Haddad) + presidencial com 4 cenários (Lula × Flávio/Zema/Caiado/Renan).
-- ✅ Mais estados: MG, RJ, PR, RS (1º turno). Adicionar outro = 1 entrada em `RACES`.
-- ✅ House effects por instituto.
-- ✅ Link de fonte por pesquisa + tabela no site + limpeza de institutos/linhas-fantasma.
-- ✅ Filtro de institutos (recomputo no cliente) · selo + cor de partido · vencedor pintado na tabela.
+- ✅ **Modelo Kalman** (estado-espaço) no lugar do LOESS+bootstrap. `site/kalman.js`.
+- ✅ **Ratings de instituto** — `scripts/ratings.mjs` faz backtest das finais de 2018 e 2022
+  (seção 5 dos artigos presidenciais), MAE vs. resultado oficial → `data/ratings.json` (peso
+  0.88–1.12, encolhido por nº de ciclos). Entra no `r_i` do Kalman. Mostrado na tabela (`.rt`).
+  `build.mjs` roda como best-effort (não derruba o build).
+- ✅ Filtro de institutos + **período** (recomputo no cliente).
+- ✅ Cenários múltiplos: usa o mais completo. 2º turno: SP + 4 cenários presidenciais.
+- ✅ Mais estados: MG, RJ, PR, RS. House effects. Selo/cor de partido. Vencedor na tabela.
 
 ## TODO / fase 2
 
-- Linhas de continuação da Wiki (cenários múltiplos): hoje só o 1º. Decidir política.
-- TSE: achar mirror/proxy BR pro cross-check de registro (API oficial dá 403 via Akamai).
-- Ratings de instituto (histórico de acerto) ponderando o agregado.
-- 2º turno dos estados (matchups variam; hoje só presidente e SP).
-- "O que mudou": variação vs. 1 semana / 1 mês. Probabilidade de 2º turno / vitória.
-- Senado (as páginas estaduais têm a seção).
-- Partido não é lido pra ~2 candidatos estaduais (ex.: Cleitinho/PSD, Garotinho) — cor de fallback.
-  Corrigir no parser (`candFromHeader`) ou via `display` em `races.mjs`.
+- **Backtest público**: página mostrando `data/ratings.csv` (como cada instituto se saiu).
+- **2018 rotula colunas por PARTIDO** — `ratings.mjs` tem `remap` fixo; se a Wiki mudar, quebra.
+- Probabilidade de 2º turno / vitória (Monte Carlo). Projeção pro dia da eleição.
+- 2º turno dos estados · Senado · "o que mudou" (∆ 1 sem / 1 mês) · URL com estado.
+- TSE: mirror/proxy BR pro cross-check de registro (API dá 403 via Akamai).
+- Aba de rejeição — espera a Wikipédia criar a seção 2026.
+- Partido não lido pra ~2 candidatos estaduais (Cleitinho/PSD, Garotinho) — cor de fallback.

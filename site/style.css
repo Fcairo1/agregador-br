@@ -159,6 +159,13 @@ h2 { margin: 0; font-size: 22px; letter-spacing: -0.02em; }
 }
 #polltable tr.excluded td { opacity: .32; text-decoration: line-through; }
 #polltable tr.excluded td.win { box-shadow: none; }
+.rt {
+  margin-left: 7px; font-size: 10.5px; font-weight: 600; color: var(--muted);
+  border: 1px solid var(--line); border-radius: 5px; padding: 0 4px; cursor: help;
+  font-variant-numeric: tabular-nums; vertical-align: 1px;
+}
+.rt.up { color: #1f9d57; border-color: color-mix(in srgb, #1f9d57 40%, transparent); }
+.rt.down { color: #c9503a; border-color: color-mix(in srgb, #c9503a 40%, transparent); }
 
 @media (max-width: 640px) {
   .chart-head { flex-direction: column; }

@@ -276,7 +276,11 @@ function renderTable() {
           ? `<td><a href="${p.source}" target="_blank" rel="noopener" title="fonte">↗</a></td>`
           : `<td></td>`;
         const out = state.excluded.has(p.pollster);
-        return `<tr class="${out ? "excluded" : ""}"><td class="poll-name">${p.pollster}</td><td class="muted">${fmtRange(
+        const rt = (state.baseData.ratings || {})[p.pollster];
+        const rtTag = rt
+          ? `<span class="rt ${rt.weight >= 1.03 ? "up" : rt.weight <= 0.97 ? "down" : ""}" title="acerto nas finais de 2018/22 — erro médio ${rt.maeFinal} p.p. (${rt.cycles} ciclo${rt.cycles > 1 ? "s" : ""}); peso ${rt.weight.toFixed(2)}×">${rt.weight.toFixed(2)}×</span>`
+          : "";
+        return `<tr class="${out ? "excluded" : ""}"><td class="poll-name">${p.pollster}${rtTag}</td><td class="muted">${fmtRange(
           p.start,
           p.end
         )}</td><td class="muted">${p.n ? p.n.toLocaleString("pt-BR") : "–"}</td>${cells}${src}</tr>`;
@@ -415,6 +419,8 @@ function renderMeta() {
   if (state.sinceDays) bits.push(`só os últimos ${state.sinceDays} dias`);
   if (state.baseData.houseEffects && Object.keys(state.baseData.houseEffects).length)
     bits.push("ajuste de viés por instituto");
+  if (state.baseData.ratings && Object.keys(state.baseData.ratings).length)
+    bits.push("peso por acerto histórico (2018/22)");
   $("#race-sub").textContent = bits.join(" · ");
   $("#src-link").href = rc.wiki;
 }

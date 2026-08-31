@@ -23,16 +23,18 @@ export function recompute(data, { excluded = new Set(), sinceDays = null } = {})
   const xOf = (t) => Math.round((t - minEnd) / DAY);
   const maxX = xOf(maxEnd);
 
+  const ratings = data.ratings || {};
   const series = {};
   for (const s of shown) series[s.key] = [];
   for (const p of polls) {
     const t = T(p.end);
     const x = xOf(t);
     const moe = p.moe || moeFromN(p.n) || 2.0;
+    const rW = ratings[p.pollster]?.weight ?? 1;
     for (const s of shown) {
       const v = p.values[s.key];
       if (v == null) continue;
-      series[s.key].push({ x, y: v, moeHalf: moe, t, pollster: p.pollster, n: p.n || null });
+      series[s.key].push({ x, y: v, moeHalf: moe, t, pollster: p.pollster, n: p.n || null, ratingW: rW });
     }
   }
 

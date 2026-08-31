@@ -1,0 +1,67 @@
+{
+  "updated": "2026-08-31T17:32:47.647Z",
+  "basis": "finais de 2018 e 2022 (1º turno presidencial)",
+  "medMae": 3.65,
+  "byPollster": {
+    "Datafolha": {
+      "canon": "Datafolha",
+      "cycles": 2,
+      "maeFinal": 3.58,
+      "weight": 1.009
+    },
+    "Ipec": {
+      "canon": "Ipec",
+      "cycles": 2,
+      "maeFinal": 3.65,
+      "weight": 1
+    },
+    "AtlasIntel": {
+      "canon": "AtlasIntel",
+      "cycles": 1,
+      "maeFinal": 1.81,
+      "weight": 1.12
+    },
+    "CNT/MDA": {
+      "canon": "CNT/MDA",
+      "cycles": 2,
+      "maeFinal": 3.31,
+      "weight": 1.05
+    },
+    "Paraná Pesquisas": {
+      "canon": "Paraná Pesquisas",
+      "cycles": 2,
+      "maeFinal": 4.01,
+      "weight": 0.954
+    },
+    "Modalmais/Futura": {
+      "canon": "Modalmais/Futura",
+      "cycles": 1,
+      "maeFinal": 5.39,
+      "weight": 0.911
+    },
+    "PoderData": {
+      "canon": "PoderData",
+      "cycles": 1,
+      "maeFinal": 3.6,
+      "weight": 1.004
+    },
+    "Genial/Quaest": {
+      "canon": "Genial/Quaest",
+      "cycles": 1,
+      "maeFinal": 4.49,
+      "weight": 0.951
+    },
+    "Nexus/BTG Pactual": {
+      "canon": "Nexus/BTG Pactual",
+      "cycles": 2,
+      "maeFinal": 4.56,
+      "weight": 0.895
+    },
+    "Real Time Big Data": {
+      "canon": "Real Time Big Data",
+      "cycles": 1,
+      "maeFinal": 3.25,
+      "weight": 1.03
+    }
+  }
+}

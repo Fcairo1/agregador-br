@@ -19,6 +19,13 @@ const DATA = new URL("../data/", import.meta.url);
 const OUT = new URL("../site/data/", import.meta.url);
 const META_COLS = new Set(["id", "pollster", "start", "end", "n", "moe", "source", "section"]);
 
+// ratings de instituto (backtest 2018/2022) — arquivo pode não existir
+let RATINGS = {};
+try {
+  RATINGS = JSON.parse(fs.readFileSync(new URL("ratings.json", DATA), "utf8")).byPollster || {};
+} catch {}
+const ratingW = (pollster) => RATINGS[pollster]?.weight ?? 1;
+
 const DAY = 86400000;
 const toDate = (iso) => new Date(iso + "T00:00:00Z");
 const iso = (d) => new Date(d).toISOString().slice(0, 10);
@@ -66,12 +73,13 @@ function aggregateRace(raceKey) {
     const x = xOf(t);
     const n = p.n ? parseInt(p.n, 10) : null;
     const moe = p.moe ? parseFloat(p.moe) : moeFromN(n) || 2.0;
+    const rW = ratingW(p.pollster);
     for (const k of candKeys) {
       const raw = p[k];
       if (raw === "" || raw == null) continue;
       const y = parseFloat(String(raw).replace(",", "."));
       if (!Number.isFinite(y)) continue;
-      series[k].push({ x, y, moeHalf: moe, t, pollster: p.pollster, n });
+      series[k].push({ x, y, moeHalf: moe, t, pollster: p.pollster, n, ratingW: rW });
     }
   }
 
@@ -213,6 +221,10 @@ function aggregateRace(raceKey) {
       party: c.party,
       partyLabel: c.partyLabel,
     })),
+    // ratings (peso por acerto histórico) só dos institutos presentes nesta corrida
+    ratings: Object.fromEntries(
+      pollsters.filter((p) => RATINGS[p]).map((p) => [p, { weight: RATINGS[p].weight, maeFinal: RATINGS[p].maeFinal, cycles: RATINGS[p].cycles }])
+    ),
     candidates,
     houseEffects: applyHouse
       ? Object.fromEntries(

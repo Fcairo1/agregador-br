@@ -209,8 +209,8 @@ function buildGrid(rows) {
   return grid;
 }
 
-const META_RE = /contratante|pesquisa|instituto|data|amostra|margem|erro|cen[aá]?\.?$|cenário/i;
-const TRAIL_RE = /outros|indecis|nulo|branco|n[ãa]o sabe|n[ãa]o respond|ns\/?nr|nenhum|n[ãa]o vota|indef|absten|vantagem|diferen[çc]a|^dif\.?$|lidera|empate/i;
+const META_RE = /contratante|pesquisa|instituto|data|per[ií]odo|amostra|amostragem|entrevistad|respondent|margem|erro|respons|cen[aá]?\.?$|cenário/i;
+const TRAIL_RE = /outros|indecis|nulo|branco|n[ãa]o sabe|n[ãa]o respond|ns\/?nr|nenhum|n[ãa]o vota|indef|absten|\babst[.eê]|vantagem|diferen[çc]a|^dif\.?$|lidera|empate/i;
 const DATEISH = /\d{1,2}\s*(?:de\s+)?(?:jan|fev|mar|abr|mai|jun|jul|ago|set|out|nov|dez)/i;
 
 const MONTHS = { jan: 0, fev: 1, mar: 2, abr: 3, mai: 4, jun: 5, jul: 6, ago: 7, set: 8, out: 9, nov: 10, dez: 11 };
@@ -222,9 +222,10 @@ export function slug(s) {
 }
 
 function parseDates(text, fallbackYear) {
-  const t = deaccent(text).toLowerCase().replace(/–|—|−/g, "-");
-  const yearM = t.match(/\b(20\d{2})\b/);
-  const year = yearM ? +yearM[1] : fallbackYear;
+  let t = deaccent(text).toLowerCase().replace(/–|—|−/g, "-");
+  const yearM = t.match(/\b(19|20)\d{2}\b/);
+  const year = yearM ? +yearM[0] : fallbackYear;
+  t = t.replace(/\b(19|20)\d{2}\b/g, " "); // tira o ano p/ não virar "dia 18/20"
   // tokens: dia [mes]
   const toks = [];
   const re = /(\d{1,2})\s*(?:de\s+)?([a-z]{3,})?/g;
@@ -306,9 +307,12 @@ const POLLSTER_ALIASES = [
 ];
 export function normPollster(s) {
   let t = String(s)
-    .replace(/\bBR[-\s]?\d{3,}\b/gi, "") // nº de registro TSE que vaza pro nome
+    .replace(/\bBR[-\s]?\d{3,}\/?\d*\b/gi, "") // nº de registro TSE que vaza pro nome
+    .replace(/\bn[º°.]?\s*de\s*(identifica[çc][ãa]o|registro)\b/gi, "")
     .replace(/\b\d{4,}\b/g, "")
     .replace(/\s*\(.*?\)\s*/g, " ")
+    .replace(/[\s/]+$/g, "")
+    .replace(/^[\s/]+/g, "")
     .replace(/\s+/g, " ")
     .trim();
   for (const [re, name] of POLLSTER_ALIASES) if (re.test(t)) return name;
@@ -398,8 +402,8 @@ export function parsePollTable(tableHtml, { year, warn = () => {}, refMap = new 
   const metaIdx = { pollster: 0, dates: 1, n: 2, moe: 3 };
   for (let c = 0; c < metaCount; c++) {
     const h = deaccent(colHeadText[c] || "").toLowerCase();
-    if (/\bdata|datas de/.test(h)) metaIdx.dates = c;
-    else if (/amostra/.test(h)) metaIdx.n = c;
+    if (/\bdata|datas de|per[ií]odo/.test(h)) metaIdx.dates = c;
+    else if (/amostra|amostragem|entrevistad|respondent/.test(h)) metaIdx.n = c;
     else if (/margem|erro/.test(h)) metaIdx.moe = c;
     else if (/contratante|instituto|respons/.test(h)) metaIdx.pollster = c;
   }
