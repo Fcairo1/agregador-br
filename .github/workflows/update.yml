@@ -2,7 +2,7 @@ name: Atualiza pesquisas
 
 on:
   schedule:
-    - cron: "17 */6 * * *" # a cada 6 horas
+    - cron: "17 10,22 * * *" # 2x/dia (07h e 19h BRT) — pesquisa não sai mais rápido que isso
   workflow_dispatch: {}
   push:
     branches: [main]
