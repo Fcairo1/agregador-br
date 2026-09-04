@@ -1,6 +1,11 @@
-id,pollster,start,end,n,moe,source,section,eduardo-paes,anthony-garotinho
-gerp-2026-07-15,Gerp,2026-07-13,2026-07-15,1000,3.5,,2026,58,22
-genial-quaest-2026-07-25,Genial/Quaest,2026-07-21,2026-07-25,1200,3,https://www.gazetadopovo.com.br/eleicoes/2026/pesquisa-eleitoral-2026/genial-quaest-governador-senador-rio-de-janeiro-julho-2026/,2026,48,18
-real-time-big-data-2026-07-27,Real Time Big Data,2026-07-23,2026-07-27,2000,2,https://www.gazetadopovo.com.br/eleicoes/2026/pesquisa-eleitoral-2026/real-time-big-data-governador-senador-rio-de-janeiro-julho-2026/,2026,44,25
-parana-pesquisas-2026-07-30,Paraná Pesquisas,2026-07-28,2026-07-30,1600,2.5,https://www.poder360.com.br/poder-eleicoes-2026/eduardo-paes-lidera-todos-os-cenarios-de-1o-e-2o-turno-no-rj/,2026,61.1,20.5
-genial-quaest-2026-08-24,Genial/Quaest,2026-08-21,2026-08-24,1302,3,https://www.poder360.com.br/poder-eleicoes-2026/eduardo-paes-lidera-no-1o-e-2o-turnos-para-o-governo-do-rj-2/,2026,53,12
+id,pollster,start,end,n,moe,source,section,eduardo-paes,douglas-ruas
+genial-quaest-2026-04-25,Genial/Quaest,2026-04-21,2026-04-25,1200,3,https://www.gazetadopovo.com.br/eleicoes/2026/pesquisa-eleitoral-2026/genial-quaest-governador-senador-rio-de-janeiro-abril-2026/,2026,49,16
+parana-pesquisas-2026-04-26,Paraná Pesquisas,2026-04-21,2026-04-26,1680,2.4,https://www.gazetadopovo.com.br/eleicoes/2026/pesquisa-eleitoral-2026/parana-pesquisas-governador-senador-rio-de-janeiro-abril-2026/,2026,58.8,20.7
+parana-pesquisas-2026-06-03,Paraná Pesquisas,2026-06-01,2026-06-03,1680,2.4,https://www.poder360.com.br/poder-eleicoes/eduardo-paes-lidera-no-1o-e-2o-turnos-para-o-governo-do-rj/,2026,60,24.5
+parana-pesquisas-2026-07-01,Paraná Pesquisas,2026-06-29,2026-07-01,1600,2.5,https://www.cartacapital.com.br/politica/nova-pesquisa-reforca-favoritismo-de-eduardo-paes-na-disputa-pelo-governo-do-rj/,2026,62.1,23.9
+gerp-2026-07-15,Gerp,2026-07-13,2026-07-15,1000,3.5,,2026,63,21
+genial-quaest-2026-07-25,Genial/Quaest,2026-07-21,2026-07-25,1200,3,https://www.gazetadopovo.com.br/eleicoes/2026/pesquisa-eleitoral-2026/genial-quaest-governador-senador-rio-de-janeiro-julho-2026/,2026,48,16
+real-time-big-data-2026-07-27,Real Time Big Data,2026-07-23,2026-07-27,2000,2,https://www.gazetadopovo.com.br/eleicoes/2026/pesquisa-eleitoral-2026/real-time-big-data-governador-senador-rio-de-janeiro-julho-2026/,2026,43,27
+parana-pesquisas-2026-07-30,Paraná Pesquisas,2026-07-28,2026-07-30,1600,2.5,https://www.poder360.com.br/poder-eleicoes-2026/eduardo-paes-lidera-todos-os-cenarios-de-1o-e-2o-turno-no-rj/,2026,60.1,24.3
+real-time-big-data-2026-08-01,Real Time Big Data,2026-08-28,2026-08-01,2000,2,https://www.poder360.com.br/poder-eleicoes-2026/eduardo-paes-lidera-no-1o-e-2o-turnos-para-o-governo-do-rj-2/,2026,41,30
+genial-quaest-2026-08-24,Genial/Quaest,2026-08-21,2026-08-24,1302,3,https://g1.globo.com/rj/rio-de-janeiro/eleicoes/2026/noticia/2026/08/25/quaest-rj-governador-25-08.ghtml,2026,50,20
