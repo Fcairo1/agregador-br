@@ -1,6 +1,0 @@
-# O site mudou pro Cloudflare Workers (agregador-eleicoes-2026.filipecairo.workers.dev).
-# Aqui no Netlify fica só uma página de aviso "novo endereço" por ~1 mês, sem build pesado.
-# Depois: deletar o site no painel do Netlify.
-[build]
-  command = "echo 'sem build — apenas a página de redirecionamento'"
-  publish = "redirect"

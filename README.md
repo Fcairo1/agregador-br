@@ -29,21 +29,12 @@ Flags: `node scripts/fetch.mjs --offline` usa o cache em `.cache/`;
 
 ## No ar
 
-- Cloudflare Pages: **https://agregador-eleicoes-2026.filipecairo.workers.dev/** (sem sistema de crédito)
-- GitHub Pages: https://fcairo1.github.io/agregador-br/ (espelho, 100% grátis)
+- **Cloudflare Workers:** https://agregador-eleicoes-2026.filipecairo.workers.dev/ (site oficial)
+- GitHub Pages: https://fcairo1.github.io/agregador-br/ (espelho)
 
-### Conectar o Cloudflare Pages (uma vez, no navegador)
-
-1. dash.cloudflare.com → **Workers & Pages** → **Create** → **Pages** → **Connect to Git**
-2. autoriza o GitHub, escolhe `Fcairo1/agregador-br`
-3. Build settings:
-   - Framework preset: **None**
-   - Build command: `node scripts/build.mjs`
-   - Build output directory: `site`
-   - (Root directory: `/`)
-4. **Save and Deploy**. Depois, em *Settings → Build → Branch control*, deixa só `main`.
-
-Cada push na `main` (inclusive os do bot) dispara um deploy. Grátis: 500 builds/mês, banda ilimitada.
+Cloudflare: projeto Workers Git-conectado a `main`. Build command `node scripts/build.mjs`,
+deploy `npx wrangler deploy` (serve `./site` via `[assets]` do `wrangler.toml`). Sem sistema
+de crédito. Cada push na `main` (bot incluso) dispara um deploy.
 
 ## Publicar (GitHub Pages)
 
