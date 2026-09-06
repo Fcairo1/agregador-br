@@ -1,0 +1,5 @@
+# Cloudflare Pages. Sem sistema de crédito: builds e banda sem custo prático.
+# Git integration (dashboard): Build command = "node scripts/build.mjs", Root = "/".
+name = "agregador-eleicoes-2026"
+pages_build_output_dir = "site"
+compatibility_date = "2026-09-06"
