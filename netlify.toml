@@ -1,14 +1,6 @@
-# Deploy no Netlify (URL genérica tipo agregador-br.netlify.app, sem username).
-# O GitHub Actions continua fazendo o refresh de 6h e commitando os CSV;
-# cada push (inclusive o do bot) dispara um build aqui.
+# O site mudou pro Cloudflare Workers (agregador-eleicoes-2026.filipecairo.workers.dev).
+# Aqui no Netlify fica só uma página de aviso "novo endereço" por ~1 mês, sem build pesado.
+# Depois: deletar o site no painel do Netlify.
 [build]
-  command = "node scripts/build.mjs"
-  publish = "site"
-
-[build.environment]
-  NODE_VERSION = "22"
-
-[[headers]]
-  for = "/data/*"
-  [headers.values]
-    Cache-Control = "public, max-age=300"
+  command = "echo 'sem build — apenas a página de redirecionamento'"
+  publish = "redirect"
