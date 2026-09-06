@@ -29,7 +29,7 @@ Flags: `node scripts/fetch.mjs --offline` usa o cache em `.cache/`;
 
 ## No ar
 
-- Cloudflare Pages: **https://agregador-eleicoes-2026.pages.dev/** (sem sistema de crédito)
+- Cloudflare Pages: **https://agregador-eleicoes-2026.filipecairo.workers.dev/** (sem sistema de crédito)
 - GitHub Pages: https://fcairo1.github.io/agregador-br/ (espelho, 100% grátis)
 
 ### Conectar o Cloudflare Pages (uma vez, no navegador)
