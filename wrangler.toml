@@ -1,0 +1,8 @@
+# Cloudflare Workers servindo a pasta estática `site/` (sem código de Worker).
+# O Cloudflare roda `node scripts/build.mjs` (Build command) e depois `npx wrangler deploy`,
+# que sobe o diretório de assets abaixo.
+name = "agregador-eleicoes-2026"
+compatibility_date = "2026-09-06"
+
+[assets]
+directory = "./site"
