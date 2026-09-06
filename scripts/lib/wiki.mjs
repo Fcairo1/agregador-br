@@ -101,30 +101,38 @@ function cleanHeading(html) {
     .trim();
 }
 
-// devolve [{ html, path:[h2,h3,h4,h5], firstSub:bool }] pra cada <table wikitable> da página
+// devolve { tables:[{html,path,firstSub}], subpages:[{title,path}] }
+// subpages = links de "Ver artigo principal" (hatnote) pra sub-páginas do mesmo artigo,
+// que a Wikipédia passou a usar pra arquivar meses antigos.
 export function tablesWithHeadings(pageHtml) {
   const toks = [];
   for (const m of pageHtml.matchAll(/<h([2-6])\b[^>]*>([\s\S]*?)<\/h\1>/gi))
     toks.push({ pos: m.index, kind: "h", level: +m[1], text: cleanHeading(m[2]) });
   for (const m of pageHtml.matchAll(/<table\b[^>]*\bwikitable\b[^>]*>[\s\S]*?<\/table>/gi))
     toks.push({ pos: m.index, kind: "table", html: m[0] });
+  for (const m of pageHtml.matchAll(/<div\b[^>]*class="[^"]*\bhatnote\b[^"]*"[^>]*>([\s\S]*?)<\/div>/gi)) {
+    const a = m[1].match(/href="\/wiki\/([^"#]+)"/i);
+    if (a) toks.push({ pos: m.index, kind: "hat", title: decode(decodeURIComponent(a[1])).replace(/_/g, " ") });
+  }
   toks.sort((a, b) => a.pos - b.pos);
 
   const cur = {}; // level -> texto
   let firstH3Seen = null; // texto do 1º h3 sob o h2 atual
-  const out = [];
+  const tables = [];
+  const subpages = [];
   for (const t of toks) {
     if (t.kind === "h") {
       cur[t.level] = t.text;
       for (let l = t.level + 1; l <= 6; l++) delete cur[l];
       if (t.level === 2) firstH3Seen = null;
       if (t.level === 3 && firstH3Seen == null) firstH3Seen = t.text;
-    } else {
-      const path = [cur[2], cur[3], cur[4], cur[5]].filter(Boolean);
-      out.push({ html: t.html, path, firstSub: cur[3] != null && cur[3] === firstH3Seen });
+      continue;
     }
+    const path = [cur[2], cur[3], cur[4], cur[5]].filter(Boolean);
+    if (t.kind === "table") tables.push({ html: t.html, path, firstSub: cur[3] != null && cur[3] === firstH3Seen });
+    else subpages.push({ title: t.title, path });
   }
-  return out;
+  return { tables, subpages };
 }
 
 export async function getPageWikitext(page, opts) {
@@ -546,8 +554,23 @@ export function parsePollTable(tableHtml, { year, warn = () => {}, refMap = new 
 // (h2 > h3 > h4). Robusto a transclusão de templates.
 export async function fetchRacePolls(race, opts) {
   const pageHtml = await getPageHTML(race.wikiPage, opts);
-  const all = tablesWithHeadings(pageHtml);
-  const targets = all.filter((t) => race.pathRule(t.path, { firstSub: t.firstSub }));
+  const walk = tablesWithHeadings(pageHtml);
+  const targets = walk.tables.filter((t) => race.pathRule(t.path, { firstSub: t.firstSub }));
+
+  // A Wikipédia arquiva meses antigos em sub-páginas ("Ver artigo principal: .../Janeiro a Agosto").
+  // Segue as que estão sob um título que a regra da corrida aceitaria.
+  const subs = walk.subpages.filter(
+    (s) => s.title.startsWith(race.wikiPage + "/") && race.pathRule([...s.path, race.year + ""], { firstSub: true })
+  );
+  for (const sp of subs) {
+    try {
+      const subWalk = tablesWithHeadings(await getPageHTML(sp.title, opts));
+      for (const t of subWalk.tables) targets.push({ ...t, path: [...sp.path, t.path.at(-1) || ""], sub: true });
+    } catch (e) {
+      console.warn(`  aviso: sub-página "${sp.title}" falhou (${e.message})`);
+    }
+  }
+
   if (!targets.length) {
     if (race.optional) {
       console.warn(`  (opcional) nenhuma tabela ainda para ${race.wikiPage} — pulando`);
