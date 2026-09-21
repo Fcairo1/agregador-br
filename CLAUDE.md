@@ -59,6 +59,12 @@ o HTML da página toda (`getPageHTML`), monta o breadcrumb h2>h3>h4 de cada `<ta
 Regras prontas: `presFirstRound` (`["Primeiro turno","2026", …]`), `govFirstRound`
 (`/primeiro turno/i` + `/governador/i` + inclui "2026"), `senado`, `lulaVs(rx)`, `spRunoff`,
 `govSecondRound` (1º confronto via `ctx.firstSub`). Adicionar estado = `stateRaces()`.
+**Anos perdidos (set/2026):** a Wikipédia recolou o arquivo de 2022–2025 no artigo principal SEM os
+títulos "2025"/"2024"…, então meses antigos viraram irmãos dos de 2026 sob o mesmo `<h3>` "2026".
+`corrigeAnosPerdidos()` (wiki.mjs) detecta isso pela ordem dos meses (cada ano lista numa ordem só;
+quando "volta", é o ano anterior) e reescreve o título de ano no breadcrumb. Além disso
+`fetchRacePolls` descarta pesquisa com data no futuro, e `check.mjs` barra: xDomain < 2026,
+pesquisas duplicadas (tabela lida 2×) e lastPoll no futuro.
 ⚠️ `scripts/ratings.mjs` ainda usa `getSectionHTML` por índice (seção "5" de 2018/22) — funciona
 hoje, mas migrar pra `tablesWithHeadings` se aqueles artigos também virarem transclusão.
 

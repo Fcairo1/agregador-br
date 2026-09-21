@@ -104,6 +104,46 @@ function cleanHeading(html) {
 // devolve { tables:[{html,path,firstSub}], subpages:[{title,path}] }
 // subpages = links de "Ver artigo principal" (hatnote) pra sub-páginas do mesmo artigo,
 // que a Wikipédia passou a usar pra arquivar meses antigos.
+const MESES = ["janeiro", "fevereiro", "março", "abril", "maio", "junho", "julho", "agosto", "setembro", "outubro", "novembro", "dezembro"];
+// 1º mês citado num título ("Novembro - Dezembro", "De setembro a dezembro") -> 1..12
+function primeiroMes(txt) {
+  const t = txt.toLowerCase();
+  let best = null;
+  MESES.forEach((n, i) => {
+    const k = t.indexOf(n);
+    if (k >= 0 && (best == null || k < best.k)) best = { k, m: i + 1 };
+  });
+  return best ? best.m : null;
+}
+
+// Em set/2026 a Wikipédia recolou o arquivo de anos anteriores no artigo principal SEM os títulos
+// "2025", "2024"…: os meses de 2025 apareceram como irmãos dos de 2026 sob o mesmo <h3> "2026".
+// Como cada ano lista os meses numa ordem só (ex.: decrescente), quando a sequência "volta" é outro
+// ano: reescreve o título de ano no breadcrumb (2026 -> 2025 -> 2024…) e a pathRule exclui.
+function corrigeAnosPerdidos(tables) {
+  const grupos = new Map();
+  for (const t of tables) {
+    const yi = t.path.length - 2;
+    if (yi < 0 || !/^(19|20)\d{2}$/.test(t.path[yi])) continue;
+    const m = primeiroMes(t.path[yi + 1]);
+    if (m == null) continue;
+    const key = t.path.slice(0, yi + 1).join(">");
+    const g = grupos.get(key) || { prev: null, dir: 0, shift: 0 };
+    grupos.set(key, g);
+    if (g.prev != null) {
+      if (!g.dir && m !== g.prev) g.dir = m < g.prev ? -1 : 1;
+      const novoBloco = g.dir === -1 ? m >= g.prev : g.dir === 1 ? m <= g.prev : false;
+      if (novoBloco) g.shift++;
+    }
+    g.prev = m;
+    if (g.shift) {
+      t.path = [...t.path];
+      t.path[yi] = String(+t.path[yi] - g.shift);
+      t.anoCorrigido = true;
+    }
+  }
+}
+
 export function tablesWithHeadings(pageHtml) {
   const toks = [];
   for (const m of pageHtml.matchAll(/<h([2-6])\b[^>]*>([\s\S]*?)<\/h\1>/gi))
@@ -132,6 +172,7 @@ export function tablesWithHeadings(pageHtml) {
     if (t.kind === "table") tables.push({ html: t.html, path, firstSub: cur[3] != null && cur[3] === firstH3Seen });
     else subpages.push({ title: t.title, path });
   }
+  corrigeAnosPerdidos(tables);
   return { tables, subpages };
 }
 
@@ -597,5 +638,11 @@ export async function fetchRacePolls(race, opts) {
     for (const c of parsed.candidates) if (c.name) candNames.set(c.key, c);
     for (const p of parsed.polls) allPolls.push({ ...p, section: sec });
   }
-  return { polls: allPolls, candidates: [...candNames.values()] };
+  // pesquisa com data no futuro é erro de leitura (ano errado, linha de evento...) — nunca real
+  const limite = new Date(Date.now() + 36 * 3600e3).toISOString().slice(0, 10);
+  const futuras = allPolls.filter((p) => p.end > limite);
+  if (futuras.length) {
+    console.warn(`  aviso: ${futuras.length} pesquisa(s) com data no futuro descartadas (${futuras.map((p) => p.id).slice(0, 3).join(", ")}...)`);
+  }
+  return { polls: allPolls.filter((p) => p.end <= limite), candidates: [...candNames.values()] };
 }
