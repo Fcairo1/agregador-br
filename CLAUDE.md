@@ -95,7 +95,8 @@ Estado-espaço 1-D por candidato, grade **diária** (dias desde a 1ª pesquisa):
   (`0.032`, ou `0.02` p/ corridas < `sparseCutoff`). Passeio aleatório: pesquisa antiga
   informa menos o "hoje" automaticamente — **não há peso de recência explícito**.
 - **Observação:** `z_i = x_{t_i} + ε`, `ε ~ N(0, r_i)`, `r_i = designEffect · p(1−p)/n · 1e4`
-  (`designEffect = 1.6`; `n=1200` se faltar). Várias pesquisas no mesmo dia = combinação
+  (`designEffect = 1.6`; `n=1200` se faltar; **`n` limitado a `nCap=3000`** — sem teto, a Veritá de 40 mil dominava
+  a tendência; com teto o backtest melhorou: MAE 2022 1.70→1.63, 2018 2.41→2.33). Várias pesquisas no mesmo dia = combinação
   precisão-ponderada. **Rating do instituto** entra dividindo `r_i` por `ratingW²`
   (casa que acerta mais pesa mais).
 - **Inferência:** filtro de Kalman para frente + suavizador RTS para trás. Forma fechada,

@@ -115,7 +115,7 @@ function aggregateRace(raceKey) {
     .sort((a, b) => (b.disp ? 1e4 : 0) + b.recentAvg - ((a.disp ? 1e4 : 0) + a.recentAvg))
     .slice(0, PLOT_MAX_LINES);
 
-  const kOpts = { q: polls.length < 25 ? 0.02 : 0.032, designEffect: 1.6, z: 1.64 };
+  const kOpts = { q: polls.length < 25 ? 0.02 : 0.032, designEffect: 1.6, nCap: 3000, z: 1.64 };
   const uniqPollsters = (arr) => new Set(arr.map((p) => p.pollster)).size;
   const rawSeries = {};
   for (const { k } of plotable) rawSeries[k] = series[k].slice();
@@ -211,6 +211,7 @@ function aggregateRace(raceKey) {
       model: "kalman",
       q: kOpts.q,
       designEffect: kOpts.designEffect,
+      nCap: kOpts.nCap,
       z: kOpts.z,
       gridStepDays: AGG.gridStepDays,
       houseMaxShift: AGG.houseMaxShift,

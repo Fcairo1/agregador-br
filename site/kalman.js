@@ -11,19 +11,23 @@
 const clampNum = (v, a, b) => Math.max(a, Math.min(b, v));
 
 // variância amostral de uma proporção, em pontos percentuais²
-function sampleVar(pct, n, designEffect) {
+// `nCap`: amostra grande demais não vale proporcionalmente mais — o erro que sobra é não amostral
+// (viés de método, painel, ponderação), que não cai com o n. Sem teto, uma pesquisa de 40 mil
+// pesaria 20× uma de 2 mil e dominaria a tendência sozinha.
+function sampleVar(pct, n, designEffect, nCap) {
   const p = clampNum((pct || 20) / 100, 0.02, 0.98);
-  const nn = n && n > 0 ? n : 1200;
+  const nn = Math.min(n && n > 0 ? n : 1200, nCap);
   return designEffect * (p * (1 - p) / nn) * 1e4;
 }
 
 // polls: [{ x:int(dia), y:%, n, ratingW? }]  (já sem house effect)
 // gridDays: [0,1,...,D]
-// opts: { q, designEffect, z, floorHalf, initVar }
+// opts: { q, designEffect, nCap, z, floorHalf, initVar }
 export function trendKalman(polls, gridDays, opts = {}) {
   const {
     q = 0.03, // sd ~0.17 p.p./dia
     designEffect = 1.6,
+    nCap = 3000, // teto do n efetivo por pesquisa
     z = 1.64, // faixa ~90%
     floorHalf = 0.5, // piso do meio-intervalo (p.p.)
     sysHalf = 1.1, // erro sistemático do setor (todo mundo erra junto) — some em quadratura
@@ -37,7 +41,7 @@ export function trendKalman(polls, gridDays, opts = {}) {
   // observações agrupadas por dia (precisão-ponderadas quando há várias no mesmo dia)
   const obsByDay = new Map();
   for (const p of polls) {
-    let r = sampleVar(p.y, p.n, designEffect);
+    let r = sampleVar(p.y, p.n, designEffect, nCap);
     if (p.ratingW && p.ratingW > 0) r /= p.ratingW * p.ratingW; // casa melhor pesa mais
     const prec = 1 / r;
     const cur = obsByDay.get(p.x) || { sPrec: 0, sPrecY: 0 };
