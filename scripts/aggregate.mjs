@@ -96,11 +96,11 @@ function aggregateRace(raceKey) {
   // candidatos "de destaque" (lista `display` da corrida) pulam o piso de % — se um nome
   // conhecido está sendo perguntado, ele aparece mesmo baixo (ex.: Zema pra presidente).
   const RECENT_WIN = 75; // dias
-  // sem pesquisa própria há mais que isto -> fora da corrida (mesmo se `display`/isDisp).
-  // Era 25: um candidato podia sumir das pesquisas por ~3 semanas (institutos pararam de
-  // perguntar por ele, ex.: desistência) e continuar "ativo" com o rótulo de fim de linha
-  // parado no valor antigo, dando a entender que ele seguia pontuando aquilo hoje.
-  const STALE = 14;
+  const STALE = 25; // sem pesquisa própria há mais que isto -> some até da linha (o modelo já
+  // nula a linha antes disso, `maxGapDays`=45 no kalman.js). Ficar "ativo" aqui só decide se ele
+  // ainda entra no JSON pra aparecer no hover do trecho em que foi pesquisado — o rótulo fixo do
+  // valor "atual" (fim de linha / legenda) é filtrado separadamente no front por recência (ver
+  // `CURRENT_STALE_DAYS` em app.js), pra não sugerir que um candidato sumido ainda pontua aquilo hoje.
   const isDisp = (k) => !!dispEntry(race, k);
   const plotable = candKeys
     .map((k) => ({ k, pts: series[k], recent: series[k].filter((p) => p.x >= maxX - RECENT_WIN) }))

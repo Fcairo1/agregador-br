@@ -7,6 +7,10 @@ let PW = VB.w - M.l - M.r;
 let PH = VB.h - M.t - M.b;
 const GAP_DAYS = 9;
 const DAY = 86400000;
+// candidato sem pesquisa própria há mais que isto (vs. a última pesquisa da corrida) não tem
+// "valor atual" mostrado (rótulo de fim de linha / % da legenda) — ficaria parecendo que ele
+// segue pontuando aquilo hoje. A linha/faixa/hover do período real dele continuam intactos.
+const CURRENT_STALE_DAYS = 14;
 
 // geometria responsiva: no celular o gráfico fica mais alto e com menos margem à direita
 function fitViewport() {
@@ -178,10 +182,11 @@ function render() {
   svg.append(linesG);
 
   // --- rótulos no fim da linha ---
+  const refT = parseT(data.lastPoll);
   const labelsG = el("g");
   const labels = visible
     .map((c) => {
-      const last = c.line[c.line.length - 1];
+      const last = currentValue(c, refT);
       return last ? { c, y: g.y(last.y), v: last.y } : null;
     })
     .filter(Boolean)
@@ -408,11 +413,18 @@ function yAt(line, targetT) {
   }
   return best;
 }
-function deltaHTML(c) {
-  if (c.line.length < 2) return "";
-  const lastT = parseT(c.line[c.line.length - 1].t);
-  const cur = c.line[c.line.length - 1].y;
-  const ago = yAt(c.line, lastT - 30 * DAY);
+// último ponto da linha, só se a pesquisa por trás dele é recente o bastante (< CURRENT_STALE_DAYS
+// da última pesquisa da corrida) — senão o candidato sumiu e "o valor atual" seria enganoso.
+function currentValue(c, refT) {
+  const last = c.line[c.line.length - 1];
+  if (!last) return null;
+  return refT - parseT(last.t) <= CURRENT_STALE_DAYS * DAY ? last : null;
+}
+function deltaHTML(c, refT) {
+  const last = currentValue(c, refT);
+  if (!last || c.line.length < 2) return "";
+  const cur = last.y;
+  const ago = yAt(c.line, parseT(last.t) - 30 * DAY);
   if (ago == null) return "";
   const d = cur - ago;
   if (Math.abs(d) < 0.35) return `<span class="delta flat" title="vs. ~30 dias atrás">±0</span>`;
@@ -425,15 +437,23 @@ function deltaHTML(c) {
 function renderLegend() {
   const box = $("#legend");
   box.textContent = "";
+  const refT = parseT(state.data.lastPoll);
   for (const c of state.data.candidates) {
     const off = state.hidden.has(c.key);
     const b = document.createElement("button");
     b.className = off ? "off" : "";
-    const last = c.line[c.line.length - 1];
+    const last = currentValue(c, refT);
+    const stale = c.line.length && !last;
+    const rawLast = c.line[c.line.length - 1];
+    const pctHtml = last
+      ? `<span class="pct">${last.y.toFixed(1)}%</span>`
+      : stale
+        ? `<span class="pct stale" title="parou de aparecer nas pesquisas — última em ${fmtDate(rawLast.t)}, com ${rawLast.y.toFixed(1)}%">até ${fmtDate(rawLast.t)}</span>`
+        : `<span class="pct">—</span>`;
     b.innerHTML = `<span class="dot" style="background:${c.color}"></span>${c.name}${pbadge(
       c.partyLabel,
       c.color
-    )} <span class="pct">${last ? last.y.toFixed(1) + "%" : "—"}</span>${deltaHTML(c)}`;
+    )} ${pctHtml}${deltaHTML(c, refT)}`;
     b.onclick = () => {
       if (state.hidden.has(c.key)) state.hidden.delete(c.key);
       else state.hidden.add(c.key);

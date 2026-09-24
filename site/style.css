@@ -105,6 +105,7 @@ h2 { margin: 0; font-size: 22px; letter-spacing: -0.02em; }
 .legend button .dot { width: 9px; height: 9px; border-radius: 999px; flex: none; }
 .legend button.off { opacity: 0.38; }
 .legend button .pct { color: var(--muted); font-variant-numeric: tabular-nums; }
+.legend button .pct.stale { font-style: italic; font-size: 11px; cursor: help; }
 .legend .delta { font-size: 10.5px; font-weight: 700; font-variant-numeric: tabular-nums; margin-left: 3px; cursor: help; }
 .legend .delta.up { color: #1f9d57; }
 .legend .delta.down { color: #c9503a; }

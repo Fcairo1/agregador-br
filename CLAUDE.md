@@ -108,10 +108,10 @@ Estado-espaço 1-D por candidato, grade **diária** (dias desde a 1ª pesquisa):
   subtrai dos pontos e refita. Só com ≥20 pesquisas e ≥5 institutos. Vai pro JSON em `houseEffects`.
 - **Bordas:** a linha some além de `maxGapDays` (45) sem pesquisa por perto; a incerteza
   cresce sozinha onde há pouco dado (é o ponto do modelo).
-- Só plota candidato ATIVO: ≥6 pesquisas, ≥5 recentes (75d), última há ≤14d, média recente ≥4 p.p.
-  (14d — era 25d; um candidato sem pesquisa própria há ~3 semanas enquanto os outros têm pesquisa
-  quase diária [ex.: Marçal, sumiu das pesquisas em 31/08] ficava com o rótulo de fim de linha
-  parado no valor antigo, dando a entender que ele seguia pontuando aquilo hoje).
+- Só entra no JSON o candidato ATIVO: ≥6 pesquisas, ≥5 recentes (75d), última há ≤25d, média
+  recente ≥4 p.p. Isso só garante que a linha/banda/pontos existam pra quem foi pesquisado
+  recentemente o bastante — não implica que o "valor atual" (rótulo de fim de linha / legenda)
+  deva aparecer; essa parte é filtrada no front (abaixo).
 - Saída: reamostrada a cada `gridStepDays` (2) da grade diária.
 
 ### `site/data/<corrida>.json`
@@ -146,6 +146,12 @@ Estado-espaço 1-D por candidato, grade **diária** (dias desde a 1ª pesquisa):
 - **Selo de partido** (`.pbadge`) ao lado do nome na legenda / tooltip / cabeçalho da tabela.
   Cor do candidato = cor do partido (`PARTY` em `races.mjs`), salvo override no `display`.
 - Legenda clicável (liga/desliga candidato). Crosshair no hover. Pontos das pesquisas ao fundo.
+- **Valor "atual" (rótulo de fim de linha + `.pct` da legenda) só aparece se a última pesquisa do
+  candidato está a ≤`CURRENT_STALE_DAYS` (14d) de `data.lastPoll`** (`app.js`). Sem isso, um
+  candidato que sumiu das pesquisas (ex.: Marçal, parou em 31/08 com os outros seguindo até 20/09)
+  ficava com o número antigo pendurado na borda direita como se fosse de hoje. A linha, a faixa e
+  o ponto no hover continuam existindo pro período real em que ele foi pesquisado — só o rótulo
+  fixo é que esconde.
 - Tabela de pesquisas: **vencedor de cada pesquisa** pintado com a cor do partido; linhas de
   institutos desconsiderados aparecem riscadas. "ver todas".
 - Responsivo, tema claro/escuro por `prefers-color-scheme`.
