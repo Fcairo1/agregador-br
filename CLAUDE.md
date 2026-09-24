@@ -108,7 +108,10 @@ Estado-espaço 1-D por candidato, grade **diária** (dias desde a 1ª pesquisa):
   subtrai dos pontos e refita. Só com ≥20 pesquisas e ≥5 institutos. Vai pro JSON em `houseEffects`.
 - **Bordas:** a linha some além de `maxGapDays` (45) sem pesquisa por perto; a incerteza
   cresce sozinha onde há pouco dado (é o ponto do modelo).
-- Só plota candidato ATIVO: ≥6 pesquisas, ≥5 recentes (75d), última há ≤25d, média recente ≥4 p.p.
+- Só plota candidato ATIVO: ≥6 pesquisas, ≥5 recentes (75d), última há ≤14d, média recente ≥4 p.p.
+  (14d — era 25d; um candidato sem pesquisa própria há ~3 semanas enquanto os outros têm pesquisa
+  quase diária [ex.: Marçal, sumiu das pesquisas em 31/08] ficava com o rótulo de fim de linha
+  parado no valor antigo, dando a entender que ele seguia pontuando aquilo hoje).
 - Saída: reamostrada a cada `gridStepDays` (2) da grade diária.
 
 ### `site/data/<corrida>.json`
