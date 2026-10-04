@@ -5,6 +5,35 @@ Esforço é relativo a "tudo que já foi construído" = 100%. Nada aqui está em
 
 ---
 
+## 0. PÓS-ELEIÇÃO (1º turno 04/10/2026) — fazer a partir de 05/10
+
+Escopo fechado com o usuário em 2026-10-04. Página nova "Resultados" (`site/resultados.html`).
+
+**Escopo de cargos**
+- Presidente, governadores e senadores: **todos os estados** (os que o agregador cobre + eleitos de todos).
+- Deputados federais: **só Sul e Sudeste** (SP, RJ, MG, ES, PR, SC, RS).
+- Deputados estaduais: **só São Paulo**.
+
+**Fonte (risco principal):** TSE Dados Abertos respondeu 200 da máquina local em 04/10 (CI dava 403 por
+Akamai) → coleta de deputados provavelmente local/manual, não no cron. Feed de resultados do TSE: caminho
+real ainda desconhecido (404 no palpite) — descobrir em 05/10. Wikipédia cobre presidente/gov/senado em horas.
+
+**Ordem**
+1. Pesquisa × resultado (presidente, gov, senado): último ponto da tendência + faixa vs. voto válido
+   oficial; erro em p.p., dentro/fora da faixa, vencedor certo. Reaproveita `ratings.mjs`/backtest.
+2. Eleitos de governador/senador + quem é novo no cargo (antes × depois).
+3. Deputados (escopo acima): eleitos, quem é novo, saldo por partido, composição antes × depois por casa
+   (Câmara federal recortada ao Sul/Sudeste, Alesp, Senado).
+4. Comparativo por partido: entrou/saiu; gráfico antes × depois por casa.
+
+**Métricas extras (todas aprovadas):** acerto de vencedor por instituto e erro médio na eleição real
+(atualiza ratings); calibração da faixa (% de resultados dentro dos ~90%); maiores surpresas vs. pesquisas;
+abstenção/brancos/nulos vs. 2022; renovação (% reeleitos por casa e partido); mulheres e pessoas negras
+eleitas (se a base do TSE trouxer as colunas).
+
+**Cuidados:** homônimos/duplicatas ao cruzar legislatura anterior; votos válidos vs. totais (usar `toValidVotes`);
+não prometer deputados via Wikipédia (incompleto).
+
 ## 1. Previsão (o maior salto de utilidade)
 
 - [ ] **Probabilidade de ir ao 2º turno / de liderar / de vencer no 1º turno** — simulação de
