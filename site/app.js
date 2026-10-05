@@ -26,6 +26,7 @@ const $ = (s, r = document) => r.querySelector(s);
 const svg = $("#chart");
 const tip = $("#tooltip");
 const state = {
+  results: {}, // resultados oficiais por corrida (data/resultados.json) — viram ◎ no gráfico
   index: [],
   group: null,
   race: null,
@@ -61,9 +62,12 @@ const parseT = (iso) => new Date(iso + "T00:00:00Z").getTime();
 // ---------- geometry ----------
 function buildGeom(data) {
   const t0 = parseT(data.xDomain[0]);
-  const t1 = parseT(data.xDomain[1]);
+  let t1 = parseT(data.xDomain[1]);
   const visible = data.candidates.filter((c) => !state.hidden.has(c.key));
+  const R = state.results[state.race];
+  if (R) t1 = Math.max(t1, parseT(R.day)); // abre espaço pro dia da eleição
   let hiMax = 0;
+  if (R) for (const rc of R.candidates) if (visible.some((c) => c.key === rc.key)) hiMax = Math.max(hiMax, rc.realRaw);
   for (const c of visible) for (const b of c.band) hiMax = Math.max(hiMax, b.hi);
   for (const c of visible) for (const p of c.line) hiMax = Math.max(hiMax, p.y);
   const step = hiMax <= 24 ? 5 : hiMax <= 60 ? 10 : 20;
@@ -216,6 +220,7 @@ function render() {
   const overlay = el("rect", { x: M.l, y: M.t, width: PW, height: PH, fill: "transparent" });
   svg.append(overlay);
   wireHover(overlay, focus, cross, fdots);
+  drawResult(g, visible);
 
   // --- animação de entrada ---
   requestAnimationFrame(() => {
@@ -239,6 +244,52 @@ function render() {
   renderMeta();
   renderTable();
   renderFilter();
+}
+
+// ---------- resultado oficial no gráfico (◎ no dia da eleição) ----------
+const fmtPct = (v) => v.toFixed(1).replace(".", ",") + "%";
+function drawResult(g, visible) {
+  const note = $("#res-note");
+  const R = state.results[state.race];
+  const cs = R ? R.candidates.filter((rc) => visible.some((c) => c.key === rc.key)) : [];
+  if (!R || !cs.length) {
+    if (note) note.hidden = true;
+    return;
+  }
+  const xe = g.x(parseT(R.day));
+  const grp = el("g", { class: "resultmarks" });
+  grp.append(el("line", { class: "voteline", x1: xe, x2: xe, y1: M.t, y2: M.t + PH }));
+  grp.append(el("text", { class: "votelbl", x: xe, y: M.t - 8, "text-anchor": "middle" }, [txt("eleição " + fmtDate(R.day))]));
+  const label = R.round === "2T" ? "2º turno" : "1º turno";
+  for (const rc of cs) {
+    const color = visible.find((c) => c.key === rc.key).color;
+    const cy = g.y(rc.realRaw);
+    const m = el("g", { class: "rmark", tabindex: 0 });
+    m.append(el("circle", { cx: xe, cy, r: 9, fill: "transparent" })); // área de toque
+    m.append(el("circle", { class: "ring", cx: xe, cy, r: 5.6, stroke: color }));
+    m.append(el("circle", { cx: xe, cy, r: 1.9, fill: color }));
+    const show = () => {
+      const holder = $("#holder").getBoundingClientRect();
+      tip.innerHTML =
+        `<h4>Resultado oficial · ${label}</h4>` +
+        `<div class="row"><span class="nm"><span class="dot" style="background:${color}"></span>${rc.name}</span><span class="v">${fmtPct(rc.real)}</span></div>` +
+        `<div class="row sub"><span>base das pesquisas</span><span class="v">${fmtPct(rc.realRaw)}</span></div>` +
+        `<div class="row sub"><span>tendência</span><span class="v">${fmtPct(rc.rawEst)}</span></div>`;
+      tip.style.left = Math.max(110, Math.min(holder.width - 120, (xe / VB.w) * holder.width)) + "px";
+      tip.style.top = Math.max(72, (cy / VB.h) * holder.height) + "px";
+      tip.hidden = false;
+    };
+    m.addEventListener("mouseenter", show);
+    m.addEventListener("focus", show);
+    m.addEventListener("mouseleave", () => (tip.hidden = true));
+    m.addEventListener("blur", () => (tip.hidden = true));
+    grp.append(m);
+  }
+  svg.append(grp);
+  if (note) {
+    note.hidden = false;
+    note.innerHTML = `◎ = resultado oficial do ${label} (TSE), convertido para a base das pesquisas — elas incluem indecisos, brancos e nulos; o resultado oficial é em votos válidos. Passe o mouse para ver os dois números. <a href="#resultados">Ver a comparação completa →</a>`;
+  }
 }
 
 // ---------- tabela de pesquisas ----------
@@ -642,9 +693,31 @@ async function boot() {
     svg.append(el("text", { x: 40, y: 60, fill: "currentColor" }, [txt("Sem dados. Rode: node scripts/build.mjs")]));
     return;
   }
+  try {
+    const rs = await (await fetch("data/resultados.json", { cache: "no-cache" })).json();
+    state.results = Object.fromEntries((rs.races || []).map((r) => [r.race, r]));
+  } catch (e) {
+    state.results = {};
+  }
   state.group = state.index[0].group;
   state.race = state.index[0].key;
   renderTabs();
   load();
 }
+
+// ---------- seções (Pesquisas · Resultados · Eleitos) ----------
+const VIEWS = ["pesquisas", "resultados", "eleitos"];
+const mounted = {};
+function route() {
+  const h = location.hash.slice(1).split("/")[0];
+  const v = VIEWS.includes(h) ? h : "pesquisas";
+  for (const name of VIEWS) $("#view-" + name).hidden = name !== v;
+  $("#tabsets").hidden = v !== "pesquisas";
+  for (const a of document.querySelectorAll("#views a[data-v]")) a.setAttribute("aria-current", String(a.dataset.v === v));
+  if (v !== "pesquisas" && !mounted[v]) mounted[v] = import(`./${v}.js`).then((m) => m.mount($("#view-" + v)));
+  if (v === "pesquisas" && state.data) render(); // volta ao gráfico já medido
+  window.scrollTo(0, 0);
+}
+window.addEventListener("hashchange", route);
+route();
 boot();

@@ -158,7 +158,13 @@ function compare(key, res, agg, race) {
   }
   const estSum = rows.reduce((s, r) => s + r.cand.line.at(-1).y, 0);
   const resSum = rows.reduce((s, r) => s + r.res.pct, 0);
-  const f = 100 / estSum;
+  // f converte "base das pesquisas" (inclui indecisos/brancos/nulos) <-> "votos válidos entre os exibidos".
+  // Congelado junto com as estimativas, pra o ponto do resultado no gráfico não se mexer se o modelo mudar.
+  let f = frozen?.f ?? 100 / estSum;
+  if (frozen && frozen.f == null) {
+    frozen.f = +f.toFixed(5);
+    snapDirty = true;
+  }
   const out = rows.map((r) => {
     const l = r.cand.line.at(-1);
     const b = r.cand.band.at(-1) || { lo: l.y, hi: l.y };
@@ -171,17 +177,19 @@ function compare(key, res, agg, race) {
       est: +est.toFixed(2), lo: +lo.toFixed(2), hi: +hi.toFixed(2),
       real: +real.toFixed(2), votes: r.res.votes, status: r.res.status || "", elected: !!r.res.elected,
       err: +(real - est).toFixed(2), inBand: real >= lo && real <= hi,
+      // mesma base das linhas do gráfico (pra plotar o resultado junto da tendência)
+      rawEst: +(est / f).toFixed(2), realRaw: +(real / f).toFixed(2),
     };
   });
   const day = dayOf(race.round);
   if (!frozen && Date.now() > Date.parse(day + "T23:59:59-03:00") && agg.lastPoll <= day) {
-    snapshot[key] = { lastPoll: agg.lastPoll, candidates: Object.fromEntries(out.map((c) => [c.key, { est: c.est, lo: c.lo, hi: c.hi }])) };
+    snapshot[key] = { lastPoll: agg.lastPoll, f: +f.toFixed(5), candidates: Object.fromEntries(out.map((c) => [c.key, { est: c.est, lo: c.lo, hi: c.hi }])) };
     snapDirty = true;
   }
   const byEst = [...out].sort((a, b) => b.est - a.est)[0];
   const byReal = [...out].sort((a, b) => b.real - a.real)[0];
   return {
-    race: key, label: agg.label, lastPoll: agg.lastPoll, nPolls: agg.nPolls,
+    race: key, label: agg.label, lastPoll: agg.lastPoll, nPolls: agg.nPolls, day,
     candidates: out.sort((a, b) => b.real - a.real),
     runoff: out.filter((c) => /2º turno/i.test(c.status)).map((c) => c.name),
     electedNames: out.filter((c) => c.elected).map((c) => c.name),

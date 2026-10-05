@@ -230,3 +230,19 @@ main.bt h3 span { color: var(--muted); font-weight: 500; font-size: 13px; }
 .filters input { min-width: 220px; }
 .bt-tbl.people td:first-child { font-weight: 600; }
 .bt .muted { color: var(--muted); font-weight: 400; }
+
+/* ---- navegação entre seções ---- */
+.views { display: flex; gap: 4px; flex-wrap: wrap; margin: 2px 0 10px; }
+.views a { color: var(--muted); text-decoration: none; font-size: 13px; font-weight: 650; padding: 6px 13px; border-radius: 999px; border: 1px solid transparent; }
+.views a:hover { color: var(--ink); }
+.views a[aria-current="true"] { color: var(--bg); background: var(--ink); }
+.views a.ext { margin-left: auto; font-weight: 500; }
+.resultmarks .voteline { stroke: var(--muted); stroke-dasharray: 4 4; opacity: .55; }
+.resultmarks .votelbl { fill: var(--muted); font-size: 11px; }
+.rmark { cursor: pointer; outline: none; }
+.rmark .ring { fill: var(--panel); stroke-width: 2.4; }
+.tooltip .row.sub { color: var(--muted); font-size: 11.5px; }
+.resnote { margin-top: 6px; }
+.tabsets[hidden], main[hidden] { display: none !important; }
+.tooltip h4, .tooltip .row, .tooltip .row span { white-space: nowrap; }
+.tooltip .row { gap: 14px; }

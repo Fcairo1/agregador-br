@@ -20,7 +20,13 @@
     <header class="top">
       <div class="wrap">
         <h1>Agregador de pesquisas <span>· Brasil 2026</span></h1>
-        <div class="tabsets">
+        <nav class="views" id="views" aria-label="Seções">
+          <a href="#" data-v="pesquisas">Pesquisas</a>
+          <a href="#resultados" data-v="resultados">Resultados</a>
+          <a href="#eleitos" data-v="eleitos">Eleitos</a>
+          <a href="backtest.html" class="ext">Backtest 2018/22 ↗</a>
+        </nav>
+        <div class="tabsets" id="tabsets">
           <div class="races" id="races" role="tablist"></div>
           <div class="rounds" id="rounds" role="tablist" hidden></div>
           <div class="scenario" id="scenario" hidden></div>
@@ -28,7 +34,7 @@
       </div>
     </header>
 
-    <main class="wrap">
+    <main class="wrap" id="view-pesquisas">
       <section class="chartcard">
         <div class="chart-head">
           <div>
@@ -66,10 +72,11 @@
           entra com peso pelo tamanho da amostra (com teto de 3 mil, pois o erro que sobra não cai com o n) e pesquisa antiga informa menos o presente.
           A faixa (~90%) soma a incerteza do modelo e um erro sistemático do setor.
           Fonte: <a id="src-link" href="#" target="_blank" rel="noopener">Wikipédia</a> (CC BY-SA) + curadoria.
-          · <a href="resultados.html">Pesquisas × resultado de 2026 →</a>
-          · <a href="eleitos.html">Quem foi eleito →</a>
+          · <a href="#resultados">Pesquisas × resultado de 2026 →</a>
+          · <a href="#eleitos">Quem foi eleito →</a>
           · <a href="backtest.html">Como o agregador se saiu em 2018/2022 →</a>
         </p>
+        <p class="foot resnote" id="res-note" hidden></p>
       </section>
 
       <section class="pollscard">
@@ -82,6 +89,9 @@
         </div>
       </section>
     </main>
+
+    <main class="wrap bt" id="view-resultados" hidden></main>
+    <main class="wrap bt" id="view-eleitos" hidden></main>
 
     <script src="app.js" type="module"></script>
   </body>

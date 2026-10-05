@@ -1,4 +1,17 @@
-const $ = (s, r = document) => r.querySelector(s);
+let ROOT = document;
+const $ = (s) => ROOT.querySelector(s);
+const TEMPLATE = `
+  <h2>Quem foi eleito — 2026</h2>
+  <p class="lead">
+    Apuração oficial do TSE. Cobre governadores e senadores de todos os estados, deputados
+    <b>federais do Sul e Sudeste</b> e deputados <b>estaduais de SP</b>. Casas ainda em apuração
+    entram aqui sozinhas, conforme o TSE publica.
+  </p>
+  <div id="el-headline" class="bt-headline"></div>
+  <div class="seg" id="el-tabs" role="tablist"></div>
+  <div id="el-panel"></div>
+  <p class="foot" id="el-foot"></p>
+`;
 const esc = (s) => String(s ?? "").replace(/[&<>"]/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" })[c]);
 const fmt = (v, d = 0) => v.toFixed(d).replace(".", ",");
 const sgn = (n) => (n > 0 ? "+" + n : n < 0 ? "−" + Math.abs(n) : "0");
@@ -84,7 +97,7 @@ function show(key) {
   else if (st.projetadas.length || st.pendentes.length) head = `<p class="lead">${st.projetadas.length ? `<b>Projeção em ${st.projetadas.join(", ")}:</b> o TSE já apurou todos os votos e definiu as vagas de cada partido, mas ainda não marcou os eleitos — aqui entram os mais votados de cada partido (mesmo método reproduziu 133 de 133 eleitos oficiais nos estados fechados). ` : ""}${st.pendentes.length ? `<i>Apuração em andamento em: ${st.pendentes.join(", ")}.</i> ` : ""}Os números cobrem ${comp.ufs && comp.ufs.length ? comp.ufs.join(", ") : "nenhum estado ainda"}; o “antes” é recortado para os mesmos estados.</p>`;
   else if (h.kind === "senador") head = `<p class="lead">Todas as 54 vagas definidas. “Antes” = os 54 senadores que ocupavam as cadeiras em disputa; a última coluna mostra a casa inteira (81), somando os 27 que continuam até 2031.</p>`;
   const empty = !list.length && h.kind !== "governador";
-  $("#panel").innerHTML = `${head}
+  $("#el-panel").innerHTML = `${head}
     ${empty ? `<p class="lead">Apuração em andamento${st.pendentes.length ? " (" + st.pendentes.join(", ") + ")" : ""}: o TSE ainda não publicou os eleitos desta casa. A página se atualiza sozinha.</p>` : `
     <h3>Antes × depois, por partido</h3>${partyTable(h, comp)}
     <h3>Perfil dos eleitos</h3>${metricCards(D.metricas[key])}
@@ -94,11 +107,21 @@ function show(key) {
     for (const id of ["#q", "#fuf", "#fnew"]) $(id).addEventListener("input", go);
     go();
   }
-  for (const b of document.querySelectorAll("#tabs button")) b.setAttribute("aria-selected", String(b.dataset.k === key));
-  history.replaceState(null, "", "#" + key);
+  for (const b of ROOT.querySelectorAll("#el-tabs button")) b.setAttribute("aria-selected", String(b.dataset.k === key));
+  history.replaceState(null, "", "#eleitos/" + key);
 }
 
-async function boot() {
+export async function mount(root) {
+  ROOT = root;
+  root.innerHTML = TEMPLATE;
+  try {
+    await render();
+  } catch (e) {
+    $("#el-headline").textContent = "Não consegui carregar os eleitos: " + e.message;
+  }
+}
+
+async function render() {
   D = await (await fetch("data/eleitos.json", { cache: "no-store" })).json();
   const S = D.status;
   const n = (k) => D.eleitos[k].filter((x) => (k === "governador" ? x.status === "Eleito" : true)).length;
@@ -109,16 +132,16 @@ async function boot() {
     : P.eleito
       ? statCard("Presidente", esc(P.eleito), "", "eleito no 2º turno")
       : statCard("Presidente", "2º turno", "", `${P.candidatos.slice(0, 2).map((c) => esc(c.name.split(" ")[0])).join(" × ")} · 25/10`);
-  $("#headline").innerHTML =
+  $("#el-headline").innerHTML =
     presCard +
     statCard("Governadores", n("governador"), "/ 27", `${S.governador.segundoTurno.length} vão a 2º turno`) +
     statCard("Senadores", n("senador"), "/ 54", S.senador.ufsFinais === S.senador.ufsTotal ? "todas as vagas definidas" : `apuração em ${S.senador.pendentes.join(", ")}`) +
     statCard("Dep. federais", n("federal"), `/ ${S.federal.vagas}`, `Sul e Sudeste${proj("federal")}${S.federal.pendentes.length ? " · falta " + S.federal.pendentes.join(", ") : ""}`) +
     statCard("Dep. estaduais SP", n("estadual"), "/ 94", S.estadual.pendentes.length ? "apuração em andamento" : S.estadual.projetadas.length ? "projeção (TSE ainda não marcou)" : "concluída");
-  $("#tabs").innerHTML = HOUSES.map((h) => `<button type="button" role="tab" data-k="${h.key}">${h.label}</button>`).join("");
-  for (const b of document.querySelectorAll("#tabs button")) b.onclick = () => show(b.dataset.k);
-  const k = location.hash.slice(1);
+  $("#el-tabs").innerHTML = HOUSES.map((h) => `<button type="button" role="tab" data-k="${h.key}">${h.label}</button>`).join("");
+  for (const b of ROOT.querySelectorAll("#el-tabs button")) b.onclick = () => show(b.dataset.k);
+  const k = location.hash.slice(1).split("/")[1] || "";
   show(HOUSES.some((h) => h.key === k) ? k : "governadores");
-  $("#foot").innerHTML = `${esc(D.metodo)} Atualizado em ${new Date(D.updated).toLocaleString("pt-BR")}.`;
+  $("#el-foot").innerHTML = `${esc(D.metodo)} Atualizado em ${new Date(D.updated).toLocaleString("pt-BR")}.`;
 }
-boot().catch((e) => ($("#headline").textContent = "Não consegui carregar os eleitos: " + e.message));
+

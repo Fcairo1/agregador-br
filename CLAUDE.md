@@ -156,6 +156,13 @@ Estado-espaço 1-D por candidato, grade **diária** (dias desde a 1ª pesquisa):
   institutos desconsiderados aparecem riscadas. "ver todas".
 - Responsivo, tema claro/escuro por `prefers-color-scheme`.
 
+- **Seções dentro do `index.html`** (`#view-pesquisas|resultados|eleitos`, nav `.views`, roteador por hash no fim do `app.js`):
+  `resultados.js` e `eleitos.js` exportam `mount(root)` e são carregados sob demanda (`import()`); `#eleitos/<casa>` guarda a sub-aba.
+  `resultados.html` e `eleitos.html` só redirecionam. IDs internos têm prefixo (`rs-`, `el-`) pra não colidir com o gráfico.
+- **◎ Resultado no gráfico** (`drawResult` em `app.js`): `data/resultados.json` → ponto no dia da eleição (`day`) em `realRaw`, o
+  resultado oficial convertido pra base das pesquisas (`real / f`, com `f` = 100/Σ das linhas finais, congelado em
+  `data/estimativas.json`). O tooltip mostra os dois números (válidos e base das pesquisas) e a tendência.
+
 ## Matemática compartilhada
 
 `site/kalman.js` é a fonte de `trendKalman`; `scripts/lib/kalman.mjs` só reexporta. `site/agg.js`
