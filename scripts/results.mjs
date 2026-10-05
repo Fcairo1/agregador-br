@@ -5,6 +5,7 @@
 import fs from "node:fs";
 import { RACES } from "./races.mjs";
 import { getPageHTML, tablesWithHeadings, cellText } from "./lib/wiki.mjs";
+import { getCargo, CARGO } from "./lib/tse.mjs";
 
 const DATA = new URL("../data/", import.meta.url);
 const OUT = new URL("../site/data/", import.meta.url);
@@ -70,7 +71,30 @@ function parseResultTable(html) {
   return { cands, tot };
 }
 
+// fonte primária: apuração oficial do TSE (completa e em tempo real); Wikipédia só como reserva
+async function fetchTSE(src) {
+  const uf = src.key === "presidente" ? "br" : src.key.split("-")[0];
+  const cargo = src.kind === "presidente" ? CARGO.presidente : src.kind === "governador" ? CARGO.governador : CARGO.senador;
+  const r = await getCargo(uf, cargo);
+  if (!r || !r.cands.length) return null;
+  return {
+    cands: r.cands.filter((c) => c.valid !== false).map((c) => ({ name: c.name, urna: c.urna, party: c.party, votes: c.votes, pct: c.pct, elected: c.elected, status: c.status })),
+    tot: r.totals,
+    final: r.final,
+    sectionsPct: r.sectionsPct,
+    updated: r.updated,
+    vagas: r.vagas,
+    source: "TSE",
+  };
+}
+
 async function fetchResult(src) {
+  try {
+    const t = await fetchTSE(src);
+    if (t && t.cands.some((c) => c.votes > 0)) return t;
+  } catch (e) {
+    console.warn(`  ${src.key}: TSE falhou (${e.message}) — tentando Wikipédia`);
+  }
   const html = await getPageHTML(src.page, { offline });
   const { tables } = tablesWithHeadings(html);
   const hit = tables.filter(
@@ -101,9 +125,14 @@ function compare(key, res, agg, race) {
   const keys = agg.candidates.map((c) => c.key);
   const rows = [];
   for (const c of res.cands) {
-    const k = matchKey(c.name, keys, aliasOf);
+    const k = matchKey(`${c.name} ${c.urna || ""}`, keys, aliasOf);
     if (k) rows.push({ key: k, cand: agg.candidates.find((x) => x.key === k), res: c });
   }
+  // dois candidatos do resultado não podem cair na mesma chave (nome só com primeiro nome é ambíguo): fica o mais votado
+  const bestByKey = new Map();
+  for (const r of rows) if (!bestByKey.has(r.key) || r.res.votes > bestByKey.get(r.key).res.votes) bestByKey.set(r.key, r);
+  rows.length = 0;
+  rows.push(...bestByKey.values());
   if (rows.length < 2) return null;
   // base comum: só os candidatos exibidos (renormaliza estimativa e resultado entre eles)
   const estSum = rows.reduce((s, r) => s + r.cand.line.at(-1).y, 0);
@@ -117,7 +146,7 @@ function compare(key, res, agg, race) {
     return {
       key: r.key, name: r.cand.name, party: r.cand.party, color: r.cand.color,
       est: +est.toFixed(2), lo: +lo.toFixed(2), hi: +hi.toFixed(2),
-      real: +real.toFixed(2), votes: r.res.votes,
+      real: +real.toFixed(2), votes: r.res.votes, status: r.res.status || "", elected: !!r.res.elected,
       err: +(real - est).toFixed(2), inBand: real >= lo && real <= hi,
     };
   });
@@ -126,6 +155,8 @@ function compare(key, res, agg, race) {
   return {
     race: key, label: agg.label, lastPoll: agg.lastPoll, nPolls: agg.nPolls,
     candidates: out.sort((a, b) => b.real - a.real),
+    runoff: out.filter((c) => /2º turno/i.test(c.status)).map((c) => c.name),
+    electedNames: out.filter((c) => c.elected).map((c) => c.name),
     winnerHit: byEst.key === byReal.key, predictedWinner: byEst.name, actualWinner: byReal.name,
     mae: +(out.reduce((s, c) => s + Math.abs(c.err), 0) / out.length).toFixed(2),
     inBandPct: +((out.filter((c) => c.inBand).length / out.length) * 100).toFixed(0),
@@ -175,10 +206,10 @@ async function main() {
       console.log(`  ${src.key}: resultado ainda não publicado`);
       continue;
     }
-    const complete = validVotes > 0 && sumVotes / validVotes > 0.98;
+    const complete = res.source === "TSE" ? !!res.final : validVotes > 0 && sumVotes / validVotes > 0.98;
     fs.writeFileSync(
       new URL(`results.${src.key}.json`, DATA),
-      JSON.stringify({ race: src.key, kind: src.kind, source: src.page, complete, totals: res.tot, candidates: res.cands }, null, 2) + "\n"
+      JSON.stringify({ race: src.key, kind: src.kind, source: res.source === "TSE" ? "TSE (resultados.tse.jus.br)" : src.page, complete, updated: res.updated || null, sectionsPct: res.sectionsPct ?? null, totals: res.tot, candidates: res.cands }, null, 2) + "\n"
     );
     if (src.kind === "presidente") turnout.presidente = res.tot;
     let agg;
@@ -195,6 +226,8 @@ async function main() {
     }
     cmp.kind = src.kind;
     cmp.complete = complete;
+    cmp.source = res.source || "Wikipédia";
+    cmp.sectionsPct = res.sectionsPct ?? null;
     cmp.group = RACES[src.key].group;
     summary.races.push(cmp);
     summary.pollsters.push(...pollsterErrors(src.key, cmp, agg));

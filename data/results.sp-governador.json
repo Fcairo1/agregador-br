@@ -1,63 +1,80 @@
 {
   "race": "sp-governador",
   "kind": "governador",
-  "source": "Eleições estaduais em São Paulo em 2026",
+  "source": "TSE (resultados.tse.jus.br)",
   "complete": true,
+  "updated": "04/10/2026 22:56:59",
+  "sectionsPct": 100,
   "totals": {
-    "valid": {
-      "votes": 23128676,
-      "pct": 87.63
-    },
-    "nulos": {
-      "votes": 1915351,
-      "pct": 7.26
-    },
-    "brancos": {
-      "votes": 1348190,
-      "pct": 5.11
+    "inscritos": {
+      "votes": 34081699
     },
     "comparecimento": {
-      "votes": 26392217,
+      "votes": 26394256,
       "pct": 77.44
     },
     "abstencoes": {
-      "votes": 7686000,
+      "votes": 7687443,
       "pct": 22.56
     },
-    "inscritos": {
-      "votes": 34105333
+    "valid": {
+      "votes": 23130513,
+      "pct": 87.63
+    },
+    "brancos": {
+      "votes": 1348262,
+      "pct": 5.11
+    },
+    "nulos": {
+      "votes": 1915481,
+      "pct": 7.26
     }
   },
   "candidates": [
     {
-      "name": "Carlos Machado",
-      "party": "PCB",
-      "votes": 58861,
-      "pct": 0.25
+      "name": "TARCISIO GOMES DE FREITAS",
+      "urna": "TARCÍSIO",
+      "party": "REPUBLICANOS",
+      "votes": 14491874,
+      "pct": 62.65,
+      "elected": true,
+      "status": "Eleito"
     },
     {
-      "name": "Fernando Haddad",
+      "name": "FERNANDO HADDAD",
+      "urna": "FERNANDO HADDAD",
       "party": "PT",
-      "votes": 8423014,
-      "pct": 36.42
+      "votes": 8423656,
+      "pct": 36.42,
+      "elected": false,
+      "status": "Não eleito"
     },
     {
-      "name": "Tarcísio",
-      "party": "Republicanos",
-      "votes": 14490683,
-      "pct": 62.65
-    },
-    {
-      "name": "Vera Lúcia",
-      "party": "PSTU",
-      "votes": 75640,
-      "pct": 0.33
-    },
-    {
-      "name": "Vivian Mendes",
+      "name": "VIVIAN MENDES DA SILVA",
+      "urna": "VIVIAN MENDES",
       "party": "UP",
-      "votes": 80478,
-      "pct": 0.35
+      "votes": 80480,
+      "pct": 0.35,
+      "elected": false,
+      "status": "Não eleito"
+    },
+    {
+      "name": "VERA LÚCIA PEREIRA DA SILVA SALGADO",
+      "urna": "VERA LÚCIA",
+      "party": "PSTU",
+      "votes": 75641,
+      "pct": 0.33,
+      "elected": false,
+      "status": "Não eleito"
+    },
+    {
+      "name": "CARLOS ALBERTO MACHADO",
+      "urna": "CARLOS MACHADO",
+      "party": "PCB",
+      "votes": 58862,
+      "pct": 0.25,
+      "elected": false,
+      "status": "Não eleito"
     }
   ]
 }

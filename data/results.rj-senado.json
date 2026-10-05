@@ -1,0 +1,161 @@
+{
+  "race": "rj-senado",
+  "kind": "senado",
+  "source": "TSE (resultados.tse.jus.br)",
+  "complete": true,
+  "updated": "04/10/2026 22:19:52",
+  "sectionsPct": 100,
+  "totals": {
+    "inscritos": {
+      "votes": 12842517
+    },
+    "comparecimento": {
+      "votes": 9845867,
+      "pct": 76.67
+    },
+    "abstencoes": {
+      "votes": 2996650,
+      "pct": 23.33
+    },
+    "valid": {
+      "votes": 15929482,
+      "pct": 80.89
+    },
+    "brancos": {
+      "votes": 1700766,
+      "pct": 8.64
+    },
+    "nulos": {
+      "votes": 2061486,
+      "pct": 10.47
+    }
+  },
+  "candidates": [
+    {
+      "name": "HELIO KINAST CRUZ SECCO",
+      "urna": "HELIO SECCO",
+      "party": "MISSÃO",
+      "votes": 131065,
+      "pct": 0.82,
+      "elected": false,
+      "status": "Não eleito"
+    },
+    {
+      "name": "CARLOS FRANCISCO PORTINHO",
+      "urna": "CARLOS PORTINHO",
+      "party": "PL",
+      "votes": 4264932,
+      "pct": 26.77,
+      "elected": true,
+      "status": "Eleito"
+    },
+    {
+      "name": "CARLOS ROBERTO COELHO DE MATTOS JÚNIOR",
+      "urna": "CARLOS JORDY",
+      "party": "PL",
+      "votes": 3912405,
+      "pct": 24.56,
+      "elected": true,
+      "status": "Eleito"
+    },
+    {
+      "name": "MARCOS DIAS PEREIRA",
+      "urna": "MARCOS DIAS",
+      "party": "PODE",
+      "votes": 194605,
+      "pct": 1.22,
+      "elected": false,
+      "status": "Não eleito"
+    },
+    {
+      "name": "CLEMENTE SEBASTIÃO DE ALMEIDA CAMPOS",
+      "urna": "Ó CLEMENTE",
+      "party": "DEMOCRATA",
+      "votes": 9176,
+      "pct": 0.06,
+      "elected": false,
+      "status": "Não eleito"
+    },
+    {
+      "name": "MICHELLY XAVIER DE SOUZA",
+      "urna": "MICHELLY XAVIER",
+      "party": "UP",
+      "votes": 31492,
+      "pct": 0.2,
+      "elected": false,
+      "status": "Não eleito"
+    },
+    {
+      "name": "VINICIUS BENEVIDES DOS SANTOS CONCEICAO",
+      "urna": "VINICIUS BENEVIDES",
+      "party": "UP",
+      "votes": 8828,
+      "pct": 0.06,
+      "elected": false,
+      "status": "Não eleito"
+    },
+    {
+      "name": "PAULA ANDREIA ALMEIDA FALCAO",
+      "urna": "PAULA FALCÃO",
+      "party": "PSTU",
+      "votes": 27631,
+      "pct": 0.17,
+      "elected": false,
+      "status": "Não eleito"
+    },
+    {
+      "name": "MONICA TEREZA AZEREDO BENICIO",
+      "urna": "MONICA BENICIO",
+      "party": "PSOL",
+      "votes": 1538444,
+      "pct": 9.66,
+      "elected": false,
+      "status": "Não eleito"
+    },
+    {
+      "name": "LUCIANO OLIVEIRA MATTOS DE SOUZA",
+      "urna": "LUCIANO MATTOS",
+      "party": "PRTB",
+      "votes": 23911,
+      "pct": 0.15,
+      "elected": false,
+      "status": "Não eleito"
+    },
+    {
+      "name": "MARCELO BEZERRA CRIVELLA",
+      "urna": "MARCELO CRIVELLA",
+      "party": "REPUBLICANOS",
+      "votes": 539598,
+      "pct": 3.39,
+      "elected": false,
+      "status": "Não eleito"
+    },
+    {
+      "name": "WAGNER DOS SANTOS CARNEIRO",
+      "urna": "WAGUINHO",
+      "party": "REPUBLICANOS",
+      "votes": 116453,
+      "pct": 0.73,
+      "elected": false,
+      "status": "Não eleito"
+    },
+    {
+      "name": "PEDRO PAULO CARVALHO TEIXEIRA",
+      "urna": "PEDRO PAULO",
+      "party": "PSD",
+      "votes": 1904352,
+      "pct": 11.95,
+      "elected": false,
+      "status": "Não eleito"
+    },
+    {
+      "name": "BENEDITA SOUZA DA SILVA SAMPAIO",
+      "urna": "BENEDITA DA SILVA",
+      "party": "PT",
+      "votes": 3220765,
+      "pct": 20.22,
+      "elected": false,
+      "status": "Não eleito"
+    }
+  ]
+}

@@ -23,9 +23,10 @@ function raceCard(r) {
   return `<section class="bt-cycle">
     <h3 style="margin:0">${r.group === "Presidente" ? "Presidente" : KIND[r.kind] + " — " + r.group}</h3>
     <p class="lead" style="margin:6px 0 10px">
-      Vencedor: <b>${r.actualWinner}</b> · previsto: <b>${r.predictedWinner}</b> ${hit ? "✓" : '<span class="err-big">✗</span>'}
+      ${r.runoff && r.runoff.length ? `Vão ao 2º turno: <b>${r.runoff.join(" × ")}</b>` : r.electedNames && r.electedNames.length ? `Eleit${r.electedNames.length > 1 ? "os" : "o"}: <b>${r.electedNames.join(" e ")}</b>` : `Mais votado: <b>${r.actualWinner}</b>`}
+      · líder da tendência: <b>${r.predictedWinner}</b> ${hit ? "✓" : '<span class="err-big">✗</span>'}
       · erro médio <b>${fmt(r.mae, 2)} p.p.</b> · ${r.inBandPct}% dentro da faixa
-      ${r.complete ? "" : ' · <i>apuração parcial na fonte</i>'}
+      ${r.complete ? "" : ` · <i>apuração em andamento${r.sectionsPct != null ? " (" + fmt(r.sectionsPct, 0) + "% das seções)" : ""}</i>`}
     </p>
     <div class="table-scroll"><table class="bt-tbl">
       <thead><tr><th>Candidato</th><th>Estimativa (faixa 90%)</th><th>Resultado</th><th>Erro</th><th>Na faixa</th></tr></thead>
@@ -46,7 +47,7 @@ async function boot() {
   const big = [...all].sort((a, b) => Math.abs(b.err) - Math.abs(a.err))[0];
   const bigRace = races.find((r) => r.candidates.includes(big));
   $("#headline").innerHTML =
-    statCard("Vencedor certo", `${hits}/${races.length}`, "corridas", "o líder da tendência foi o eleito") +
+    statCard("Líder certo", `${hits}/${races.length}`, "corridas", "o líder da tendência foi o mais votado") +
     statCard("Erro médio", fmt(mae, 2), "p.p.", "por candidato, todas as corridas") +
     statCard("Dentro da faixa", fmt(inBand, 0), "%", "meta do modelo: ~90%") +
     statCard("Maior surpresa", sgn(big.err), "p.p.", `${big.name} (${bigRace.group})`);
@@ -77,6 +78,6 @@ async function boot() {
       row("Votos em branco", t.brancos?.pct, p22?.brancos?.pct) +
       "</tbody></table>";
   }
-  $("#foot").textContent = `Fonte dos resultados: Wikipédia (CC BY-SA), a partir da apuração do TSE. Atualizado em ${new Date(d.updated).toLocaleString("pt-BR")}.`;
+  $("#foot").textContent = `Fonte dos resultados: apuração oficial do TSE (resultados.tse.jus.br). Atualizado em ${new Date(d.updated).toLocaleString("pt-BR")}.`;
 }
 boot().catch((e) => ($("#headline").textContent = "Não consegui carregar os resultados: " + e.message));

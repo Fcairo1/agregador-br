@@ -1,105 +1,143 @@
 {
   "race": "presidente",
   "kind": "presidente",
-  "source": "Eleição presidencial no Brasil em 2026",
-  "complete": true,
+  "source": "TSE (resultados.tse.jus.br)",
+  "complete": false,
+  "updated": "05/10/2026 02:58:39",
+  "sectionsPct": 100,
   "totals": {
-    "valid": {
-      "votes": 119174992,
-      "pct": 95.23
-    },
-    "nulos": {
-      "votes": 3669695,
-      "pct": 2.93
-    },
-    "brancos": {
-      "votes": 2299168,
-      "pct": 1.84
+    "inscritos": {
+      "votes": 158745502
     },
     "comparecimento": {
-      "votes": 125151796,
+      "votes": 125275835,
       "pct": 78.92
     },
     "abstencoes": {
-      "votes": 33423539,
+      "votes": 33469244,
       "pct": 21.08
     },
-    "inscritos": {
-      "votes": 158745502
+    "valid": {
+      "votes": 119300788,
+      "pct": 95.23
+    },
+    "brancos": {
+      "votes": 2300798,
+      "pct": 1.84
+    },
+    "nulos": {
+      "votes": 3674249,
+      "pct": 2.93
     }
   },
   "candidates": [
     {
-      "name": "Flávio Bolsonaro",
+      "name": "FLAVIO NANTES BOLSONARO",
+      "urna": "FLAVIO BOLSONARO",
       "party": "PL",
-      "votes": 56073037,
-      "pct": 47.06
+      "votes": 56104503,
+      "pct": 47.03,
+      "elected": false,
+      "status": ""
     },
     {
-      "name": "Lula da Silva",
-      "party": "PT",
-      "votes": 53776393,
-      "pct": 45.13
-    },
-    {
-      "name": "Augusto Cury",
-      "party": "Avante",
-      "votes": 3446030,
-      "pct": 2.89
-    },
-    {
-      "name": "Renan Santos",
-      "party": "MISSÃO",
-      "votes": 2674758,
-      "pct": 2.24
-    },
-    {
-      "name": "Ronaldo Caiado",
+      "name": "RONALDO RAMOS CAIADO",
+      "urna": "RONALDO CAIADO",
       "party": "PSD",
-      "votes": 2603862,
-      "pct": 2.19
+      "votes": 2605148,
+      "pct": 2.18,
+      "elected": false,
+      "status": ""
     },
     {
-      "name": "Zema",
-      "party": "NOVO",
-      "votes": 326376,
-      "pct": 0.27
+      "name": "LUIZ INÁCIO LULA DA SILVA",
+      "urna": "LULA",
+      "party": "PT",
+      "votes": 53879538,
+      "pct": 45.16,
+      "elected": false,
+      "status": ""
     },
     {
-      "name": "Samara",
-      "party": "UP",
-      "votes": 122867,
-      "pct": 0.1
-    },
-    {
-      "name": "Hertz Dias",
-      "party": "PSTU",
-      "votes": 43085,
-      "pct": 0.04
-    },
-    {
-      "name": "Clariana Barão",
+      "name": "CLARIANA ZACARKIM BARAO",
+      "urna": "CLARIANA BARAO",
       "party": "DC",
-      "votes": 40022,
-      "pct": 0.03
+      "votes": 40043,
+      "pct": 0.03,
+      "elected": false,
+      "status": ""
     },
     {
-      "name": "Edmilson Costa",
+      "name": "EDMILSON SILVA COSTA",
+      "urna": "EDMILSON COSTA",
       "party": "PCB",
-      "votes": 22666,
-      "pct": 0.02
+      "votes": 22693,
+      "pct": 0.02,
+      "elected": false,
+      "status": ""
     },
     {
-      "name": "Veterinário Wilson Grassi",
-      "party": "Democrata",
-      "votes": 16866,
-      "pct": 0.01
+      "name": "HERTZ DA CONCEICAO DIAS",
+      "urna": "HERTZ DIAS",
+      "party": "PSTU",
+      "votes": 43103,
+      "pct": 0.04,
+      "elected": false,
+      "status": ""
     },
     {
-      "name": "Rui Costa Pimenta",
+      "name": "AUGUSTO JORGE CURY",
+      "urna": "ESCRITOR AUGUSTO CURY",
+      "party": "AVANTE",
+      "votes": 3448569,
+      "pct": 2.89,
+      "elected": false,
+      "status": ""
+    },
+    {
+      "name": "ROMEU ZEMA NETO",
+      "urna": "ZEMA",
+      "party": "NOVO",
+      "votes": 326488,
+      "pct": 0.27,
+      "elected": false,
+      "status": ""
+    },
+    {
+      "name": "SAMARA MARTINS DA SILVA FEITOSA",
+      "urna": "SAMARA",
+      "party": "UP",
+      "votes": 122911,
+      "pct": 0.1,
+      "elected": false,
+      "status": ""
+    },
+    {
+      "name": "WILSON GRASSI JUNIOR",
+      "urna": "VETERINÁRIO WILSON GRASSI",
+      "party": "DEMOCRATA",
+      "votes": 16881,
+      "pct": 0.01,
+      "elected": false,
+      "status": ""
+    },
+    {
+      "name": "RENAN ANTONIO FERREIRA DOS SANTOS",
+      "urna": "RENAN SANTOS",
+      "party": "MISSÃO",
+      "votes": 2675887,
+      "pct": 2.24,
+      "elected": false,
+      "status": ""
+    },
+    {
+      "name": "RUI COSTA PIMENTA",
+      "urna": "RUI COSTA PIMENTA",
       "party": "PCO",
-      "votes": 15018,
-      "pct": 0.01
+      "votes": 15024,
+      "pct": 0.01,
+      "elected": false,
+      "status": ""
     }
   ]
 }

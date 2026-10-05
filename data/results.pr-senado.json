@@ -1,0 +1,107 @@
+{
+  "race": "pr-senado",
+  "kind": "senado",
+  "source": "TSE (resultados.tse.jus.br)",
+  "complete": true,
+  "updated": "04/10/2026 22:43:11",
+  "sectionsPct": 100,
+  "totals": {
+    "inscritos": {
+      "votes": 8600624
+    },
+    "comparecimento": {
+      "votes": 6829615,
+      "pct": 79.41
+    },
+    "abstencoes": {
+      "votes": 1771009,
+      "pct": 20.59
+    },
+    "valid": {
+      "votes": 11552833,
+      "pct": 84.58
+    },
+    "brancos": {
+      "votes": 1058678,
+      "pct": 7.75
+    },
+    "nulos": {
+      "votes": 1047719,
+      "pct": 7.67
+    }
+  },
+  "candidates": [
+    {
+      "name": "CRISTINA REIS GRAEML",
+      "urna": "CRISTINA GRAEML",
+      "party": "PSD",
+      "votes": 737893,
+      "pct": 6.39,
+      "elected": false,
+      "status": "Não eleito"
+    },
+    {
+      "name": "ALEXANDRE MARANHAO KHURY",
+      "urna": "ALEXANDRE CURI",
+      "party": "REPUBLICANOS",
+      "votes": 1947135,
+      "pct": 16.85,
+      "elected": false,
+      "status": "Não eleito"
+    },
+    {
+      "name": "JOAQUIM SILVA MACIEL",
+      "urna": "JOAQUIM DO MLB",
+      "party": "UP",
+      "votes": 15457,
+      "pct": 0.13,
+      "elected": false,
+      "status": "Não eleito"
+    },
+    {
+      "name": "KAREN CORREIA GUERREIRO",
+      "urna": "KAREN GUERREIRO",
+      "party": "MISSÃO",
+      "votes": 93198,
+      "pct": 0.81,
+      "elected": false,
+      "status": "Não eleito"
+    },
+    {
+      "name": "GLEISI HELENA HOFFMANN",
+      "urna": "GLEISI",
+      "party": "PT",
+      "votes": 1542636,
+      "pct": 13.35,
+      "elected": false,
+      "status": "Não eleito"
+    },
+    {
+      "name": "FLORISVALDO FIER",
+      "urna": "DR ROSINHA",
+      "party": "PT",
+      "votes": 1154143,
+      "pct": 9.99,
+      "elected": false,
+      "status": "Não eleito"
+    },
+    {
+      "name": "DELTAN MARTINAZZO DALLAGNOL",
+      "urna": "DELTAN DALLAGNOL",
+      "party": "NOVO",
+      "votes": 2904594,
+      "pct": 25.14,
+      "elected": true,
+      "status": "Eleito"
+    },
+    {
+      "name": "FILIPE BARROS BAPTISTA DE TOLEDO RIBEIRO",
+      "urna": "FILIPE BARROS",
+      "party": "PL",
+      "votes": 3148583,
+      "pct": 27.25,
+      "elected": true,
+      "status": "Eleito"
+    }
+  ]
+}

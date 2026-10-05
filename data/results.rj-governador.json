@@ -1,0 +1,107 @@
+{
+  "race": "rj-governador",
+  "kind": "governador",
+  "source": "TSE (resultados.tse.jus.br)",
+  "complete": true,
+  "updated": "04/10/2026 22:19:52",
+  "sectionsPct": 100,
+  "totals": {
+    "inscritos": {
+      "votes": 12842517
+    },
+    "comparecimento": {
+      "votes": 9845867,
+      "pct": 76.67
+    },
+    "abstencoes": {
+      "votes": 2996650,
+      "pct": 23.33
+    },
+    "valid": {
+      "votes": 8669038,
+      "pct": 88.05
+    },
+    "brancos": {
+      "votes": 501537,
+      "pct": 5.09
+    },
+    "nulos": {
+      "votes": 675292,
+      "pct": 6.86
+    }
+  },
+  "candidates": [
+    {
+      "name": "DOUGLAS RUAS DOS SANTOS",
+      "urna": "DOUGLAS RUAS",
+      "party": "PL",
+      "votes": 4271199,
+      "pct": 49.27,
+      "elected": true,
+      "status": "2º turno"
+    },
+    {
+      "name": "ANDRÉ BOURGUIGNON MARINHO",
+      "urna": "ANDRÉ MARINHO",
+      "party": "NOVO",
+      "votes": 45359,
+      "pct": 0.52,
+      "elected": false,
+      "status": "Não eleito"
+    },
+    {
+      "name": "LUAN MONTEIRO PASCHOAL PIRES",
+      "urna": "LUAN MONTEIRO",
+      "party": "PCO",
+      "votes": 2777,
+      "pct": 0.03,
+      "elected": false,
+      "status": "Não eleito"
+    },
+    {
+      "name": "EDUARDO DA COSTA PAES",
+      "urna": "EDUARDO PAES",
+      "party": "PSD",
+      "votes": 3706984,
+      "pct": 42.76,
+      "elected": true,
+      "status": "2º turno"
+    },
+    {
+      "name": "JULIETE PANTOJA ALVES",
+      "urna": "JULIETE",
+      "party": "UP",
+      "votes": 33430,
+      "pct": 0.39,
+      "elected": false,
+      "status": "Não eleito"
+    },
+    {
+      "name": "WILLIAM CARLOS BRUM BISPO",
+      "urna": "WILLIAM SIRI",
+      "party": "PSOL",
+      "votes": 235347,
+      "pct": 2.71,
+      "elected": false,
+      "status": "Não eleito"
+    },
+    {
+      "name": "JOÃO JACQUES SOARES BUSNELLO",
+      "urna": "CORONEL BUSNELLO",
+      "party": "MISSÃO",
+      "votes": 84889,
+      "pct": 0.98,
+      "elected": false,
+      "status": "Não eleito"
+    },
+    {
+      "name": "CYRO GARCIA",
+      "urna": "CYRO GARCIA",
+      "party": "PSTU",
+      "votes": 14642,
+      "pct": 0.17,
+      "elected": false,
+      "status": "Não eleito"
+    }
+  ]
+}

@@ -1,0 +1,98 @@
+{
+  "race": "pr-governador",
+  "kind": "governador",
+  "source": "TSE (resultados.tse.jus.br)",
+  "complete": true,
+  "updated": "04/10/2026 22:43:11",
+  "sectionsPct": 100,
+  "totals": {
+    "inscritos": {
+      "votes": 8600624
+    },
+    "comparecimento": {
+      "votes": 6829615,
+      "pct": 79.41
+    },
+    "abstencoes": {
+      "votes": 1771009,
+      "pct": 20.59
+    },
+    "valid": {
+      "votes": 6243799,
+      "pct": 91.42
+    },
+    "brancos": {
+      "votes": 278322,
+      "pct": 4.08
+    },
+    "nulos": {
+      "votes": 307494,
+      "pct": 4.5
+    }
+  },
+  "candidates": [
+    {
+      "name": "SANDRO ALEX CRUZ DE OLIVEIRA",
+      "urna": "SANDRO ALEX",
+      "party": "PSD",
+      "votes": 1583764,
+      "pct": 25.37,
+      "elected": false,
+      "status": "Não eleito"
+    },
+    {
+      "name": "MAURICIO THADEU DE MELLO E SILVA",
+      "urna": "REQUIÃO FILHO",
+      "party": "PDT",
+      "votes": 1465601,
+      "pct": 23.47,
+      "elected": false,
+      "status": "Não eleito"
+    },
+    {
+      "name": "LUIZ FELIPE MARTINS FRANCA",
+      "urna": "LUIZ FRANÇA",
+      "party": "MISSÃO",
+      "votes": 44581,
+      "pct": 0.71,
+      "elected": false,
+      "status": "Não eleito"
+    },
+    {
+      "name": "SERGIO FERNANDO MORO",
+      "urna": "SERGIO MORO",
+      "party": "PL",
+      "votes": 3127911,
+      "pct": 50.1,
+      "elected": true,
+      "status": "Eleito"
+    },
+    {
+      "name": "ALEXANDRE SALOMAO",
+      "urna": "DOUTOR ALEXANDRE SALOMÃO",
+      "party": "MOBILIZA",
+      "votes": 4144,
+      "pct": 0.07,
+      "elected": false,
+      "status": "Não eleito"
+    },
+    {
+      "name": "TAYNA MIESSA TSUSHIDA",
+      "urna": "TAYNÁ MIESSA",
+      "party": "UP",
+      "votes": 14193,
+      "pct": 0.23,
+      "elected": false,
+      "status": "Não eleito"
+    },
+    {
+      "name": "SAMUEL DE MATTOS FIGUEIREDO",
+      "urna": "SAMUEL DE MATTOS",
+      "party": "PSTU",
+      "votes": 2080,
+      "pct": 0.03,
+      "elected": false,
+      "status": "Não eleito"
+    }
+  ]
+}

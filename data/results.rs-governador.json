@@ -1,0 +1,89 @@
+{
+  "race": "rs-governador",
+  "kind": "governador",
+  "source": "TSE (resultados.tse.jus.br)",
+  "complete": true,
+  "updated": "04/10/2026 21:11:34",
+  "sectionsPct": 100,
+  "totals": {
+    "inscritos": {
+      "votes": 8516465
+    },
+    "comparecimento": {
+      "votes": 6697424,
+      "pct": 78.64
+    },
+    "abstencoes": {
+      "votes": 1819041,
+      "pct": 21.36
+    },
+    "valid": {
+      "votes": 6057443,
+      "pct": 90.44
+    },
+    "brancos": {
+      "votes": 324123,
+      "pct": 4.84
+    },
+    "nulos": {
+      "votes": 315858,
+      "pct": 4.72
+    }
+  },
+  "candidates": [
+    {
+      "name": "GABRIEL VIEIRA DE SOUZA",
+      "urna": "GABRIEL SOUZA",
+      "party": "MDB",
+      "votes": 510698,
+      "pct": 8.43,
+      "elected": false,
+      "status": "Não eleito"
+    },
+    {
+      "name": "JULIANA BRIZOLA",
+      "urna": "JULIANA BRIZOLA",
+      "party": "PDT",
+      "votes": 1917374,
+      "pct": 31.65,
+      "elected": false,
+      "status": "Não eleito"
+    },
+    {
+      "name": "REJANE SILVA DE OLIVEIRA",
+      "urna": "REJANE DE OLIVEIRA",
+      "party": "PSTU",
+      "votes": 3492,
+      "pct": 0.06,
+      "elected": false,
+      "status": "Não eleito"
+    },
+    {
+      "name": "PRISCILA VOIGT SEVERIANO",
+      "urna": "PRISCILA VOIGT",
+      "party": "UP",
+      "votes": 5716,
+      "pct": 0.09,
+      "elected": false,
+      "status": "Não eleito"
+    },
+    {
+      "name": "LUCIANO LORENZINI ZUCCO",
+      "urna": "ZUCCO",
+      "party": "PL",
+      "votes": 3516048,
+      "pct": 58.05,
+      "elected": true,
+      "status": "Eleito"
+    },
+    {
+      "name": "MARCELO MARANATA SOARES REINALDO",
+      "urna": "MARCELO MARANATA",
+      "party": "PSDB",
+      "votes": 101978,
+      "pct": 1.68,
+      "elected": false,
+      "status": "Não eleito"
+    }
+  ]
+}

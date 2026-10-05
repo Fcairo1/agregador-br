@@ -1,0 +1,143 @@
+{
+  "race": "rs-senado",
+  "kind": "senado",
+  "source": "TSE (resultados.tse.jus.br)",
+  "complete": true,
+  "updated": "04/10/2026 21:11:34",
+  "sectionsPct": 100,
+  "totals": {
+    "inscritos": {
+      "votes": 8516465
+    },
+    "comparecimento": {
+      "votes": 6697424,
+      "pct": 78.64
+    },
+    "abstencoes": {
+      "votes": 1819041,
+      "pct": 21.36
+    },
+    "valid": {
+      "votes": 11468092,
+      "pct": 85.62
+    },
+    "brancos": {
+      "votes": 1089553,
+      "pct": 8.13
+    },
+    "nulos": {
+      "votes": 837203,
+      "pct": 6.25
+    }
+  },
+  "candidates": [
+    {
+      "name": "PAULO ROBERTO SEVERO PIMENTA",
+      "urna": "PIMENTA",
+      "party": "PT",
+      "votes": 1870301,
+      "pct": 16.31,
+      "elected": false,
+      "status": "Não eleito"
+    },
+    {
+      "name": "MANUELA PINTO VIEIRA D'ÁVILA",
+      "urna": "MANUELA D'ÁVILA",
+      "party": "PSOL",
+      "votes": 1957697,
+      "pct": 17.07,
+      "elected": false,
+      "status": "Não eleito"
+    },
+    {
+      "name": "FREDERICO CANTORI ANTUNES",
+      "urna": "FREDERICO ANTUNES",
+      "party": "PSD",
+      "votes": 223643,
+      "pct": 1.95,
+      "elected": false,
+      "status": "Não eleito"
+    },
+    {
+      "name": "GERMANO ANTONIO RIGOTTO",
+      "urna": "RIGOTTO",
+      "party": "MDB",
+      "votes": 420722,
+      "pct": 3.67,
+      "elected": false,
+      "status": "Não eleito"
+    },
+    {
+      "name": "UBIRATAN ANTUNES SANDERSON",
+      "urna": "SANDERSON",
+      "party": "PL",
+      "votes": 3453316,
+      "pct": 30.11,
+      "elected": true,
+      "status": "Eleito"
+    },
+    {
+      "name": "MARCEL VAN HATTEM",
+      "urna": "MARCEL VAN HATTEM",
+      "party": "NOVO",
+      "votes": 3449053,
+      "pct": 30.08,
+      "elected": true,
+      "status": "Eleito"
+    },
+    {
+      "name": "DANIELA MAIDANA DA SILVA",
+      "urna": "DANIELA MULHERES SOCIALISTAS",
+      "party": "PSTU",
+      "votes": 26844,
+      "pct": 0.23,
+      "elected": false,
+      "status": "Não eleito"
+    },
+    {
+      "name": "REGIS BATISTA ETHUR",
+      "urna": "REGIS ETHUR",
+      "party": "PSTU",
+      "votes": 3991,
+      "pct": 0.03,
+      "elected": false,
+      "status": "Não eleito"
+    },
+    {
+      "name": "PAULO RENATO JAGUARÃO SILVA DA ROSA",
+      "urna": "RENATO JAGUARÃO",
+      "party": "CIDADANIA",
+      "votes": 16428,
+      "pct": 0.14,
+      "elected": false,
+      "status": "Não eleito"
+    },
+    {
+      "name": "MILTON BATISTA CARDOSO",
+      "urna": "MILTON CARDOSO",
+      "party": "PSDB",
+      "votes": 25937,
+      "pct": 0.23,
+      "elected": false,
+      "status": "Não eleito"
+    },
+    {
+      "name": "TANIA MARA SANTORO PERES",
+      "urna": "TANIA PERES",
+      "party": "UP",
+      "votes": 12192,
+      "pct": 0.11,
+      "elected": false,
+      "status": "Não eleito"
+    },
+    {
+      "name": "LUCIANO SCHAFER",
+      "urna": "LUCIANO DO MLB",
+      "party": "UP",
+      "votes": 5658,
+      "pct": 0.05,
+      "elected": false,
+      "status": "Não eleito"
+    }
+  ]
+}

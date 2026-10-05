@@ -1,0 +1,125 @@
+{
+  "race": "mg-governador",
+  "kind": "governador",
+  "source": "TSE (resultados.tse.jus.br)",
+  "complete": true,
+  "updated": "05/10/2026 00:50:04",
+  "sectionsPct": 100,
+  "totals": {
+    "inscritos": {
+      "votes": 16361188
+    },
+    "comparecimento": {
+      "votes": 12627167,
+      "pct": 77.18
+    },
+    "abstencoes": {
+      "votes": 3734021,
+      "pct": 22.82
+    },
+    "valid": {
+      "votes": 11411835,
+      "pct": 90.38
+    },
+    "brancos": {
+      "votes": 658416,
+      "pct": 5.21
+    },
+    "nulos": {
+      "votes": 556916,
+      "pct": 4.41
+    }
+  },
+  "candidates": [
+    {
+      "name": "RAFAEL RIBEIRO DE ÁVILA",
+      "urna": "RAFAEL DUDA",
+      "party": "PSTU",
+      "votes": 4764,
+      "pct": 0.04,
+      "elected": false,
+      "status": "Não eleito"
+    },
+    {
+      "name": "CLEITON GONTIJO DE AZEVEDO",
+      "urna": "CLEITINHO AZEVEDO",
+      "party": "REPUBLICANOS",
+      "votes": 6321590,
+      "pct": 55.4,
+      "elected": true,
+      "status": "Eleito"
+    },
+    {
+      "name": "PATRUS ANANIAS DE SOUSA",
+      "urna": "PATRUS ANANIAS",
+      "party": "PT",
+      "votes": 3006088,
+      "pct": 26.34,
+      "elected": false,
+      "status": "Não eleito"
+    },
+    {
+      "name": "TULIO CESAR DIAS LOPES",
+      "urna": "PROFESSOR TÚLIO LOPES",
+      "party": "PCB",
+      "votes": 10957,
+      "pct": 0.1,
+      "elected": false,
+      "status": "Não eleito"
+    },
+    {
+      "name": "GABRIEL SOUSA MARQUES DE AZEVEDO",
+      "urna": "GABRIEL",
+      "party": "MDB",
+      "votes": 237051,
+      "pct": 2.08,
+      "elected": false,
+      "status": "Não eleito"
+    },
+    {
+      "name": "MATEUS SIMÕES DE ALMEIDA",
+      "urna": "MATEUS SIMÕES",
+      "party": "PSD",
+      "votes": 530292,
+      "pct": 4.65,
+      "elected": false,
+      "status": "Não eleito"
+    },
+    {
+      "name": "ALEXANDRE KALIL",
+      "urna": "ALEXANDRE KALIL",
+      "party": "PDT",
+      "votes": 403466,
+      "pct": 3.54,
+      "elected": false,
+      "status": "Não eleito"
+    },
+    {
+      "name": "BENONI BENJAMIN CARDOSO MENDES",
+      "urna": "BEN MENDES",
+      "party": "MISSÃO",
+      "votes": 80308,
+      "pct": 0.7,
+      "elected": false,
+      "status": "Não eleito"
+    },
+    {
+      "name": "FLAVIO ROSCOE NOGUEIRA",
+      "urna": "FLÁVIO ROSCOE",
+      "party": "PL",
+      "votes": 795193,
+      "pct": 6.97,
+      "elected": false,
+      "status": "Não eleito"
+    },
+    {
+      "name": "INDIRA IVANISE XAVIER",
+      "urna": "INDIRA XAVIER",
+      "party": "UP",
+      "votes": 20662,
+      "pct": 0.18,
+      "elected": false,
+      "status": "Não eleito"
+    }
+  ]
+}

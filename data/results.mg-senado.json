@@ -1,0 +1,170 @@
+{
+  "race": "mg-senado",
+  "kind": "senado",
+  "source": "TSE (resultados.tse.jus.br)",
+  "complete": true,
+  "updated": "05/10/2026 00:50:04",
+  "sectionsPct": 100,
+  "totals": {
+    "inscritos": {
+      "votes": 16361188
+    },
+    "comparecimento": {
+      "votes": 12627167,
+      "pct": 77.18
+    },
+    "abstencoes": {
+      "votes": 3734021,
+      "pct": 22.82
+    },
+    "valid": {
+      "votes": 20525486,
+      "pct": 81.28
+    },
+    "brancos": {
+      "votes": 2200110,
+      "pct": 8.71
+    },
+    "nulos": {
+      "votes": 2528738,
+      "pct": 10.01
+    }
+  },
+  "candidates": [
+    {
+      "name": "RAMON MOREIRA",
+      "urna": "JUÍZ RAMON MOREIRA",
+      "party": "DC",
+      "votes": 14463,
+      "pct": 0.07,
+      "elected": false,
+      "status": "Não eleito"
+    },
+    {
+      "name": "CARLOS MAGNO DE MOURA SOARES",
+      "urna": "CARLIN MOURA",
+      "party": "AVANTE",
+      "votes": 35892,
+      "pct": 0.17,
+      "elected": false,
+      "status": "Não eleito"
+    },
+    {
+      "name": "VICTORIA DE FATIMA DE MELLO",
+      "urna": "VICTÓRIA MELLO VIC",
+      "party": "PSTU",
+      "votes": 17444,
+      "pct": 0.08,
+      "elected": false,
+      "status": "Não eleito"
+    },
+    {
+      "name": "JORDANO CARVALHO DOS SANTOS",
+      "urna": "JORDANO METALÚRGICO",
+      "party": "PSTU",
+      "votes": 7282,
+      "pct": 0.04,
+      "elected": false,
+      "status": "Não eleito"
+    },
+    {
+      "name": "AÉCIO NEVES DA CUNHA",
+      "urna": "AÉCIO NEVES",
+      "party": "PSDB",
+      "votes": 836595,
+      "pct": 4.08,
+      "elected": false,
+      "status": "Não eleito"
+    },
+    {
+      "name": "MARCO ANTÔNIO MOREIRA DA COSTA",
+      "urna": "MARCO ANTÔNIO SUPERMAN",
+      "party": "NOVO",
+      "votes": 1895603,
+      "pct": 9.24,
+      "elected": false,
+      "status": "Não eleito"
+    },
+    {
+      "name": "ANA LUIZA CARDOSO DE MACEDO",
+      "urna": "ANA LUIZA DO MLB",
+      "party": "UP",
+      "votes": 27620,
+      "pct": 0.13,
+      "elected": false,
+      "status": "Não eleito"
+    },
+    {
+      "name": "FIDELIS OLIVEIRA ALCANTARA",
+      "urna": "FIDÉLIS ALCÂNTARA",
+      "party": "UP",
+      "votes": 7546,
+      "pct": 0.04,
+      "elected": false,
+      "status": "Não eleito"
+    },
+    {
+      "name": "MARCELO GUILHERME DE ARO FERREIRA",
+      "urna": "MARCELO ARO",
+      "party": "PP",
+      "votes": 2387973,
+      "pct": 11.63,
+      "elected": false,
+      "status": "Não eleito"
+    },
+    {
+      "name": "CARLOS ALBERTO DIAS VIANA",
+      "urna": "CARLOS VIANA",
+      "party": "PSD",
+      "votes": 3583487,
+      "pct": 17.46,
+      "elected": false,
+      "status": "Não eleito"
+    },
+    {
+      "name": "DOMINGOS SAVIO CAMPOS RESENDE",
+      "urna": "DOMINGOS SÁVIO",
+      "party": "PL",
+      "votes": 4968829,
+      "pct": 24.21,
+      "elected": true,
+      "status": "Eleito"
+    },
+    {
+      "name": "AUREA CAROLINA DE FREITAS E SILVA",
+      "urna": "ÁUREA CAROLINA",
+      "party": "PSOL",
+      "votes": 2664763,
+      "pct": 12.98,
+      "elected": false,
+      "status": "Não eleito"
+    },
+    {
+      "name": "MARILIA APARECIDA CAMPOS",
+      "urna": "MARÍLIA CAMPOS",
+      "party": "PT",
+      "votes": 3990864,
+      "pct": 19.44,
+      "elected": true,
+      "status": "Eleito"
+    },
+    {
+      "name": "MANOEL TEODORO PEREIRA DE CARVALHO FILHO",
+      "urna": "MANOEL CARVALHO",
+      "party": "MDB",
+      "votes": 43227,
+      "pct": 0.21,
+      "elected": false,
+      "status": "Não eleito"
+    },
+    {
+      "name": "ARCANJO CARLOS PIMENTA",
+      "urna": "ARCANJO PIMENTA",
+      "party": "MDB",
+      "votes": 40714,
+      "pct": 0.2,
+      "elected": false,
+      "status": "Não eleito"
+    }
+  ]
+}

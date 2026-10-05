@@ -1,0 +1,143 @@
+{
+  "race": "sp-senado",
+  "kind": "senado",
+  "source": "TSE (resultados.tse.jus.br)",
+  "complete": true,
+  "updated": "04/10/2026 22:56:59",
+  "sectionsPct": 100,
+  "totals": {
+    "inscritos": {
+      "votes": 34081699
+    },
+    "comparecimento": {
+      "votes": 26394256,
+      "pct": 77.44
+    },
+    "abstencoes": {
+      "votes": 7687443,
+      "pct": 22.56
+    },
+    "valid": {
+      "votes": 43386635,
+      "pct": 82.19
+    },
+    "brancos": {
+      "votes": 4291919,
+      "pct": 8.13
+    },
+    "nulos": {
+      "votes": 5109958,
+      "pct": 9.68
+    }
+  },
+  "candidates": [
+    {
+      "name": "ANDRE LUIS DO PRADO",
+      "urna": "ANDRÉ DO PRADO",
+      "party": "PL",
+      "votes": 12703089,
+      "pct": 29.28,
+      "elected": true,
+      "status": "Eleito"
+    },
+    {
+      "name": "GUILHERME MURARO DERRITE",
+      "urna": "GUILHERME DERRITE",
+      "party": "PP",
+      "votes": 13273880,
+      "pct": 30.59,
+      "elected": true,
+      "status": "Eleito"
+    },
+    {
+      "name": "PETTER MAAHS DA SILVA",
+      "urna": "PETTER MAAHS",
+      "party": "PCB",
+      "votes": 28311,
+      "pct": 0.07,
+      "elected": false,
+      "status": "Não eleito"
+    },
+    {
+      "name": "RICARDO AUGUSTO MANGUE SCHIAVETTO",
+      "urna": "GUTO SCHIAVETTO",
+      "party": "MISSÃO",
+      "votes": 392916,
+      "pct": 0.91,
+      "elected": false,
+      "status": "Não eleito"
+    },
+    {
+      "name": "SIMONE NASSAR TEBET ROCHA",
+      "urna": "SIMONE TEBET",
+      "party": "PSB",
+      "votes": 8342968,
+      "pct": 19.23,
+      "elected": false,
+      "status": "Não eleito"
+    },
+    {
+      "name": "MARIA OSMARINA MARINA DA SILVA VAZ DE LIMA",
+      "urna": "MARINA SILVA",
+      "party": "REDE",
+      "votes": 7862400,
+      "pct": 18.12,
+      "elected": false,
+      "status": "Não eleito"
+    },
+    {
+      "name": "SONIA FRANCINE GASPAR MARMO",
+      "urna": "SONINHA FRANCINE",
+      "party": "CIDADANIA",
+      "votes": 165707,
+      "pct": 0.38,
+      "elected": false,
+      "status": "Não eleito"
+    },
+    {
+      "name": "GERALDO ARISTIDES RUFINO",
+      "urna": "GERALDO RUFINO",
+      "party": "PODE",
+      "votes": 386468,
+      "pct": 0.89,
+      "elected": false,
+      "status": "Não eleito"
+    },
+    {
+      "name": "ELIANA LUCIA FERREIRA",
+      "urna": "DRA ELIANA FERREIRA",
+      "party": "PSTU",
+      "votes": 65200,
+      "pct": 0.15,
+      "elected": false,
+      "status": "Não eleito"
+    },
+    {
+      "name": "WELLER PEREIRA GONÇALVES",
+      "urna": "WELLER GONÇALVES",
+      "party": "PSTU",
+      "votes": 20503,
+      "pct": 0.05,
+      "elected": false,
+      "status": "Não eleito"
+    },
+    {
+      "name": "MAÍRA DIAS DE SOUZA",
+      "urna": "MAÍRA DE SOUZA",
+      "party": "UP",
+      "votes": 91283,
+      "pct": 0.21,
+      "elected": false,
+      "status": "Não eleito"
+    },
+    {
+      "name": "MARCIO ALVES DOS SANTOS",
+      "urna": "MARCIO ALVES",
+      "party": "UP",
+      "votes": 45178,
+      "pct": 0.1,
+      "elected": false,
+      "status": "Não eleito"
+    }
+  ]
+}
