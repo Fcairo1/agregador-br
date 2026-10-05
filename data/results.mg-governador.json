@@ -68,20 +68,20 @@
       "status": "Não eleito"
     },
     {
-      "name": "GABRIEL SOUSA MARQUES DE AZEVEDO",
-      "urna": "GABRIEL",
-      "party": "MDB",
-      "votes": 237051,
-      "pct": 2.08,
-      "elected": false,
-      "status": "Não eleito"
-    },
-    {
       "name": "MATEUS SIMÕES DE ALMEIDA",
       "urna": "MATEUS SIMÕES",
       "party": "PSD",
       "votes": 530292,
       "pct": 4.65,
+      "elected": false,
+      "status": "Não eleito"
+    },
+    {
+      "name": "GABRIEL SOUSA MARQUES DE AZEVEDO",
+      "urna": "GABRIEL",
+      "party": "MDB",
+      "votes": 237051,
+      "pct": 2.08,
       "elected": false,
       "status": "Não eleito"
     },
@@ -95,20 +95,20 @@
       "status": "Não eleito"
     },
     {
-      "name": "BENONI BENJAMIN CARDOSO MENDES",
-      "urna": "BEN MENDES",
-      "party": "MISSÃO",
-      "votes": 80308,
-      "pct": 0.7,
-      "elected": false,
-      "status": "Não eleito"
-    },
-    {
       "name": "FLAVIO ROSCOE NOGUEIRA",
       "urna": "FLÁVIO ROSCOE",
       "party": "PL",
       "votes": 795193,
       "pct": 6.97,
+      "elected": false,
+      "status": "Não eleito"
+    },
+    {
+      "name": "BENONI BENJAMIN CARDOSO MENDES",
+      "urna": "BEN MENDES",
+      "party": "MISSÃO",
+      "votes": 80308,
+      "pct": 0.7,
       "elected": false,
       "status": "Não eleito"
     },

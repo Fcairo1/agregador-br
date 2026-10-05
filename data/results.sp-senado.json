@@ -86,24 +86,6 @@
       "status": "Não eleito"
     },
     {
-      "name": "SONIA FRANCINE GASPAR MARMO",
-      "urna": "SONINHA FRANCINE",
-      "party": "CIDADANIA",
-      "votes": 165707,
-      "pct": 0.38,
-      "elected": false,
-      "status": "Não eleito"
-    },
-    {
-      "name": "GERALDO ARISTIDES RUFINO",
-      "urna": "GERALDO RUFINO",
-      "party": "PODE",
-      "votes": 386468,
-      "pct": 0.89,
-      "elected": false,
-      "status": "Não eleito"
-    },
-    {
       "name": "ELIANA LUCIA FERREIRA",
       "urna": "DRA ELIANA FERREIRA",
       "party": "PSTU",
@@ -118,6 +100,24 @@
       "party": "PSTU",
       "votes": 20503,
       "pct": 0.05,
+      "elected": false,
+      "status": "Não eleito"
+    },
+    {
+      "name": "GERALDO ARISTIDES RUFINO",
+      "urna": "GERALDO RUFINO",
+      "party": "PODE",
+      "votes": 386468,
+      "pct": 0.89,
+      "elected": false,
+      "status": "Não eleito"
+    },
+    {
+      "name": "SONIA FRANCINE GASPAR MARMO",
+      "urna": "SONINHA FRANCINE",
+      "party": "CIDADANIA",
+      "votes": 165707,
+      "pct": 0.38,
       "elected": false,
       "status": "Não eleito"
     },

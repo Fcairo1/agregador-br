@@ -40,29 +40,24 @@
    "vagas": 54
   },
   "federal": {
-   "ufsFinais": 5,
+   "ufsFinais": 7,
    "ufsTotal": 7,
    "pendentes": [],
-   "projetadas": [
-    "MG",
-    "SP"
-   ],
+   "projetadas": [],
    "segundoTurno": [],
    "vagas": 256
   },
   "estadual": {
-   "ufsFinais": 0,
+   "ufsFinais": 1,
    "ufsTotal": 1,
    "pendentes": [],
-   "projetadas": [
-    "SP"
-   ],
+   "projetadas": [],
    "segundoTurno": [],
    "vagas": 94
   },
   "presidente": {
    "turno": 1,
-   "final": false,
+   "final": true,
    "apuradas": 100,
    "eleito": null,
    "candidatos": [
@@ -71,28 +66,28 @@
      "party": "PL",
      "pct": 47.03,
      "votes": 56104503,
-     "status": "2º turno (projeção)"
+     "status": "2º turno"
     },
     {
      "name": "LULA",
      "party": "PT",
      "pct": 45.16,
      "votes": 53879538,
-     "status": "2º turno (projeção)"
+     "status": "2º turno"
     },
     {
      "name": "ESCRITOR AUGUSTO CURY",
      "party": "AVANTE",
      "pct": 2.89,
      "votes": 3448569,
-     "status": ""
+     "status": "Não eleito"
     },
     {
      "name": "RENAN SANTOS",
      "party": "MISSÃO",
      "pct": 2.24,
      "votes": 2675887,
-     "status": ""
+     "status": "Não eleito"
     }
    ]
   }
@@ -1287,11 +1282,11 @@
     "number": "2222",
     "votes": 3119318,
     "pct": 27.19,
-    "status": "Eleito (projeção)",
+    "status": "Eleito por QP",
     "incumbent": true,
     "prevParty": "PL",
     "prevCurrent": true,
-    "projecao": true
+    "projecao": false
    },
    {
     "uf": "MG",
@@ -1301,11 +1296,11 @@
     "number": "1331",
     "votes": 524219,
     "pct": 4.57,
-    "status": "Eleito (projeção)",
+    "status": "Eleito por QP",
     "incumbent": false,
     "prevParty": null,
     "prevCurrent": null,
-    "projecao": true
+    "projecao": false
    },
    {
     "uf": "MG",
@@ -1315,11 +1310,11 @@
     "number": "5050",
     "votes": 229535,
     "pct": 2,
-    "status": "Eleito (projeção)",
+    "status": "Eleito por QP",
     "incumbent": true,
     "prevParty": "PDT",
     "prevCurrent": true,
-    "projecao": true
+    "projecao": false
    },
    {
     "uf": "MG",
@@ -1329,11 +1324,11 @@
     "number": "1312",
     "votes": 215192,
     "pct": 1.88,
-    "status": "Eleito (projeção)",
+    "status": "Eleito por QP",
     "incumbent": true,
     "prevParty": "PT",
     "prevCurrent": true,
-    "projecao": true
+    "projecao": false
    },
    {
     "uf": "MG",
@@ -1343,11 +1338,11 @@
     "number": "1313",
     "votes": 185912,
     "pct": 1.62,
-    "status": "Eleito (projeção)",
+    "status": "Eleito por QP",
     "incumbent": true,
     "prevParty": "PT",
     "prevCurrent": true,
-    "projecao": true
+    "projecao": false
    },
    {
     "uf": "MG",
@@ -1357,11 +1352,11 @@
     "number": "1122",
     "votes": 151981,
     "pct": 1.33,
-    "status": "Eleito (projeção)",
+    "status": "Eleito por QP",
     "incumbent": true,
     "prevParty": "PP",
     "prevCurrent": true,
-    "projecao": true
+    "projecao": false
    },
    {
     "uf": "MG",
@@ -1371,11 +1366,11 @@
     "number": "2200",
     "votes": 145006,
     "pct": 1.26,
-    "status": "Eleito (projeção)",
+    "status": "Eleito por QP",
     "incumbent": true,
     "prevParty": "PL",
     "prevCurrent": true,
-    "projecao": true
+    "projecao": false
    },
    {
     "uf": "MG",
@@ -1385,11 +1380,11 @@
     "number": "1314",
     "votes": 144496,
     "pct": 1.26,
-    "status": "Eleito (projeção)",
+    "status": "Eleito por QP",
     "incumbent": true,
     "prevParty": "PT",
     "prevCurrent": true,
-    "projecao": true
+    "projecao": false
    },
    {
     "uf": "MG",
@@ -1399,11 +1394,11 @@
     "number": "1307",
     "votes": 130253,
     "pct": 1.14,
-    "status": "Eleito (projeção)",
+    "status": "Eleito por QP",
     "incumbent": false,
     "prevParty": null,
     "prevCurrent": null,
-    "projecao": true
+    "projecao": false
    },
    {
     "uf": "MG",
@@ -1413,11 +1408,11 @@
     "number": "5510",
     "votes": 129366,
     "pct": 1.13,
-    "status": "Eleito (projeção)",
+    "status": "Eleito por QP",
     "incumbent": true,
     "prevParty": "PROS",
     "prevCurrent": true,
-    "projecao": true
+    "projecao": false
    },
    {
     "uf": "MG",
@@ -1427,11 +1422,11 @@
     "number": "1378",
     "votes": 126974,
     "pct": 1.11,
-    "status": "Eleito (projeção)",
+    "status": "Eleito por QP",
     "incumbent": true,
     "prevParty": "PT",
     "prevCurrent": true,
-    "projecao": true
+    "projecao": false
    },
    {
     "uf": "MG",
@@ -1441,11 +1436,11 @@
     "number": "1000",
     "votes": 126248,
     "pct": 1.1,
-    "status": "Eleito (projeção)",
+    "status": "Eleito por QP",
     "incumbent": false,
     "prevParty": null,
     "prevCurrent": null,
-    "projecao": true
+    "projecao": false
    },
    {
     "uf": "MG",
@@ -1455,11 +1450,11 @@
     "number": "1300",
     "votes": 118567,
     "pct": 1.03,
-    "status": "Eleito (projeção)",
+    "status": "Eleito por QP",
     "incumbent": false,
     "prevParty": null,
     "prevCurrent": null,
-    "projecao": true
+    "projecao": false
    },
    {
     "uf": "MG",
@@ -1469,11 +1464,11 @@
     "number": "1077",
     "votes": 113379,
     "pct": 0.99,
-    "status": "Eleito (projeção)",
+    "status": "Eleito por QP",
     "incumbent": true,
     "prevParty": "AVANTE",
     "prevCurrent": true,
-    "projecao": true
+    "projecao": false
    },
    {
     "uf": "MG",
@@ -1483,11 +1478,11 @@
     "number": "1339",
     "votes": 110124,
     "pct": 0.96,
-    "status": "Eleito (projeção)",
+    "status": "Eleito por QP",
     "incumbent": true,
     "prevParty": "PT",
     "prevCurrent": true,
-    "projecao": true
+    "projecao": false
    },
    {
     "uf": "MG",
@@ -1497,11 +1492,11 @@
     "number": "5555",
     "votes": 109445,
     "pct": 0.95,
-    "status": "Eleito (projeção)",
+    "status": "Eleito por QP",
     "incumbent": true,
     "prevParty": "PSD",
     "prevCurrent": true,
-    "projecao": true
+    "projecao": false
    },
    {
     "uf": "MG",
@@ -1511,11 +1506,11 @@
     "number": "1334",
     "votes": 108193,
     "pct": 0.94,
-    "status": "Eleito (projeção)",
+    "status": "Eleito por QP",
     "incumbent": true,
     "prevParty": "PT",
     "prevCurrent": true,
-    "projecao": true
+    "projecao": false
    },
    {
     "uf": "MG",
@@ -1525,11 +1520,11 @@
     "number": "4350",
     "votes": 108182,
     "pct": 0.94,
-    "status": "Eleito (projeção)",
+    "status": "Eleito por QP",
     "incumbent": false,
     "prevParty": null,
     "prevCurrent": null,
-    "projecao": true
+    "projecao": false
    },
    {
     "uf": "MG",
@@ -1539,11 +1534,11 @@
     "number": "4450",
     "votes": 105371,
     "pct": 0.92,
-    "status": "Eleito (projeção)",
+    "status": "Eleito por QP",
     "incumbent": true,
     "prevParty": "UNIÃO",
     "prevCurrent": true,
-    "projecao": true
+    "projecao": false
    },
    {
     "uf": "MG",
@@ -1553,11 +1548,11 @@
     "number": "4444",
     "votes": 104010,
     "pct": 0.91,
-    "status": "Eleito (projeção)",
+    "status": "Eleito por QP",
     "incumbent": true,
     "prevParty": "UNIÃO",
     "prevCurrent": true,
-    "projecao": true
+    "projecao": false
    },
    {
     "uf": "MG",
@@ -1567,11 +1562,11 @@
     "number": "2533",
     "votes": 100082,
     "pct": 0.87,
-    "status": "Eleito (projeção)",
+    "status": "Eleito por QP",
     "incumbent": true,
     "prevParty": "PATRIOTA",
     "prevCurrent": true,
-    "projecao": true
+    "projecao": false
    },
    {
     "uf": "MG",
@@ -1581,11 +1576,11 @@
     "number": "1390",
     "votes": 98750,
     "pct": 0.86,
-    "status": "Eleito (projeção)",
+    "status": "Eleito por média",
     "incumbent": false,
     "prevParty": null,
     "prevCurrent": null,
-    "projecao": true
+    "projecao": false
    },
    {
     "uf": "MG",
@@ -1595,11 +1590,11 @@
     "number": "1010",
     "votes": 96046,
     "pct": 0.84,
-    "status": "Eleito (projeção)",
+    "status": "Eleito por média",
     "incumbent": true,
     "prevParty": "REPUBLICANOS",
     "prevCurrent": true,
-    "projecao": true
+    "projecao": false
    },
    {
     "uf": "MG",
@@ -1609,11 +1604,11 @@
     "number": "2240",
     "votes": 94812,
     "pct": 0.83,
-    "status": "Eleito (projeção)",
+    "status": "Eleito por QP",
     "incumbent": true,
     "prevParty": "PL",
     "prevCurrent": true,
-    "projecao": true
+    "projecao": false
    },
    {
     "uf": "MG",
@@ -1623,11 +1618,11 @@
     "number": "1510",
     "votes": 93759,
     "pct": 0.82,
-    "status": "Eleito (projeção)",
+    "status": "Eleito por média",
     "incumbent": true,
     "prevParty": "MDB",
     "prevCurrent": true,
-    "projecao": true
+    "projecao": false
    },
    {
     "uf": "MG",
@@ -1637,11 +1632,11 @@
     "number": "1111",
     "votes": 90827,
     "pct": 0.79,
-    "status": "Eleito (projeção)",
+    "status": "Eleito por QP",
     "incumbent": true,
     "prevParty": "PP",
     "prevCurrent": true,
-    "projecao": true
+    "projecao": false
    },
    {
     "uf": "MG",
@@ -1651,11 +1646,11 @@
     "number": "1315",
     "votes": 86923,
     "pct": 0.76,
-    "status": "Eleito (projeção)",
+    "status": "Eleito por média",
     "incumbent": true,
     "prevParty": "PT",
     "prevCurrent": true,
-    "projecao": true
+    "projecao": false
    },
    {
     "uf": "MG",
@@ -1665,11 +1660,11 @@
     "number": "7070",
     "votes": 86740,
     "pct": 0.76,
-    "status": "Eleito (projeção)",
+    "status": "Eleito por QP",
     "incumbent": true,
     "prevParty": "AVANTE",
     "prevCurrent": true,
-    "projecao": true
+    "projecao": false
    },
    {
     "uf": "MG",
@@ -1679,11 +1674,11 @@
     "number": "4445",
     "votes": 86131,
     "pct": 0.75,
-    "status": "Eleito (projeção)",
+    "status": "Eleito por QP",
     "incumbent": true,
     "prevParty": "UNIÃO",
     "prevCurrent": true,
-    "projecao": true
+    "projecao": false
    },
    {
     "uf": "MG",
@@ -1693,11 +1688,11 @@
     "number": "4433",
     "votes": 84879,
     "pct": 0.74,
-    "status": "Eleito (projeção)",
+    "status": "Eleito por média",
     "incumbent": true,
     "prevParty": "PL",
     "prevCurrent": true,
-    "projecao": true
+    "projecao": false
    },
    {
     "uf": "MG",
@@ -1707,11 +1702,11 @@
     "number": "2277",
     "votes": 81650,
     "pct": 0.71,
-    "status": "Eleito (projeção)",
+    "status": "Eleito por QP",
     "incumbent": true,
     "prevParty": "PL",
     "prevCurrent": true,
-    "projecao": true
+    "projecao": false
    },
    {
     "uf": "MG",
@@ -1721,11 +1716,11 @@
     "number": "2280",
     "votes": 80567,
     "pct": 0.7,
-    "status": "Eleito (projeção)",
+    "status": "Eleito por QP",
     "incumbent": false,
     "prevParty": null,
     "prevCurrent": null,
-    "projecao": true
+    "projecao": false
    },
    {
     "uf": "MG",
@@ -1735,11 +1730,11 @@
     "number": "1363",
     "votes": 78841,
     "pct": 0.69,
-    "status": "Eleito (projeção)",
+    "status": "Eleito por média",
     "incumbent": true,
     "prevParty": "PT",
     "prevCurrent": true,
-    "projecao": true
+    "projecao": false
    },
    {
     "uf": "MG",
@@ -1749,11 +1744,11 @@
     "number": "1813",
     "votes": 78780,
     "pct": 0.69,
-    "status": "Eleito (projeção)",
+    "status": "Eleito por QP",
     "incumbent": true,
     "prevParty": "AVANTE",
     "prevCurrent": true,
-    "projecao": true
+    "projecao": false
    },
    {
     "uf": "MG",
@@ -1763,11 +1758,11 @@
     "number": "2020",
     "votes": 70921,
     "pct": 0.62,
-    "status": "Eleito (projeção)",
+    "status": "Eleito por QP",
     "incumbent": true,
     "prevParty": "PODE",
     "prevCurrent": true,
-    "projecao": true
+    "projecao": false
    },
    {
     "uf": "MG",
@@ -1777,11 +1772,11 @@
     "number": "2227",
     "votes": 70572,
     "pct": 0.62,
-    "status": "Eleito (projeção)",
+    "status": "Eleito por QP",
     "incumbent": false,
     "prevParty": null,
     "prevCurrent": null,
-    "projecao": true
+    "projecao": false
    },
    {
     "uf": "MG",
@@ -1791,11 +1786,11 @@
     "number": "4545",
     "votes": 68795,
     "pct": 0.6,
-    "status": "Eleito (projeção)",
+    "status": "Eleito por QP",
     "incumbent": true,
     "prevParty": "PSDB",
     "prevCurrent": true,
-    "projecao": true
+    "projecao": false
    },
    {
     "uf": "MG",
@@ -1805,11 +1800,11 @@
     "number": "2260",
     "votes": 67371,
     "pct": 0.59,
-    "status": "Eleito (projeção)",
+    "status": "Eleito por QP",
     "incumbent": false,
     "prevParty": null,
     "prevCurrent": null,
-    "projecao": true
+    "projecao": false
    },
    {
     "uf": "MG",
@@ -1819,11 +1814,11 @@
     "number": "2270",
     "votes": 66395,
     "pct": 0.58,
-    "status": "Eleito (projeção)",
+    "status": "Eleito por QP",
     "incumbent": true,
     "prevParty": "AVANTE",
     "prevCurrent": true,
-    "projecao": true
+    "projecao": false
    },
    {
     "uf": "MG",
@@ -1833,11 +1828,11 @@
     "number": "2250",
     "votes": 61773,
     "pct": 0.54,
-    "status": "Eleito (projeção)",
+    "status": "Eleito por QP",
     "incumbent": true,
     "prevParty": "REPUBLICANOS",
     "prevCurrent": true,
-    "projecao": true
+    "projecao": false
    },
    {
     "uf": "MG",
@@ -1847,11 +1842,11 @@
     "number": "2252",
     "votes": 60625,
     "pct": 0.53,
-    "status": "Eleito (projeção)",
+    "status": "Eleito por QP",
     "incumbent": true,
     "prevParty": "PATRIOTA",
     "prevCurrent": true,
-    "projecao": true
+    "projecao": false
    },
    {
     "uf": "MG",
@@ -1861,11 +1856,11 @@
     "number": "2212",
     "votes": 57878,
     "pct": 0.5,
-    "status": "Eleito (projeção)",
+    "status": "Eleito por QP",
     "incumbent": false,
     "prevParty": null,
     "prevCurrent": null,
-    "projecao": true
+    "projecao": false
    },
    {
     "uf": "MG",
@@ -1875,11 +1870,11 @@
     "number": "2215",
     "votes": 57063,
     "pct": 0.5,
-    "status": "Eleito (projeção)",
+    "status": "Eleito por QP",
     "incumbent": true,
     "prevParty": "PL",
     "prevCurrent": true,
-    "projecao": true
+    "projecao": false
    },
    {
     "uf": "MG",
@@ -1889,11 +1884,11 @@
     "number": "2244",
     "votes": 56958,
     "pct": 0.5,
-    "status": "Eleito (projeção)",
+    "status": "Eleito por QP",
     "incumbent": true,
     "prevParty": "PL",
     "prevCurrent": true,
-    "projecao": true
+    "projecao": false
    },
    {
     "uf": "MG",
@@ -1903,11 +1898,11 @@
     "number": "4010",
     "votes": 46479,
     "pct": 0.41,
-    "status": "Eleito (projeção)",
+    "status": "Eleito por QP",
     "incumbent": true,
     "prevParty": "PSC",
     "prevCurrent": false,
-    "projecao": true
+    "projecao": false
    },
    {
     "uf": "MG",
@@ -1917,11 +1912,11 @@
     "number": "2225",
     "votes": 43908,
     "pct": 0.38,
-    "status": "Eleito (projeção)",
+    "status": "Eleito por QP",
     "incumbent": false,
     "prevParty": null,
     "prevCurrent": null,
-    "projecao": true
+    "projecao": false
    },
    {
     "uf": "MG",
@@ -1931,11 +1926,11 @@
     "number": "2275",
     "votes": 42718,
     "pct": 0.37,
-    "status": "Eleito (projeção)",
+    "status": "Eleito por QP",
     "incumbent": false,
     "prevParty": null,
     "prevCurrent": null,
-    "projecao": true
+    "projecao": false
    },
    {
     "uf": "MG",
@@ -1945,11 +1940,11 @@
     "number": "2232",
     "votes": 39275,
     "pct": 0.34,
-    "status": "Eleito (projeção)",
+    "status": "Eleito por QP",
     "incumbent": true,
     "prevParty": "AVANTE",
     "prevCurrent": true,
-    "projecao": true
+    "projecao": false
    },
    {
     "uf": "MG",
@@ -1959,11 +1954,11 @@
     "number": "2204",
     "votes": 37534,
     "pct": 0.33,
-    "status": "Eleito (projeção)",
+    "status": "Eleito por QP",
     "incumbent": false,
     "prevParty": null,
     "prevCurrent": null,
-    "projecao": true
+    "projecao": false
    },
    {
     "uf": "MG",
@@ -1973,11 +1968,11 @@
     "number": "2233",
     "votes": 37162,
     "pct": 0.32,
-    "status": "Eleito (projeção)",
+    "status": "Eleito por QP",
     "incumbent": true,
     "prevParty": "PL",
     "prevCurrent": true,
-    "projecao": true
+    "projecao": false
    },
    {
     "uf": "MG",
@@ -1987,11 +1982,11 @@
     "number": "2219",
     "votes": 35958,
     "pct": 0.31,
-    "status": "Eleito (projeção)",
+    "status": "Eleito por QP",
     "incumbent": false,
     "prevParty": null,
     "prevCurrent": null,
-    "projecao": true
+    "projecao": false
    },
    {
     "uf": "MG",
@@ -2001,11 +1996,11 @@
     "number": "2299",
     "votes": 33762,
     "pct": 0.29,
-    "status": "Eleito (projeção)",
+    "status": "Eleito por QP",
     "incumbent": true,
     "prevParty": "PL",
     "prevCurrent": true,
-    "projecao": true
+    "projecao": false
    },
    {
     "uf": "MG",
@@ -2015,11 +2010,11 @@
     "number": "2245",
     "votes": 25090,
     "pct": 0.22,
-    "status": "Eleito (projeção)",
+    "status": "Eleito por QP",
     "incumbent": false,
     "prevParty": null,
     "prevCurrent": null,
-    "projecao": true
+    "projecao": false
    },
    {
     "uf": "PR",
@@ -3751,11 +3746,11 @@
     "number": "2211",
     "votes": 3038438,
     "pct": 12.82,
-    "status": "Eleito (projeção)",
+    "status": "Eleito por QP",
     "incumbent": false,
     "prevParty": null,
     "prevCurrent": null,
-    "projecao": true
+    "projecao": false
    },
    {
     "uf": "SP",
@@ -3765,11 +3760,11 @@
     "number": "5070",
     "votes": 1596472,
     "pct": 6.73,
-    "status": "Eleito (projeção)",
+    "status": "Eleito por QP",
     "incumbent": true,
     "prevParty": "PSOL",
     "prevCurrent": true,
-    "projecao": true
+    "projecao": false
    },
    {
     "uf": "SP",
@@ -3779,11 +3774,11 @@
     "number": "5000",
     "votes": 583107,
     "pct": 2.46,
-    "status": "Eleito (projeção)",
+    "status": "Eleito por QP",
     "incumbent": true,
     "prevParty": "PSOL",
     "prevCurrent": true,
-    "projecao": true
+    "projecao": false
    },
    {
     "uf": "SP",
@@ -3793,11 +3788,11 @@
     "number": "1414",
     "votes": 520071,
     "pct": 2.19,
-    "status": "Eleito (projeção)",
+    "status": "Eleito por QP",
     "incumbent": true,
     "prevParty": "UNIÃO",
     "prevCurrent": true,
-    "projecao": true
+    "projecao": false
    },
    {
     "uf": "SP",
@@ -3807,11 +3802,11 @@
     "number": "4040",
     "votes": 476383,
     "pct": 2.01,
-    "status": "Eleito (projeção)",
+    "status": "Eleito por QP",
     "incumbent": true,
     "prevParty": "PSB",
     "prevCurrent": true,
-    "projecao": true
+    "projecao": false
    },
    {
     "uf": "SP",
@@ -3821,11 +3816,11 @@
     "number": "2222",
     "votes": 379312,
     "pct": 1.6,
-    "status": "Eleito (projeção)",
+    "status": "Eleito por QP",
     "incumbent": false,
     "prevParty": null,
     "prevCurrent": null,
-    "projecao": true
+    "projecao": false
    },
    {
     "uf": "SP",
@@ -3835,11 +3830,11 @@
     "number": "1110",
     "votes": 333401,
     "pct": 1.41,
-    "status": "Eleito (projeção)",
+    "status": "Eleito por QP",
     "incumbent": false,
     "prevParty": null,
     "prevCurrent": null,
-    "projecao": true
+    "projecao": false
    },
    {
     "uf": "SP",
@@ -3849,11 +3844,11 @@
     "number": "2000",
     "votes": 303271,
     "pct": 1.28,
-    "status": "Eleito (projeção)",
+    "status": "Eleito por QP",
     "incumbent": true,
     "prevParty": "MDB",
     "prevCurrent": true,
-    "projecao": true
+    "projecao": false
    },
    {
     "uf": "SP",
@@ -3863,11 +3858,11 @@
     "number": "5005",
     "votes": 275450,
     "pct": 1.16,
-    "status": "Eleito (projeção)",
+    "status": "Eleito por QP",
     "incumbent": false,
     "prevParty": null,
     "prevCurrent": null,
-    "projecao": true
+    "projecao": false
    },
    {
     "uf": "SP",
@@ -3877,11 +3872,11 @@
     "number": "1111",
     "votes": 269996,
     "pct": 1.14,
-    "status": "Eleito (projeção)",
+    "status": "Eleito por QP",
     "incumbent": true,
     "prevParty": "PP",
     "prevCurrent": true,
-    "projecao": true
+    "projecao": false
    },
    {
     "uf": "SP",
@@ -3891,11 +3886,11 @@
     "number": "2299",
     "votes": 261325,
     "pct": 1.1,
-    "status": "Eleito (projeção)",
+    "status": "Eleito por QP",
     "incumbent": true,
     "prevParty": "PL",
     "prevCurrent": true,
-    "projecao": true
+    "projecao": false
    },
    {
     "uf": "SP",
@@ -3905,11 +3900,11 @@
     "number": "5089",
     "votes": 253778,
     "pct": 1.07,
-    "status": "Eleito (projeção)",
+    "status": "Eleito por QP",
     "incumbent": true,
     "prevParty": "PSOL",
     "prevCurrent": true,
-    "projecao": true
+    "projecao": false
    },
    {
     "uf": "SP",
@@ -3919,11 +3914,11 @@
     "number": "2026",
     "votes": 246741,
     "pct": 1.04,
-    "status": "Eleito (projeção)",
+    "status": "Eleito por QP",
     "incumbent": false,
     "prevParty": null,
     "prevCurrent": null,
-    "projecao": true
+    "projecao": false
    },
    {
     "uf": "SP",
@@ -3933,11 +3928,11 @@
     "number": "1515",
     "votes": 239124,
     "pct": 1.01,
-    "status": "Eleito (projeção)",
+    "status": "Eleito por QP",
     "incumbent": true,
     "prevParty": "MDB",
     "prevCurrent": true,
-    "projecao": true
+    "projecao": false
    },
    {
     "uf": "SP",
@@ -3947,11 +3942,11 @@
     "number": "1302",
     "votes": 233733,
     "pct": 0.99,
-    "status": "Eleito (projeção)",
+    "status": "Eleito por QP",
     "incumbent": false,
     "prevParty": null,
     "prevCurrent": null,
-    "projecao": true
+    "projecao": false
    },
    {
     "uf": "SP",
@@ -3961,11 +3956,11 @@
     "number": "3007",
     "votes": 230866,
     "pct": 0.97,
-    "status": "Eleito (projeção)",
+    "status": "Eleito por QP",
     "incumbent": false,
     "prevParty": null,
     "prevCurrent": null,
-    "projecao": true
+    "projecao": false
    },
    {
     "uf": "SP",
@@ -3975,11 +3970,11 @@
     "number": "2011",
     "votes": 217952,
     "pct": 0.92,
-    "status": "Eleito (projeção)",
+    "status": "Eleito por QP",
     "incumbent": true,
     "prevParty": "PP",
     "prevCurrent": true,
-    "projecao": true
+    "projecao": false
    },
    {
     "uf": "SP",
@@ -3989,11 +3984,11 @@
     "number": "2227",
     "votes": 213752,
     "pct": 0.9,
-    "status": "Eleito (projeção)",
+    "status": "Eleito por QP",
     "incumbent": true,
     "prevParty": "PL",
     "prevCurrent": true,
-    "projecao": true
+    "projecao": false
    },
    {
     "uf": "SP",
@@ -4003,11 +3998,11 @@
     "number": "2020",
     "votes": 199100,
     "pct": 0.84,
-    "status": "Eleito (projeção)",
+    "status": "Eleito por QP",
     "incumbent": true,
     "prevParty": "PODE",
     "prevCurrent": false,
-    "projecao": true
+    "projecao": false
    },
    {
     "uf": "SP",
@@ -4017,11 +4012,11 @@
     "number": "1010",
     "votes": 196681,
     "pct": 0.83,
-    "status": "Eleito (projeção)",
+    "status": "Eleito por QP",
     "incumbent": true,
     "prevParty": "REPUBLICANOS",
     "prevCurrent": true,
-    "projecao": true
+    "projecao": false
    },
    {
     "uf": "SP",
@@ -4031,11 +4026,11 @@
     "number": "2225",
     "votes": 187743,
     "pct": 0.79,
-    "status": "Eleito (projeção)",
+    "status": "Eleito por QP",
     "incumbent": true,
     "prevParty": "PL",
     "prevCurrent": true,
-    "projecao": true
+    "projecao": false
    },
    {
     "uf": "SP",
@@ -4045,11 +4040,11 @@
     "number": "1011",
     "votes": 182328,
     "pct": 0.77,
-    "status": "Eleito (projeção)",
+    "status": "Eleito por QP",
     "incumbent": false,
     "prevParty": null,
     "prevCurrent": null,
-    "projecao": true
+    "projecao": false
    },
    {
     "uf": "SP",
@@ -4059,11 +4054,11 @@
     "number": "5500",
     "votes": 181820,
     "pct": 0.77,
-    "status": "Eleito (projeção)",
+    "status": "Eleito por QP",
     "incumbent": false,
     "prevParty": null,
     "prevCurrent": null,
-    "projecao": true
+    "projecao": false
    },
    {
     "uf": "SP",
@@ -4073,11 +4068,11 @@
     "number": "5533",
     "votes": 168207,
     "pct": 0.71,
-    "status": "Eleito (projeção)",
+    "status": "Eleito por QP",
     "incumbent": true,
     "prevParty": "PSDB",
     "prevCurrent": true,
-    "projecao": true
+    "projecao": false
    },
    {
     "uf": "SP",
@@ -4087,11 +4082,11 @@
     "number": "2007",
     "votes": 162957,
     "pct": 0.69,
-    "status": "Eleito (projeção)",
+    "status": "Eleito por QP",
     "incumbent": true,
     "prevParty": "UNIÃO",
     "prevCurrent": true,
-    "projecao": true
+    "projecao": false
    },
    {
     "uf": "SP",
@@ -4101,11 +4096,11 @@
     "number": "2280",
     "votes": 161971,
     "pct": 0.68,
-    "status": "Eleito (projeção)",
+    "status": "Eleito por QP",
     "incumbent": false,
     "prevParty": null,
     "prevCurrent": null,
-    "projecao": true
+    "projecao": false
    },
    {
     "uf": "SP",
@@ -4115,11 +4110,11 @@
     "number": "1358",
     "votes": 160264,
     "pct": 0.68,
-    "status": "Eleito (projeção)",
+    "status": "Eleito por QP",
     "incumbent": true,
     "prevParty": "PT",
     "prevCurrent": true,
-    "projecao": true
+    "projecao": false
    },
    {
     "uf": "SP",
@@ -4129,11 +4124,11 @@
     "number": "2200",
     "votes": 153745,
     "pct": 0.65,
-    "status": "Eleito (projeção)",
+    "status": "Eleito por QP",
     "incumbent": true,
     "prevParty": "PL",
     "prevCurrent": true,
-    "projecao": true
+    "projecao": false
    },
    {
     "uf": "SP",
@@ -4143,11 +4138,11 @@
     "number": "1380",
     "votes": 152984,
     "pct": 0.65,
-    "status": "Eleito (projeção)",
+    "status": "Eleito por QP",
     "incumbent": true,
     "prevParty": "PT",
     "prevCurrent": true,
-    "projecao": true
+    "projecao": false
    },
    {
     "uf": "SP",
@@ -4157,11 +4152,11 @@
     "number": "1000",
     "votes": 138827,
     "pct": 0.59,
-    "status": "Eleito (projeção)",
+    "status": "Eleito por QP",
     "incumbent": true,
     "prevParty": "REPUBLICANOS",
     "prevCurrent": true,
-    "projecao": true
+    "projecao": false
    },
    {
     "uf": "SP",
@@ -4171,11 +4166,11 @@
     "number": "1399",
     "votes": 137240,
     "pct": 0.58,
-    "status": "Eleito (projeção)",
+    "status": "Eleito por QP",
     "incumbent": false,
     "prevParty": null,
     "prevCurrent": null,
-    "projecao": true
+    "projecao": false
    },
    {
     "uf": "SP",
@@ -4185,11 +4180,11 @@
     "number": "4545",
     "votes": 132866,
     "pct": 0.56,
-    "status": "Eleito (projeção)",
+    "status": "Eleito por QP",
     "incumbent": false,
     "prevParty": null,
     "prevCurrent": null,
-    "projecao": true
+    "projecao": false
    },
    {
     "uf": "SP",
@@ -4199,11 +4194,11 @@
     "number": "1502",
     "votes": 130951,
     "pct": 0.55,
-    "status": "Eleito (projeção)",
+    "status": "Eleito por QP",
     "incumbent": false,
     "prevParty": null,
     "prevCurrent": null,
-    "projecao": true
+    "projecao": false
    },
    {
     "uf": "SP",
@@ -4213,11 +4208,11 @@
     "number": "1550",
     "votes": 130915,
     "pct": 0.55,
-    "status": "Eleito (projeção)",
+    "status": "Eleito por QP",
     "incumbent": true,
     "prevParty": "MDB",
     "prevCurrent": true,
-    "projecao": true
+    "projecao": false
    },
    {
     "uf": "SP",
@@ -4227,11 +4222,11 @@
     "number": "2234",
     "votes": 129004,
     "pct": 0.54,
-    "status": "Eleito (projeção)",
+    "status": "Eleito por QP",
     "incumbent": false,
     "prevParty": null,
     "prevCurrent": null,
-    "projecao": true
+    "projecao": false
    },
    {
     "uf": "SP",
@@ -4241,11 +4236,11 @@
     "number": "1322",
     "votes": 124121,
     "pct": 0.52,
-    "status": "Eleito (projeção)",
+    "status": "Eleito por QP",
     "incumbent": true,
     "prevParty": "PT",
     "prevCurrent": true,
-    "projecao": true
+    "projecao": false
    },
    {
     "uf": "SP",
@@ -4255,11 +4250,11 @@
     "number": "2270",
     "votes": 122119,
     "pct": 0.52,
-    "status": "Eleito (projeção)",
+    "status": "Eleito por QP",
     "incumbent": true,
     "prevParty": "PL",
     "prevCurrent": true,
-    "projecao": true
+    "projecao": false
    },
    {
     "uf": "SP",
@@ -4269,11 +4264,11 @@
     "number": "1023",
     "votes": 118566,
     "pct": 0.5,
-    "status": "Eleito (projeção)",
+    "status": "Eleito por QP",
     "incumbent": false,
     "prevParty": null,
     "prevCurrent": null,
-    "projecao": true
+    "projecao": false
    },
    {
     "uf": "SP",
@@ -4283,11 +4278,11 @@
     "number": "1370",
     "votes": 117608,
     "pct": 0.5,
-    "status": "Eleito (projeção)",
+    "status": "Eleito por QP",
     "incumbent": true,
     "prevParty": "PT",
     "prevCurrent": true,
-    "projecao": true
+    "projecao": false
    },
    {
     "uf": "SP",
@@ -4297,11 +4292,11 @@
     "number": "1316",
     "votes": 115341,
     "pct": 0.49,
-    "status": "Eleito (projeção)",
+    "status": "Eleito por QP",
     "incumbent": false,
     "prevParty": null,
     "prevCurrent": null,
-    "projecao": true
+    "projecao": false
    },
    {
     "uf": "SP",
@@ -4311,11 +4306,11 @@
     "number": "1353",
     "votes": 114560,
     "pct": 0.48,
-    "status": "Eleito (projeção)",
+    "status": "Eleito por QP",
     "incumbent": true,
     "prevParty": "PT",
     "prevCurrent": true,
-    "projecao": true
+    "projecao": false
    },
    {
     "uf": "SP",
@@ -4325,11 +4320,11 @@
     "number": "5010",
     "votes": 114552,
     "pct": 0.48,
-    "status": "Eleito (projeção)",
+    "status": "Eleito por QP",
     "incumbent": false,
     "prevParty": null,
     "prevCurrent": null,
-    "projecao": true
+    "projecao": false
    },
    {
     "uf": "SP",
@@ -4339,11 +4334,11 @@
     "number": "1301",
     "votes": 113158,
     "pct": 0.48,
-    "status": "Eleito (projeção)",
+    "status": "Eleito por média",
     "incumbent": true,
     "prevParty": "PT",
     "prevCurrent": true,
-    "projecao": true
+    "projecao": false
    },
    {
     "uf": "SP",
@@ -4353,11 +4348,11 @@
     "number": "2244",
     "votes": 112854,
     "pct": 0.48,
-    "status": "Eleito (projeção)",
+    "status": "Eleito por QP",
     "incumbent": true,
     "prevParty": "PL",
     "prevCurrent": true,
-    "projecao": true
+    "projecao": false
    },
    {
     "uf": "SP",
@@ -4367,11 +4362,11 @@
     "number": "1333",
     "votes": 111904,
     "pct": 0.47,
-    "status": "Eleito (projeção)",
+    "status": "Eleito por média",
     "incumbent": true,
     "prevParty": "PT",
     "prevCurrent": true,
-    "projecao": true
+    "projecao": false
    },
    {
     "uf": "SP",
@@ -4381,11 +4376,11 @@
     "number": "1325",
     "votes": 109548,
     "pct": 0.46,
-    "status": "Eleito (projeção)",
+    "status": "Eleito por média",
     "incumbent": false,
     "prevParty": null,
     "prevCurrent": null,
-    "projecao": true
+    "projecao": false
    },
    {
     "uf": "SP",
@@ -4395,11 +4390,11 @@
     "number": "2077",
     "votes": 106901,
     "pct": 0.45,
-    "status": "Eleito (projeção)",
+    "status": "Eleito por média",
     "incumbent": true,
     "prevParty": "PODE",
     "prevCurrent": true,
-    "projecao": true
+    "projecao": false
    },
    {
     "uf": "SP",
@@ -4409,11 +4404,11 @@
     "number": "2255",
     "votes": 106471,
     "pct": 0.45,
-    "status": "Eleito (projeção)",
+    "status": "Eleito por QP",
     "incumbent": false,
     "prevParty": null,
     "prevCurrent": null,
-    "projecao": true
+    "projecao": false
    },
    {
     "uf": "SP",
@@ -4423,11 +4418,11 @@
     "number": "1536",
     "votes": 106225,
     "pct": 0.45,
-    "status": "Eleito (projeção)",
+    "status": "Eleito por média",
     "incumbent": false,
     "prevParty": null,
     "prevCurrent": null,
-    "projecao": true
+    "projecao": false
    },
    {
     "uf": "SP",
@@ -4437,11 +4432,11 @@
     "number": "1100",
     "votes": 104513,
     "pct": 0.44,
-    "status": "Eleito (projeção)",
+    "status": "Eleito por QP",
     "incumbent": true,
     "prevParty": "PP",
     "prevCurrent": false,
-    "projecao": true
+    "projecao": false
    },
    {
     "uf": "SP",
@@ -4451,11 +4446,11 @@
     "number": "2233",
     "votes": 99388,
     "pct": 0.42,
-    "status": "Eleito (projeção)",
+    "status": "Eleito por QP",
     "incumbent": true,
     "prevParty": "PL",
     "prevCurrent": true,
-    "projecao": true
+    "projecao": false
    },
    {
     "uf": "SP",
@@ -4465,11 +4460,11 @@
     "number": "5570",
     "votes": 98359,
     "pct": 0.41,
-    "status": "Eleito (projeção)",
+    "status": "Eleito por QP",
     "incumbent": false,
     "prevParty": null,
     "prevCurrent": null,
-    "projecao": true
+    "projecao": false
    },
    {
     "uf": "SP",
@@ -4479,11 +4474,11 @@
     "number": "4000",
     "votes": 97335,
     "pct": 0.41,
-    "status": "Eleito (projeção)",
+    "status": "Eleito por QP",
     "incumbent": true,
     "prevParty": "PSB",
     "prevCurrent": true,
-    "projecao": true
+    "projecao": false
    },
    {
     "uf": "SP",
@@ -4493,11 +4488,11 @@
     "number": "2277",
     "votes": 96333,
     "pct": 0.41,
-    "status": "Eleito (projeção)",
+    "status": "Eleito por QP",
     "incumbent": true,
     "prevParty": "PL",
     "prevCurrent": true,
-    "projecao": true
+    "projecao": false
    },
    {
     "uf": "SP",
@@ -4507,11 +4502,11 @@
     "number": "5515",
     "votes": 95096,
     "pct": 0.4,
-    "status": "Eleito (projeção)",
+    "status": "Eleito por QP",
     "incumbent": true,
     "prevParty": "PSD",
     "prevCurrent": true,
-    "projecao": true
+    "projecao": false
    },
    {
     "uf": "SP",
@@ -4521,11 +4516,11 @@
     "number": "1033",
     "votes": 94770,
     "pct": 0.4,
-    "status": "Eleito (projeção)",
+    "status": "Eleito por média",
     "incumbent": false,
     "prevParty": null,
     "prevCurrent": null,
-    "projecao": true
+    "projecao": false
    },
    {
     "uf": "SP",
@@ -4535,11 +4530,11 @@
     "number": "2274",
     "votes": 92286,
     "pct": 0.39,
-    "status": "Eleito (projeção)",
+    "status": "Eleito por QP",
     "incumbent": true,
     "prevParty": "PL",
     "prevCurrent": true,
-    "projecao": true
+    "projecao": false
    },
    {
     "uf": "SP",
@@ -4549,11 +4544,11 @@
     "number": "5585",
     "votes": 91902,
     "pct": 0.39,
-    "status": "Eleito (projeção)",
+    "status": "Eleito por média",
     "incumbent": true,
     "prevParty": "PSDB",
     "prevCurrent": true,
-    "projecao": true
+    "projecao": false
    },
    {
     "uf": "SP",
@@ -4563,11 +4558,11 @@
     "number": "1022",
     "votes": 91690,
     "pct": 0.39,
-    "status": "Eleito (projeção)",
+    "status": "Eleito por média",
     "incumbent": true,
     "prevParty": "REPUBLICANOS",
     "prevCurrent": true,
-    "projecao": true
+    "projecao": false
    },
    {
     "uf": "SP",
@@ -4577,11 +4572,11 @@
     "number": "2208",
     "votes": 91403,
     "pct": 0.39,
-    "status": "Eleito (projeção)",
+    "status": "Eleito por QP",
     "incumbent": true,
     "prevParty": "PL",
     "prevCurrent": true,
-    "projecao": true
+    "projecao": false
    },
    {
     "uf": "SP",
@@ -4591,11 +4586,11 @@
     "number": "2247",
     "votes": 90363,
     "pct": 0.38,
-    "status": "Eleito (projeção)",
+    "status": "Eleito por QP",
     "incumbent": true,
     "prevParty": "PL",
     "prevCurrent": true,
-    "projecao": true
+    "projecao": false
    },
    {
     "uf": "SP",
@@ -4605,11 +4600,11 @@
     "number": "5512",
     "votes": 89414,
     "pct": 0.38,
-    "status": "Eleito (projeção)",
+    "status": "Eleito por média",
     "incumbent": false,
     "prevParty": null,
     "prevCurrent": null,
-    "projecao": true
+    "projecao": false
    },
    {
     "uf": "SP",
@@ -4619,11 +4614,11 @@
     "number": "4410",
     "votes": 87820,
     "pct": 0.37,
-    "status": "Eleito (projeção)",
+    "status": "Eleito por QP",
     "incumbent": false,
     "prevParty": null,
     "prevCurrent": null,
-    "projecao": true
+    "projecao": false
    },
    {
     "uf": "SP",
@@ -4633,11 +4628,11 @@
     "number": "4425",
     "votes": 71631,
     "pct": 0.3,
-    "status": "Eleito (projeção)",
+    "status": "Eleito por QP",
     "incumbent": false,
     "prevParty": null,
     "prevCurrent": null,
-    "projecao": true
+    "projecao": false
    },
    {
     "uf": "SP",
@@ -4647,11 +4642,11 @@
     "number": "3030",
     "votes": 69083,
     "pct": 0.29,
-    "status": "Eleito (projeção)",
+    "status": "Eleito por média",
     "incumbent": true,
     "prevParty": "NOVO",
     "prevCurrent": true,
-    "projecao": true
+    "projecao": false
    },
    {
     "uf": "SP",
@@ -4661,11 +4656,11 @@
     "number": "2212",
     "votes": 66860,
     "pct": 0.28,
-    "status": "Eleito (projeção)",
+    "status": "Eleito por QP",
     "incumbent": false,
     "prevParty": null,
     "prevCurrent": null,
-    "projecao": true
+    "projecao": false
    },
    {
     "uf": "SP",
@@ -4675,11 +4670,11 @@
     "number": "2278",
     "votes": 66673,
     "pct": 0.28,
-    "status": "Eleito (projeção)",
+    "status": "Eleito por QP",
     "incumbent": false,
     "prevParty": null,
     "prevCurrent": null,
-    "projecao": true
+    "projecao": false
    },
    {
     "uf": "SP",
@@ -4689,11 +4684,11 @@
     "number": "2220",
     "votes": 63398,
     "pct": 0.27,
-    "status": "Eleito (projeção)",
+    "status": "Eleito por QP",
     "incumbent": false,
     "prevParty": null,
     "prevCurrent": null,
-    "projecao": true
+    "projecao": false
    },
    {
     "uf": "SP",
@@ -4703,11 +4698,11 @@
     "number": "2525",
     "votes": 54443,
     "pct": 0.23,
-    "status": "Eleito (projeção)",
+    "status": "Eleito por QP",
     "incumbent": false,
     "prevParty": null,
     "prevCurrent": null,
-    "projecao": true
+    "projecao": false
    },
    {
     "uf": "SP",
@@ -4717,11 +4712,11 @@
     "number": "5088",
     "votes": 54207,
     "pct": 0.23,
-    "status": "Eleito (projeção)",
+    "status": "Eleito por QP",
     "incumbent": true,
     "prevParty": "PSOL",
     "prevCurrent": true,
-    "projecao": true
+    "projecao": false
    }
   ],
   "estadual": [
@@ -4733,11 +4728,11 @@
     "number": "22011",
     "votes": 1956238,
     "pct": 8.39,
-    "status": "Eleito (projeção)",
+    "status": "Eleito por QP",
     "incumbent": false,
     "prevParty": null,
     "prevCurrent": null,
-    "projecao": true
+    "projecao": false
    },
    {
     "uf": "SP",
@@ -4747,11 +4742,11 @@
     "number": "13133",
     "votes": 654627,
     "pct": 2.81,
-    "status": "Eleito (projeção)",
+    "status": "Eleito por QP",
     "incumbent": true,
     "prevParty": "PT",
     "prevCurrent": null,
-    "projecao": true
+    "projecao": false
    },
    {
     "uf": "SP",
@@ -4761,11 +4756,11 @@
     "number": "50700",
     "votes": 407773,
     "pct": 1.75,
-    "status": "Eleito (projeção)",
+    "status": "Eleito por QP",
     "incumbent": false,
     "prevParty": null,
     "prevCurrent": null,
-    "projecao": true
+    "projecao": false
    },
    {
     "uf": "SP",
@@ -4775,11 +4770,11 @@
     "number": "50789",
     "votes": 367861,
     "pct": 1.58,
-    "status": "Eleito (projeção)",
+    "status": "Eleito por QP",
     "incumbent": true,
     "prevParty": "PSOL",
     "prevCurrent": null,
-    "projecao": true
+    "projecao": false
    },
    {
     "uf": "SP",
@@ -4789,11 +4784,11 @@
     "number": "50000",
     "votes": 326190,
     "pct": 1.4,
-    "status": "Eleito (projeção)",
+    "status": "Eleito por QP",
     "incumbent": true,
     "prevParty": "PSOL",
     "prevCurrent": null,
-    "projecao": true
+    "projecao": false
    },
    {
     "uf": "SP",
@@ -4803,11 +4798,11 @@
     "number": "22800",
     "votes": 235363,
     "pct": 1.01,
-    "status": "Eleito (projeção)",
+    "status": "Eleito por QP",
     "incumbent": false,
     "prevParty": null,
     "prevCurrent": null,
-    "projecao": true
+    "projecao": false
    },
    {
     "uf": "SP",
@@ -4817,11 +4812,11 @@
     "number": "20200",
     "votes": 229928,
     "pct": 0.99,
-    "status": "Eleito (projeção)",
+    "status": "Eleito por QP",
     "incumbent": false,
     "prevParty": null,
     "prevCurrent": null,
-    "projecao": true
+    "projecao": false
    },
    {
     "uf": "SP",
@@ -4831,11 +4826,11 @@
     "number": "22444",
     "votes": 198342,
     "pct": 0.85,
-    "status": "Eleito (projeção)",
+    "status": "Eleito por QP",
     "incumbent": true,
     "prevParty": "PL",
     "prevCurrent": null,
-    "projecao": true
+    "projecao": false
    },
    {
     "uf": "SP",
@@ -4845,11 +4840,11 @@
     "number": "14014",
     "votes": 185582,
     "pct": 0.8,
-    "status": "Eleito (projeção)",
+    "status": "Eleito por QP",
     "incumbent": false,
     "prevParty": null,
     "prevCurrent": null,
-    "projecao": true
+    "projecao": false
    },
    {
     "uf": "SP",
@@ -4859,11 +4854,11 @@
     "number": "11111",
     "votes": 182839,
     "pct": 0.78,
-    "status": "Eleito (projeção)",
+    "status": "Eleito por QP",
     "incumbent": false,
     "prevParty": null,
     "prevCurrent": null,
-    "projecao": true
+    "projecao": false
    },
    {
     "uf": "SP",
@@ -4873,11 +4868,11 @@
     "number": "22111",
     "votes": 178164,
     "pct": 0.76,
-    "status": "Eleito (projeção)",
+    "status": "Eleito por QP",
     "incumbent": false,
     "prevParty": null,
     "prevCurrent": null,
-    "projecao": true
+    "projecao": false
    },
    {
     "uf": "SP",
@@ -4887,11 +4882,11 @@
     "number": "50110",
     "votes": 170844,
     "pct": 0.73,
-    "status": "Eleito (projeção)",
+    "status": "Eleito por QP",
     "incumbent": true,
     "prevParty": "PSOL",
     "prevCurrent": null,
-    "projecao": true
+    "projecao": false
    },
    {
     "uf": "SP",
@@ -4901,11 +4896,11 @@
     "number": "50555",
     "votes": 169567,
     "pct": 0.73,
-    "status": "Eleito (projeção)",
+    "status": "Eleito por QP",
     "incumbent": false,
     "prevParty": null,
     "prevCurrent": null,
-    "projecao": true
+    "projecao": false
    },
    {
     "uf": "SP",
@@ -4915,11 +4910,11 @@
     "number": "11777",
     "votes": 163918,
     "pct": 0.7,
-    "status": "Eleito (projeção)",
+    "status": "Eleito por QP",
     "incumbent": true,
     "prevParty": "PP",
     "prevCurrent": null,
-    "projecao": true
+    "projecao": false
    },
    {
     "uf": "SP",
@@ -4929,11 +4924,11 @@
     "number": "22000",
     "votes": 162562,
     "pct": 0.7,
-    "status": "Eleito (projeção)",
+    "status": "Eleito por QP",
     "incumbent": false,
     "prevParty": null,
     "prevCurrent": null,
-    "projecao": true
+    "projecao": false
    },
    {
     "uf": "SP",
@@ -4943,11 +4938,11 @@
     "number": "50900",
     "votes": 159100,
     "pct": 0.68,
-    "status": "Eleito (projeção)",
+    "status": "Eleito por QP",
     "incumbent": false,
     "prevParty": null,
     "prevCurrent": null,
-    "projecao": true
+    "projecao": false
    },
    {
     "uf": "SP",
@@ -4957,11 +4952,11 @@
     "number": "15300",
     "votes": 159058,
     "pct": 0.68,
-    "status": "Eleito (projeção)",
+    "status": "Eleito por QP",
     "incumbent": true,
     "prevParty": "MDB",
     "prevCurrent": null,
-    "projecao": true
+    "projecao": false
    },
    {
     "uf": "SP",
@@ -4971,11 +4966,11 @@
     "number": "10010",
     "votes": 157381,
     "pct": 0.67,
-    "status": "Eleito (projeção)",
+    "status": "Eleito por QP",
     "incumbent": true,
     "prevParty": "Republicanos",
     "prevCurrent": null,
-    "projecao": true
+    "projecao": false
    },
    {
     "uf": "SP",
@@ -4985,11 +4980,11 @@
     "number": "22222",
     "votes": 156691,
     "pct": 0.67,
-    "status": "Eleito (projeção)",
+    "status": "Eleito por QP",
     "incumbent": true,
     "prevParty": "PL",
     "prevCurrent": null,
-    "projecao": true
+    "projecao": false
    },
    {
     "uf": "SP",
@@ -4999,11 +4994,11 @@
     "number": "22322",
     "votes": 155574,
     "pct": 0.67,
-    "status": "Eleito (projeção)",
+    "status": "Eleito por QP",
     "incumbent": true,
     "prevParty": "PL",
     "prevCurrent": null,
-    "projecao": true
+    "projecao": false
    },
    {
     "uf": "SP",
@@ -5013,11 +5008,11 @@
     "number": "15115",
     "votes": 154966,
     "pct": 0.66,
-    "status": "Eleito (projeção)",
+    "status": "Eleito por QP",
     "incumbent": false,
     "prevParty": null,
     "prevCurrent": null,
-    "projecao": true
+    "projecao": false
    },
    {
     "uf": "SP",
@@ -5027,11 +5022,11 @@
     "number": "13180",
     "votes": 154953,
     "pct": 0.66,
-    "status": "Eleito (projeção)",
+    "status": "Eleito por QP",
     "incumbent": false,
     "prevParty": null,
     "prevCurrent": null,
-    "projecao": true
+    "projecao": false
    },
    {
     "uf": "SP",
@@ -5041,11 +5036,11 @@
     "number": "11911",
     "votes": 143422,
     "pct": 0.61,
-    "status": "Eleito (projeção)",
+    "status": "Eleito por QP",
     "incumbent": false,
     "prevParty": null,
     "prevCurrent": null,
-    "projecao": true
+    "projecao": false
    },
    {
     "uf": "SP",
@@ -5055,11 +5050,11 @@
     "number": "13123",
     "votes": 142001,
     "pct": 0.61,
-    "status": "Eleito (projeção)",
+    "status": "Eleito por QP",
     "incumbent": true,
     "prevParty": "PT",
     "prevCurrent": null,
-    "projecao": true
+    "projecao": false
    },
    {
     "uf": "SP",
@@ -5069,11 +5064,11 @@
     "number": "22138",
     "votes": 139225,
     "pct": 0.6,
-    "status": "Eleito (projeção)",
+    "status": "Eleito por QP",
     "incumbent": false,
     "prevParty": null,
     "prevCurrent": null,
-    "projecao": true
+    "projecao": false
    },
    {
     "uf": "SP",
@@ -5083,11 +5078,11 @@
     "number": "22110",
     "votes": 138277,
     "pct": 0.59,
-    "status": "Eleito (projeção)",
+    "status": "Eleito por QP",
     "incumbent": false,
     "prevParty": null,
     "prevCurrent": null,
-    "projecao": true
+    "projecao": false
    },
    {
     "uf": "SP",
@@ -5097,11 +5092,11 @@
     "number": "55555",
     "votes": 137335,
     "pct": 0.59,
-    "status": "Eleito (projeção)",
+    "status": "Eleito por QP",
     "incumbent": true,
     "prevParty": "PSD",
     "prevCurrent": null,
-    "projecao": true
+    "projecao": false
    },
    {
     "uf": "SP",
@@ -5111,11 +5106,11 @@
     "number": "11190",
     "votes": 134006,
     "pct": 0.57,
-    "status": "Eleito (projeção)",
+    "status": "Eleito por QP",
     "incumbent": false,
     "prevParty": null,
     "prevCurrent": null,
-    "projecao": true
+    "projecao": false
    },
    {
     "uf": "SP",
@@ -5125,11 +5120,11 @@
     "number": "45045",
     "votes": 132881,
     "pct": 0.57,
-    "status": "Eleito (projeção)",
+    "status": "Eleito por QP",
     "incumbent": true,
     "prevParty": "PSDB",
     "prevCurrent": null,
-    "projecao": true
+    "projecao": false
    },
    {
     "uf": "SP",
@@ -5139,11 +5134,11 @@
     "number": "50100",
     "votes": 126344,
     "pct": 0.54,
-    "status": "Eleito (projeção)",
+    "status": "Eleito por QP",
     "incumbent": false,
     "prevParty": null,
     "prevCurrent": null,
-    "projecao": true
+    "projecao": false
    },
    {
     "uf": "SP",
@@ -5153,11 +5148,11 @@
     "number": "22888",
     "votes": 125624,
     "pct": 0.54,
-    "status": "Eleito (projeção)",
+    "status": "Eleito por QP",
     "incumbent": true,
     "prevParty": "PL",
     "prevCurrent": null,
-    "projecao": true
+    "projecao": false
    },
    {
     "uf": "SP",
@@ -5167,11 +5162,11 @@
     "number": "20007",
     "votes": 124394,
     "pct": 0.53,
-    "status": "Eleito (projeção)",
+    "status": "Eleito por QP",
     "incumbent": false,
     "prevParty": null,
     "prevCurrent": null,
-    "projecao": true
+    "projecao": false
    },
    {
     "uf": "SP",
@@ -5181,11 +5176,11 @@
     "number": "22777",
     "votes": 122704,
     "pct": 0.53,
-    "status": "Eleito (projeção)",
+    "status": "Eleito por QP",
     "incumbent": false,
     "prevParty": null,
     "prevCurrent": null,
-    "projecao": true
+    "projecao": false
    },
    {
     "uf": "SP",
@@ -5195,11 +5190,11 @@
     "number": "13633",
     "votes": 122158,
     "pct": 0.52,
-    "status": "Eleito (projeção)",
+    "status": "Eleito por QP",
     "incumbent": false,
     "prevParty": null,
     "prevCurrent": null,
-    "projecao": true
+    "projecao": false
    },
    {
     "uf": "SP",
@@ -5209,11 +5204,11 @@
     "number": "10222",
     "votes": 119904,
     "pct": 0.51,
-    "status": "Eleito (projeção)",
+    "status": "Eleito por QP",
     "incumbent": false,
     "prevParty": null,
     "prevCurrent": null,
-    "projecao": true
+    "projecao": false
    },
    {
     "uf": "SP",
@@ -5223,11 +5218,11 @@
     "number": "55855",
     "votes": 116413,
     "pct": 0.5,
-    "status": "Eleito (projeção)",
+    "status": "Eleito por QP",
     "incumbent": true,
     "prevParty": "PSD",
     "prevCurrent": null,
-    "projecao": true
+    "projecao": false
    },
    {
     "uf": "SP",
@@ -5237,11 +5232,11 @@
     "number": "13131",
     "votes": 108275,
     "pct": 0.46,
-    "status": "Eleito (projeção)",
+    "status": "Eleito por QP",
     "incumbent": true,
     "prevParty": "PT",
     "prevCurrent": null,
-    "projecao": true
+    "projecao": false
    },
    {
     "uf": "SP",
@@ -5251,11 +5246,11 @@
     "number": "22422",
     "votes": 107073,
     "pct": 0.46,
-    "status": "Eleito (projeção)",
+    "status": "Eleito por QP",
     "incumbent": true,
     "prevParty": "PL",
     "prevCurrent": null,
-    "projecao": true
+    "projecao": false
    },
    {
     "uf": "SP",
@@ -5265,11 +5260,11 @@
     "number": "44077",
     "votes": 105174,
     "pct": 0.45,
-    "status": "Eleito (projeção)",
+    "status": "Eleito por QP",
     "incumbent": true,
     "prevParty": "UNIÃO",
     "prevCurrent": null,
-    "projecao": true
+    "projecao": false
    },
    {
     "uf": "SP",
@@ -5279,11 +5274,11 @@
     "number": "13644",
     "votes": 104820,
     "pct": 0.45,
-    "status": "Eleito (projeção)",
+    "status": "Eleito por QP",
     "incumbent": false,
     "prevParty": null,
     "prevCurrent": null,
-    "projecao": true
+    "projecao": false
    },
    {
     "uf": "SP",
@@ -5293,11 +5288,11 @@
     "number": "13114",
     "votes": 102892,
     "pct": 0.44,
-    "status": "Eleito (projeção)",
+    "status": "Eleito por QP",
     "incumbent": true,
     "prevParty": "PT",
     "prevCurrent": null,
-    "projecao": true
+    "projecao": false
    },
    {
     "uf": "SP",
@@ -5307,11 +5302,11 @@
     "number": "15363",
     "votes": 101946,
     "pct": 0.44,
-    "status": "Eleito (projeção)",
+    "status": "Eleito por QP",
     "incumbent": false,
     "prevParty": null,
     "prevCurrent": null,
-    "projecao": true
+    "projecao": false
    },
    {
     "uf": "SP",
@@ -5321,11 +5316,11 @@
     "number": "55400",
     "votes": 100083,
     "pct": 0.43,
-    "status": "Eleito (projeção)",
+    "status": "Eleito por QP",
     "incumbent": true,
     "prevParty": "PSD",
     "prevCurrent": null,
-    "projecao": true
+    "projecao": false
    },
    {
     "uf": "SP",
@@ -5335,11 +5330,11 @@
     "number": "40640",
     "votes": 99840,
     "pct": 0.43,
-    "status": "Eleito (projeção)",
+    "status": "Eleito por QP",
     "incumbent": true,
     "prevParty": "PSB",
     "prevCurrent": null,
-    "projecao": true
+    "projecao": false
    },
    {
     "uf": "SP",
@@ -5349,11 +5344,11 @@
     "number": "22001",
     "votes": 98375,
     "pct": 0.42,
-    "status": "Eleito (projeção)",
+    "status": "Eleito por QP",
     "incumbent": false,
     "prevParty": null,
     "prevCurrent": null,
-    "projecao": true
+    "projecao": false
    },
    {
     "uf": "SP",
@@ -5363,11 +5358,11 @@
     "number": "44555",
     "votes": 97410,
     "pct": 0.42,
-    "status": "Eleito (projeção)",
+    "status": "Eleito por QP",
     "incumbent": false,
     "prevParty": null,
     "prevCurrent": null,
-    "projecao": true
+    "projecao": false
    },
    {
     "uf": "SP",
@@ -5377,11 +5372,11 @@
     "number": "13613",
     "votes": 96370,
     "pct": 0.41,
-    "status": "Eleito (projeção)",
+    "status": "Eleito por QP",
     "incumbent": true,
     "prevParty": "PT",
     "prevCurrent": null,
-    "projecao": true
+    "projecao": false
    },
    {
     "uf": "SP",
@@ -5391,11 +5386,11 @@
     "number": "22007",
     "votes": 96188,
     "pct": 0.41,
-    "status": "Eleito (projeção)",
+    "status": "Eleito por QP",
     "incumbent": false,
     "prevParty": null,
     "prevCurrent": null,
-    "projecao": true
+    "projecao": false
    },
    {
     "uf": "SP",
@@ -5405,11 +5400,11 @@
     "number": "13134",
     "votes": 94901,
     "pct": 0.41,
-    "status": "Eleito (projeção)",
+    "status": "Eleito por QP",
     "incumbent": true,
     "prevParty": "PT",
     "prevCurrent": null,
-    "projecao": true
+    "projecao": false
    },
    {
     "uf": "SP",
@@ -5419,11 +5414,11 @@
     "number": "50500",
     "votes": 94895,
     "pct": 0.41,
-    "status": "Eleito (projeção)",
+    "status": "Eleito por QP",
     "incumbent": false,
     "prevParty": null,
     "prevCurrent": null,
-    "projecao": true
+    "projecao": false
    },
    {
     "uf": "SP",
@@ -5433,11 +5428,11 @@
     "number": "22522",
     "votes": 94832,
     "pct": 0.41,
-    "status": "Eleito (projeção)",
+    "status": "Eleito por QP",
     "incumbent": true,
     "prevParty": "PL",
     "prevCurrent": null,
-    "projecao": true
+    "projecao": false
    },
    {
     "uf": "SP",
@@ -5447,11 +5442,11 @@
     "number": "13700",
     "votes": 94779,
     "pct": 0.41,
-    "status": "Eleito (projeção)",
+    "status": "Eleito por QP",
     "incumbent": true,
     "prevParty": "PT",
     "prevCurrent": null,
-    "projecao": true
+    "projecao": false
    },
    {
     "uf": "SP",
@@ -5461,11 +5456,11 @@
     "number": "55155",
     "votes": 94596,
     "pct": 0.41,
-    "status": "Eleito (projeção)",
+    "status": "Eleito por QP",
     "incumbent": true,
     "prevParty": "PSD",
     "prevCurrent": null,
-    "projecao": true
+    "projecao": false
    },
    {
     "uf": "SP",
@@ -5475,11 +5470,11 @@
     "number": "22123",
     "votes": 94319,
     "pct": 0.4,
-    "status": "Eleito (projeção)",
+    "status": "Eleito por QP",
     "incumbent": true,
     "prevParty": "PL",
     "prevCurrent": null,
-    "projecao": true
+    "projecao": false
    },
    {
     "uf": "SP",
@@ -5489,11 +5484,11 @@
     "number": "20000",
     "votes": 90934,
     "pct": 0.39,
-    "status": "Eleito (projeção)",
+    "status": "Eleito por QP",
     "incumbent": false,
     "prevParty": null,
     "prevCurrent": null,
-    "projecao": true
+    "projecao": false
    },
    {
     "uf": "SP",
@@ -5503,11 +5498,11 @@
     "number": "55014",
     "votes": 89558,
     "pct": 0.38,
-    "status": "Eleito (projeção)",
+    "status": "Eleito por QP",
     "incumbent": false,
     "prevParty": null,
     "prevCurrent": null,
-    "projecao": true
+    "projecao": false
    },
    {
     "uf": "SP",
@@ -5517,11 +5512,11 @@
     "number": "22999",
     "votes": 89156,
     "pct": 0.38,
-    "status": "Eleito (projeção)",
+    "status": "Eleito por QP",
     "incumbent": false,
     "prevParty": null,
     "prevCurrent": null,
-    "projecao": true
+    "projecao": false
    },
    {
     "uf": "SP",
@@ -5531,11 +5526,11 @@
     "number": "55455",
     "votes": 88784,
     "pct": 0.38,
-    "status": "Eleito (projeção)",
+    "status": "Eleito por QP",
     "incumbent": true,
     "prevParty": "PSD",
     "prevCurrent": null,
-    "projecao": true
+    "projecao": false
    },
    {
     "uf": "SP",
@@ -5545,11 +5540,11 @@
     "number": "11000",
     "votes": 87918,
     "pct": 0.38,
-    "status": "Eleito (projeção)",
+    "status": "Eleito por QP",
     "incumbent": false,
     "prevParty": null,
     "prevCurrent": null,
-    "projecao": true
+    "projecao": false
    },
    {
     "uf": "SP",
@@ -5559,11 +5554,11 @@
     "number": "40211",
     "votes": 86893,
     "pct": 0.37,
-    "status": "Eleito (projeção)",
+    "status": "Eleito por QP",
     "incumbent": false,
     "prevParty": null,
     "prevCurrent": null,
-    "projecao": true
+    "projecao": false
    },
    {
     "uf": "SP",
@@ -5573,11 +5568,11 @@
     "number": "55000",
     "votes": 85619,
     "pct": 0.37,
-    "status": "Eleito (projeção)",
+    "status": "Eleito por QP",
     "incumbent": false,
     "prevParty": null,
     "prevCurrent": null,
-    "projecao": true
+    "projecao": false
    },
    {
     "uf": "SP",
@@ -5587,11 +5582,11 @@
     "number": "22100",
     "votes": 82946,
     "pct": 0.36,
-    "status": "Eleito (projeção)",
+    "status": "Eleito por QP",
     "incumbent": true,
     "prevParty": "PL",
     "prevCurrent": null,
-    "projecao": true
+    "projecao": false
    },
    {
     "uf": "SP",
@@ -5601,11 +5596,11 @@
     "number": "10023",
     "votes": 82559,
     "pct": 0.35,
-    "status": "Eleito (projeção)",
+    "status": "Eleito por QP",
     "incumbent": false,
     "prevParty": null,
     "prevCurrent": null,
-    "projecao": true
+    "projecao": false
    },
    {
     "uf": "SP",
@@ -5615,11 +5610,11 @@
     "number": "15123",
     "votes": 82508,
     "pct": 0.35,
-    "status": "Eleito (projeção)",
+    "status": "Eleito por QP",
     "incumbent": true,
     "prevParty": "MDB",
     "prevCurrent": null,
-    "projecao": true
+    "projecao": false
    },
    {
     "uf": "SP",
@@ -5629,11 +5624,11 @@
     "number": "13016",
     "votes": 81485,
     "pct": 0.35,
-    "status": "Eleito (projeção)",
+    "status": "Eleito por QP",
     "incumbent": true,
     "prevParty": "PT",
     "prevCurrent": null,
-    "projecao": true
+    "projecao": false
    },
    {
     "uf": "SP",
@@ -5643,11 +5638,11 @@
     "number": "55125",
     "votes": 79157,
     "pct": 0.34,
-    "status": "Eleito (projeção)",
+    "status": "Eleito por QP",
     "incumbent": false,
     "prevParty": null,
     "prevCurrent": null,
-    "projecao": true
+    "projecao": false
    },
    {
     "uf": "SP",
@@ -5657,11 +5652,11 @@
     "number": "40444",
     "votes": 78957,
     "pct": 0.34,
-    "status": "Eleito (projeção)",
+    "status": "Eleito por média",
     "incumbent": false,
     "prevParty": null,
     "prevCurrent": null,
-    "projecao": true
+    "projecao": false
    },
    {
     "uf": "SP",
@@ -5671,11 +5666,11 @@
     "number": "22190",
     "votes": 77703,
     "pct": 0.33,
-    "status": "Eleito (projeção)",
+    "status": "Eleito por QP",
     "incumbent": false,
     "prevParty": null,
     "prevCurrent": null,
-    "projecao": true
+    "projecao": false
    },
    {
     "uf": "SP",
@@ -5685,11 +5680,11 @@
     "number": "44044",
     "votes": 77524,
     "pct": 0.33,
-    "status": "Eleito (projeção)",
+    "status": "Eleito por QP",
     "incumbent": true,
     "prevParty": "UNIÃO",
     "prevCurrent": null,
-    "projecao": true
+    "projecao": false
    },
    {
     "uf": "SP",
@@ -5699,11 +5694,11 @@
     "number": "22345",
     "votes": 76371,
     "pct": 0.33,
-    "status": "Eleito (projeção)",
+    "status": "Eleito por QP",
     "incumbent": false,
     "prevParty": null,
     "prevCurrent": null,
-    "projecao": true
+    "projecao": false
    },
    {
     "uf": "SP",
@@ -5713,11 +5708,11 @@
     "number": "44123",
     "votes": 74733,
     "pct": 0.32,
-    "status": "Eleito (projeção)",
+    "status": "Eleito por média",
     "incumbent": false,
     "prevParty": null,
     "prevCurrent": null,
-    "projecao": true
+    "projecao": false
    },
    {
     "uf": "SP",
@@ -5727,11 +5722,11 @@
     "number": "15000",
     "votes": 74480,
     "pct": 0.32,
-    "status": "Eleito (projeção)",
+    "status": "Eleito por média",
     "incumbent": true,
     "prevParty": "MDB",
     "prevCurrent": null,
-    "projecao": true
+    "projecao": false
    },
    {
     "uf": "SP",
@@ -5741,11 +5736,11 @@
     "number": "20777",
     "votes": 74365,
     "pct": 0.32,
-    "status": "Eleito (projeção)",
+    "status": "Eleito por QP",
     "incumbent": false,
     "prevParty": null,
     "prevCurrent": null,
-    "projecao": true
+    "projecao": false
    },
    {
     "uf": "SP",
@@ -5755,11 +5750,11 @@
     "number": "13110",
     "votes": 74115,
     "pct": 0.32,
-    "status": "Eleito (projeção)",
+    "status": "Eleito por QP",
     "incumbent": false,
     "prevParty": null,
     "prevCurrent": null,
-    "projecao": true
+    "projecao": false
    },
    {
     "uf": "SP",
@@ -5769,11 +5764,11 @@
     "number": "55055",
     "votes": 74043,
     "pct": 0.32,
-    "status": "Eleito (projeção)",
+    "status": "Eleito por QP",
     "incumbent": true,
     "prevParty": "PSD",
     "prevCurrent": null,
-    "projecao": true
+    "projecao": false
    },
    {
     "uf": "SP",
@@ -5783,11 +5778,11 @@
     "number": "22411",
     "votes": 73787,
     "pct": 0.32,
-    "status": "Eleito (projeção)",
+    "status": "Eleito por QP",
     "incumbent": true,
     "prevParty": "PL",
     "prevCurrent": null,
-    "projecao": true
+    "projecao": false
    },
    {
     "uf": "SP",
@@ -5797,11 +5792,11 @@
     "number": "13789",
     "votes": 73648,
     "pct": 0.32,
-    "status": "Eleito (projeção)",
+    "status": "Eleito por QP",
     "incumbent": true,
     "prevParty": "PT",
     "prevCurrent": null,
-    "projecao": true
+    "projecao": false
    },
    {
     "uf": "SP",
@@ -5811,11 +5806,11 @@
     "number": "10100",
     "votes": 73526,
     "pct": 0.32,
-    "status": "Eleito (projeção)",
+    "status": "Eleito por QP",
     "incumbent": false,
     "prevParty": null,
     "prevCurrent": null,
-    "projecao": true
+    "projecao": false
    },
    {
     "uf": "SP",
@@ -5825,11 +5820,11 @@
     "number": "13310",
     "votes": 72574,
     "pct": 0.31,
-    "status": "Eleito (projeção)",
+    "status": "Eleito por QP",
     "incumbent": true,
     "prevParty": "PT",
     "prevCurrent": null,
-    "projecao": true
+    "projecao": false
    },
    {
     "uf": "SP",
@@ -5839,11 +5834,11 @@
     "number": "13622",
     "votes": 72486,
     "pct": 0.31,
-    "status": "Eleito (projeção)",
+    "status": "Eleito por média",
     "incumbent": false,
     "prevParty": null,
     "prevCurrent": null,
-    "projecao": true
+    "projecao": false
    },
    {
     "uf": "SP",
@@ -5853,11 +5848,11 @@
     "number": "22500",
     "votes": 71263,
     "pct": 0.31,
-    "status": "Eleito (projeção)",
+    "status": "Eleito por QP",
     "incumbent": true,
     "prevParty": "PL",
     "prevCurrent": null,
-    "projecao": true
+    "projecao": false
    },
    {
     "uf": "SP",
@@ -5867,11 +5862,11 @@
     "number": "22022",
     "votes": 70997,
     "pct": 0.3,
-    "status": "Eleito (projeção)",
+    "status": "Eleito por QP",
     "incumbent": false,
     "prevParty": null,
     "prevCurrent": null,
-    "projecao": true
+    "projecao": false
    },
    {
     "uf": "SP",
@@ -5881,11 +5876,11 @@
     "number": "13121",
     "votes": 70737,
     "pct": 0.3,
-    "status": "Eleito (projeção)",
+    "status": "Eleito por média",
     "incumbent": true,
     "prevParty": "PT",
     "prevCurrent": null,
-    "projecao": true
+    "projecao": false
    },
    {
     "uf": "SP",
@@ -5895,11 +5890,11 @@
     "number": "10321",
     "votes": 68118,
     "pct": 0.29,
-    "status": "Eleito (projeção)",
+    "status": "Eleito por QP",
     "incumbent": true,
     "prevParty": "Republicanos",
     "prevCurrent": null,
-    "projecao": true
+    "projecao": false
    },
    {
     "uf": "SP",
@@ -5909,11 +5904,11 @@
     "number": "20520",
     "votes": 68055,
     "pct": 0.29,
-    "status": "Eleito (projeção)",
+    "status": "Eleito por QP",
     "incumbent": false,
     "prevParty": null,
     "prevCurrent": null,
-    "projecao": true
+    "projecao": false
    },
    {
     "uf": "SP",
@@ -5923,11 +5918,11 @@
     "number": "22300",
     "votes": 67413,
     "pct": 0.29,
-    "status": "Eleito (projeção)",
+    "status": "Eleito por QP",
     "incumbent": false,
     "prevParty": null,
     "prevCurrent": null,
-    "projecao": true
+    "projecao": false
    },
    {
     "uf": "SP",
@@ -5937,11 +5932,11 @@
     "number": "30123",
     "votes": 66512,
     "pct": 0.29,
-    "status": "Eleito (projeção)",
+    "status": "Eleito por QP",
     "incumbent": false,
     "prevParty": null,
     "prevCurrent": null,
-    "projecao": true
+    "projecao": false
    },
    {
     "uf": "SP",
@@ -5951,11 +5946,11 @@
     "number": "10123",
     "votes": 66474,
     "pct": 0.28,
-    "status": "Eleito (projeção)",
+    "status": "Eleito por QP",
     "incumbent": true,
     "prevParty": "Republicanos",
     "prevCurrent": null,
-    "projecao": true
+    "projecao": false
    },
    {
     "uf": "SP",
@@ -5965,11 +5960,11 @@
     "number": "22122",
     "votes": 61953,
     "pct": 0.27,
-    "status": "Eleito (projeção)",
+    "status": "Eleito por QP",
     "incumbent": false,
     "prevParty": null,
     "prevCurrent": null,
-    "projecao": true
+    "projecao": false
    },
    {
     "uf": "SP",
@@ -5979,11 +5974,11 @@
     "number": "22051",
     "votes": 61183,
     "pct": 0.26,
-    "status": "Eleito (projeção)",
+    "status": "Eleito por média",
     "incumbent": true,
     "prevParty": "PL",
     "prevCurrent": null,
-    "projecao": true
+    "projecao": false
    },
    {
     "uf": "SP",
@@ -5993,11 +5988,11 @@
     "number": "22343",
     "votes": 59942,
     "pct": 0.26,
-    "status": "Eleito (projeção)",
+    "status": "Eleito por média",
     "incumbent": true,
     "prevParty": "PL",
     "prevCurrent": null,
-    "projecao": true
+    "projecao": false
    },
    {
     "uf": "SP",
@@ -6007,11 +6002,11 @@
     "number": "50300",
     "votes": 58984,
     "pct": 0.25,
-    "status": "Eleito (projeção)",
+    "status": "Eleito por QP",
     "incumbent": false,
     "prevParty": null,
     "prevCurrent": null,
-    "projecao": true
+    "projecao": false
    },
    {
     "uf": "SP",
@@ -6021,11 +6016,11 @@
     "number": "25000",
     "votes": 54065,
     "pct": 0.23,
-    "status": "Eleito (projeção)",
+    "status": "Eleito por QP",
     "incumbent": true,
     "prevParty": "PRD",
     "prevCurrent": null,
-    "projecao": true
+    "projecao": false
    },
    {
     "uf": "SP",
@@ -6035,11 +6030,11 @@
     "number": "20100",
     "votes": 53644,
     "pct": 0.23,
-    "status": "Eleito (projeção)",
+    "status": "Eleito por média",
     "incumbent": true,
     "prevParty": "PODE",
     "prevCurrent": null,
-    "projecao": true
+    "projecao": false
    }
   ]
  },
@@ -6360,10 +6355,7 @@
     "SP"
    ],
    "pendentes": [],
-   "projetadas": [
-    "MG",
-    "SP"
-   ],
+   "projetadas": [],
    "rows": [
     {
      "party": "PL",
@@ -6603,9 +6595,7 @@
     "SP"
    ],
    "pendentes": [],
-   "projetadas": [
-    "SP"
-   ],
+   "projetadas": [],
    "rows": [
     {
      "party": "PL",
@@ -6814,7 +6804,7 @@
  },
  "presidente": {
   "turno": 1,
-  "final": false,
+  "final": true,
   "apuradas": 100,
   "eleito": null,
   "candidatos": [
@@ -6823,28 +6813,28 @@
     "party": "PL",
     "pct": 47.03,
     "votes": 56104503,
-    "status": "2º turno (projeção)"
+    "status": "2º turno"
    },
    {
     "name": "LULA",
     "party": "PT",
     "pct": 45.16,
     "votes": 53879538,
-    "status": "2º turno (projeção)"
+    "status": "2º turno"
    },
    {
     "name": "ESCRITOR AUGUSTO CURY",
     "party": "AVANTE",
     "pct": 2.89,
     "votes": 3448569,
-    "status": ""
+    "status": "Não eleito"
    },
    {
     "name": "RENAN SANTOS",
     "party": "MISSÃO",
     "pct": 2.24,
     "votes": 2675887,
-    "status": ""
+    "status": "Não eleito"
    }
   ]
  },

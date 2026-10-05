@@ -2,8 +2,8 @@
   "race": "presidente",
   "kind": "presidente",
   "source": "TSE (resultados.tse.jus.br)",
-  "complete": false,
-  "updated": "05/10/2026 02:58:39",
+  "complete": true,
+  "updated": "05/10/2026 12:51:05",
   "sectionsPct": 100,
   "totals": {
     "inscritos": {
@@ -37,8 +37,8 @@
       "party": "PL",
       "votes": 56104503,
       "pct": 47.03,
-      "elected": false,
-      "status": "2º turno (projeção)"
+      "elected": true,
+      "status": "2º turno"
     },
     {
       "name": "RONALDO RAMOS CAIADO",
@@ -47,7 +47,7 @@
       "votes": 2605148,
       "pct": 2.18,
       "elected": false,
-      "status": ""
+      "status": "Não eleito"
     },
     {
       "name": "LUIZ INÁCIO LULA DA SILVA",
@@ -55,8 +55,8 @@
       "party": "PT",
       "votes": 53879538,
       "pct": 45.16,
-      "elected": false,
-      "status": "2º turno (projeção)"
+      "elected": true,
+      "status": "2º turno"
     },
     {
       "name": "CLARIANA ZACARKIM BARAO",
@@ -65,7 +65,7 @@
       "votes": 40043,
       "pct": 0.03,
       "elected": false,
-      "status": ""
+      "status": "Não eleito"
     },
     {
       "name": "EDMILSON SILVA COSTA",
@@ -74,7 +74,7 @@
       "votes": 22693,
       "pct": 0.02,
       "elected": false,
-      "status": ""
+      "status": "Não eleito"
     },
     {
       "name": "HERTZ DA CONCEICAO DIAS",
@@ -83,7 +83,7 @@
       "votes": 43103,
       "pct": 0.04,
       "elected": false,
-      "status": ""
+      "status": "Não eleito"
     },
     {
       "name": "AUGUSTO JORGE CURY",
@@ -92,7 +92,7 @@
       "votes": 3448569,
       "pct": 2.89,
       "elected": false,
-      "status": ""
+      "status": "Não eleito"
     },
     {
       "name": "ROMEU ZEMA NETO",
@@ -101,7 +101,7 @@
       "votes": 326488,
       "pct": 0.27,
       "elected": false,
-      "status": ""
+      "status": "Não eleito"
     },
     {
       "name": "SAMARA MARTINS DA SILVA FEITOSA",
@@ -110,7 +110,7 @@
       "votes": 122911,
       "pct": 0.1,
       "elected": false,
-      "status": ""
+      "status": "Não eleito"
     },
     {
       "name": "WILSON GRASSI JUNIOR",
@@ -119,7 +119,7 @@
       "votes": 16881,
       "pct": 0.01,
       "elected": false,
-      "status": ""
+      "status": "Não eleito"
     },
     {
       "name": "RENAN ANTONIO FERREIRA DOS SANTOS",
@@ -128,7 +128,7 @@
       "votes": 2675887,
       "pct": 2.24,
       "elected": false,
-      "status": ""
+      "status": "Não eleito"
     },
     {
       "name": "RUI COSTA PIMENTA",
@@ -137,7 +137,7 @@
       "votes": 15024,
       "pct": 0.01,
       "elected": false,
-      "status": ""
+      "status": "Não eleito"
     }
   ]
 }

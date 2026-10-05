@@ -50,20 +50,20 @@
       "status": "Não eleito"
     },
     {
-      "name": "JOAQUIM SILVA MACIEL",
-      "urna": "JOAQUIM DO MLB",
-      "party": "UP",
-      "votes": 15457,
-      "pct": 0.13,
-      "elected": false,
-      "status": "Não eleito"
-    },
-    {
       "name": "KAREN CORREIA GUERREIRO",
       "urna": "KAREN GUERREIRO",
       "party": "MISSÃO",
       "votes": 93198,
       "pct": 0.81,
+      "elected": false,
+      "status": "Não eleito"
+    },
+    {
+      "name": "JOAQUIM SILVA MACIEL",
+      "urna": "JOAQUIM DO MLB",
+      "party": "UP",
+      "votes": 15457,
+      "pct": 0.13,
       "elected": false,
       "status": "Não eleito"
     },
