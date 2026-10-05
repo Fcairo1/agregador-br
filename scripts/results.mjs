@@ -11,6 +11,8 @@ const DATA = new URL("../data/", import.meta.url);
 const OUT = new URL("../site/data/", import.meta.url);
 const offline = process.argv.includes("--offline");
 const ELECTION_DAY = "2026-10-04";
+const ELECTION_DAY_2T = "2026-10-25";
+const dayOf = (round) => (round === "2T" ? ELECTION_DAY_2T : ELECTION_DAY);
 
 // ---------- onde está o resultado de cada corrida ----------
 const PRES_RES = "Eleição presidencial no Brasil em 2026";
@@ -21,7 +23,12 @@ const stateRes = (race) => {
 function sources() {
   const out = [];
   for (const [key, race] of Object.entries(RACES)) {
-    if (race.round === "2T") continue; // 2º turno ainda não houve
+    if (race.round === "2T") {
+      // só o 2º turno que vai acontecer: Flávio × Lula (os outros "cenários" são hipóteses) e governador do RJ
+      if (key === "presidente-2t-flavio") out.push({ key, kind: "presidente", round: "2T", page: PRES_RES, head: /^resultado/i });
+      else if (key === "rj-governador-2t") out.push({ key, kind: "governador", round: "2T", page: stateRes(race), head: /governador/i });
+      continue;
+    }
     if (key === "presidente") out.push({ key, kind: "presidente", page: PRES_RES, head: /^resultado/i });
     else if (key.endsWith("-governador")) out.push({ key, kind: "governador", page: stateRes(race), head: /governador/i });
     else if (key.endsWith("-senado")) out.push({ key, kind: "senado", page: stateRes(race), head: /senador/i });
@@ -73,9 +80,9 @@ function parseResultTable(html) {
 
 // fonte primária: apuração oficial do TSE (completa e em tempo real); Wikipédia só como reserva
 async function fetchTSE(src) {
-  const uf = src.key === "presidente" ? "br" : src.key.split("-")[0];
+  const uf = src.kind === "presidente" ? "br" : src.key.split("-")[0];
   const cargo = src.kind === "presidente" ? CARGO.presidente : src.kind === "governador" ? CARGO.governador : CARGO.senador;
-  const r = await getCargo(uf, cargo);
+  const r = await getCargo(uf, cargo, src.round === "2T" ? 2 : 1);
   if (!r || !r.cands.length) return null;
   return {
     cands: r.cands.filter((c) => c.valid !== false).map((c) => ({ name: c.name, urna: c.urna, party: c.party, votes: c.votes, pct: c.pct, elected: c.elected, status: c.status })),
@@ -95,6 +102,7 @@ async function fetchResult(src) {
   } catch (e) {
     console.warn(`  ${src.key}: TSE falhou (${e.message}) — tentando Wikipédia`);
   }
+  if (src.round === "2T") return null; // sem reserva pela Wikipédia no 2º turno
   const html = await getPageHTML(src.page, { offline });
   const { tables } = tablesWithHeadings(html);
   const hit = tables.filter(
@@ -122,7 +130,7 @@ function matchKey(resultName, keys, aliasOf) {
 
 // Estimativas CONGELADAS do 1º turno: a comparação pesquisa × resultado tem que usar o que o modelo
 // mostrava na véspera, não o que ele calcularia hoje (senão recalibrar o modelo reescreve a história).
-const SNAP = new URL("estimativas-1t.json", DATA);
+const SNAP = new URL("estimativas.json", DATA);
 const snapshot = fs.existsSync(SNAP) ? JSON.parse(fs.readFileSync(SNAP, "utf8")) : {};
 let snapDirty = false;
 
@@ -165,7 +173,8 @@ function compare(key, res, agg, race) {
       err: +(real - est).toFixed(2), inBand: real >= lo && real <= hi,
     };
   });
-  if (!frozen && Date.now() > Date.parse(ELECTION_DAY + "T23:59:59-03:00") && agg.lastPoll <= ELECTION_DAY) {
+  const day = dayOf(race.round);
+  if (!frozen && Date.now() > Date.parse(day + "T23:59:59-03:00") && agg.lastPoll <= day) {
     snapshot[key] = { lastPoll: agg.lastPoll, candidates: Object.fromEntries(out.map((c) => [c.key, { est: c.est, lo: c.lo, hi: c.hi }])) };
     snapDirty = true;
   }
@@ -183,13 +192,13 @@ function compare(key, res, agg, race) {
 }
 
 // erro das ÚLTIMAS pesquisas de cada instituto (≤14d antes da eleição), mesma base (candidatos exibidos)
-function pollsterErrors(key, cmp, agg) {
+function pollsterErrors(key, cmp, agg, day = ELECTION_DAY) {
   const real = Object.fromEntries(cmp.candidates.map((c) => [c.key, c.real]));
-  const lim = Date.parse(ELECTION_DAY + "T00:00:00Z") - 14 * 864e5;
+  const lim = Date.parse(day + "T00:00:00Z") - 14 * 864e5;
   const last = new Map();
   for (const p of agg.polls || []) {
     const t = Date.parse(p.end + "T00:00:00Z");
-    if (t > Date.parse(ELECTION_DAY + "T00:00:00Z") || t < lim) continue;
+    if (t > Date.parse(day + "T00:00:00Z") || t < lim) continue;
     if (!last.has(p.pollster) || t > last.get(p.pollster).t) last.set(p.pollster, { t, p });
   }
   const res = [];
@@ -244,18 +253,19 @@ async function main() {
       continue;
     }
     cmp.kind = src.kind;
+    cmp.round = src.round || "1T";
     cmp.complete = complete;
     cmp.source = res.source || "Wikipédia";
     cmp.sectionsPct = res.sectionsPct ?? null;
     cmp.group = RACES[src.key].group;
     summary.races.push(cmp);
-    summary.pollsters.push(...pollsterErrors(src.key, cmp, agg));
+    summary.pollsters.push(...pollsterErrors(src.key, cmp, agg, dayOf(src.round)).map((p) => ({ ...p, round: src.round || "1T" })));
     console.log(`  ${src.key}: ${cmp.complete ? "completo" : "PARCIAL"} · vencedor ${cmp.actualWinner} (previsto ${cmp.predictedWinner}) · MAE ${cmp.mae} · ${cmp.inBandPct}% na faixa`);
   }
   if (snapDirty) {
     const sorted = Object.fromEntries(Object.entries(snapshot).sort(([a], [b]) => a.localeCompare(b)));
     fs.writeFileSync(SNAP, JSON.stringify(sorted, null, 1) + "\n");
-    console.log("  -> data/estimativas-1t.json (estimativas do 1º turno congeladas)");
+    console.log("  -> data/estimativas.json (estimativas do 1º turno congeladas)");
   }
   summary.turnout = turnout;
   // 2022 (1º turno presidencial) pra comparar abstenção/brancos/nulos

@@ -33,39 +33,58 @@ function raceCard(r) {
       <tbody>${rows}</tbody></table></div></section>`;
 }
 
-async function boot() {
-  const d = await (await fetch("data/resultados.json", { cache: "no-store" })).json();
-  const races = d.races || [];
-  if (!races.length) {
-    $("#headline").innerHTML = `<p class="lead">Ainda sem resultados publicados na fonte. Esta página se atualiza sozinha.</p>`;
-    return;
-  }
+function headline(races) {
   const hits = races.filter((r) => r.winnerHit).length;
   const mae = races.reduce((s, r) => s + r.mae, 0) / races.length;
   const all = races.flatMap((r) => r.candidates);
   const inBand = (all.filter((c) => c.inBand).length / all.length) * 100;
   const big = [...all].sort((a, b) => Math.abs(b.err) - Math.abs(a.err))[0];
   const bigRace = races.find((r) => r.candidates.includes(big));
-  $("#headline").innerHTML =
-    statCard("Líder certo", `${hits}/${races.length}`, "corridas", "o líder da tendência foi o mais votado") +
-    statCard("Erro médio", fmt(mae, 2), "p.p.", "por candidato, todas as corridas") +
+  return (
+    statCard("Líder certo", `${hits}/${races.length}`, races.length > 1 ? "corridas" : "corrida", "o líder da tendência foi o mais votado") +
+    statCard("Erro médio", fmt(mae, 2), "p.p.", "por candidato") +
     statCard("Dentro da faixa", fmt(inBand, 0), "%", "meta do modelo: ~90%") +
-    statCard("Maior surpresa", sgn(big.err), "p.p.", `${big.name} (${bigRace.group})`);
-  $("#races").innerHTML = races.map(raceCard).join("");
+    statCard("Maior surpresa", sgn(big.err), "p.p.", `${big.name} (${bigRace.group})`)
+  );
+}
 
-  // institutos
+function pollsterTable(list) {
   const by = new Map();
-  for (const p of d.pollsters || []) {
+  for (const p of list) {
     const a = by.get(p.pollster) || { mae: [], bias: [], hit: 0, n: 0 };
     a.mae.push(p.mae); if (p.bias != null) a.bias.push(p.bias); a.hit += p.winnerHit ? 1 : 0; a.n++;
     by.set(p.pollster, a);
   }
   const avg = (a) => a.reduce((s, v) => s + v, 0) / a.length;
-  const list = [...by].map(([name, a]) => ({ name, mae: avg(a.mae), bias: a.bias.length ? avg(a.bias) : 0, hit: a.hit, n: a.n })).sort((a, b) => a.mae - b.mae);
-  $("#pollsters").innerHTML =
+  const rows = [...by].map(([name, a]) => ({ name, mae: avg(a.mae), bias: a.bias.length ? avg(a.bias) : 0, hit: a.hit, n: a.n })).sort((a, b) => a.mae - b.mae);
+  return (
     "<thead><tr><th>Instituto</th><th>Erro médio</th><th>Viés no vencedor</th><th>Corridas</th><th>Vencedor certo</th></tr></thead><tbody>" +
-    list.map((p) => `<tr><td>${p.name}</td><td>${fmt(p.mae, 2)}</td><td class="${Math.abs(p.bias) > 2.5 ? "err-big" : ""}">${sgn(p.bias)}</td><td>${p.n}</td><td>${p.hit}/${p.n}</td></tr>`).join("") +
-    "</tbody>";
+    rows.map((p) => `<tr><td>${p.name}</td><td>${fmt(p.mae, 2)}</td><td class="${Math.abs(p.bias) > 2.5 ? "err-big" : ""}">${sgn(p.bias)}</td><td>${p.n}</td><td>${p.hit}/${p.n}</td></tr>`).join("") +
+    "</tbody>"
+  );
+}
+
+async function boot() {
+  const d = await (await fetch("data/resultados.json", { cache: "no-store" })).json();
+  const all = d.races || [];
+  const r1 = all.filter((r) => r.round !== "2T");
+  const r2 = all.filter((r) => r.round === "2T");
+  if (!r1.length) {
+    $("#headline").innerHTML = `<p class="lead">Ainda sem resultados publicados na fonte. Esta página se atualiza sozinha.</p>`;
+    return;
+  }
+  $("#headline").innerHTML = headline(r1);
+  $("#races").innerHTML = r1.map(raceCard).join("");
+
+  // 2º turno (25/10): presidente e governador do RJ
+  $("#round2").innerHTML = r2.length
+    ? `<h2 style="margin-top:34px">2º turno — 25/10</h2><div class="bt-headline">${headline(r2)}</div>${r2.map(raceCard).join("")}`
+    : `<h3>2º turno</h3><p class="lead">Aparece aqui depois de 25/10 (presidente: Flávio × Lula; governo do RJ: Paes × Ruas).</p>`;
+
+  // institutos
+  $("#pollsters").innerHTML = pollsterTable((d.pollsters || []).filter((p) => p.round !== "2T"));
+  const p2 = (d.pollsters || []).filter((p) => p.round === "2T");
+  if (p2.length) $("#pollsters2").innerHTML = pollsterTable(p2);
 
   // abstenção etc. (presidente 2026 vs 2022)
   const t = d.turnout?.presidente, p22 = d.turnout22;

@@ -53,6 +53,10 @@ async function collect() {
   };
   await Promise.all(Array.from({ length: 5 }, worker));
   R.presidente = await getCargo("br", CARGO.presidente).catch(() => null);
+  // 2º turno (25/10): só presidente e governador do RJ são acompanhados. Os arquivos só existem depois da votação.
+  R.presidente2 = await getCargo("br", CARGO.presidente, 2).catch(() => null);
+  const rj2 = await getCargo("rj", CARGO.governador, 2).catch(() => null);
+  if (rj2 && rj2.cands.some((c) => c.status === "Eleito")) R.governador.rj = { ...rj2, turno2: true };
   return R;
 }
 
@@ -148,18 +152,41 @@ async function main() {
     out.eleitos[kind] = list.sort((a, b) => a.uf.localeCompare(b.uf) || b.votes - a.votes);
     out.status[kind] = { ufsFinais: done, ufsTotal: total, pendentes: pendingUF.map((u) => u.toUpperCase()).sort(), projetadas: projUF.map((u) => u.toUpperCase()).sort(), segundoTurno: runoff.map((u) => u.toUpperCase()).sort(), vagas: Object.values(R[kind]).reduce((s, r) => s + (r?.vagas || 0), 0) };
   }
-  out.status.presidente = R.presidente ? { final: R.presidente.final, apuradas: R.presidente.sectionsPct } : null;
+  {
+    const p2 = R.presidente2 && R.presidente2.cands.some((c) => c.elected || c.status === "Eleito") ? R.presidente2 : null;
+    const p = p2 || R.presidente;
+    out.presidente = p
+      ? {
+          turno: p2 ? 2 : 1,
+          final: p.final,
+          apuradas: p.sectionsPct,
+          eleito: p2 ? p2.cands.find((c) => c.elected || c.status === "Eleito")?.urna || null : null,
+          candidatos: [...p.cands].sort((a, b) => b.votes - a.votes).slice(0, p2 ? 2 : 4).map((c) => ({ name: c.urna, party: c.party, pct: c.pct, votes: c.votes, status: c.status })),
+        }
+      : null;
+  }
+  out.status.presidente = out.presidente;
+  out.status.governador.rjDecidido2T = !!R.governador.rj?.turno2;
 
   // ---- composição antes × depois por casa ----
   const finalUF = (kind) => Object.entries(R[kind]).filter(([, r]) => r?.final || r?.projected).map(([u]) => u).sort(); // fechadas + projetadas
   const build = (antesCounts, elected, extra = {}) => {
-    const parties = new Set([...Object.keys(antesCounts), ...elected.map((e) => e.party)]);
+    // "PCdoB" (Câmara) e "PC do B" (TSE) são o mesmo partido: junta pela chave canônica
+    const ac = {};
+    const label = {};
+    for (const [p, n] of Object.entries(antesCounts)) {
+      ac[canon(p)] = (ac[canon(p)] || 0) + n;
+      label[canon(p)] = p;
+    }
+    for (const e of elected) label[canon(e.party)] = e.party; // prefere a sigla do TSE
+    const parties = new Set([...Object.keys(ac), ...elected.map((e) => canon(e.party))]);
     const rows = [];
-    for (const p of parties) {
-      const el = elected.filter((e) => e.party === p);
-      const a = antesCounts[p] || 0;
+    for (const k of parties) {
+      const p = label[k];
+      const el = elected.filter((e) => canon(e.party) === k);
+      const a = ac[k] || 0;
       const reel = el.filter((e) => e.incumbent).length;
-      const fromParty = elected.filter((e) => e.incumbent && e.prevParty && canon(e.prevParty) === canon(p)).length; // reeleitos que já eram desse partido
+      const fromParty = elected.filter((e) => e.incumbent && e.prevParty && canon(e.prevParty) === k).length; // reeleitos que já eram desse partido
       rows.push({ party: p, color: colorOf(p), antes: a, depois: el.length, saldo: el.length - a, reeleitos: reel, novos: el.length - reel, saiu: Math.max(0, a - fromParty), entrou: el.length - fromParty });
     }
     rows.sort((x, y) => y.depois - x.depois || y.antes - x.antes);
@@ -181,12 +208,14 @@ async function main() {
     const antesC = countBy(disp, (s) => s.party);
     const base = build(antesC, el, { vagasEmDisputa: disp.length, definidos: el.length });
     // casa inteira: soma quem continua
-    const contC = countBy(cont, (s) => s.party);
+    const canonCount = (o) => Object.entries(o).reduce((m, [p, n]) => ((m[canon(p)] = (m[canon(p)] || 0) + n), m), {});
+    const contC = canonCount(countBy(cont, (s) => s.party));
+    const antesK = canonCount(antesC);
     for (const r of base.rows) {
-      r.casaAntes = (antesC[r.party] || 0) + (contC[r.party] || 0);
-      r.casaDepois = r.depois + (contC[r.party] || 0);
+      r.casaAntes = (antesK[canon(r.party)] || 0) + (contC[canon(r.party)] || 0);
+      r.casaDepois = r.depois + (contC[canon(r.party)] || 0);
     }
-    for (const [p, n] of Object.entries(contC)) if (!base.rows.find((r) => canon(r.party) === canon(p))) base.rows.push({ party: p, color: colorOf(p), antes: 0, depois: 0, saldo: 0, reeleitos: 0, novos: 0, saiu: 0, entrou: 0, casaAntes: n, casaDepois: n });
+    for (const [k, n] of Object.entries(contC)) if (!base.rows.find((r) => canon(r.party) === k)) base.rows.push({ party: cont.find((x) => canon(x.party) === k).party, color: colorOf(k), antes: 0, depois: 0, saldo: 0, reeleitos: 0, novos: 0, saiu: 0, entrou: 0, casaAntes: n, casaDepois: n });
     out.composicao.senado = base;
   }
   // câmara (Sul+Sudeste, só UFs já finais)

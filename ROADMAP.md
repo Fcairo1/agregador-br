@@ -13,16 +13,15 @@ dep. federais Sul+Sudeste, dep. estaduais SP: antes × depois por partido, quem 
 renovação, mulheres, pretos e pardos, troca de partido). Fonte primária: JSON público do TSE
 (`scripts/lib/tse.mjs`). "Antes" = foto única em `data/antes.json` (não refazer após a posse!).
 
+**Feito depois (05/10):** projeção de SP/MG e Alesp; estimativas congeladas; recalibração da faixa (`SYS_HALF`);
+2º turno (presidente + RJ) pronto e testado com dados simulados — roda sozinho a partir de 25/10; removido mulheres/negros.
+
 **Falta / próximos passos**
-- **SP e MG** (dep. federal) e **Alesp**: o TSE ainda não fechou a apuração; entram sozinhos.
-- **2º turno (25/10):** presidente (Flávio × Lula), 7 governos (AC, AM, DF, ES, RJ, RN, TO). Estender
-  `RACES`/`results.mjs`/`eleitos.mjs` pro turno 2 (o TSE usa outro código de eleição) e comparar com as pesquisas de 2T.
-- **Recalibrar o modelo:** a faixa de 90% cobriu só ~31% dos resultados (presidente 83%, estados ~25%).
-  Estados: erro médio ~4,5 p.p. → `sysHalf` (1,1) é pequeno demais fora do presidente; testar por tipo de corrida.
-- **Ratings com a eleição real:** incluir 2026 (por instituto) no `ratings.mjs` (hoje só 2018/22).
-- **"Antes" mais fino:** Alesp usa a composição da eleição (Wikipédia); governadores/Alesp cruzam por nome.
-  Câmara/Senado têm nome civil → confiável. Revisar homônimos se algo parecer errado.
-- Mulheres/negros "antes" (só temos "depois").
+- **Depois de 25/10:** conferir o 2T de verdade (os arquivos 6258/6260 do TSE) e reavaliar `SYS_HALF` com mais dados.
+- **Ratings com a eleição real:** o erro por instituto de 2026 já aparece em `resultados.html`; falta incorporar ao `ratings.mjs`
+  (hoje só 2018/22). Fazer só depois do 2T pra não misturar (as estimativas do 1T estão congeladas, então não contamina a comparação).
+- Quando o TSE fechar SP/MG/Alesp, a projeção é substituída pelo oficial sozinha (conferir se bateu).
+- Demais 6 governos em 2º turno (AC, AM, DF, ES, RN, TO) não são acompanhados.
 
 ## 1. Previsão (o maior salto de utilidade)
 

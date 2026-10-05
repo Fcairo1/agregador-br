@@ -56,8 +56,14 @@ const spRunoff = (p) =>
 const PRES_PAGE = "Pesquisas de opinião para a eleição presidencial no Brasil em 2026";
 const wikiUrl = (page) => "https://pt.wikipedia.org/wiki/" + encodeURIComponent(page.replace(/ /g, "_"));
 
+// Erro sistemático do setor (p.p., escala crua da pesquisa) — soma em quadratura na faixa.
+// Calibrado com o 1º turno de 2026 (04/10): presidente ~1,1 (a faixa de 90% cobriu 83%); estaduais o erro foi bem
+// maior (erro quadrático médio ~5,3 p.p. normalizado ≈ 4,2 cru; cobertura de 90% exigiria ~4). Uso 3,8 (encolhido
+// pro prior, pois é UMA eleição). Reavaliar depois do 2º turno.
+export const SYS_HALF = { presidente: 1.1, estadual: 3.8 };
 function race(cfg) {
-  return { year: 2026, round: "1T", display: [], ...cfg, wikiUrl: wikiUrl(cfg.wikiPage) };
+  const sysHalf = cfg.sysHalf ?? (cfg.wikiPage === PRES_PAGE ? SYS_HALF.presidente : SYS_HALF.estadual);
+  return { year: 2026, round: "1T", display: [], sysHalf, ...cfg, wikiUrl: wikiUrl(cfg.wikiPage) };
 }
 // candidato de destaque: cor vem do partido, salvo override explícito
 const C = (key, name, party, extra = {}) => ({ key, name, party, ...extra });

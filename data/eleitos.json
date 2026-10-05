@@ -28,7 +28,8 @@
     "RN",
     "TO"
    ],
-   "vagas": 27
+   "vagas": 27,
+   "rjDecidido2T": false
   },
   "senador": {
    "ufsFinais": 27,
@@ -60,8 +61,40 @@
    "vagas": 94
   },
   "presidente": {
+   "turno": 1,
    "final": false,
-   "apuradas": 100
+   "apuradas": 100,
+   "eleito": null,
+   "candidatos": [
+    {
+     "name": "FLAVIO BOLSONARO",
+     "party": "PL",
+     "pct": 47.03,
+     "votes": 56104503,
+     "status": "2º turno (projeção)"
+    },
+    {
+     "name": "LULA",
+     "party": "PT",
+     "pct": 45.16,
+     "votes": 53879538,
+     "status": "2º turno (projeção)"
+    },
+    {
+     "name": "ESCRITOR AUGUSTO CURY",
+     "party": "AVANTE",
+     "pct": 2.89,
+     "votes": 3448569,
+     "status": ""
+    },
+    {
+     "name": "RENAN SANTOS",
+     "party": "MISSÃO",
+     "pct": 2.24,
+     "votes": 2675887,
+     "status": ""
+    }
+   ]
   }
  },
  "eleitos": {
@@ -6050,12 +6083,12 @@
     {
      "party": "REPUBLICANOS",
      "color": "#2E6BD6",
-     "antes": 0,
+     "antes": 4,
      "depois": 3,
-     "saldo": 3,
+     "saldo": -1,
      "reeleitos": 2,
      "novos": 1,
-     "saiu": 0,
+     "saiu": 2,
      "entrou": 1
     },
     {
@@ -6101,17 +6134,6 @@
      "novos": 1,
      "saiu": 0,
      "entrou": 1
-    },
-    {
-     "party": "Republicanos",
-     "color": "#2E6BD6",
-     "antes": 4,
-     "depois": 0,
-     "saldo": -4,
-     "reeleitos": 0,
-     "novos": 0,
-     "saiu": 2,
-     "entrou": -2
     },
     {
      "party": "UNIÃO",
@@ -6478,12 +6500,12 @@
     {
      "party": "PCDOB",
      "color": "#A31D1D",
-     "antes": 0,
+     "antes": 4,
      "depois": 4,
-     "saldo": 4,
+     "saldo": 0,
      "reeleitos": 2,
      "novos": 2,
-     "saiu": 0,
+     "saiu": 2,
      "entrou": 2
     },
     {
@@ -6564,17 +6586,6 @@
      "entrou": -4
     },
     {
-     "party": "PCdoB",
-     "color": "#A31D1D",
-     "antes": 4,
-     "depois": 0,
-     "saldo": -4,
-     "reeleitos": 0,
-     "novos": 0,
-     "saiu": 2,
-     "entrou": -2
-    },
-    {
      "party": "CIDADANIA",
      "color": "hsl(310 38% 48%)",
      "antes": 2,
@@ -6641,6 +6652,17 @@
      "entrou": 6
     },
     {
+     "party": "REPUBLICANOS",
+     "color": "#2E6BD6",
+     "antes": 9,
+     "depois": 6,
+     "saldo": -3,
+     "reeleitos": 3,
+     "novos": 3,
+     "saiu": 6,
+     "entrou": 3
+    },
+    {
      "party": "PODE",
      "color": "#2B7A78",
      "antes": 6,
@@ -6650,17 +6672,6 @@
      "novos": 5,
      "saiu": 5,
      "entrou": 5
-    },
-    {
-     "party": "REPUBLICANOS",
-     "color": "#2E6BD6",
-     "antes": 0,
-     "depois": 6,
-     "saldo": 6,
-     "reeleitos": 3,
-     "novos": 3,
-     "saiu": 0,
-     "entrou": 3
     },
     {
      "party": "MDB",
@@ -6751,17 +6762,6 @@
      "entrou": 1
     },
     {
-     "party": "Republicanos",
-     "color": "#2E6BD6",
-     "antes": 9,
-     "depois": 0,
-     "saldo": -9,
-     "reeleitos": 0,
-     "novos": 0,
-     "saiu": 6,
-     "entrou": -3
-    },
-    {
      "party": "PCdoB",
      "color": "#A31D1D",
      "antes": 1,
@@ -6811,6 +6811,42 @@
    "renovacaoPct": 52.1,
    "trocaramPartido": 0
   }
+ },
+ "presidente": {
+  "turno": 1,
+  "final": false,
+  "apuradas": 100,
+  "eleito": null,
+  "candidatos": [
+   {
+    "name": "FLAVIO BOLSONARO",
+    "party": "PL",
+    "pct": 47.03,
+    "votes": 56104503,
+    "status": "2º turno (projeção)"
+   },
+   {
+    "name": "LULA",
+    "party": "PT",
+    "pct": 45.16,
+    "votes": 53879538,
+    "status": "2º turno (projeção)"
+   },
+   {
+    "name": "ESCRITOR AUGUSTO CURY",
+    "party": "AVANTE",
+    "pct": 2.89,
+    "votes": 3448569,
+    "status": ""
+   },
+   {
+    "name": "RENAN SANTOS",
+    "party": "MISSÃO",
+    "pct": 2.24,
+    "votes": 2675887,
+    "status": ""
+   }
+  ]
  },
  "metodo": "Eleitos: apuração oficial do TSE. “Já ocupava o cargo” = nome encontrado na 57ª legislatura (Câmara/Senado, APIs oficiais), no Alesp atual (Wikipédia) ou como governador atual — cruzamento por nome, pode errar em homônimos."
 }

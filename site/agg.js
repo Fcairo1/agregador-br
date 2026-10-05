@@ -49,6 +49,7 @@ export function recompute(data, { excluded = new Set(), sinceDays = null } = {})
     q: polls.length < (P.sparseCutoff || 25) ? 0.02 : P.q ?? 0.032,
     designEffect: P.designEffect ?? 1.6,
     nCap: P.nCap ?? 3000,
+    sysHalf: P.sysHalf ?? 1.1,
     z: P.z ?? 1.64,
   };
 

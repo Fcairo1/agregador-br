@@ -80,7 +80,7 @@ function show(key) {
   const colors = Object.fromEntries(Object.values(D.composicao).flatMap((c) => c.rows.map((r) => [r.party, r.color])));
   let head = "";
   if (!list.length && h.kind !== "governador") head = "";
-  else if (h.kind === "governador") head = `<p class="lead">${list.length} governadores eleitos em 1º turno. Vão a <b>2º turno</b> em ${st.segundoTurno.length} estados: <b>${st.segundoTurno.join(", ")}</b> (25/10).</p>`;
+  else if (h.kind === "governador") head = `<p class="lead">${list.length} governadores eleitos em 1º turno. Vão a <b>2º turno</b> em ${st.segundoTurno.length} estados: <b>${st.segundoTurno.join(", ")}</b> (25/10) — aqui acompanho só o do RJ; nos demais, a vaga fica em aberto.${st.rjDecidido2T ? " <b>RJ já decidido no 2º turno.</b>" : ""}</p>`;
   else if (st.projetadas.length || st.pendentes.length) head = `<p class="lead">${st.projetadas.length ? `<b>Projeção em ${st.projetadas.join(", ")}:</b> o TSE já apurou todos os votos e definiu as vagas de cada partido, mas ainda não marcou os eleitos — aqui entram os mais votados de cada partido (mesmo método reproduziu 133 de 133 eleitos oficiais nos estados fechados). ` : ""}${st.pendentes.length ? `<i>Apuração em andamento em: ${st.pendentes.join(", ")}.</i> ` : ""}Os números cobrem ${comp.ufs && comp.ufs.length ? comp.ufs.join(", ") : "nenhum estado ainda"}; o “antes” é recortado para os mesmos estados.</p>`;
   else if (h.kind === "senador") head = `<p class="lead">Todas as 54 vagas definidas. “Antes” = os 54 senadores que ocupavam as cadeiras em disputa; a última coluna mostra a casa inteira (81), somando os 27 que continuam até 2031.</p>`;
   const empty = !list.length && h.kind !== "governador";
@@ -103,7 +103,14 @@ async function boot() {
   const S = D.status;
   const n = (k) => D.eleitos[k].filter((x) => (k === "governador" ? x.status === "Eleito" : true)).length;
   const proj = (k) => (S[k].projetadas.length ? ` · projeção em ${S[k].projetadas.join(", ")}` : "");
+  const P = D.presidente;
+  const presCard = !P
+    ? ""
+    : P.eleito
+      ? statCard("Presidente", esc(P.eleito), "", "eleito no 2º turno")
+      : statCard("Presidente", "2º turno", "", `${P.candidatos.slice(0, 2).map((c) => esc(c.name.split(" ")[0])).join(" × ")} · 25/10`);
   $("#headline").innerHTML =
+    presCard +
     statCard("Governadores", n("governador"), "/ 27", `${S.governador.segundoTurno.length} vão a 2º turno`) +
     statCard("Senadores", n("senador"), "/ 54", S.senador.ufsFinais === S.senador.ufsTotal ? "todas as vagas definidas" : `apuração em ${S.senador.pendentes.join(", ")}`) +
     statCard("Dep. federais", n("federal"), `/ ${S.federal.vagas}`, `Sul e Sudeste${proj("federal")}${S.federal.pendentes.length ? " · falta " + S.federal.pendentes.join(", ") : ""}`) +

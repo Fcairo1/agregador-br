@@ -3,14 +3,16 @@
 // Presidente = eleição federal (6257), cargo 1, uf "br". Estadual (6259): 3 gov, 5 sen, 6 dep.fed, 7 dep.est.
 const BASE = "https://resultados.tse.jus.br/oficial/ele2026";
 export const ELE = { federal: "6257", estadual: "6259" };
+export const ELE2 = { federal: "6258", estadual: "6260" }; // 2º turno (cdt2 em ele-c.json) — os arquivos só existem a partir de 25/10
 export const CARGO = { presidente: 1, governador: 3, senador: 5, federal: 6, estadual: 7 };
 export const UFS = "ac al am ap ba ce df es go ma mg ms mt pa pb pe pi pr rj rn ro rr rs sc se sp to".split(" ");
 
 const pad = (n, w) => String(n).padStart(w, "0");
 const f1 = (s) => parseFloat(String(s ?? "0").replace(",", "."));
 
-export async function fetchUnified(uf, cargo) {
-  const ele = cargo === CARGO.presidente ? ELE.federal : ELE.estadual;
+export async function fetchUnified(uf, cargo, turno = 1) {
+  const E = turno === 2 ? ELE2 : ELE;
+  const ele = cargo === CARGO.presidente ? E.federal : E.estadual;
   const url = `${BASE}/${ele}/dados/${uf}/${uf}-c${pad(cargo, 4)}-e${pad(ele, 6)}-u.json`;
   for (let i = 0; i < 3; i++) {
     try {
@@ -97,6 +99,6 @@ export function parseUnified(j, cargo) {
   };
 }
 
-export async function getCargo(uf, cargo) {
-  return parseUnified(await fetchUnified(uf, cargo), cargo);
+export async function getCargo(uf, cargo, turno = 1) {
+  return parseUnified(await fetchUnified(uf, cargo, turno), cargo);
 }

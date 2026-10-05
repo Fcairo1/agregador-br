@@ -102,7 +102,7 @@ Estado-espaço 1-D por candidato, grade **diária** (dias desde a 1ª pesquisa):
 - **Inferência:** filtro de Kalman para frente + suavizador RTS para trás. Forma fechada,
   **determinística** (sem RNG).
 - **Linha** = média suavizada `xS[t]`. **Faixa (~90%)** = `xS ± z·sqrt(PS[t] + sysHalf²)`,
-  `z=1.64`, `sysHalf=1.1` (erro sistemático do setor — todo mundo erra junto), piso `floorHalf`.
+  `z=1.64`, `sysHalf` por corrida (erro sistemático do setor — todo mundo erra junto; `SYS_HALF` em `races.mjs`: **presidente 1,1, estaduais 3,8** — recalibrado com o 1º turno de 2026, onde a faixa de 90% cobriu só 31%; reavaliar após o 2T), piso `floorHalf`.
 - **House effects:** 1ª passada Kalman como tendência de referência; resíduo médio de cada
   `(instituto, candidato)`, encolhido por `n/(n+5)`, limitado a `±houseMaxShift` (4 p.p.);
   subtrai dos pontos e refita. Só com ≥20 pesquisas e ≥5 institutos. Vai pro JSON em `houseEffects`.
@@ -212,6 +212,13 @@ npm run serve      # http://localhost:5173  (servidor estático, Node puro)
   `site/eleitos.html`. Escopo: gov/senado todos os estados; dep. federal Sul+Sudeste (`SCOPE_FED`); dep. estadual só SP.
   "Já ocupava" = cruzamento por nome (nome civil > nome de urna > nome parlamentar ⊂ completo). Gênero/cor-raça: cadastro
   `consulta_cand_2026.zip` (leitor de zip próprio em `lib/zip.mjs`, cache em `.cache/`).
+
+- **Estimativas congeladas** (`data/estimativas.json`): a comparação pesquisa × resultado usa o que o modelo mostrava na
+  véspera (1T: 04/10; 2T: 25/10), gravado na 1ª rodada depois da eleição — recalibrar o modelo não reescreve a história.
+- **Projeção de deputados** (`parseUnified` em `lib/tse.mjs`): enquanto `tf`≠"s", o TSE traz as vagas por partido (`vag`) mas não marca
+  eleitos; projeto os mais votados de cada partido (reproduziu 133/133 nos estados fechados). Cede ao oficial quando o TSE fecha.
+- **2º turno (25/10):** só presidente (Flávio × Lula) e governador do RJ. TSE: eleições 6258 (federal) e 6260 (estadual); os arquivos só
+  existem depois da votação (404 → null). `results.mjs` e `eleitos.mjs` já tratam (testado com dados simulados). Demais governos em 2T ficam "em aberto".
 
 ## TODO / fase 2
 
