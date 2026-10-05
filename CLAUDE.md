@@ -163,6 +163,11 @@ Estado-espaço 1-D por candidato, grade **diária** (dias desde a 1ª pesquisa):
   resultado oficial convertido pra base das pesquisas (`real / f`, com `f` = 100/Σ das linhas finais, congelado em
   `data/estimativas.json`). O tooltip mostra os dois números (válidos e base das pesquisas) e a tendência.
 
+- **Toggle de base dos gráficos** (`#base-toggle`, `toValid`/`setData` em `app.js`): "% das pesquisas" (padrão, inclui indecisos/
+  brancos/nulos) × "votos válidos" (cada data renormalizada pra os candidatos ATIVOS somarem 100%; linha, faixa e pontos usam o mesmo
+  fator). Só os gráficos — a tabela de pesquisas não muda. Preferência em `localStorage["base"]`; `state.raw` guarda o dado sem normalizar.
+  No modo válidos o ◎ usa `real` (já em votos válidos) em vez de `realRaw`.
+
 ## Matemática compartilhada
 
 `site/kalman.js` é a fonte de `trendKalman`; `scripts/lib/kalman.mjs` só reexporta. `site/agg.js`

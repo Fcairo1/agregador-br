@@ -26,6 +26,8 @@ const $ = (s, r = document) => r.querySelector(s);
 const svg = $("#chart");
 const tip = $("#tooltip");
 const state = {
+  valid: false, // base dos gráficos: false = % das pesquisas (com indecisos/brancos/nulos); true = votos válidos
+  raw: null, // dado do servidor já com filtros (antes da normalização)
   results: {}, // resultados oficiais por corrida (data/resultados.json) — viram ◎ no gráfico
   index: [],
   group: null,
@@ -67,7 +69,7 @@ function buildGeom(data) {
   const R = state.results[state.race];
   if (R) t1 = Math.max(t1, parseT(R.day)); // abre espaço pro dia da eleição
   let hiMax = 0;
-  if (R) for (const rc of R.candidates) if (visible.some((c) => c.key === rc.key)) hiMax = Math.max(hiMax, rc.realRaw);
+  if (R) for (const rc of R.candidates) if (visible.some((c) => c.key === rc.key)) hiMax = Math.max(hiMax, state.valid ? rc.real : rc.realRaw);
   for (const c of visible) for (const b of c.band) hiMax = Math.max(hiMax, b.hi);
   for (const c of visible) for (const p of c.line) hiMax = Math.max(hiMax, p.y);
   const step = hiMax <= 24 ? 5 : hiMax <= 60 ? 10 : 20;
@@ -246,6 +248,59 @@ function render() {
   renderFilter();
 }
 
+// ---------- base "votos válidos" ----------
+// Renormaliza, a cada data, pra que os candidatos ATIVOS somem 100% (como o resultado oficial, que só conta
+// votos válidos). Linha, faixa e pontos são multiplicados pelo mesmo fator; a tabela de pesquisas não muda.
+function toValid(d) {
+  const cs = d.candidates;
+  if (!cs || cs.length < 2) return d;
+  const refT = parseT(d.lastPoll);
+  const act = cs.filter((c) => currentValue(c, refT));
+  if (act.length < 2) return d;
+  const dates = [...new Set(cs.flatMap((c) => c.line.map((p) => p.t)))].sort();
+  const tms = dates.map(parseT);
+  const interp = (line, t) => {
+    // y da linha em t (ms); fora do intervalo, segura a ponta (candidato que entra/sai não faz a base pular)
+    if (t <= parseT(line[0].t)) return line[0].y;
+    const last = line[line.length - 1];
+    if (t >= parseT(last.t)) return last.y;
+    for (let i = 1; i < line.length; i++) {
+      const b = parseT(line[i].t);
+      if (t <= b) {
+        const a = parseT(line[i - 1].t);
+        return line[i - 1].y + ((line[i].y - line[i - 1].y) * (t - a)) / (b - a || 1);
+      }
+    }
+    return last.y;
+  };
+  const f = tms.map((t) => {
+    const sum = act.reduce((n, c) => n + interp(c.line, t), 0);
+    return sum > 0 ? 100 / sum : 1;
+  });
+  const fAt = (ms) => {
+    let bi = 0, bd = Infinity;
+    for (let i = 0; i < tms.length; i++) {
+      const dd = Math.abs(tms[i] - ms);
+      if (dd < bd) { bd = dd; bi = i; }
+    }
+    return f[bi];
+  };
+  const fByDate = new Map(dates.map((t, i) => [t, f[i]]));
+  return {
+    ...d,
+    candidates: cs.map((c) => ({
+      ...c,
+      line: c.line.map((p) => ({ ...p, y: p.y * fByDate.get(p.t) })),
+      band: c.band.map((p) => ({ ...p, lo: p.lo * (fByDate.get(p.t) ?? 1), hi: Math.min(100, p.hi * (fByDate.get(p.t) ?? 1)) })),
+      polls: c.polls.map((p) => ({ ...p, y: p.y * fAt(parseT(p.t)) })),
+    })),
+  };
+}
+function setData(d) {
+  state.raw = d;
+  state.data = state.valid ? toValid(d) : d;
+}
+
 // ---------- resultado oficial no gráfico (◎ no dia da eleição) ----------
 const fmtPct = (v) => v.toFixed(1).replace(".", ",") + "%";
 function drawResult(g, visible) {
@@ -263,7 +318,7 @@ function drawResult(g, visible) {
   const label = R.round === "2T" ? "2º turno" : "1º turno";
   for (const rc of cs) {
     const color = visible.find((c) => c.key === rc.key).color;
-    const cy = g.y(rc.realRaw);
+    const cy = g.y(state.valid ? rc.real : rc.realRaw);
     const m = el("g", { class: "rmark", tabindex: 0 });
     m.append(el("circle", { cx: xe, cy, r: 9, fill: "transparent" })); // área de toque
     m.append(el("circle", { class: "ring", cx: xe, cy, r: 5.6, stroke: color }));
@@ -273,8 +328,10 @@ function drawResult(g, visible) {
       tip.innerHTML =
         `<h4>Resultado oficial · ${label}</h4>` +
         `<div class="row"><span class="nm"><span class="dot" style="background:${color}"></span>${rc.name}</span><span class="v">${fmtPct(rc.real)}</span></div>` +
-        `<div class="row sub"><span>base das pesquisas</span><span class="v">${fmtPct(rc.realRaw)}</span></div>` +
-        `<div class="row sub"><span>tendência</span><span class="v">${fmtPct(rc.rawEst)}</span></div>`;
+        (state.valid
+          ? `<div class="row sub"><span>tendência (válidos)</span><span class="v">${fmtPct(rc.est)}</span></div>`
+          : `<div class="row sub"><span>base das pesquisas</span><span class="v">${fmtPct(rc.realRaw)}</span></div>` +
+            `<div class="row sub"><span>tendência</span><span class="v">${fmtPct(rc.rawEst)}</span></div>`);
       tip.style.left = Math.max(110, Math.min(holder.width - 120, (xe / VB.w) * holder.width)) + "px";
       tip.style.top = Math.max(72, (cy / VB.h) * holder.height) + "px";
       tip.hidden = false;
@@ -288,7 +345,9 @@ function drawResult(g, visible) {
   svg.append(grp);
   if (note) {
     note.hidden = false;
-    note.innerHTML = `◎ = resultado oficial do ${label} (TSE), convertido para a base das pesquisas — elas incluem indecisos, brancos e nulos; o resultado oficial é em votos válidos. Passe o mouse para ver os dois números. <a href="#resultados">Ver a comparação completa →</a>`;
+    note.innerHTML = state.valid
+      ? `◎ = resultado oficial do ${label} (TSE), em votos válidos entre os candidatos exibidos — a mesma base das linhas neste modo. <a href="#resultados">Ver a comparação completa →</a>`
+      : `◎ = resultado oficial do ${label} (TSE), convertido para a base das pesquisas — elas incluem indecisos, brancos e nulos; o resultado oficial é em votos válidos. Passe o mouse para ver os dois números. <a href="#resultados">Ver a comparação completa →</a>`;
   }
 }
 
@@ -599,7 +658,7 @@ async function load() {
     state.sinceDays = 0;
     const psel = $("#period-sel");
     if (psel) psel.value = "0";
-    state.data = state.baseData;
+    setData(state.baseData);
     render();
   } catch (e) {
     svg.textContent = "";
@@ -616,13 +675,13 @@ function applyFilter() {
   clearTimeout(filterTimer);
   filterTimer = setTimeout(() => {
     if (state.excluded.size === 0 && !state.sinceDays) {
-      state.data = state.baseData;
+      setData(state.baseData);
     } else {
       const rc = recompute(state.baseData, { excluded: state.excluded, sinceDays: state.sinceDays });
       if (rc.empty || !rc.candidates.length) {
-        state.data = { ...state.baseData, candidates: [], nPolls: rc.nPolls, pollsters: rc.pollsters || [] };
+        setData({ ...state.baseData, candidates: [], nPolls: rc.nPolls, pollsters: rc.pollsters || [] });
       } else {
-        state.data = { ...state.baseData, ...rc };
+        setData({ ...state.baseData, ...rc });
       }
     }
     render();
@@ -704,6 +763,31 @@ async function boot() {
   renderTabs();
   load();
 }
+
+// ---------- toggle de base (% das pesquisas × votos válidos) ----------
+function initBaseToggle() {
+  try {
+    state.valid = localStorage.getItem("base") === "valid";
+  } catch (e) {}
+  const sync = () => {
+    for (const b of document.querySelectorAll("#base-toggle button")) b.setAttribute("aria-pressed", String((b.dataset.b === "valid") === state.valid));
+  };
+  for (const b of document.querySelectorAll("#base-toggle button")) {
+    b.onclick = () => {
+      state.valid = b.dataset.b === "valid";
+      try {
+        localStorage.setItem("base", state.valid ? "valid" : "raw");
+      } catch (e) {}
+      sync();
+      if (state.raw) {
+        setData(state.raw);
+        render();
+      }
+    };
+  }
+  sync();
+}
+initBaseToggle();
 
 // ---------- seções (Pesquisas · Resultados · Eleitos) ----------
 const VIEWS = ["pesquisas", "resultados", "eleitos"];

@@ -246,3 +246,8 @@ main.bt h3 span { color: var(--muted); font-weight: 500; font-size: 13px; }
 .tabsets[hidden], main[hidden] { display: none !important; }
 .tooltip h4, .tooltip .row, .tooltip .row span { white-space: nowrap; }
 .tooltip .row { gap: 14px; }
+
+/* ---- toggle de base dos gráficos ---- */
+.basetoggle { display: inline-flex; border: 1px solid var(--line); border-radius: 999px; overflow: hidden; margin-right: auto; }
+.basetoggle button { border: 0; background: var(--panel); color: var(--muted); font: inherit; font-size: 12px; font-weight: 600; padding: 5px 12px; cursor: pointer; }
+.basetoggle button[aria-pressed="true"] { background: var(--ink); color: var(--bg); }

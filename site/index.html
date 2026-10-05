@@ -45,6 +45,10 @@
         </div>
 
         <div class="chart-toolbar">
+          <div class="basetoggle" id="base-toggle" role="group" aria-label="Base dos percentuais">
+            <button type="button" data-b="raw" aria-pressed="true" title="Percentual como a pesquisa divulga: inclui indecisos, brancos e nulos">% das pesquisas</button>
+            <button type="button" data-b="valid" aria-pressed="false" title="Renormaliza para somar 100% entre os candidatos exibidos, como o resultado oficial (votos válidos)">votos válidos</button>
+          </div>
           <label class="period">
             Período
             <select id="period-sel">
@@ -70,7 +74,7 @@
         <p class="foot">
           Linha = tendência estimada por um modelo estado-espaço (filtro de Kalman): cada pesquisa
           entra com peso pelo tamanho da amostra (com teto de 3 mil, pois o erro que sobra não cai com o n) e pesquisa antiga informa menos o presente.
-          A faixa (~90%) soma a incerteza do modelo e um erro sistemático do setor.
+          A faixa (~90%) soma a incerteza do modelo e um erro sistemático do setor. “Votos válidos” renormaliza cada data para somar 100% entre os candidatos exibidos (a base do resultado oficial); “% das pesquisas” mantém indecisos, brancos e nulos.
           Fonte: <a id="src-link" href="#" target="_blank" rel="noopener">Wikipédia</a> (CC BY-SA) + curadoria.
           · <a href="#resultados">Pesquisas × resultado de 2026 →</a>
           · <a href="#eleitos">Quem foi eleito →</a>
