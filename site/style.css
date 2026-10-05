@@ -213,3 +213,20 @@ main.bt h3 span { color: var(--muted); font-weight: 500; font-size: 13px; }
   .legend { justify-content: flex-start; }
   h1 span { display: none; }
 }
+
+/* ---- página de eleitos ---- */
+.seg { display: flex; gap: 6px; flex-wrap: wrap; margin: 22px 0 10px; }
+.seg button { border: 1px solid var(--line); background: var(--panel); color: var(--ink); font: inherit; font-size: 13px; font-weight: 600; padding: 7px 14px; border-radius: 999px; cursor: pointer; }
+.seg button[aria-selected="true"] { background: var(--ink); color: var(--bg); border-color: var(--ink); }
+.bt-tbl.party .bars { width: 34%; min-width: 120px; padding: 7px 10px; }
+.bt-tbl.party .bar { height: 7px; border-radius: 4px; margin: 2px 0; min-width: 2px; }
+.bt-tbl.party .bar.a { opacity: .38; }
+.bt-tbl.party th.bh { text-align: left; font-weight: 500; }
+.bt-tbl .sd.up { color: #1f9d57; font-weight: 700; }
+.bt-tbl .sd.down { color: #c9503a; font-weight: 700; }
+.bt-tbl .pbadge { margin: 0; }
+.filters { display: flex; gap: 8px; flex-wrap: wrap; margin: 6px 0 10px; }
+.filters input, .filters select { font: inherit; font-size: 13px; padding: 7px 10px; border: 1px solid var(--line); border-radius: 8px; background: var(--panel); color: var(--ink); }
+.filters input { min-width: 220px; }
+.bt-tbl.people td:first-child { font-weight: 600; }
+.bt .muted { color: var(--muted); font-weight: 400; }

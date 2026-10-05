@@ -15,5 +15,9 @@ if (run("aggregate.mjs") !== 0) process.exit(1);
 // resultados oficiais + pesquisa × resultado (best-effort; sem resultado ainda = pula)
 run("results.mjs");
 
+// eleitos (TSE) + "antes" (foto única, só refaz com --refresh); best-effort
+run("antes.mjs");
+run("eleitos.mjs");
+
 // trava de sanidade: barra dado claramente errado antes de commitar/publicar
 if (run("check.mjs") !== 0) process.exit(1);

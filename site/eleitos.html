@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Eleitos · Agregador de pesquisas Brasil 2026</title>
+    <meta name="description" content="Quem foi eleito em 2026: governadores, senadores, deputados federais (Sul e Sudeste) e estaduais (SP). Quem é novo no cargo e o antes × depois por partido." />
+    <link rel="stylesheet" href="style.css" />
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Ctext y='26' font-size='26'%3E%F0%9F%93%88%3C/text%3E%3C/svg%3E" />
+  </head>
+  <body>
+    <header class="top">
+      <div class="wrap">
+        <h1><a href="./" class="backlink">← Agregador</a> <span>· eleitos · <a href="resultados.html" class="backlink">pesquisas × resultado →</a></span></h1>
+      </div>
+    </header>
+
+    <main class="wrap bt">
+      <h2>Quem foi eleito — 2026</h2>
+      <p class="lead">
+        Apuração oficial do TSE. Cobre governadores e senadores de todos os estados, deputados
+        <b>federais do Sul e Sudeste</b> e deputados <b>estaduais de SP</b>. Casas ainda em apuração
+        entram aqui sozinhas, conforme o TSE publica.
+      </p>
+
+      <div id="headline" class="bt-headline"></div>
+
+      <div class="seg" id="tabs" role="tablist"></div>
+      <div id="panel"></div>
+
+      <p class="foot" id="foot"></p>
+    </main>
+
+    <script src="eleitos.js" type="module"></script>
+  </body>
+</html>
