@@ -1,0 +1,302 @@
+{
+ "mg-governador": {
+  "lastPoll": "2026-10-02",
+  "candidates": {
+   "cleitinho": {
+    "est": 52.37,
+    "lo": 49.76,
+    "hi": 54.98
+   },
+   "patrus-ananias": {
+    "est": 26.07,
+    "lo": 23.5,
+    "hi": 28.63
+   },
+   "mateus-simoes": {
+    "est": 6.79,
+    "lo": 4.34,
+    "hi": 9.24
+   },
+   "alexandre-kalil": {
+    "est": 8.33,
+    "lo": 5.88,
+    "hi": 10.8
+   },
+   "flavio-roscoe": {
+    "est": 6.44,
+    "lo": 3.99,
+    "hi": 8.89
+   }
+  }
+ },
+ "mg-senado": {
+  "lastPoll": "2026-10-02",
+  "candidates": {
+   "aecio-neves": {
+    "est": 12.48,
+    "lo": 9.86,
+    "hi": 15.11
+   },
+   "marco-antonio-superman": {
+    "est": 5.49,
+    "lo": 2.93,
+    "hi": 8.05
+   },
+   "marcelo-aro": {
+    "est": 10.64,
+    "lo": 8.04,
+    "hi": 13.24
+   },
+   "carlos-viana": {
+    "est": 21.3,
+    "lo": 18.63,
+    "hi": 23.98
+   },
+   "domingos-savio": {
+    "est": 19.39,
+    "lo": 16.72,
+    "hi": 22.06
+   },
+   "aurea-carolina": {
+    "est": 7.83,
+    "lo": 5.26,
+    "hi": 10.42
+   },
+   "marilia-campos": {
+    "est": 22.87,
+    "lo": 20.19,
+    "hi": 25.54
+   }
+  }
+ },
+ "pr-governador": {
+  "lastPoll": "2026-10-01",
+  "candidates": {
+   "sandro-alex": {
+    "est": 26.95,
+    "lo": 24.74,
+    "hi": 29.18
+   },
+   "requiao-filho": {
+    "est": 26.01,
+    "lo": 23.79,
+    "hi": 28.22
+   },
+   "sergio-moro": {
+    "est": 47.04,
+    "lo": 44.78,
+    "hi": 49.29
+   }
+  }
+ },
+ "pr-senado": {
+  "lastPoll": "2026-10-01",
+  "candidates": {
+   "cristina-graeml": {
+    "est": 9.69,
+    "lo": 7.95,
+    "hi": 11.43
+   },
+   "alexandre-curi": {
+    "est": 19.35,
+    "lo": 17.56,
+    "hi": 21.14
+   },
+   "gleisi-hoffmann": {
+    "est": 17.89,
+    "lo": 16.1,
+    "hi": 19.67
+   },
+   "dr-rosinha": {
+    "est": 8.56,
+    "lo": 6.82,
+    "hi": 10.3
+   },
+   "deltan-dallagnol": {
+    "est": 24.25,
+    "lo": 22.44,
+    "hi": 26.05
+   },
+   "filipe-barros": {
+    "est": 20.26,
+    "lo": 18.46,
+    "hi": 22.05
+   }
+  }
+ },
+ "presidente": {
+  "lastPoll": "2026-10-03",
+  "candidates": {
+   "flavio": {
+    "est": 44.39,
+    "lo": 42.35,
+    "hi": 46.44
+   },
+   "caiado": {
+    "est": 3,
+    "lo": 1.02,
+    "hi": 4.98
+   },
+   "lula": {
+    "est": 45.78,
+    "lo": 43.75,
+    "hi": 47.83
+   },
+   "cury": {
+    "est": 2.96,
+    "lo": 0.97,
+    "hi": 4.94
+   },
+   "zema": {
+    "est": 0.62,
+    "lo": 0,
+    "hi": 2.6
+   },
+   "renan": {
+    "est": 3.24,
+    "lo": 1.26,
+    "hi": 5.23
+   }
+  }
+ },
+ "rj-governador": {
+  "lastPoll": "2026-10-03",
+  "candidates": {
+   "douglas-ruas": {
+    "est": 42.97,
+    "lo": 40.35,
+    "hi": 45.59
+   },
+   "eduardo-paes": {
+    "est": 57.03,
+    "lo": 54.39,
+    "hi": 59.66
+   }
+  }
+ },
+ "rj-senado": {
+  "lastPoll": "2026-10-03",
+  "candidates": {
+   "carlos-portinho": {
+    "est": 18.26,
+    "lo": 15.75,
+    "hi": 20.79
+   },
+   "carlos-jordy": {
+    "est": 20.04,
+    "lo": 17.52,
+    "hi": 22.58
+   },
+   "monica-benicio": {
+    "est": 8.37,
+    "lo": 5.92,
+    "hi": 10.83
+   },
+   "marcelo-crivella": {
+    "est": 12.93,
+    "lo": 10.45,
+    "hi": 15.42
+   },
+   "pedro-paulo": {
+    "est": 13.68,
+    "lo": 11.19,
+    "hi": 16.18
+   },
+   "benedita-da-silva": {
+    "est": 26.71,
+    "lo": 24.16,
+    "hi": 29.28
+   }
+  }
+ },
+ "rs-governador": {
+  "lastPoll": "2026-10-03",
+  "candidates": {
+   "gabriel-souza": {
+    "est": 14.96,
+    "lo": 12.49,
+    "hi": 17.43
+   },
+   "juliana-brizola": {
+    "est": 36.57,
+    "lo": 34,
+    "hi": 39.15
+   },
+   "luciano-zucco": {
+    "est": 48.47,
+    "lo": 45.87,
+    "hi": 51.08
+   }
+  }
+ },
+ "rs-senado": {
+  "lastPoll": "2026-10-03",
+  "candidates": {
+   "paulo-pimenta": {
+    "est": 18.73,
+    "lo": 16.38,
+    "hi": 21.07
+   },
+   "manuela-d-avila": {
+    "est": 22.26,
+    "lo": 19.9,
+    "hi": 24.61
+   },
+   "germano-rigotto": {
+    "est": 10.8,
+    "lo": 8.54,
+    "hi": 13.07
+   },
+   "ubiratan-sanderson": {
+    "est": 22.38,
+    "lo": 20,
+    "hi": 24.75
+   },
+   "marcel-van-hattem": {
+    "est": 25.84,
+    "lo": 23.46,
+    "hi": 28.22
+   }
+  }
+ },
+ "sp-governador": {
+  "lastPoll": "2026-10-03",
+  "candidates": {
+   "tarcisio": {
+    "est": 60.7,
+    "lo": 58.46,
+    "hi": 62.96
+   },
+   "haddad": {
+    "est": 39.3,
+    "lo": 37.05,
+    "hi": 41.54
+   }
+  }
+ },
+ "sp-senado": {
+  "lastPoll": "2026-10-03",
+  "candidates": {
+   "andre": {
+    "est": 24.4,
+    "lo": 22.21,
+    "hi": 26.58
+   },
+   "guilherme": {
+    "est": 27.56,
+    "lo": 25.36,
+    "hi": 29.74
+   },
+   "simone": {
+    "est": 24.06,
+    "lo": 21.87,
+    "hi": 26.24
+   },
+   "marina": {
+    "est": 23.99,
+    "lo": 21.81,
+    "hi": 26.17
+   }
+  }
+ }
+}

@@ -42,8 +42,6 @@ function metricCards(m) {
   if (!m) return "";
   return `<div class="bt-headline">` +
     statCard("Renovação", fmt(m.renovacaoPct, 0), "%", `${m.n - m.reeleitos} novos no cargo · ${m.reeleitos} reeleitos`) +
-    (m.mulheres != null ? statCard("Mulheres", fmt(m.mulheres, 1), "%", "dos eleitos") : "") +
-    (m.negros != null ? statCard("Pretos e pardos", fmt(m.negros, 1), "%", "dos eleitos (autodeclarados)") : "") +
     statCard("Trocaram de partido", m.trocaramPartido, "", "reeleitos por outra sigla") +
     `</div>`;
 }
@@ -65,7 +63,7 @@ function fillPeople(list, colors) {
   const rows = list.filter((x) => (!uf || x.uf === uf) && (!q || (x.name + " " + x.fullName + " " + x.party).toLowerCase().includes(q)) && (!nw || (nw === "new" ? !x.incumbent : x.incumbent)));
   $("#people").innerHTML = rows
     .map(
-      (x) => `<tr><td>${esc(x.name)}${/2º turno/i.test(x.status) ? ' <span class="muted">(2º turno)</span>' : ""}</td><td>${x.uf}</td><td>${badge(x.party, colors[x.party] || "#8C8C8C")}</td><td>${x.votes.toLocaleString("pt-BR")}</td><td>${fmt(x.pct, 1)}%</td>
+      (x) => `<tr><td>${esc(x.name)}${/2º turno/i.test(x.status) ? ' <span class="muted">(2º turno)</span>' : ""}${x.projecao ? ' <span class="muted" title="projeção: TSE ainda não marcou os eleitos">(projeção)</span>' : ""}</td><td>${x.uf}</td><td>${badge(x.party, colors[x.party] || "#8C8C8C")}</td><td>${x.votes.toLocaleString("pt-BR")}</td><td>${fmt(x.pct, 1)}%</td>
       <td>${x.incumbent ? `reeleito${x.prevParty && x.prevParty.toLowerCase() !== x.party.toLowerCase() ? ` <span class="muted">(vinha do ${esc(x.prevParty)})</span>` : ""}` : "<b>novo</b>"}</td></tr>`
     )
     .join("");
@@ -83,7 +81,7 @@ function show(key) {
   let head = "";
   if (!list.length && h.kind !== "governador") head = "";
   else if (h.kind === "governador") head = `<p class="lead">${list.length} governadores eleitos em 1º turno. Vão a <b>2º turno</b> em ${st.segundoTurno.length} estados: <b>${st.segundoTurno.join(", ")}</b> (25/10).</p>`;
-  else if (st.pendentes.length) head = `<p class="lead"><i>Apuração em andamento em: ${st.pendentes.join(", ")}.</i> Os números abaixo cobrem só os estados já concluídos${comp.ufs ? ` (${comp.ufs.join(", ")})` : ""}; o “antes” é recortado para os mesmos estados.</p>`;
+  else if (st.projetadas.length || st.pendentes.length) head = `<p class="lead">${st.projetadas.length ? `<b>Projeção em ${st.projetadas.join(", ")}:</b> o TSE já apurou todos os votos e definiu as vagas de cada partido, mas ainda não marcou os eleitos — aqui entram os mais votados de cada partido (mesmo método reproduziu 133 de 133 eleitos oficiais nos estados fechados). ` : ""}${st.pendentes.length ? `<i>Apuração em andamento em: ${st.pendentes.join(", ")}.</i> ` : ""}Os números cobrem ${comp.ufs && comp.ufs.length ? comp.ufs.join(", ") : "nenhum estado ainda"}; o “antes” é recortado para os mesmos estados.</p>`;
   else if (h.kind === "senador") head = `<p class="lead">Todas as 54 vagas definidas. “Antes” = os 54 senadores que ocupavam as cadeiras em disputa; a última coluna mostra a casa inteira (81), somando os 27 que continuam até 2031.</p>`;
   const empty = !list.length && h.kind !== "governador";
   $("#panel").innerHTML = `${head}
@@ -104,11 +102,12 @@ async function boot() {
   D = await (await fetch("data/eleitos.json", { cache: "no-store" })).json();
   const S = D.status;
   const n = (k) => D.eleitos[k].filter((x) => (k === "governador" ? x.status === "Eleito" : true)).length;
+  const proj = (k) => (S[k].projetadas.length ? ` · projeção em ${S[k].projetadas.join(", ")}` : "");
   $("#headline").innerHTML =
     statCard("Governadores", n("governador"), "/ 27", `${S.governador.segundoTurno.length} vão a 2º turno`) +
     statCard("Senadores", n("senador"), "/ 54", S.senador.ufsFinais === S.senador.ufsTotal ? "todas as vagas definidas" : `apuração em ${S.senador.pendentes.join(", ")}`) +
-    statCard("Dep. federais", n("federal"), `/ ${S.federal.vagas}`, `Sul e Sudeste${S.federal.pendentes.length ? " · falta " + S.federal.pendentes.join(", ") : ""}`) +
-    statCard("Dep. estaduais SP", n("estadual"), "/ 94", S.estadual.pendentes.length ? "apuração em andamento" : "concluída");
+    statCard("Dep. federais", n("federal"), `/ ${S.federal.vagas}`, `Sul e Sudeste${proj("federal")}${S.federal.pendentes.length ? " · falta " + S.federal.pendentes.join(", ") : ""}`) +
+    statCard("Dep. estaduais SP", n("estadual"), "/ 94", S.estadual.pendentes.length ? "apuração em andamento" : S.estadual.projetadas.length ? "projeção (TSE ainda não marcou)" : "concluída");
   $("#tabs").innerHTML = HOUSES.map((h) => `<button type="button" role="tab" data-k="${h.key}">${h.label}</button>`).join("");
   for (const b of document.querySelectorAll("#tabs button")) b.onclick = () => show(b.dataset.k);
   const k = location.hash.slice(1);

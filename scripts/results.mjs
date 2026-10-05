@@ -120,6 +120,12 @@ function matchKey(resultName, keys, aliasOf) {
   return best?.k || null;
 }
 
+// Estimativas CONGELADAS do 1º turno: a comparação pesquisa × resultado tem que usar o que o modelo
+// mostrava na véspera, não o que ele calcularia hoje (senão recalibrar o modelo reescreve a história).
+const SNAP = new URL("estimativas-1t.json", DATA);
+const snapshot = fs.existsSync(SNAP) ? JSON.parse(fs.readFileSync(SNAP, "utf8")) : {};
+let snapDirty = false;
+
 function compare(key, res, agg, race) {
   const aliasOf = Object.fromEntries((race.display || []).map((d) => [d.key, d.aliases || []]));
   const keys = agg.candidates.map((c) => c.key);
@@ -135,13 +141,22 @@ function compare(key, res, agg, race) {
   rows.push(...bestByKey.values());
   if (rows.length < 2) return null;
   // base comum: só os candidatos exibidos (renormaliza estimativa e resultado entre eles)
+  const frozen = snapshot[key];
+  if (frozen) {
+    const keep = rows.filter((r) => frozen.candidates[r.key]);
+    rows.length = 0;
+    rows.push(...keep);
+    if (rows.length < 2) return null;
+  }
   const estSum = rows.reduce((s, r) => s + r.cand.line.at(-1).y, 0);
   const resSum = rows.reduce((s, r) => s + r.res.pct, 0);
   const f = 100 / estSum;
   const out = rows.map((r) => {
     const l = r.cand.line.at(-1);
     const b = r.cand.band.at(-1) || { lo: l.y, hi: l.y };
-    const est = l.y * f, lo = b.lo * f, hi = b.hi * f;
+    let est = l.y * f, lo = b.lo * f, hi = b.hi * f;
+    const fz = frozen?.candidates[r.key];
+    if (fz) ({ est, lo, hi } = fz);
     const real = (r.res.pct / resSum) * 100;
     return {
       key: r.key, name: r.cand.name, party: r.cand.party, color: r.cand.color,
@@ -150,6 +165,10 @@ function compare(key, res, agg, race) {
       err: +(real - est).toFixed(2), inBand: real >= lo && real <= hi,
     };
   });
+  if (!frozen && Date.now() > Date.parse(ELECTION_DAY + "T23:59:59-03:00") && agg.lastPoll <= ELECTION_DAY) {
+    snapshot[key] = { lastPoll: agg.lastPoll, candidates: Object.fromEntries(out.map((c) => [c.key, { est: c.est, lo: c.lo, hi: c.hi }])) };
+    snapDirty = true;
+  }
   const byEst = [...out].sort((a, b) => b.est - a.est)[0];
   const byReal = [...out].sort((a, b) => b.real - a.real)[0];
   return {
@@ -232,6 +251,11 @@ async function main() {
     summary.races.push(cmp);
     summary.pollsters.push(...pollsterErrors(src.key, cmp, agg));
     console.log(`  ${src.key}: ${cmp.complete ? "completo" : "PARCIAL"} · vencedor ${cmp.actualWinner} (previsto ${cmp.predictedWinner}) · MAE ${cmp.mae} · ${cmp.inBandPct}% na faixa`);
+  }
+  if (snapDirty) {
+    const sorted = Object.fromEntries(Object.entries(snapshot).sort(([a], [b]) => a.localeCompare(b)));
+    fs.writeFileSync(SNAP, JSON.stringify(sorted, null, 1) + "\n");
+    console.log("  -> data/estimativas-1t.json (estimativas do 1º turno congeladas)");
   }
   summary.turnout = turnout;
   // 2022 (1º turno presidencial) pra comparar abstenção/brancos/nulos

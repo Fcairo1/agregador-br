@@ -18,6 +18,7 @@
    "ufsFinais": 27,
    "ufsTotal": 27,
    "pendentes": [],
+   "projetadas": [],
    "segundoTurno": [
     "AC",
     "AM",
@@ -33,13 +34,15 @@
    "ufsFinais": 27,
    "ufsTotal": 27,
    "pendentes": [],
+   "projetadas": [],
    "segundoTurno": [],
    "vagas": 54
   },
   "federal": {
    "ufsFinais": 5,
    "ufsTotal": 7,
-   "pendentes": [
+   "pendentes": [],
+   "projetadas": [
     "MG",
     "SP"
    ],
@@ -49,7 +52,8 @@
   "estadual": {
    "ufsFinais": 0,
    "ufsTotal": 1,
-   "pendentes": [
+   "pendentes": [],
+   "projetadas": [
     "SP"
    ],
    "segundoTurno": [],
@@ -74,8 +78,7 @@
     "incumbent": false,
     "prevParty": null,
     "prevCurrent": null,
-    "gender": "MASCULINO",
-    "race": "PARDA"
+    "projecao": false
    },
    {
     "uf": "AP",
@@ -89,8 +92,7 @@
     "incumbent": false,
     "prevParty": null,
     "prevCurrent": null,
-    "gender": "MASCULINO",
-    "race": "BRANCA"
+    "projecao": false
    },
    {
     "uf": "BA",
@@ -104,8 +106,7 @@
     "incumbent": true,
     "prevParty": "PT",
     "prevCurrent": null,
-    "gender": "MASCULINO",
-    "race": "INDÍGENA"
+    "projecao": false
    },
    {
     "uf": "CE",
@@ -119,8 +120,7 @@
     "incumbent": true,
     "prevParty": "PT",
     "prevCurrent": null,
-    "gender": "MASCULINO",
-    "race": "PARDA"
+    "projecao": false
    },
    {
     "uf": "GO",
@@ -134,8 +134,7 @@
     "incumbent": true,
     "prevParty": "MDB",
     "prevCurrent": null,
-    "gender": "MASCULINO",
-    "race": "BRANCA"
+    "projecao": false
    },
    {
     "uf": "MA",
@@ -149,8 +148,7 @@
     "incumbent": false,
     "prevParty": null,
     "prevCurrent": null,
-    "gender": "MASCULINO",
-    "race": "BRANCA"
+    "projecao": false
    },
    {
     "uf": "MG",
@@ -164,8 +162,7 @@
     "incumbent": false,
     "prevParty": null,
     "prevCurrent": null,
-    "gender": "MASCULINO",
-    "race": "BRANCA"
+    "projecao": false
    },
    {
     "uf": "MS",
@@ -179,8 +176,7 @@
     "incumbent": true,
     "prevParty": "PP",
     "prevCurrent": null,
-    "gender": "MASCULINO",
-    "race": "BRANCA"
+    "projecao": false
    },
    {
     "uf": "MT",
@@ -194,8 +190,7 @@
     "incumbent": true,
     "prevParty": "Republicanos",
     "prevCurrent": null,
-    "gender": "MASCULINO",
-    "race": "BRANCA"
+    "projecao": false
    },
    {
     "uf": "PA",
@@ -209,8 +204,7 @@
     "incumbent": false,
     "prevParty": null,
     "prevCurrent": null,
-    "gender": "MASCULINO",
-    "race": "PARDA"
+    "projecao": false
    },
    {
     "uf": "PB",
@@ -224,8 +218,7 @@
     "incumbent": true,
     "prevParty": "PP",
     "prevCurrent": null,
-    "gender": "MASCULINO",
-    "race": "BRANCA"
+    "projecao": false
    },
    {
     "uf": "PE",
@@ -239,8 +232,7 @@
     "incumbent": true,
     "prevParty": "PSD",
     "prevCurrent": null,
-    "gender": "FEMININO",
-    "race": "BRANCA"
+    "projecao": false
    },
    {
     "uf": "PI",
@@ -254,8 +246,7 @@
     "incumbent": true,
     "prevParty": "PT",
     "prevCurrent": null,
-    "gender": "MASCULINO",
-    "race": "BRANCA"
+    "projecao": false
    },
    {
     "uf": "PR",
@@ -269,8 +260,7 @@
     "incumbent": false,
     "prevParty": null,
     "prevCurrent": null,
-    "gender": "MASCULINO",
-    "race": "BRANCA"
+    "projecao": false
    },
    {
     "uf": "RO",
@@ -284,8 +274,7 @@
     "incumbent": false,
     "prevParty": null,
     "prevCurrent": null,
-    "gender": "MASCULINO",
-    "race": "PARDA"
+    "projecao": false
    },
    {
     "uf": "RR",
@@ -299,8 +288,7 @@
     "incumbent": false,
     "prevParty": null,
     "prevCurrent": null,
-    "gender": "MASCULINO",
-    "race": "PARDA"
+    "projecao": false
    },
    {
     "uf": "RS",
@@ -314,8 +302,7 @@
     "incumbent": false,
     "prevParty": null,
     "prevCurrent": null,
-    "gender": "MASCULINO",
-    "race": "BRANCA"
+    "projecao": false
    },
    {
     "uf": "SC",
@@ -329,8 +316,7 @@
     "incumbent": true,
     "prevParty": "PL",
     "prevCurrent": null,
-    "gender": "MASCULINO",
-    "race": "BRANCA"
+    "projecao": false
    },
    {
     "uf": "SE",
@@ -344,8 +330,7 @@
     "incumbent": true,
     "prevParty": "PSD",
     "prevCurrent": null,
-    "gender": "MASCULINO",
-    "race": "BRANCA"
+    "projecao": false
    },
    {
     "uf": "SP",
@@ -359,8 +344,7 @@
     "incumbent": true,
     "prevParty": "Republicanos",
     "prevCurrent": null,
-    "gender": "MASCULINO",
-    "race": "BRANCA"
+    "projecao": false
    }
   ],
   "senador": [
@@ -376,8 +360,7 @@
     "incumbent": true,
     "prevParty": null,
     "prevCurrent": null,
-    "gender": "MASCULINO",
-    "race": "PARDA"
+    "projecao": false
    },
    {
     "uf": "AC",
@@ -391,8 +374,7 @@
     "incumbent": false,
     "prevParty": null,
     "prevCurrent": null,
-    "gender": "FEMININO",
-    "race": "BRANCA"
+    "projecao": false
    },
    {
     "uf": "AL",
@@ -406,8 +388,7 @@
     "incumbent": false,
     "prevParty": null,
     "prevCurrent": null,
-    "gender": "MASCULINO",
-    "race": "PARDA"
+    "projecao": false
    },
    {
     "uf": "AL",
@@ -421,8 +402,7 @@
     "incumbent": false,
     "prevParty": null,
     "prevCurrent": null,
-    "gender": "FEMININO",
-    "race": "BRANCA"
+    "projecao": false
    },
    {
     "uf": "AM",
@@ -436,8 +416,7 @@
     "incumbent": true,
     "prevParty": null,
     "prevCurrent": null,
-    "gender": "MASCULINO",
-    "race": "PARDA"
+    "projecao": false
    },
    {
     "uf": "AM",
@@ -451,8 +430,7 @@
     "incumbent": true,
     "prevParty": null,
     "prevCurrent": null,
-    "gender": "MASCULINO",
-    "race": "PARDA"
+    "projecao": false
    },
    {
     "uf": "AP",
@@ -466,8 +444,7 @@
     "incumbent": false,
     "prevParty": null,
     "prevCurrent": null,
-    "gender": "FEMININO",
-    "race": "PARDA"
+    "projecao": false
    },
    {
     "uf": "AP",
@@ -481,8 +458,7 @@
     "incumbent": true,
     "prevParty": null,
     "prevCurrent": null,
-    "gender": "MASCULINO",
-    "race": "BRANCA"
+    "projecao": false
    },
    {
     "uf": "BA",
@@ -496,8 +472,7 @@
     "incumbent": false,
     "prevParty": null,
     "prevCurrent": null,
-    "gender": "MASCULINO",
-    "race": "PARDA"
+    "projecao": false
    },
    {
     "uf": "BA",
@@ -511,8 +486,7 @@
     "incumbent": true,
     "prevParty": null,
     "prevCurrent": null,
-    "gender": "MASCULINO",
-    "race": "BRANCA"
+    "projecao": false
    },
    {
     "uf": "CE",
@@ -526,8 +500,7 @@
     "incumbent": true,
     "prevParty": null,
     "prevCurrent": null,
-    "gender": "MASCULINO",
-    "race": "BRANCA"
+    "projecao": false
    },
    {
     "uf": "CE",
@@ -541,8 +514,7 @@
     "incumbent": false,
     "prevParty": null,
     "prevCurrent": null,
-    "gender": "FEMININO",
-    "race": "BRANCA"
+    "projecao": false
    },
    {
     "uf": "DF",
@@ -556,8 +528,7 @@
     "incumbent": false,
     "prevParty": null,
     "prevCurrent": null,
-    "gender": "FEMININO",
-    "race": "BRANCA"
+    "projecao": false
    },
    {
     "uf": "DF",
@@ -571,8 +542,7 @@
     "incumbent": false,
     "prevParty": null,
     "prevCurrent": null,
-    "gender": "FEMININO",
-    "race": "BRANCA"
+    "projecao": false
    },
    {
     "uf": "ES",
@@ -586,8 +556,7 @@
     "incumbent": false,
     "prevParty": null,
     "prevCurrent": null,
-    "gender": "MASCULINO",
-    "race": "BRANCA"
+    "projecao": false
    },
    {
     "uf": "ES",
@@ -601,8 +570,7 @@
     "incumbent": false,
     "prevParty": null,
     "prevCurrent": null,
-    "gender": "MASCULINO",
-    "race": "PARDA"
+    "projecao": false
    },
    {
     "uf": "GO",
@@ -616,8 +584,7 @@
     "incumbent": false,
     "prevParty": null,
     "prevCurrent": null,
-    "gender": "MASCULINO",
-    "race": "BRANCA"
+    "projecao": false
    },
    {
     "uf": "GO",
@@ -631,8 +598,7 @@
     "incumbent": false,
     "prevParty": null,
     "prevCurrent": null,
-    "gender": "FEMININO",
-    "race": "BRANCA"
+    "projecao": false
    },
    {
     "uf": "MA",
@@ -646,8 +612,7 @@
     "incumbent": false,
     "prevParty": null,
     "prevCurrent": null,
-    "gender": "MASCULINO",
-    "race": "PARDA"
+    "projecao": false
    },
    {
     "uf": "MA",
@@ -661,8 +626,7 @@
     "incumbent": false,
     "prevParty": null,
     "prevCurrent": null,
-    "gender": "MASCULINO",
-    "race": "PARDA"
+    "projecao": false
    },
    {
     "uf": "MG",
@@ -676,8 +640,7 @@
     "incumbent": false,
     "prevParty": null,
     "prevCurrent": null,
-    "gender": "MASCULINO",
-    "race": "BRANCA"
+    "projecao": false
    },
    {
     "uf": "MG",
@@ -691,8 +654,7 @@
     "incumbent": false,
     "prevParty": null,
     "prevCurrent": null,
-    "gender": "FEMININO",
-    "race": "PARDA"
+    "projecao": false
    },
    {
     "uf": "MS",
@@ -706,8 +668,7 @@
     "incumbent": false,
     "prevParty": null,
     "prevCurrent": null,
-    "gender": "MASCULINO",
-    "race": "BRANCA"
+    "projecao": false
    },
    {
     "uf": "MS",
@@ -721,8 +682,7 @@
     "incumbent": false,
     "prevParty": null,
     "prevCurrent": null,
-    "gender": "MASCULINO",
-    "race": "BRANCA"
+    "projecao": false
    },
    {
     "uf": "MT",
@@ -736,8 +696,7 @@
     "incumbent": false,
     "prevParty": null,
     "prevCurrent": null,
-    "gender": "MASCULINO",
-    "race": "BRANCA"
+    "projecao": false
    },
    {
     "uf": "MT",
@@ -751,8 +710,7 @@
     "incumbent": false,
     "prevParty": null,
     "prevCurrent": null,
-    "gender": "MASCULINO",
-    "race": "BRANCA"
+    "projecao": false
    },
    {
     "uf": "PA",
@@ -766,8 +724,7 @@
     "incumbent": false,
     "prevParty": null,
     "prevCurrent": null,
-    "gender": "MASCULINO",
-    "race": "BRANCA"
+    "projecao": false
    },
    {
     "uf": "PA",
@@ -781,8 +738,7 @@
     "incumbent": false,
     "prevParty": null,
     "prevCurrent": null,
-    "gender": "MASCULINO",
-    "race": "PARDA"
+    "projecao": false
    },
    {
     "uf": "PB",
@@ -796,8 +752,7 @@
     "incumbent": false,
     "prevParty": null,
     "prevCurrent": null,
-    "gender": "MASCULINO",
-    "race": "BRANCA"
+    "projecao": false
    },
    {
     "uf": "PB",
@@ -811,8 +766,7 @@
     "incumbent": true,
     "prevParty": null,
     "prevCurrent": null,
-    "gender": "MASCULINO",
-    "race": "BRANCA"
+    "projecao": false
    },
    {
     "uf": "PE",
@@ -826,8 +780,7 @@
     "incumbent": true,
     "prevParty": null,
     "prevCurrent": null,
-    "gender": "MASCULINO",
-    "race": "PARDA"
+    "projecao": false
    },
    {
     "uf": "PE",
@@ -841,8 +794,7 @@
     "incumbent": false,
     "prevParty": null,
     "prevCurrent": null,
-    "gender": "FEMININO",
-    "race": "BRANCA"
+    "projecao": false
    },
    {
     "uf": "PI",
@@ -856,8 +808,7 @@
     "incumbent": true,
     "prevParty": null,
     "prevCurrent": null,
-    "gender": "MASCULINO",
-    "race": "BRANCA"
+    "projecao": false
    },
    {
     "uf": "PI",
@@ -871,8 +822,7 @@
     "incumbent": false,
     "prevParty": null,
     "prevCurrent": null,
-    "gender": "MASCULINO",
-    "race": "BRANCA"
+    "projecao": false
    },
    {
     "uf": "PR",
@@ -886,8 +836,7 @@
     "incumbent": false,
     "prevParty": null,
     "prevCurrent": null,
-    "gender": "MASCULINO",
-    "race": "BRANCA"
+    "projecao": false
    },
    {
     "uf": "PR",
@@ -901,8 +850,7 @@
     "incumbent": false,
     "prevParty": null,
     "prevCurrent": null,
-    "gender": "MASCULINO",
-    "race": "BRANCA"
+    "projecao": false
    },
    {
     "uf": "RJ",
@@ -916,8 +864,7 @@
     "incumbent": true,
     "prevParty": null,
     "prevCurrent": null,
-    "gender": "MASCULINO",
-    "race": "BRANCA"
+    "projecao": false
    },
    {
     "uf": "RJ",
@@ -931,8 +878,7 @@
     "incumbent": false,
     "prevParty": null,
     "prevCurrent": null,
-    "gender": "MASCULINO",
-    "race": "BRANCA"
+    "projecao": false
    },
    {
     "uf": "RN",
@@ -946,8 +892,7 @@
     "incumbent": true,
     "prevParty": null,
     "prevCurrent": null,
-    "gender": "MASCULINO",
-    "race": "PARDA"
+    "projecao": false
    },
    {
     "uf": "RN",
@@ -961,8 +906,7 @@
     "incumbent": false,
     "prevParty": null,
     "prevCurrent": null,
-    "gender": "FEMININO",
-    "race": "BRANCA"
+    "projecao": false
    },
    {
     "uf": "RO",
@@ -976,8 +920,7 @@
     "incumbent": false,
     "prevParty": null,
     "prevCurrent": null,
-    "gender": "MASCULINO",
-    "race": "PARDA"
+    "projecao": false
    },
    {
     "uf": "RO",
@@ -991,8 +934,7 @@
     "incumbent": false,
     "prevParty": null,
     "prevCurrent": null,
-    "gender": "MASCULINO",
-    "race": "PARDA"
+    "projecao": false
    },
    {
     "uf": "RR",
@@ -1006,8 +948,7 @@
     "incumbent": false,
     "prevParty": null,
     "prevCurrent": null,
-    "gender": "MASCULINO",
-    "race": "BRANCA"
+    "projecao": false
    },
    {
     "uf": "RR",
@@ -1021,8 +962,7 @@
     "incumbent": false,
     "prevParty": null,
     "prevCurrent": null,
-    "gender": "FEMININO",
-    "race": "BRANCA"
+    "projecao": false
    },
    {
     "uf": "RS",
@@ -1036,8 +976,7 @@
     "incumbent": false,
     "prevParty": null,
     "prevCurrent": null,
-    "gender": "MASCULINO",
-    "race": "BRANCA"
+    "projecao": false
    },
    {
     "uf": "RS",
@@ -1051,8 +990,7 @@
     "incumbent": false,
     "prevParty": null,
     "prevCurrent": null,
-    "gender": "MASCULINO",
-    "race": "BRANCA"
+    "projecao": false
    },
    {
     "uf": "SC",
@@ -1066,8 +1004,7 @@
     "incumbent": false,
     "prevParty": null,
     "prevCurrent": null,
-    "gender": "FEMININO",
-    "race": "BRANCA"
+    "projecao": false
    },
    {
     "uf": "SC",
@@ -1081,8 +1018,7 @@
     "incumbent": false,
     "prevParty": null,
     "prevCurrent": null,
-    "gender": "MASCULINO",
-    "race": "BRANCA"
+    "projecao": false
    },
    {
     "uf": "SE",
@@ -1096,8 +1032,7 @@
     "incumbent": true,
     "prevParty": null,
     "prevCurrent": null,
-    "gender": "MASCULINO",
-    "race": "BRANCA"
+    "projecao": false
    },
    {
     "uf": "SE",
@@ -1111,8 +1046,7 @@
     "incumbent": true,
     "prevParty": null,
     "prevCurrent": null,
-    "gender": "MASCULINO",
-    "race": "PARDA"
+    "projecao": false
    },
    {
     "uf": "SP",
@@ -1126,8 +1060,7 @@
     "incumbent": false,
     "prevParty": null,
     "prevCurrent": null,
-    "gender": "MASCULINO",
-    "race": "BRANCA"
+    "projecao": false
    },
    {
     "uf": "SP",
@@ -1141,8 +1074,7 @@
     "incumbent": false,
     "prevParty": null,
     "prevCurrent": null,
-    "gender": "MASCULINO",
-    "race": "BRANCA"
+    "projecao": false
    },
    {
     "uf": "TO",
@@ -1156,8 +1088,7 @@
     "incumbent": true,
     "prevParty": null,
     "prevCurrent": null,
-    "gender": "MASCULINO",
-    "race": "BRANCA"
+    "projecao": false
    },
    {
     "uf": "TO",
@@ -1171,8 +1102,7 @@
     "incumbent": false,
     "prevParty": null,
     "prevCurrent": null,
-    "gender": "MASCULINO",
-    "race": "BRANCA"
+    "projecao": false
    }
   ],
   "federal": [
@@ -1188,8 +1118,7 @@
     "incumbent": false,
     "prevParty": null,
     "prevCurrent": null,
-    "gender": "MASCULINO",
-    "race": "BRANCA"
+    "projecao": false
    },
    {
     "uf": "ES",
@@ -1203,8 +1132,7 @@
     "incumbent": true,
     "prevParty": "PT",
     "prevCurrent": true,
-    "gender": "FEMININO",
-    "race": "PRETA"
+    "projecao": false
    },
    {
     "uf": "ES",
@@ -1218,8 +1146,7 @@
     "incumbent": false,
     "prevParty": null,
     "prevCurrent": null,
-    "gender": "MASCULINO",
-    "race": "BRANCA"
+    "projecao": false
    },
    {
     "uf": "ES",
@@ -1233,8 +1160,7 @@
     "incumbent": true,
     "prevParty": "PODE",
     "prevCurrent": true,
-    "gender": "MASCULINO",
-    "race": "PARDA"
+    "projecao": false
    },
    {
     "uf": "ES",
@@ -1248,8 +1174,7 @@
     "incumbent": true,
     "prevParty": "PP",
     "prevCurrent": true,
-    "gender": "MASCULINO",
-    "race": "PARDA"
+    "projecao": false
    },
    {
     "uf": "ES",
@@ -1263,8 +1188,7 @@
     "incumbent": false,
     "prevParty": null,
     "prevCurrent": null,
-    "gender": "MASCULINO",
-    "race": "PARDA"
+    "projecao": false
    },
    {
     "uf": "ES",
@@ -1278,8 +1202,7 @@
     "incumbent": false,
     "prevParty": null,
     "prevCurrent": null,
-    "gender": "MASCULINO",
-    "race": "BRANCA"
+    "projecao": false
    },
    {
     "uf": "ES",
@@ -1293,8 +1216,7 @@
     "incumbent": false,
     "prevParty": null,
     "prevCurrent": null,
-    "gender": "FEMININO",
-    "race": "BRANCA"
+    "projecao": false
    },
    {
     "uf": "ES",
@@ -1308,8 +1230,7 @@
     "incumbent": false,
     "prevParty": null,
     "prevCurrent": null,
-    "gender": "MASCULINO",
-    "race": "BRANCA"
+    "projecao": false
    },
    {
     "uf": "ES",
@@ -1323,8 +1244,749 @@
     "incumbent": false,
     "prevParty": null,
     "prevCurrent": null,
-    "gender": "MASCULINO",
-    "race": "BRANCA"
+    "projecao": false
+   },
+   {
+    "uf": "MG",
+    "name": "NIKOLAS FERREIRA",
+    "fullName": "NIKOLAS FERREIRA DE OLIVEIRA",
+    "party": "PL",
+    "number": "2222",
+    "votes": 3119318,
+    "pct": 27.19,
+    "status": "Eleito (projeção)",
+    "incumbent": true,
+    "prevParty": "PL",
+    "prevCurrent": true,
+    "projecao": true
+   },
+   {
+    "uf": "MG",
+    "name": "ANA ELISA",
+    "fullName": "ANA ELISA SANTOS SILVA",
+    "party": "PT",
+    "number": "1331",
+    "votes": 524219,
+    "pct": 4.57,
+    "status": "Eleito (projeção)",
+    "incumbent": false,
+    "prevParty": null,
+    "prevCurrent": null,
+    "projecao": true
+   },
+   {
+    "uf": "MG",
+    "name": "DUDA SALABERT",
+    "fullName": "DUDA SALABERT",
+    "party": "PSOL",
+    "number": "5050",
+    "votes": 229535,
+    "pct": 2,
+    "status": "Eleito (projeção)",
+    "incumbent": true,
+    "prevParty": "PDT",
+    "prevCurrent": true,
+    "projecao": true
+   },
+   {
+    "uf": "MG",
+    "name": "REGINALDO LOPES",
+    "fullName": "REGINALDO LAZARO DE OLIVEIRA LOPES",
+    "party": "PT",
+    "number": "1312",
+    "votes": 215192,
+    "pct": 1.88,
+    "status": "Eleito (projeção)",
+    "incumbent": true,
+    "prevParty": "PT",
+    "prevCurrent": true,
+    "projecao": true
+   },
+   {
+    "uf": "MG",
+    "name": "ROGÉRIO CORREIA",
+    "fullName": "ROGERIO CORREIA DE MOURA BAPTISTA",
+    "party": "PT",
+    "number": "1313",
+    "votes": 185912,
+    "pct": 1.62,
+    "status": "Eleito (projeção)",
+    "incumbent": true,
+    "prevParty": "PT",
+    "prevCurrent": true,
+    "projecao": true
+   },
+   {
+    "uf": "MG",
+    "name": "PINHEIRINHO",
+    "fullName": "ANTÔNIO PINHEIRO NETO",
+    "party": "PP",
+    "number": "1122",
+    "votes": 151981,
+    "pct": 1.33,
+    "status": "Eleito (projeção)",
+    "incumbent": true,
+    "prevParty": "PP",
+    "prevCurrent": true,
+    "projecao": true
+   },
+   {
+    "uf": "MG",
+    "name": "ZÉ VITOR",
+    "fullName": "JOSE VITOR DE RESENDE AGUIAR",
+    "party": "PL",
+    "number": "2200",
+    "votes": 145006,
+    "pct": 1.26,
+    "status": "Eleito (projeção)",
+    "incumbent": true,
+    "prevParty": "PL",
+    "prevCurrent": true,
+    "projecao": true
+   },
+   {
+    "uf": "MG",
+    "name": "ANA PIMENTEL",
+    "fullName": "ANA CRISTINA DE LIMA PIMENTEL",
+    "party": "PT",
+    "number": "1314",
+    "votes": 144496,
+    "pct": 1.26,
+    "status": "Eleito (projeção)",
+    "incumbent": true,
+    "prevParty": "PT",
+    "prevCurrent": true,
+    "projecao": true
+   },
+   {
+    "uf": "MG",
+    "name": "GLEIDE ANDRADE",
+    "fullName": "GLEIDE ANDRADE DE OLIVEIRA",
+    "party": "PT",
+    "number": "1307",
+    "votes": 130253,
+    "pct": 1.14,
+    "status": "Eleito (projeção)",
+    "incumbent": false,
+    "prevParty": null,
+    "prevCurrent": null,
+    "projecao": true
+   },
+   {
+    "uf": "MG",
+    "name": "WELITON PRADO",
+    "fullName": "WELITON FERNANDES PRADO",
+    "party": "PSD",
+    "number": "5510",
+    "votes": 129366,
+    "pct": 1.13,
+    "status": "Eleito (projeção)",
+    "incumbent": true,
+    "prevParty": "PROS",
+    "prevCurrent": true,
+    "projecao": true
+   },
+   {
+    "uf": "MG",
+    "name": "PAULO GUEDES",
+    "fullName": "PAULO JOSE CARLOS GUEDES",
+    "party": "PT",
+    "number": "1378",
+    "votes": 126974,
+    "pct": 1.11,
+    "status": "Eleito (projeção)",
+    "incumbent": true,
+    "prevParty": "PT",
+    "prevCurrent": true,
+    "projecao": true
+   },
+   {
+    "uf": "MG",
+    "name": "GLEIDSON AZEVEDO",
+    "fullName": "GLEIDSON GONTIJO AZEVEDO",
+    "party": "REPUBLICANOS",
+    "number": "1000",
+    "votes": 126248,
+    "pct": 1.1,
+    "status": "Eleito (projeção)",
+    "incumbent": false,
+    "prevParty": null,
+    "prevCurrent": null,
+    "projecao": true
+   },
+   {
+    "uf": "MG",
+    "name": "PEDRO ROUSSEFF",
+    "fullName": "PEDRO FARAH ROUSSEFF",
+    "party": "PT",
+    "number": "1300",
+    "votes": 118567,
+    "pct": 1.03,
+    "status": "Eleito (projeção)",
+    "incumbent": false,
+    "prevParty": null,
+    "prevCurrent": null,
+    "projecao": true
+   },
+   {
+    "uf": "MG",
+    "name": "BRUNO FARIAS",
+    "fullName": "BRUNO SOUZA FARIAS",
+    "party": "REPUBLICANOS",
+    "number": "1077",
+    "votes": 113379,
+    "pct": 0.99,
+    "status": "Eleito (projeção)",
+    "incumbent": true,
+    "prevParty": "AVANTE",
+    "prevCurrent": true,
+    "projecao": true
+   },
+   {
+    "uf": "MG",
+    "name": "MIGUEL ÂNGELO",
+    "fullName": "MIGUEL ANGELO MONTEIRO ANDRADE",
+    "party": "PT",
+    "number": "1339",
+    "votes": 110124,
+    "pct": 0.96,
+    "status": "Eleito (projeção)",
+    "incumbent": true,
+    "prevParty": "PT",
+    "prevCurrent": true,
+    "projecao": true
+   },
+   {
+    "uf": "MG",
+    "name": "DIEGO ANDRADE",
+    "fullName": "DIEGO LEONARDO DE ANDRADE CARVALHO",
+    "party": "PSD",
+    "number": "5555",
+    "votes": 109445,
+    "pct": 0.95,
+    "status": "Eleito (projeção)",
+    "incumbent": true,
+    "prevParty": "PSD",
+    "prevCurrent": true,
+    "projecao": true
+   },
+   {
+    "uf": "MG",
+    "name": "DANDARA",
+    "fullName": "DANDARA TONANTZIN SILVA CASTRO",
+    "party": "PT",
+    "number": "1334",
+    "votes": 108193,
+    "pct": 0.94,
+    "status": "Eleito (projeção)",
+    "incumbent": true,
+    "prevParty": "PT",
+    "prevCurrent": true,
+    "projecao": true
+   },
+   {
+    "uf": "MG",
+    "name": "LOHANNA",
+    "fullName": "LOHANNA SOUZA FRANÇA MOREIRA DE OLIVEIRA",
+    "party": "PV",
+    "number": "4350",
+    "votes": 108182,
+    "pct": 0.94,
+    "status": "Eleito (projeção)",
+    "incumbent": false,
+    "prevParty": null,
+    "prevCurrent": null,
+    "projecao": true
+   },
+   {
+    "uf": "MG",
+    "name": "RODRIGO DE CASTRO",
+    "fullName": "RODRIGO BATISTA DE CASTRO",
+    "party": "UNIÃO",
+    "number": "4450",
+    "votes": 105371,
+    "pct": 0.92,
+    "status": "Eleito (projeção)",
+    "incumbent": true,
+    "prevParty": "UNIÃO",
+    "prevCurrent": true,
+    "projecao": true
+   },
+   {
+    "uf": "MG",
+    "name": "DELEGADO MARCELO FREITAS",
+    "fullName": "MARCELO EDUARDO FREITAS",
+    "party": "UNIÃO",
+    "number": "4444",
+    "votes": 104010,
+    "pct": 0.91,
+    "status": "Eleito (projeção)",
+    "incumbent": true,
+    "prevParty": "UNIÃO",
+    "prevCurrent": true,
+    "projecao": true
+   },
+   {
+    "uf": "MG",
+    "name": "FRED COSTA",
+    "fullName": "FREDERICO BORGES DA COSTA",
+    "party": "PRD",
+    "number": "2533",
+    "votes": 100082,
+    "pct": 0.87,
+    "status": "Eleito (projeção)",
+    "incumbent": true,
+    "prevParty": "PATRIOTA",
+    "prevCurrent": true,
+    "projecao": true
+   },
+   {
+    "uf": "MG",
+    "name": "BELLA GONÇALVES",
+    "fullName": "ISABELLA GONÇALVES MIRANDA",
+    "party": "PT",
+    "number": "1390",
+    "votes": 98750,
+    "pct": 0.86,
+    "status": "Eleito (projeção)",
+    "incumbent": false,
+    "prevParty": null,
+    "prevCurrent": null,
+    "projecao": true
+   },
+   {
+    "uf": "MG",
+    "name": "GILBERTO ABRAMO",
+    "fullName": "GILBERTO APARECIDO ABRAMO",
+    "party": "REPUBLICANOS",
+    "number": "1010",
+    "votes": 96046,
+    "pct": 0.84,
+    "status": "Eleito (projeção)",
+    "incumbent": true,
+    "prevParty": "REPUBLICANOS",
+    "prevCurrent": true,
+    "projecao": true
+   },
+   {
+    "uf": "MG",
+    "name": "EMIDINHO MADEIRA",
+    "fullName": "EMIDIO ALVES MADEIRA JUNIOR",
+    "party": "PL",
+    "number": "2240",
+    "votes": 94812,
+    "pct": 0.83,
+    "status": "Eleito (projeção)",
+    "incumbent": true,
+    "prevParty": "PL",
+    "prevCurrent": true,
+    "projecao": true
+   },
+   {
+    "uf": "MG",
+    "name": "NEWTON CARDOSO JR",
+    "fullName": "NEWTON CARDOSO JUNIOR",
+    "party": "MDB",
+    "number": "1510",
+    "votes": 93759,
+    "pct": 0.82,
+    "status": "Eleito (projeção)",
+    "incumbent": true,
+    "prevParty": "MDB",
+    "prevCurrent": true,
+    "projecao": true
+   },
+   {
+    "uf": "MG",
+    "name": "DIMAS FABIANO",
+    "fullName": "DIMAS FABIANO TOLEDO JUNIOR",
+    "party": "PP",
+    "number": "1111",
+    "votes": 90827,
+    "pct": 0.79,
+    "status": "Eleito (projeção)",
+    "incumbent": true,
+    "prevParty": "PP",
+    "prevCurrent": true,
+    "projecao": true
+   },
+   {
+    "uf": "MG",
+    "name": "PADRE JOÃO",
+    "fullName": "JOAO CARLOS SIQUEIRA",
+    "party": "PT",
+    "number": "1315",
+    "votes": 86923,
+    "pct": 0.76,
+    "status": "Eleito (projeção)",
+    "incumbent": true,
+    "prevParty": "PT",
+    "prevCurrent": true,
+    "projecao": true
+   },
+   {
+    "uf": "MG",
+    "name": "LUIS TIBÉ",
+    "fullName": "LUIS HENRIQUE DE OLIVEIRA RESENDE",
+    "party": "AVANTE",
+    "number": "7070",
+    "votes": 86740,
+    "pct": 0.76,
+    "status": "Eleito (projeção)",
+    "incumbent": true,
+    "prevParty": "AVANTE",
+    "prevCurrent": true,
+    "projecao": true
+   },
+   {
+    "uf": "MG",
+    "name": "RAFAEL SIMÕES",
+    "fullName": "RAFAEL TADEU SIMÕES",
+    "party": "UNIÃO",
+    "number": "4445",
+    "votes": 86131,
+    "pct": 0.75,
+    "status": "Eleito (projeção)",
+    "incumbent": true,
+    "prevParty": "UNIÃO",
+    "prevCurrent": true,
+    "projecao": true
+   },
+   {
+    "uf": "MG",
+    "name": "SAMUEL VIANA",
+    "fullName": "SAMUEL JOSÉ RODRIGUES DE VIANA",
+    "party": "UNIÃO",
+    "number": "4433",
+    "votes": 84879,
+    "pct": 0.74,
+    "status": "Eleito (projeção)",
+    "incumbent": true,
+    "prevParty": "PL",
+    "prevCurrent": true,
+    "projecao": true
+   },
+   {
+    "uf": "MG",
+    "name": "EROS BIONDINI",
+    "fullName": "EROS FERREIRA BIONDINI",
+    "party": "PL",
+    "number": "2277",
+    "votes": 81650,
+    "pct": 0.71,
+    "status": "Eleito (projeção)",
+    "incumbent": true,
+    "prevParty": "PL",
+    "prevCurrent": true,
+    "projecao": true
+   },
+   {
+    "uf": "MG",
+    "name": "VINICIUS DINIZ",
+    "fullName": "VINICIUS ABREU DINIZ",
+    "party": "PL",
+    "number": "2280",
+    "votes": 80567,
+    "pct": 0.7,
+    "status": "Eleito (projeção)",
+    "incumbent": false,
+    "prevParty": null,
+    "prevCurrent": null,
+    "projecao": true
+   },
+   {
+    "uf": "MG",
+    "name": "LEONARDO MONTEIRO",
+    "fullName": "JOSE LEONARDO COSTA MONTEIRO",
+    "party": "PT",
+    "number": "1363",
+    "votes": 78841,
+    "pct": 0.69,
+    "status": "Eleito (projeção)",
+    "incumbent": true,
+    "prevParty": "PT",
+    "prevCurrent": true,
+    "projecao": true
+   },
+   {
+    "uf": "MG",
+    "name": "ANDRÉ JANONES",
+    "fullName": "ANDRE LUIS GASPAR JANONES",
+    "party": "REDE",
+    "number": "1813",
+    "votes": 78780,
+    "pct": 0.69,
+    "status": "Eleito (projeção)",
+    "incumbent": true,
+    "prevParty": "AVANTE",
+    "prevCurrent": true,
+    "projecao": true
+   },
+   {
+    "uf": "MG",
+    "name": "NELY AQUINO",
+    "fullName": "NELI PEREIRA DE AQUINO",
+    "party": "PODE",
+    "number": "2020",
+    "votes": 70921,
+    "pct": 0.62,
+    "status": "Eleito (projeção)",
+    "incumbent": true,
+    "prevParty": "PODE",
+    "prevCurrent": true,
+    "projecao": true
+   },
+   {
+    "uf": "MG",
+    "name": "IGOR SANTOS",
+    "fullName": "IGOR PEREIRA DOS SANTOS",
+    "party": "PL",
+    "number": "2227",
+    "votes": 70572,
+    "pct": 0.62,
+    "status": "Eleito (projeção)",
+    "incumbent": false,
+    "prevParty": null,
+    "prevCurrent": null,
+    "projecao": true
+   },
+   {
+    "uf": "MG",
+    "name": "PAULO ABI-ACKEL",
+    "fullName": "PAULO ABI-ACKEL",
+    "party": "PSDB",
+    "number": "4545",
+    "votes": 68795,
+    "pct": 0.6,
+    "status": "Eleito (projeção)",
+    "incumbent": true,
+    "prevParty": "PSDB",
+    "prevCurrent": true,
+    "projecao": true
+   },
+   {
+    "uf": "MG",
+    "name": "DR. MARCOS VINICIUS",
+    "fullName": "MARCOS VINICIUS DA SILVA BIZARRO",
+    "party": "PL",
+    "number": "2260",
+    "votes": 67371,
+    "pct": 0.59,
+    "status": "Eleito (projeção)",
+    "incumbent": false,
+    "prevParty": null,
+    "prevCurrent": null,
+    "projecao": true
+   },
+   {
+    "uf": "MG",
+    "name": "GREYCE ELIAS",
+    "fullName": "GREYCE DE QUEIROZ ELIAS",
+    "party": "PL",
+    "number": "2270",
+    "votes": 66395,
+    "pct": 0.58,
+    "status": "Eleito (projeção)",
+    "incumbent": true,
+    "prevParty": "AVANTE",
+    "prevCurrent": true,
+    "projecao": true
+   },
+   {
+    "uf": "MG",
+    "name": "LAFAYETTE ANDRADA",
+    "fullName": "LAFAYETTE LUIZ DOORGAL DE ANDRADA",
+    "party": "PL",
+    "number": "2250",
+    "votes": 61773,
+    "pct": 0.54,
+    "status": "Eleito (projeção)",
+    "incumbent": true,
+    "prevParty": "REPUBLICANOS",
+    "prevCurrent": true,
+    "projecao": true
+   },
+   {
+    "uf": "MG",
+    "name": "DR. FREDERICO",
+    "fullName": "FREDERICO DE CASTRO ESCALEIRA",
+    "party": "PL",
+    "number": "2252",
+    "votes": 60625,
+    "pct": 0.53,
+    "status": "Eleito (projeção)",
+    "incumbent": true,
+    "prevParty": "PATRIOTA",
+    "prevCurrent": true,
+    "projecao": true
+   },
+   {
+    "uf": "MG",
+    "name": "CAPOREZZO",
+    "fullName": "CRISTIANO CAPOREZZO ARAUJO PIRES FERREIRA",
+    "party": "PL",
+    "number": "2212",
+    "votes": 57878,
+    "pct": 0.5,
+    "status": "Eleito (projeção)",
+    "incumbent": false,
+    "prevParty": null,
+    "prevCurrent": null,
+    "projecao": true
+   },
+   {
+    "uf": "MG",
+    "name": "ROSANGELA REIS",
+    "fullName": "ROSANGELA DE OLIVEIRA CAMPOS REIS",
+    "party": "PL",
+    "number": "2215",
+    "votes": 57063,
+    "pct": 0.5,
+    "status": "Eleito (projeção)",
+    "incumbent": true,
+    "prevParty": "PL",
+    "prevCurrent": true,
+    "projecao": true
+   },
+   {
+    "uf": "MG",
+    "name": "MARCELO ÁLVARO ANTÔNIO",
+    "fullName": "MARCELO HENRIQUE TEIXEIRA DIAS",
+    "party": "PL",
+    "number": "2244",
+    "votes": 56958,
+    "pct": 0.5,
+    "status": "Eleito (projeção)",
+    "incumbent": true,
+    "prevParty": "PL",
+    "prevCurrent": true,
+    "projecao": true
+   },
+   {
+    "uf": "MG",
+    "name": "DUARTE JÚNIOR",
+    "fullName": "DUARTE EUSTAQUIO GONCALVES JUNIOR",
+    "party": "PSB",
+    "number": "4010",
+    "votes": 46479,
+    "pct": 0.41,
+    "status": "Eleito (projeção)",
+    "incumbent": true,
+    "prevParty": "PSC",
+    "prevCurrent": false,
+    "projecao": true
+   },
+   {
+    "uf": "MG",
+    "name": "FABINHO RAMALHO",
+    "fullName": "FABIO AUGUSTO RAMALHO DOS SANTOS",
+    "party": "PL",
+    "number": "2225",
+    "votes": 43908,
+    "pct": 0.38,
+    "status": "Eleito (projeção)",
+    "incumbent": false,
+    "prevParty": null,
+    "prevCurrent": null,
+    "projecao": true
+   },
+   {
+    "uf": "MG",
+    "name": "THIAGO GANEM",
+    "fullName": "THIAGO MARTINS MILHIM",
+    "party": "PL",
+    "number": "2275",
+    "votes": 42718,
+    "pct": 0.37,
+    "status": "Eleito (projeção)",
+    "incumbent": false,
+    "prevParty": null,
+    "prevCurrent": null,
+    "projecao": true
+   },
+   {
+    "uf": "MG",
+    "name": "DELEGADA IONE",
+    "fullName": "IONE MARIA MOREIRA DIAS BARBOSA",
+    "party": "PL",
+    "number": "2232",
+    "votes": 39275,
+    "pct": 0.34,
+    "status": "Eleito (projeção)",
+    "incumbent": true,
+    "prevParty": "AVANTE",
+    "prevCurrent": true,
+    "projecao": true
+   },
+   {
+    "uf": "MG",
+    "name": "RODRIGO TAVARES",
+    "fullName": "RODRIGO RODRIGUES TAVARES",
+    "party": "PL",
+    "number": "2204",
+    "votes": 37534,
+    "pct": 0.33,
+    "status": "Eleito (projeção)",
+    "incumbent": false,
+    "prevParty": null,
+    "prevCurrent": null,
+    "projecao": true
+   },
+   {
+    "uf": "MG",
+    "name": "LINCOLN PORTELA",
+    "fullName": "LINCOLN DINIZ PORTELA",
+    "party": "PL",
+    "number": "2233",
+    "votes": 37162,
+    "pct": 0.32,
+    "status": "Eleito (projeção)",
+    "incumbent": true,
+    "prevParty": "PL",
+    "prevCurrent": true,
+    "projecao": true
+   },
+   {
+    "uf": "MG",
+    "name": "SUBTENETE GONZAGA",
+    "fullName": "LUIZ GONZAGA RIBEIRO",
+    "party": "PL",
+    "number": "2219",
+    "votes": 35958,
+    "pct": 0.31,
+    "status": "Eleito (projeção)",
+    "incumbent": false,
+    "prevParty": null,
+    "prevCurrent": null,
+    "projecao": true
+   },
+   {
+    "uf": "MG",
+    "name": "JUNIO AMARAL",
+    "fullName": "GERALDO JUNIO DO AMARAL",
+    "party": "PL",
+    "number": "2299",
+    "votes": 33762,
+    "pct": 0.29,
+    "status": "Eleito (projeção)",
+    "incumbent": true,
+    "prevParty": "PL",
+    "prevCurrent": true,
+    "projecao": true
+   },
+   {
+    "uf": "MG",
+    "name": "SARGENTO MELLO-CASAL",
+    "fullName": "CARLOS ALBERTO DE MELLO",
+    "party": "PL",
+    "number": "2245",
+    "votes": 25090,
+    "pct": 0.22,
+    "status": "Eleito (projeção)",
+    "incumbent": false,
+    "prevParty": null,
+    "prevCurrent": null,
+    "projecao": true
    },
    {
     "uf": "PR",
@@ -1338,8 +2000,7 @@
     "incumbent": false,
     "prevParty": null,
     "prevCurrent": null,
-    "gender": "MASCULINO",
-    "race": "BRANCA"
+    "projecao": false
    },
    {
     "uf": "PR",
@@ -1353,8 +2014,7 @@
     "incumbent": false,
     "prevParty": null,
     "prevCurrent": null,
-    "gender": "MASCULINO",
-    "race": "BRANCA"
+    "projecao": false
    },
    {
     "uf": "PR",
@@ -1368,8 +2028,7 @@
     "incumbent": true,
     "prevParty": "PSD",
     "prevCurrent": true,
-    "gender": "MASCULINO",
-    "race": "BRANCA"
+    "projecao": false
    },
    {
     "uf": "PR",
@@ -1383,8 +2042,7 @@
     "incumbent": false,
     "prevParty": null,
     "prevCurrent": null,
-    "gender": "FEMININO",
-    "race": "BRANCA"
+    "projecao": false
    },
    {
     "uf": "PR",
@@ -1398,8 +2056,7 @@
     "incumbent": true,
     "prevParty": "PSD",
     "prevCurrent": true,
-    "gender": "MASCULINO",
-    "race": "BRANCA"
+    "projecao": false
    },
    {
     "uf": "PR",
@@ -1413,8 +2070,7 @@
     "incumbent": true,
     "prevParty": "PT",
     "prevCurrent": true,
-    "gender": "MASCULINO",
-    "race": "BRANCA"
+    "projecao": false
    },
    {
     "uf": "PR",
@@ -1428,8 +2084,7 @@
     "incumbent": false,
     "prevParty": null,
     "prevCurrent": null,
-    "gender": "FEMININO",
-    "race": "BRANCA"
+    "projecao": false
    },
    {
     "uf": "PR",
@@ -1443,8 +2098,7 @@
     "incumbent": true,
     "prevParty": "PV",
     "prevCurrent": true,
-    "gender": "MASCULINO",
-    "race": "BRANCA"
+    "projecao": false
    },
    {
     "uf": "PR",
@@ -1458,8 +2112,7 @@
     "incumbent": false,
     "prevParty": null,
     "prevCurrent": null,
-    "gender": "MASCULINO",
-    "race": "PRETA"
+    "projecao": false
    },
    {
     "uf": "PR",
@@ -1473,8 +2126,7 @@
     "incumbent": true,
     "prevParty": "UNIÃO",
     "prevCurrent": true,
-    "gender": "MASCULINO",
-    "race": "BRANCA"
+    "projecao": false
    },
    {
     "uf": "PR",
@@ -1488,8 +2140,7 @@
     "incumbent": true,
     "prevParty": "PP",
     "prevCurrent": true,
-    "gender": "MASCULINO",
-    "race": "BRANCA"
+    "projecao": false
    },
    {
     "uf": "PR",
@@ -1503,8 +2154,7 @@
     "incumbent": true,
     "prevParty": "UNIÃO",
     "prevCurrent": true,
-    "gender": "MASCULINO",
-    "race": "BRANCA"
+    "projecao": false
    },
    {
     "uf": "PR",
@@ -1518,8 +2168,7 @@
     "incumbent": true,
     "prevParty": "PT",
     "prevCurrent": true,
-    "gender": "FEMININO",
-    "race": "PRETA"
+    "projecao": false
    },
    {
     "uf": "PR",
@@ -1533,8 +2182,7 @@
     "incumbent": false,
     "prevParty": null,
     "prevCurrent": null,
-    "gender": "MASCULINO",
-    "race": "BRANCA"
+    "projecao": false
    },
    {
     "uf": "PR",
@@ -1548,8 +2196,7 @@
     "incumbent": true,
     "prevParty": "PP",
     "prevCurrent": true,
-    "gender": "MASCULINO",
-    "race": "BRANCA"
+    "projecao": false
    },
    {
     "uf": "PR",
@@ -1563,8 +2210,7 @@
     "incumbent": true,
     "prevParty": "PSD",
     "prevCurrent": true,
-    "gender": "FEMININO",
-    "race": "BRANCA"
+    "projecao": false
    },
    {
     "uf": "PR",
@@ -1578,8 +2224,7 @@
     "incumbent": true,
     "prevParty": "PSD",
     "prevCurrent": true,
-    "gender": "MASCULINO",
-    "race": "BRANCA"
+    "projecao": false
    },
    {
     "uf": "PR",
@@ -1593,8 +2238,7 @@
     "incumbent": true,
     "prevParty": "PROS",
     "prevCurrent": true,
-    "gender": "MASCULINO",
-    "race": "BRANCA"
+    "projecao": false
    },
    {
     "uf": "PR",
@@ -1608,8 +2252,7 @@
     "incumbent": false,
     "prevParty": null,
     "prevCurrent": null,
-    "gender": "MASCULINO",
-    "race": "BRANCA"
+    "projecao": false
    },
    {
     "uf": "PR",
@@ -1623,8 +2266,7 @@
     "incumbent": true,
     "prevParty": "PP",
     "prevCurrent": true,
-    "gender": "MASCULINO",
-    "race": "BRANCA"
+    "projecao": false
    },
    {
     "uf": "PR",
@@ -1638,8 +2280,7 @@
     "incumbent": false,
     "prevParty": null,
     "prevCurrent": null,
-    "gender": "MASCULINO",
-    "race": "BRANCA"
+    "projecao": false
    },
    {
     "uf": "PR",
@@ -1653,8 +2294,7 @@
     "incumbent": false,
     "prevParty": null,
     "prevCurrent": null,
-    "gender": "MASCULINO",
-    "race": "BRANCA"
+    "projecao": false
    },
    {
     "uf": "PR",
@@ -1668,8 +2308,7 @@
     "incumbent": true,
     "prevParty": "PL",
     "prevCurrent": true,
-    "gender": "MASCULINO",
-    "race": "BRANCA"
+    "projecao": false
    },
    {
     "uf": "PR",
@@ -1683,8 +2322,7 @@
     "incumbent": true,
     "prevParty": "MDB",
     "prevCurrent": true,
-    "gender": "MASCULINO",
-    "race": "BRANCA"
+    "projecao": false
    },
    {
     "uf": "PR",
@@ -1698,8 +2336,7 @@
     "incumbent": false,
     "prevParty": null,
     "prevCurrent": null,
-    "gender": "MASCULINO",
-    "race": "BRANCA"
+    "projecao": false
    },
    {
     "uf": "PR",
@@ -1713,8 +2350,7 @@
     "incumbent": false,
     "prevParty": null,
     "prevCurrent": null,
-    "gender": "MASCULINO",
-    "race": "BRANCA"
+    "projecao": false
    },
    {
     "uf": "PR",
@@ -1728,8 +2364,7 @@
     "incumbent": true,
     "prevParty": "UNIÃO",
     "prevCurrent": false,
-    "gender": "MASCULINO",
-    "race": "BRANCA"
+    "projecao": false
    },
    {
     "uf": "PR",
@@ -1743,8 +2378,7 @@
     "incumbent": false,
     "prevParty": null,
     "prevCurrent": null,
-    "gender": "MASCULINO",
-    "race": "BRANCA"
+    "projecao": false
    },
    {
     "uf": "PR",
@@ -1758,8 +2392,7 @@
     "incumbent": false,
     "prevParty": null,
     "prevCurrent": null,
-    "gender": "MASCULINO",
-    "race": "BRANCA"
+    "projecao": false
    },
    {
     "uf": "PR",
@@ -1773,8 +2406,7 @@
     "incumbent": false,
     "prevParty": null,
     "prevCurrent": null,
-    "gender": "MASCULINO",
-    "race": "BRANCA"
+    "projecao": false
    },
    {
     "uf": "RJ",
@@ -1788,8 +2420,7 @@
     "incumbent": true,
     "prevParty": "PP",
     "prevCurrent": true,
-    "gender": "MASCULINO",
-    "race": "BRANCA"
+    "projecao": false
    },
    {
     "uf": "RJ",
@@ -1803,8 +2434,7 @@
     "incumbent": false,
     "prevParty": null,
     "prevCurrent": null,
-    "gender": "MASCULINO",
-    "race": "PRETA"
+    "projecao": false
    },
    {
     "uf": "RJ",
@@ -1818,8 +2448,7 @@
     "incumbent": true,
     "prevParty": "PT",
     "prevCurrent": true,
-    "gender": "MASCULINO",
-    "race": "BRANCA"
+    "projecao": false
    },
    {
     "uf": "RJ",
@@ -1833,8 +2462,7 @@
     "incumbent": true,
     "prevParty": "PL",
     "prevCurrent": false,
-    "gender": "MASCULINO",
-    "race": "BRANCA"
+    "projecao": false
    },
    {
     "uf": "RJ",
@@ -1848,8 +2476,7 @@
     "incumbent": true,
     "prevParty": "PL",
     "prevCurrent": true,
-    "gender": "MASCULINO",
-    "race": "PARDA"
+    "projecao": false
    },
    {
     "uf": "RJ",
@@ -1863,8 +2490,7 @@
     "incumbent": false,
     "prevParty": null,
     "prevCurrent": null,
-    "gender": "MASCULINO",
-    "race": "BRANCA"
+    "projecao": false
    },
    {
     "uf": "RJ",
@@ -1878,8 +2504,7 @@
     "incumbent": true,
     "prevParty": "PL",
     "prevCurrent": true,
-    "gender": "MASCULINO",
-    "race": "BRANCA"
+    "projecao": false
    },
    {
     "uf": "RJ",
@@ -1893,8 +2518,7 @@
     "incumbent": false,
     "prevParty": null,
     "prevCurrent": null,
-    "gender": "MASCULINO",
-    "race": "BRANCA"
+    "projecao": false
    },
    {
     "uf": "RJ",
@@ -1908,8 +2532,7 @@
     "incumbent": false,
     "prevParty": null,
     "prevCurrent": null,
-    "gender": "FEMININO",
-    "race": "PRETA"
+    "projecao": false
    },
    {
     "uf": "RJ",
@@ -1923,8 +2546,7 @@
     "incumbent": true,
     "prevParty": "PL",
     "prevCurrent": true,
-    "gender": "MASCULINO",
-    "race": "BRANCA"
+    "projecao": false
    },
    {
     "uf": "RJ",
@@ -1938,8 +2560,7 @@
     "incumbent": true,
     "prevParty": "MDB",
     "prevCurrent": true,
-    "gender": "MASCULINO",
-    "race": "BRANCA"
+    "projecao": false
    },
    {
     "uf": "RJ",
@@ -1953,8 +2574,7 @@
     "incumbent": true,
     "prevParty": "PL",
     "prevCurrent": true,
-    "gender": "FEMININO",
-    "race": "BRANCA"
+    "projecao": false
    },
    {
     "uf": "RJ",
@@ -1968,8 +2588,7 @@
     "incumbent": true,
     "prevParty": "SOLIDARIEDADE",
     "prevCurrent": true,
-    "gender": "MASCULINO",
-    "race": "BRANCA"
+    "projecao": false
    },
    {
     "uf": "RJ",
@@ -1983,8 +2602,7 @@
     "incumbent": false,
     "prevParty": null,
     "prevCurrent": null,
-    "gender": "MASCULINO",
-    "race": "BRANCA"
+    "projecao": false
    },
    {
     "uf": "RJ",
@@ -1998,8 +2616,7 @@
     "incumbent": true,
     "prevParty": "PSOL",
     "prevCurrent": true,
-    "gender": "FEMININO",
-    "race": "PRETA"
+    "projecao": false
    },
    {
     "uf": "RJ",
@@ -2013,8 +2630,7 @@
     "incumbent": false,
     "prevParty": null,
     "prevCurrent": null,
-    "gender": "FEMININO",
-    "race": "BRANCA"
+    "projecao": false
    },
    {
     "uf": "RJ",
@@ -2028,8 +2644,7 @@
     "incumbent": true,
     "prevParty": "UNIÃO",
     "prevCurrent": true,
-    "gender": "FEMININO",
-    "race": "BRANCA"
+    "projecao": false
    },
    {
     "uf": "RJ",
@@ -2043,8 +2658,7 @@
     "incumbent": true,
     "prevParty": "PSD",
     "prevCurrent": true,
-    "gender": "MASCULINO",
-    "race": "BRANCA"
+    "projecao": false
    },
    {
     "uf": "RJ",
@@ -2058,8 +2672,7 @@
     "incumbent": false,
     "prevParty": null,
     "prevCurrent": null,
-    "gender": "FEMININO",
-    "race": "PARDA"
+    "projecao": false
    },
    {
     "uf": "RJ",
@@ -2073,8 +2686,7 @@
     "incumbent": false,
     "prevParty": null,
     "prevCurrent": null,
-    "gender": "MASCULINO",
-    "race": "BRANCA"
+    "projecao": false
    },
    {
     "uf": "RJ",
@@ -2088,8 +2700,7 @@
     "incumbent": false,
     "prevParty": null,
     "prevCurrent": null,
-    "gender": "MASCULINO",
-    "race": "BRANCA"
+    "projecao": false
    },
    {
     "uf": "RJ",
@@ -2103,8 +2714,7 @@
     "incumbent": true,
     "prevParty": "PSD",
     "prevCurrent": false,
-    "gender": "MASCULINO",
-    "race": "BRANCA"
+    "projecao": false
    },
    {
     "uf": "RJ",
@@ -2118,8 +2728,7 @@
     "incumbent": false,
     "prevParty": null,
     "prevCurrent": null,
-    "gender": "MASCULINO",
-    "race": "PRETA"
+    "projecao": false
    },
    {
     "uf": "RJ",
@@ -2133,8 +2742,7 @@
     "incumbent": true,
     "prevParty": "PSOL",
     "prevCurrent": true,
-    "gender": "MASCULINO",
-    "race": "BRANCA"
+    "projecao": false
    },
    {
     "uf": "RJ",
@@ -2148,8 +2756,7 @@
     "incumbent": false,
     "prevParty": null,
     "prevCurrent": null,
-    "gender": "MASCULINO",
-    "race": "BRANCA"
+    "projecao": false
    },
    {
     "uf": "RJ",
@@ -2163,8 +2770,7 @@
     "incumbent": false,
     "prevParty": null,
     "prevCurrent": null,
-    "gender": "MASCULINO",
-    "race": "BRANCA"
+    "projecao": false
    },
    {
     "uf": "RJ",
@@ -2178,8 +2784,7 @@
     "incumbent": true,
     "prevParty": "PL",
     "prevCurrent": true,
-    "gender": "FEMININO",
-    "race": "BRANCA"
+    "projecao": false
    },
    {
     "uf": "RJ",
@@ -2193,8 +2798,7 @@
     "incumbent": false,
     "prevParty": null,
     "prevCurrent": null,
-    "gender": "MASCULINO",
-    "race": "BRANCA"
+    "projecao": false
    },
    {
     "uf": "RJ",
@@ -2208,8 +2812,7 @@
     "incumbent": false,
     "prevParty": null,
     "prevCurrent": null,
-    "gender": "MASCULINO",
-    "race": "BRANCA"
+    "projecao": false
    },
    {
     "uf": "RJ",
@@ -2223,8 +2826,7 @@
     "incumbent": false,
     "prevParty": null,
     "prevCurrent": null,
-    "gender": "MASCULINO",
-    "race": "BRANCA"
+    "projecao": false
    },
    {
     "uf": "RJ",
@@ -2238,8 +2840,7 @@
     "incumbent": true,
     "prevParty": "PL",
     "prevCurrent": true,
-    "gender": "MASCULINO",
-    "race": "BRANCA"
+    "projecao": false
    },
    {
     "uf": "RJ",
@@ -2253,8 +2854,7 @@
     "incumbent": true,
     "prevParty": "PSOL",
     "prevCurrent": true,
-    "gender": "MASCULINO",
-    "race": "PRETA"
+    "projecao": false
    },
    {
     "uf": "RJ",
@@ -2268,8 +2868,7 @@
     "incumbent": false,
     "prevParty": null,
     "prevCurrent": null,
-    "gender": "MASCULINO",
-    "race": "BRANCA"
+    "projecao": false
    },
    {
     "uf": "RJ",
@@ -2283,8 +2882,7 @@
     "incumbent": true,
     "prevParty": "PCdoB",
     "prevCurrent": true,
-    "gender": "FEMININO",
-    "race": "BRANCA"
+    "projecao": false
    },
    {
     "uf": "RJ",
@@ -2298,8 +2896,7 @@
     "incumbent": false,
     "prevParty": null,
     "prevCurrent": null,
-    "gender": "MASCULINO",
-    "race": "BRANCA"
+    "projecao": false
    },
    {
     "uf": "RJ",
@@ -2313,8 +2910,7 @@
     "incumbent": true,
     "prevParty": "REPUBLICANOS",
     "prevCurrent": false,
-    "gender": "MASCULINO",
-    "race": "PARDA"
+    "projecao": false
    },
    {
     "uf": "RJ",
@@ -2328,8 +2924,7 @@
     "incumbent": true,
     "prevParty": "PDT",
     "prevCurrent": true,
-    "gender": "MASCULINO",
-    "race": "BRANCA"
+    "projecao": false
    },
    {
     "uf": "RJ",
@@ -2343,8 +2938,7 @@
     "incumbent": false,
     "prevParty": null,
     "prevCurrent": null,
-    "gender": "MASCULINO",
-    "race": "BRANCA"
+    "projecao": false
    },
    {
     "uf": "RJ",
@@ -2358,8 +2952,7 @@
     "incumbent": false,
     "prevParty": null,
     "prevCurrent": null,
-    "gender": "MASCULINO",
-    "race": "BRANCA"
+    "projecao": false
    },
    {
     "uf": "RJ",
@@ -2373,8 +2966,7 @@
     "incumbent": false,
     "prevParty": null,
     "prevCurrent": null,
-    "gender": "MASCULINO",
-    "race": "BRANCA"
+    "projecao": false
    },
    {
     "uf": "RJ",
@@ -2388,8 +2980,7 @@
     "incumbent": false,
     "prevParty": null,
     "prevCurrent": null,
-    "gender": "FEMININO",
-    "race": "BRANCA"
+    "projecao": false
    },
    {
     "uf": "RJ",
@@ -2403,8 +2994,7 @@
     "incumbent": false,
     "prevParty": null,
     "prevCurrent": null,
-    "gender": "MASCULINO",
-    "race": "BRANCA"
+    "projecao": false
    },
    {
     "uf": "RJ",
@@ -2418,8 +3008,7 @@
     "incumbent": true,
     "prevParty": "UNIÃO",
     "prevCurrent": true,
-    "gender": "MASCULINO",
-    "race": "BRANCA"
+    "projecao": false
    },
    {
     "uf": "RJ",
@@ -2433,8 +3022,7 @@
     "incumbent": true,
     "prevParty": "PP",
     "prevCurrent": true,
-    "gender": "MASCULINO",
-    "race": "BRANCA"
+    "projecao": false
    },
    {
     "uf": "RJ",
@@ -2448,8 +3036,7 @@
     "incumbent": true,
     "prevParty": "PTB",
     "prevCurrent": true,
-    "gender": "MASCULINO",
-    "race": "BRANCA"
+    "projecao": false
    },
    {
     "uf": "RJ",
@@ -2463,8 +3050,7 @@
     "incumbent": false,
     "prevParty": null,
     "prevCurrent": null,
-    "gender": "FEMININO",
-    "race": "BRANCA"
+    "projecao": false
    },
    {
     "uf": "RS",
@@ -2478,8 +3064,7 @@
     "incumbent": true,
     "prevParty": "PODE",
     "prevCurrent": true,
-    "gender": "MASCULINO",
-    "race": "BRANCA"
+    "projecao": false
    },
    {
     "uf": "RS",
@@ -2493,8 +3078,7 @@
     "incumbent": true,
     "prevParty": "PSOL",
     "prevCurrent": true,
-    "gender": "FEMININO",
-    "race": "BRANCA"
+    "projecao": false
    },
    {
     "uf": "RS",
@@ -2508,8 +3092,7 @@
     "incumbent": true,
     "prevParty": "PL",
     "prevCurrent": true,
-    "gender": "MASCULINO",
-    "race": "BRANCA"
+    "projecao": false
    },
    {
     "uf": "RS",
@@ -2523,8 +3106,7 @@
     "incumbent": false,
     "prevParty": null,
     "prevCurrent": null,
-    "gender": "MASCULINO",
-    "race": "PARDA"
+    "projecao": false
    },
    {
     "uf": "RS",
@@ -2538,8 +3120,7 @@
     "incumbent": true,
     "prevParty": "MDB",
     "prevCurrent": true,
-    "gender": "MASCULINO",
-    "race": "BRANCA"
+    "projecao": false
    },
    {
     "uf": "RS",
@@ -2553,8 +3134,7 @@
     "incumbent": true,
     "prevParty": "PT",
     "prevCurrent": true,
-    "gender": "FEMININO",
-    "race": "BRANCA"
+    "projecao": false
    },
    {
     "uf": "RS",
@@ -2568,8 +3148,7 @@
     "incumbent": true,
     "prevParty": "PP",
     "prevCurrent": true,
-    "gender": "MASCULINO",
-    "race": "BRANCA"
+    "projecao": false
    },
    {
     "uf": "RS",
@@ -2583,8 +3162,7 @@
     "incumbent": true,
     "prevParty": "CIDADANIA",
     "prevCurrent": true,
-    "gender": "FEMININO",
-    "race": "BRANCA"
+    "projecao": false
    },
    {
     "uf": "RS",
@@ -2598,8 +3176,7 @@
     "incumbent": true,
     "prevParty": "PP",
     "prevCurrent": true,
-    "gender": "MASCULINO",
-    "race": "BRANCA"
+    "projecao": false
    },
    {
     "uf": "RS",
@@ -2613,8 +3190,7 @@
     "incumbent": true,
     "prevParty": "PP",
     "prevCurrent": true,
-    "gender": "MASCULINO",
-    "race": "BRANCA"
+    "projecao": false
    },
    {
     "uf": "RS",
@@ -2628,8 +3204,7 @@
     "incumbent": true,
     "prevParty": "MDB",
     "prevCurrent": true,
-    "gender": "MASCULINO",
-    "race": "BRANCA"
+    "projecao": false
    },
    {
     "uf": "RS",
@@ -2643,8 +3218,7 @@
     "incumbent": true,
     "prevParty": "PCdoB",
     "prevCurrent": true,
-    "gender": "FEMININO",
-    "race": "PRETA"
+    "projecao": false
    },
    {
     "uf": "RS",
@@ -2658,8 +3232,7 @@
     "incumbent": true,
     "prevParty": "PT",
     "prevCurrent": true,
-    "gender": "MASCULINO",
-    "race": "BRANCA"
+    "projecao": false
    },
    {
     "uf": "RS",
@@ -2673,8 +3246,7 @@
     "incumbent": true,
     "prevParty": "PSD",
     "prevCurrent": true,
-    "gender": "MASCULINO",
-    "race": "BRANCA"
+    "projecao": false
    },
    {
     "uf": "RS",
@@ -2688,8 +3260,7 @@
     "incumbent": true,
     "prevParty": "PL",
     "prevCurrent": true,
-    "gender": "MASCULINO",
-    "race": "BRANCA"
+    "projecao": false
    },
    {
     "uf": "RS",
@@ -2703,8 +3274,7 @@
     "incumbent": true,
     "prevParty": "PT",
     "prevCurrent": true,
-    "gender": "FEMININO",
-    "race": "PRETA"
+    "projecao": false
    },
    {
     "uf": "RS",
@@ -2718,8 +3288,7 @@
     "incumbent": true,
     "prevParty": "PSDB",
     "prevCurrent": true,
-    "gender": "MASCULINO",
-    "race": "BRANCA"
+    "projecao": false
    },
    {
     "uf": "RS",
@@ -2733,8 +3302,7 @@
     "incumbent": true,
     "prevParty": "PT",
     "prevCurrent": true,
-    "gender": "MASCULINO",
-    "race": "BRANCA"
+    "projecao": false
    },
    {
     "uf": "RS",
@@ -2748,8 +3316,7 @@
     "incumbent": false,
     "prevParty": null,
     "prevCurrent": null,
-    "gender": "MASCULINO",
-    "race": "BRANCA"
+    "projecao": false
    },
    {
     "uf": "RS",
@@ -2763,8 +3330,7 @@
     "incumbent": false,
     "prevParty": null,
     "prevCurrent": null,
-    "gender": "MASCULINO",
-    "race": "BRANCA"
+    "projecao": false
    },
    {
     "uf": "RS",
@@ -2778,8 +3344,7 @@
     "incumbent": false,
     "prevParty": null,
     "prevCurrent": null,
-    "gender": "MASCULINO",
-    "race": "BRANCA"
+    "projecao": false
    },
    {
     "uf": "RS",
@@ -2793,8 +3358,7 @@
     "incumbent": false,
     "prevParty": null,
     "prevCurrent": null,
-    "gender": "MASCULINO",
-    "race": "BRANCA"
+    "projecao": false
    },
    {
     "uf": "RS",
@@ -2808,8 +3372,7 @@
     "incumbent": false,
     "prevParty": null,
     "prevCurrent": null,
-    "gender": "MASCULINO",
-    "race": "BRANCA"
+    "projecao": false
    },
    {
     "uf": "RS",
@@ -2823,8 +3386,7 @@
     "incumbent": true,
     "prevParty": "PDT",
     "prevCurrent": true,
-    "gender": "MASCULINO",
-    "race": "BRANCA"
+    "projecao": false
    },
    {
     "uf": "RS",
@@ -2838,8 +3400,7 @@
     "incumbent": true,
     "prevParty": "REPUBLICANOS",
     "prevCurrent": true,
-    "gender": "MASCULINO",
-    "race": "PARDA"
+    "projecao": false
    },
    {
     "uf": "RS",
@@ -2853,8 +3414,7 @@
     "incumbent": false,
     "prevParty": null,
     "prevCurrent": null,
-    "gender": "MASCULINO",
-    "race": "BRANCA"
+    "projecao": false
    },
    {
     "uf": "RS",
@@ -2868,8 +3428,7 @@
     "incumbent": true,
     "prevParty": "PL",
     "prevCurrent": true,
-    "gender": "MASCULINO",
-    "race": "BRANCA"
+    "projecao": false
    },
    {
     "uf": "RS",
@@ -2883,8 +3442,7 @@
     "incumbent": false,
     "prevParty": null,
     "prevCurrent": null,
-    "gender": "MASCULINO",
-    "race": "BRANCA"
+    "projecao": false
    },
    {
     "uf": "RS",
@@ -2898,8 +3456,7 @@
     "incumbent": true,
     "prevParty": "UNIÃO",
     "prevCurrent": true,
-    "gender": "MASCULINO",
-    "race": "BRANCA"
+    "projecao": false
    },
    {
     "uf": "RS",
@@ -2913,8 +3470,7 @@
     "incumbent": false,
     "prevParty": null,
     "prevCurrent": null,
-    "gender": "MASCULINO",
-    "race": "BRANCA"
+    "projecao": false
    },
    {
     "uf": "RS",
@@ -2928,8 +3484,7 @@
     "incumbent": false,
     "prevParty": null,
     "prevCurrent": null,
-    "gender": "MASCULINO",
-    "race": "BRANCA"
+    "projecao": false
    },
    {
     "uf": "SC",
@@ -2943,8 +3498,7 @@
     "incumbent": true,
     "prevParty": "PL",
     "prevCurrent": true,
-    "gender": "FEMININO",
-    "race": "BRANCA"
+    "projecao": false
    },
    {
     "uf": "SC",
@@ -2958,8 +3512,7 @@
     "incumbent": true,
     "prevParty": "PT",
     "prevCurrent": true,
-    "gender": "FEMININO",
-    "race": "BRANCA"
+    "projecao": false
    },
    {
     "uf": "SC",
@@ -2973,8 +3526,7 @@
     "incumbent": true,
     "prevParty": "PT",
     "prevCurrent": true,
-    "gender": "MASCULINO",
-    "race": "BRANCA"
+    "projecao": false
    },
    {
     "uf": "SC",
@@ -2988,8 +3540,7 @@
     "incumbent": false,
     "prevParty": null,
     "prevCurrent": null,
-    "gender": "MASCULINO",
-    "race": "BRANCA"
+    "projecao": false
    },
    {
     "uf": "SC",
@@ -3003,8 +3554,7 @@
     "incumbent": false,
     "prevParty": null,
     "prevCurrent": null,
-    "gender": "MASCULINO",
-    "race": "BRANCA"
+    "projecao": false
    },
    {
     "uf": "SC",
@@ -3018,8 +3568,7 @@
     "incumbent": true,
     "prevParty": "MDB",
     "prevCurrent": true,
-    "gender": "MASCULINO",
-    "race": "BRANCA"
+    "projecao": false
    },
    {
     "uf": "SC",
@@ -3033,8 +3582,7 @@
     "incumbent": true,
     "prevParty": "NOVO",
     "prevCurrent": true,
-    "gender": "MASCULINO",
-    "race": "BRANCA"
+    "projecao": false
    },
    {
     "uf": "SC",
@@ -3048,8 +3596,7 @@
     "incumbent": false,
     "prevParty": null,
     "prevCurrent": null,
-    "gender": "FEMININO",
-    "race": "BRANCA"
+    "projecao": false
    },
    {
     "uf": "SC",
@@ -3063,8 +3610,7 @@
     "incumbent": false,
     "prevParty": null,
     "prevCurrent": null,
-    "gender": "MASCULINO",
-    "race": "BRANCA"
+    "projecao": false
    },
    {
     "uf": "SC",
@@ -3078,8 +3624,7 @@
     "incumbent": true,
     "prevParty": "PL",
     "prevCurrent": true,
-    "gender": "FEMININO",
-    "race": "BRANCA"
+    "projecao": false
    },
    {
     "uf": "SC",
@@ -3093,8 +3638,7 @@
     "incumbent": false,
     "prevParty": null,
     "prevCurrent": null,
-    "gender": "MASCULINO",
-    "race": "BRANCA"
+    "projecao": false
    },
    {
     "uf": "SC",
@@ -3108,8 +3652,7 @@
     "incumbent": false,
     "prevParty": null,
     "prevCurrent": null,
-    "gender": "FEMININO",
-    "race": "BRANCA"
+    "projecao": false
    },
    {
     "uf": "SC",
@@ -3123,8 +3666,7 @@
     "incumbent": true,
     "prevParty": "PL",
     "prevCurrent": true,
-    "gender": "MASCULINO",
-    "race": "BRANCA"
+    "projecao": false
    },
    {
     "uf": "SC",
@@ -3138,8 +3680,7 @@
     "incumbent": true,
     "prevParty": "PSD",
     "prevCurrent": true,
-    "gender": "MASCULINO",
-    "race": "BRANCA"
+    "projecao": false
    },
    {
     "uf": "SC",
@@ -3153,8 +3694,7 @@
     "incumbent": true,
     "prevParty": "PL",
     "prevCurrent": true,
-    "gender": "MASCULINO",
-    "race": "BRANCA"
+    "projecao": false
    },
    {
     "uf": "SC",
@@ -3168,11 +3708,2307 @@
     "incumbent": true,
     "prevParty": "PSDB",
     "prevCurrent": true,
-    "gender": "FEMININO",
-    "race": "BRANCA"
+    "projecao": false
+   },
+   {
+    "uf": "SP",
+    "name": "LUCAS PAVANATO",
+    "fullName": "LUCAS PAVANATO DE OLIVEIRA",
+    "party": "PL",
+    "number": "2211",
+    "votes": 3038438,
+    "pct": 12.82,
+    "status": "Eleito (projeção)",
+    "incumbent": false,
+    "prevParty": null,
+    "prevCurrent": null,
+    "projecao": true
+   },
+   {
+    "uf": "SP",
+    "name": "ERIKA HILTON",
+    "fullName": "ERIKA HILTON",
+    "party": "PSOL",
+    "number": "5070",
+    "votes": 1596472,
+    "pct": 6.73,
+    "status": "Eleito (projeção)",
+    "incumbent": true,
+    "prevParty": "PSOL",
+    "prevCurrent": true,
+    "projecao": true
+   },
+   {
+    "uf": "SP",
+    "name": "SÂMIA BOMFIM",
+    "fullName": "SÂMIA DE SOUZA BOMFIM",
+    "party": "PSOL",
+    "number": "5000",
+    "votes": 583107,
+    "pct": 2.46,
+    "status": "Eleito (projeção)",
+    "incumbent": true,
+    "prevParty": "PSOL",
+    "prevCurrent": true,
+    "projecao": true
+   },
+   {
+    "uf": "SP",
+    "name": "KIM KATAGUIRI",
+    "fullName": "KIM PATROCA KATAGUIRI",
+    "party": "MISSÃO",
+    "number": "1414",
+    "votes": 520071,
+    "pct": 2.19,
+    "status": "Eleito (projeção)",
+    "incumbent": true,
+    "prevParty": "UNIÃO",
+    "prevCurrent": true,
+    "projecao": true
+   },
+   {
+    "uf": "SP",
+    "name": "TABATA AMARAL",
+    "fullName": "TABATA CLÁUDIA AMARAL DE PONTES",
+    "party": "PSB",
+    "number": "4040",
+    "votes": 476383,
+    "pct": 2.01,
+    "status": "Eleito (projeção)",
+    "incumbent": true,
+    "prevParty": "PSB",
+    "prevCurrent": true,
+    "projecao": true
+   },
+   {
+    "uf": "SP",
+    "name": "RENATO BOLSONARO",
+    "fullName": "RENATO ANTONIO BOLSONARO",
+    "party": "PL",
+    "number": "2222",
+    "votes": 379312,
+    "pct": 1.6,
+    "status": "Eleito (projeção)",
+    "incumbent": false,
+    "prevParty": null,
+    "prevCurrent": null,
+    "projecao": true
+   },
+   {
+    "uf": "SP",
+    "name": "SARGENTO NANTES",
+    "fullName": "ISRAEL NANTES SANTOS",
+    "party": "PP",
+    "number": "1110",
+    "votes": 333401,
+    "pct": 1.41,
+    "status": "Eleito (projeção)",
+    "incumbent": false,
+    "prevParty": null,
+    "prevCurrent": null,
+    "projecao": true
+   },
+   {
+    "uf": "SP",
+    "name": "DELEGADO PALUMBO",
+    "fullName": "MARIO PALUMBO JUNIOR",
+    "party": "PODE",
+    "number": "2000",
+    "votes": 303271,
+    "pct": 1.28,
+    "status": "Eleito (projeção)",
+    "incumbent": true,
+    "prevParty": "MDB",
+    "prevCurrent": true,
+    "projecao": true
+   },
+   {
+    "uf": "SP",
+    "name": "GUILHERME CORTEZ",
+    "fullName": "GUILHERME DA COSTA AGUIAR CORTEZ",
+    "party": "PSOL",
+    "number": "5005",
+    "votes": 275450,
+    "pct": 1.16,
+    "status": "Eleito (projeção)",
+    "incumbent": false,
+    "prevParty": null,
+    "prevCurrent": null,
+    "projecao": true
+   },
+   {
+    "uf": "SP",
+    "name": "MAURICIO NEVES",
+    "fullName": "MANOEL MAURICIO SILVA NEVES",
+    "party": "PP",
+    "number": "1111",
+    "votes": 269996,
+    "pct": 1.14,
+    "status": "Eleito (projeção)",
+    "incumbent": true,
+    "prevParty": "PP",
+    "prevCurrent": true,
+    "projecao": true
+   },
+   {
+    "uf": "SP",
+    "name": "MARCIO ALVINO",
+    "fullName": "MARCIO LUIZ ALVINO DE SOUZA",
+    "party": "PL",
+    "number": "2299",
+    "votes": 261325,
+    "pct": 1.1,
+    "status": "Eleito (projeção)",
+    "incumbent": true,
+    "prevParty": "PL",
+    "prevCurrent": true,
+    "projecao": true
+   },
+   {
+    "uf": "SP",
+    "name": "PROFESSORA LUCIENE CAVALCANTE",
+    "fullName": "LUCIENE CAVALCANTE DA SILVA",
+    "party": "PSOL",
+    "number": "5089",
+    "votes": 253778,
+    "pct": 1.07,
+    "status": "Eleito (projeção)",
+    "incumbent": true,
+    "prevParty": "PSOL",
+    "prevCurrent": true,
+    "projecao": true
+   },
+   {
+    "uf": "SP",
+    "name": "ANA CAROLINA OLIVEIRA",
+    "fullName": "ANA CAROLINA CUNHA DE OLIVEIRA FRANCOMANO",
+    "party": "PODE",
+    "number": "2026",
+    "votes": 246741,
+    "pct": 1.04,
+    "status": "Eleito (projeção)",
+    "incumbent": false,
+    "prevParty": null,
+    "prevCurrent": null,
+    "projecao": true
+   },
+   {
+    "uf": "SP",
+    "name": "BALEIA ROSSI",
+    "fullName": "LUIZ FELIPE BALEIA TENUTO ROSSI",
+    "party": "MDB",
+    "number": "1515",
+    "votes": 239124,
+    "pct": 1.01,
+    "status": "Eleito (projeção)",
+    "incumbent": true,
+    "prevParty": "MDB",
+    "prevCurrent": true,
+    "projecao": true
+   },
+   {
+    "uf": "SP",
+    "name": "LUNA ZARATTINI",
+    "fullName": "LUNA ZARATTINI BRANDÃO",
+    "party": "PT",
+    "number": "1302",
+    "votes": 233733,
+    "pct": 0.99,
+    "status": "Eleito (projeção)",
+    "incumbent": false,
+    "prevParty": null,
+    "prevCurrent": null,
+    "projecao": true
+   },
+   {
+    "uf": "SP",
+    "name": "MARINA HELENA",
+    "fullName": "MARINA HELENA CUNHA PEREIRA SANTOS",
+    "party": "NOVO",
+    "number": "3007",
+    "votes": 230866,
+    "pct": 0.97,
+    "status": "Eleito (projeção)",
+    "incumbent": false,
+    "prevParty": null,
+    "prevCurrent": null,
+    "projecao": true
+   },
+   {
+    "uf": "SP",
+    "name": "DELEGADO BRUNO LIMA",
+    "fullName": "BRUNO MARCELLO DE OLIVEIRA LIMA",
+    "party": "PODE",
+    "number": "2011",
+    "votes": 217952,
+    "pct": 0.92,
+    "status": "Eleito (projeção)",
+    "incumbent": true,
+    "prevParty": "PP",
+    "prevCurrent": true,
+    "projecao": true
+   },
+   {
+    "uf": "SP",
+    "name": "ROSANA VALLE",
+    "fullName": "ROSANA DE OLIVEIRA VALLE",
+    "party": "PL",
+    "number": "2227",
+    "votes": 213752,
+    "pct": 0.9,
+    "status": "Eleito (projeção)",
+    "incumbent": true,
+    "prevParty": "PL",
+    "prevCurrent": true,
+    "projecao": true
+   },
+   {
+    "uf": "SP",
+    "name": "RENATA ABREU",
+    "fullName": "RENATA HELLMEISTER DE ABREU MELO",
+    "party": "PODE",
+    "number": "2020",
+    "votes": 199100,
+    "pct": 0.84,
+    "status": "Eleito (projeção)",
+    "incumbent": true,
+    "prevParty": "PODE",
+    "prevCurrent": false,
+    "projecao": true
+   },
+   {
+    "uf": "SP",
+    "name": "MARCOS PEREIRA",
+    "fullName": "MARCOS ANTONIO PEREIRA",
+    "party": "REPUBLICANOS",
+    "number": "1010",
+    "votes": 196681,
+    "pct": 0.83,
+    "status": "Eleito (projeção)",
+    "incumbent": true,
+    "prevParty": "REPUBLICANOS",
+    "prevCurrent": true,
+    "projecao": true
+   },
+   {
+    "uf": "SP",
+    "name": "LUIZ PHILIPPE DE O E BRAGANÇA",
+    "fullName": "LUIZ PHILIPPE DE ORLEANS BRAGANCA",
+    "party": "PL",
+    "number": "2225",
+    "votes": 187743,
+    "pct": 0.79,
+    "status": "Eleito (projeção)",
+    "incumbent": true,
+    "prevParty": "PL",
+    "prevCurrent": true,
+    "projecao": true
+   },
+   {
+    "uf": "SP",
+    "name": "GUILHERME PIAI",
+    "fullName": "GUILHERME PIAI SILVA FILIZZOLA",
+    "party": "REPUBLICANOS",
+    "number": "1011",
+    "votes": 182328,
+    "pct": 0.77,
+    "status": "Eleito (projeção)",
+    "incumbent": false,
+    "prevParty": null,
+    "prevCurrent": null,
+    "projecao": true
+   },
+   {
+    "uf": "SP",
+    "name": "IGOR SOARES",
+    "fullName": "IGOR SOARES EBERT",
+    "party": "PSD",
+    "number": "5500",
+    "votes": 181820,
+    "pct": 0.77,
+    "status": "Eleito (projeção)",
+    "incumbent": false,
+    "prevParty": null,
+    "prevCurrent": null,
+    "projecao": true
+   },
+   {
+    "uf": "SP",
+    "name": "PAULO ALEXANDRE BARBOSA",
+    "fullName": "PAULO ALEXANDRE PEREIRA BARBOSA",
+    "party": "PSD",
+    "number": "5533",
+    "votes": 168207,
+    "pct": 0.71,
+    "status": "Eleito (projeção)",
+    "incumbent": true,
+    "prevParty": "PSDB",
+    "prevCurrent": true,
+    "projecao": true
+   },
+   {
+    "uf": "SP",
+    "name": "FELIPE BECARI",
+    "fullName": "FELIPE BECARI COMENALE",
+    "party": "PODE",
+    "number": "2007",
+    "votes": 162957,
+    "pct": 0.69,
+    "status": "Eleito (projeção)",
+    "incumbent": true,
+    "prevParty": "UNIÃO",
+    "prevCurrent": true,
+    "projecao": true
+   },
+   {
+    "uf": "SP",
+    "name": "THIAGO SURFISTA",
+    "fullName": "THIAGO DE AZEVEDO LOPES FONSECA",
+    "party": "PL",
+    "number": "2280",
+    "votes": 161971,
+    "pct": 0.68,
+    "status": "Eleito (projeção)",
+    "incumbent": false,
+    "prevParty": null,
+    "prevCurrent": null,
+    "projecao": true
+   },
+   {
+    "uf": "SP",
+    "name": "ALENCAR SANTANA",
+    "fullName": "ALENCAR SANTANA BRAGA",
+    "party": "PT",
+    "number": "1358",
+    "votes": 160264,
+    "pct": 0.68,
+    "status": "Eleito (projeção)",
+    "incumbent": true,
+    "prevParty": "PT",
+    "prevCurrent": true,
+    "projecao": true
+   },
+   {
+    "uf": "SP",
+    "name": "CAPITÃO AUGUSTO",
+    "fullName": "JOSE AUGUSTO ROSA",
+    "party": "PL",
+    "number": "2200",
+    "votes": 153745,
+    "pct": 0.65,
+    "status": "Eleito (projeção)",
+    "incumbent": true,
+    "prevParty": "PL",
+    "prevCurrent": true,
+    "projecao": true
+   },
+   {
+    "uf": "SP",
+    "name": "JILMAR TATTO",
+    "fullName": "JILMAR AUGUSTINHO TATTO",
+    "party": "PT",
+    "number": "1380",
+    "votes": 152984,
+    "pct": 0.65,
+    "status": "Eleito (projeção)",
+    "incumbent": true,
+    "prevParty": "PT",
+    "prevCurrent": true,
+    "projecao": true
+   },
+   {
+    "uf": "SP",
+    "name": "CELSO RUSSOMANNO",
+    "fullName": "CELSO UBIRAJARA RUSSOMANNO",
+    "party": "REPUBLICANOS",
+    "number": "1000",
+    "votes": 138827,
+    "pct": 0.59,
+    "status": "Eleito (projeção)",
+    "incumbent": true,
+    "prevParty": "REPUBLICANOS",
+    "prevCurrent": true,
+    "projecao": true
+   },
+   {
+    "uf": "SP",
+    "name": "THIAGO DOS REIS",
+    "fullName": "THIAGO DOS REIS PEREIRA DOS SANTOS",
+    "party": "PT",
+    "number": "1399",
+    "votes": 137240,
+    "pct": 0.58,
+    "status": "Eleito (projeção)",
+    "incumbent": false,
+    "prevParty": null,
+    "prevCurrent": null,
+    "projecao": true
+   },
+   {
+    "uf": "SP",
+    "name": "PAULO SERRA",
+    "fullName": "PAULO HENRIQUE PINTO SERRA",
+    "party": "PSDB",
+    "number": "4545",
+    "votes": 132866,
+    "pct": 0.56,
+    "status": "Eleito (projeção)",
+    "incumbent": false,
+    "prevParty": null,
+    "prevCurrent": null,
+    "projecao": true
+   },
+   {
+    "uf": "SP",
+    "name": "SIDNEY CRUZ",
+    "fullName": "SIDNEY LUIZ DA CRUZ",
+    "party": "MDB",
+    "number": "1502",
+    "votes": 130951,
+    "pct": 0.55,
+    "status": "Eleito (projeção)",
+    "incumbent": false,
+    "prevParty": null,
+    "prevCurrent": null,
+    "projecao": true
+   },
+   {
+    "uf": "SP",
+    "name": "JOÃO CURY",
+    "fullName": "JOAO CURY NETO",
+    "party": "MDB",
+    "number": "1550",
+    "votes": 130915,
+    "pct": 0.55,
+    "status": "Eleito (projeção)",
+    "incumbent": true,
+    "prevParty": "MDB",
+    "prevCurrent": true,
+    "projecao": true
+   },
+   {
+    "uf": "SP",
+    "name": "LUIZ FERNANDO MACHADO",
+    "fullName": "LUIZ FERNANDO ARANTES MACHADO",
+    "party": "PL",
+    "number": "2234",
+    "votes": 129004,
+    "pct": 0.54,
+    "status": "Eleito (projeção)",
+    "incumbent": false,
+    "prevParty": null,
+    "prevCurrent": null,
+    "projecao": true
+   },
+   {
+    "uf": "SP",
+    "name": "ARLINDO CHINAGLIA",
+    "fullName": "ARLINDO CHIGNALIA JUNIOR",
+    "party": "PT",
+    "number": "1322",
+    "votes": 124121,
+    "pct": 0.52,
+    "status": "Eleito (projeção)",
+    "incumbent": true,
+    "prevParty": "PT",
+    "prevCurrent": true,
+    "projecao": true
+   },
+   {
+    "uf": "SP",
+    "name": "PASTOR MARCO FELICIANO",
+    "fullName": "MARCO ANTONIO FELICIANO",
+    "party": "PL",
+    "number": "2270",
+    "votes": 122119,
+    "pct": 0.52,
+    "status": "Eleito (projeção)",
+    "incumbent": true,
+    "prevParty": "PL",
+    "prevCurrent": true,
+    "projecao": true
+   },
+   {
+    "uf": "SP",
+    "name": "NEY SANTOS",
+    "fullName": "CLAUDINEI ALVES DOS SANTOS",
+    "party": "REPUBLICANOS",
+    "number": "1023",
+    "votes": 118566,
+    "pct": 0.5,
+    "status": "Eleito (projeção)",
+    "incumbent": false,
+    "prevParty": null,
+    "prevCurrent": null,
+    "projecao": true
+   },
+   {
+    "uf": "SP",
+    "name": "CARLOS ZARATTINI",
+    "fullName": "CARLOS ALBERTO ROLIM ZARATTINI",
+    "party": "PT",
+    "number": "1370",
+    "votes": 117608,
+    "pct": 0.5,
+    "status": "Eleito (projeção)",
+    "incumbent": true,
+    "prevParty": "PT",
+    "prevCurrent": true,
+    "projecao": true
+   },
+   {
+    "uf": "SP",
+    "name": "EDINHO SILVA",
+    "fullName": "EDSON ANTONIO EDINHO DA SILVA",
+    "party": "PT",
+    "number": "1316",
+    "votes": 115341,
+    "pct": 0.49,
+    "status": "Eleito (projeção)",
+    "incumbent": false,
+    "prevParty": null,
+    "prevCurrent": null,
+    "projecao": true
+   },
+   {
+    "uf": "SP",
+    "name": "NILTO TATTO",
+    "fullName": "NILTO IGNACIO TATTO",
+    "party": "PT",
+    "number": "1353",
+    "votes": 114560,
+    "pct": 0.48,
+    "status": "Eleito (projeção)",
+    "incumbent": true,
+    "prevParty": "PT",
+    "prevCurrent": true,
+    "projecao": true
+   },
+   {
+    "uf": "SP",
+    "name": "NATÁLIA BOULOS",
+    "fullName": "NATALIA SZERMETA",
+    "party": "PSOL",
+    "number": "5010",
+    "votes": 114552,
+    "pct": 0.48,
+    "status": "Eleito (projeção)",
+    "incumbent": false,
+    "prevParty": null,
+    "prevCurrent": null,
+    "projecao": true
+   },
+   {
+    "uf": "SP",
+    "name": "KIKO CELEGUIM",
+    "fullName": "FRANCISCO DANIEL CELEGUIM DE MORAIS",
+    "party": "PT",
+    "number": "1301",
+    "votes": 113158,
+    "pct": 0.48,
+    "status": "Eleito (projeção)",
+    "incumbent": true,
+    "prevParty": "PT",
+    "prevCurrent": true,
+    "projecao": true
+   },
+   {
+    "uf": "SP",
+    "name": "MOTTA",
+    "fullName": "LUIZ CARLOS MOTTA",
+    "party": "PL",
+    "number": "2244",
+    "votes": 112854,
+    "pct": 0.48,
+    "status": "Eleito (projeção)",
+    "incumbent": true,
+    "prevParty": "PL",
+    "prevCurrent": true,
+    "projecao": true
+   },
+   {
+    "uf": "SP",
+    "name": "JULIANA CARDOSO",
+    "fullName": "JULIANA CARDOSO",
+    "party": "PT",
+    "number": "1333",
+    "votes": 111904,
+    "pct": 0.47,
+    "status": "Eleito (projeção)",
+    "incumbent": true,
+    "prevParty": "PT",
+    "prevCurrent": true,
+    "projecao": true
+   },
+   {
+    "uf": "SP",
+    "name": "JOAO PAULO CUNHA",
+    "fullName": "JOAO PAULO CUNHA",
+    "party": "PT",
+    "number": "1325",
+    "votes": 109548,
+    "pct": 0.46,
+    "status": "Eleito (projeção)",
+    "incumbent": false,
+    "prevParty": null,
+    "prevCurrent": null,
+    "projecao": true
+   },
+   {
+    "uf": "SP",
+    "name": "RODRIGO GAMBALE",
+    "fullName": "RODRIGO GAMBALE VIEIRA",
+    "party": "PODE",
+    "number": "2077",
+    "votes": 106901,
+    "pct": 0.45,
+    "status": "Eleito (projeção)",
+    "incumbent": true,
+    "prevParty": "PODE",
+    "prevCurrent": true,
+    "projecao": true
+   },
+   {
+    "uf": "SP",
+    "name": "DRA. SANDRA TADEU",
+    "fullName": "SANDRA REGINA CARBONE TADEU MUDALEN",
+    "party": "PL",
+    "number": "2255",
+    "votes": 106471,
+    "pct": 0.45,
+    "status": "Eleito (projeção)",
+    "incumbent": false,
+    "prevParty": null,
+    "prevCurrent": null,
+    "projecao": true
+   },
+   {
+    "uf": "SP",
+    "name": "ENRICO MISASI",
+    "fullName": "ENRICO VAN BLARCUM DE GRAAFF MISASI",
+    "party": "MDB",
+    "number": "1536",
+    "votes": 106225,
+    "pct": 0.45,
+    "status": "Eleito (projeção)",
+    "incumbent": false,
+    "prevParty": null,
+    "prevCurrent": null,
+    "projecao": true
+   },
+   {
+    "uf": "SP",
+    "name": "CORONEL TELHADA",
+    "fullName": "PAULO ADRIANO LOPES LUCINDA TELHADA",
+    "party": "PP",
+    "number": "1100",
+    "votes": 104513,
+    "pct": 0.44,
+    "status": "Eleito (projeção)",
+    "incumbent": true,
+    "prevParty": "PP",
+    "prevCurrent": false,
+    "projecao": true
+   },
+   {
+    "uf": "SP",
+    "name": "PAULO FREIRE",
+    "fullName": "PAULO ROBERTO FREIRE DA COSTA",
+    "party": "PL",
+    "number": "2233",
+    "votes": 99388,
+    "pct": 0.42,
+    "status": "Eleito (projeção)",
+    "incumbent": true,
+    "prevParty": "PL",
+    "prevCurrent": true,
+    "projecao": true
+   },
+   {
+    "uf": "SP",
+    "name": "MARCOS NEVES",
+    "fullName": "MARCO AURELIO DOS SANTOS NEVES",
+    "party": "PSD",
+    "number": "5570",
+    "votes": 98359,
+    "pct": 0.41,
+    "status": "Eleito (projeção)",
+    "incumbent": false,
+    "prevParty": null,
+    "prevCurrent": null,
+    "projecao": true
+   },
+   {
+    "uf": "SP",
+    "name": "JONAS DONIZETTE",
+    "fullName": "JONAS DONIZETTE FERREIRA",
+    "party": "PSB",
+    "number": "4000",
+    "votes": 97335,
+    "pct": 0.41,
+    "status": "Eleito (projeção)",
+    "incumbent": true,
+    "prevParty": "PSB",
+    "prevCurrent": true,
+    "projecao": true
+   },
+   {
+    "uf": "SP",
+    "name": "MIGUEL LOMBARDI",
+    "fullName": "MIGUEL LOMBARDI",
+    "party": "PL",
+    "number": "2277",
+    "votes": 96333,
+    "pct": 0.41,
+    "status": "Eleito (projeção)",
+    "incumbent": true,
+    "prevParty": "PL",
+    "prevCurrent": true,
+    "projecao": true
+   },
+   {
+    "uf": "SP",
+    "name": "SAULO PEDROSO",
+    "fullName": "SAULO PEDROSO DE SOUZA",
+    "party": "PSD",
+    "number": "5515",
+    "votes": 95096,
+    "pct": 0.4,
+    "status": "Eleito (projeção)",
+    "incumbent": true,
+    "prevParty": "PSD",
+    "prevCurrent": true,
+    "projecao": true
+   },
+   {
+    "uf": "SP",
+    "name": "ALTAIR MORAES",
+    "fullName": "ALTAIR MORAES DE OLIVEIRA",
+    "party": "REPUBLICANOS",
+    "number": "1033",
+    "votes": 94770,
+    "pct": 0.4,
+    "status": "Eleito (projeção)",
+    "incumbent": false,
+    "prevParty": null,
+    "prevCurrent": null,
+    "projecao": true
+   },
+   {
+    "uf": "SP",
+    "name": "JEFFERSON CAMPOS",
+    "fullName": "JEFFERSON ALVES DE CAMPOS",
+    "party": "PL",
+    "number": "2274",
+    "votes": 92286,
+    "pct": 0.39,
+    "status": "Eleito (projeção)",
+    "incumbent": true,
+    "prevParty": "PL",
+    "prevCurrent": true,
+    "projecao": true
+   },
+   {
+    "uf": "SP",
+    "name": "CARLOS SAMPAIO",
+    "fullName": "CARLOS HENRIQUE FOCESI SAMPAIO",
+    "party": "PSD",
+    "number": "5585",
+    "votes": 91902,
+    "pct": 0.39,
+    "status": "Eleito (projeção)",
+    "incumbent": true,
+    "prevParty": "PSDB",
+    "prevCurrent": true,
+    "projecao": true
+   },
+   {
+    "uf": "SP",
+    "name": "MARIA ROSAS",
+    "fullName": "MARIA DO PARTO MENDES ROSAS",
+    "party": "REPUBLICANOS",
+    "number": "1022",
+    "votes": 91690,
+    "pct": 0.39,
+    "status": "Eleito (projeção)",
+    "incumbent": true,
+    "prevParty": "REPUBLICANOS",
+    "prevCurrent": true,
+    "projecao": true
+   },
+   {
+    "uf": "SP",
+    "name": "MARIO FRIAS",
+    "fullName": "MARIO LUIS FRIAS",
+    "party": "PL",
+    "number": "2208",
+    "votes": 91403,
+    "pct": 0.39,
+    "status": "Eleito (projeção)",
+    "incumbent": true,
+    "prevParty": "PL",
+    "prevCurrent": true,
+    "projecao": true
+   },
+   {
+    "uf": "SP",
+    "name": "DELEGADO PAULO BILYNSKYJ",
+    "fullName": "PAULO FRANCISCO MUNIZ BILYNSKYJ",
+    "party": "PL",
+    "number": "2247",
+    "votes": 90363,
+    "pct": 0.38,
+    "status": "Eleito (projeção)",
+    "incumbent": true,
+    "prevParty": "PL",
+    "prevCurrent": true,
+    "projecao": true
+   },
+   {
+    "uf": "SP",
+    "name": "CARLOS BEZERRA JR.",
+    "fullName": "CARLOS ALBERTO DE QUADROS BEZERRA JUNIOR",
+    "party": "PSD",
+    "number": "5512",
+    "votes": 89414,
+    "pct": 0.38,
+    "status": "Eleito (projeção)",
+    "incumbent": false,
+    "prevParty": null,
+    "prevCurrent": null,
+    "projecao": true
+   },
+   {
+    "uf": "SP",
+    "name": "SIRLANGE MANGA",
+    "fullName": "SIRLANGE RODRIGUES FRATE MAGANHATO",
+    "party": "UNIÃO",
+    "number": "4410",
+    "votes": 87820,
+    "pct": 0.37,
+    "status": "Eleito (projeção)",
+    "incumbent": false,
+    "prevParty": null,
+    "prevCurrent": null,
+    "projecao": true
+   },
+   {
+    "uf": "SP",
+    "name": "MILTON LEITE FILHO",
+    "fullName": "MILTON LEITE DA SILVA FILHO",
+    "party": "UNIÃO",
+    "number": "4425",
+    "votes": 71631,
+    "pct": 0.3,
+    "status": "Eleito (projeção)",
+    "incumbent": false,
+    "prevParty": null,
+    "prevCurrent": null,
+    "projecao": true
+   },
+   {
+    "uf": "SP",
+    "name": "ADRIANA VENTURA",
+    "fullName": "ADRIANA MIGUEL VENTURA",
+    "party": "NOVO",
+    "number": "3030",
+    "votes": 69083,
+    "pct": 0.29,
+    "status": "Eleito (projeção)",
+    "incumbent": true,
+    "prevParty": "NOVO",
+    "prevCurrent": true,
+    "projecao": true
+   },
+   {
+    "uf": "SP",
+    "name": "EDUARDO CURY",
+    "fullName": "EDUARDO PEDROSA CURY",
+    "party": "PL",
+    "number": "2212",
+    "votes": 66860,
+    "pct": 0.28,
+    "status": "Eleito (projeção)",
+    "incumbent": false,
+    "prevParty": null,
+    "prevCurrent": null,
+    "projecao": true
+   },
+   {
+    "uf": "SP",
+    "name": "WESLEY CEZAR LELINHO",
+    "fullName": "WESLEY LEONARDO CEZAR",
+    "party": "PL",
+    "number": "2278",
+    "votes": 66673,
+    "pct": 0.28,
+    "status": "Eleito (projeção)",
+    "incumbent": false,
+    "prevParty": null,
+    "prevCurrent": null,
+    "projecao": true
+   },
+   {
+    "uf": "SP",
+    "name": "GIL DINIZ",
+    "fullName": "GILDEVANIO ILSO DOS SANTOS DINIZ",
+    "party": "PL",
+    "number": "2220",
+    "votes": 63398,
+    "pct": 0.27,
+    "status": "Eleito (projeção)",
+    "incumbent": false,
+    "prevParty": null,
+    "prevCurrent": null,
+    "projecao": true
+   },
+   {
+    "uf": "SP",
+    "name": "EDINHO ARAUJO",
+    "fullName": "EDSON EDINHO COELHO ARAUJO",
+    "party": "PRD",
+    "number": "2525",
+    "votes": 54443,
+    "pct": 0.23,
+    "status": "Eleito (projeção)",
+    "incumbent": false,
+    "prevParty": null,
+    "prevCurrent": null,
+    "projecao": true
+   },
+   {
+    "uf": "SP",
+    "name": "SÔNIA GUAJAJARA",
+    "fullName": "SÔNIA BONE DE SOUSA SILVA",
+    "party": "PSOL",
+    "number": "5088",
+    "votes": 54207,
+    "pct": 0.23,
+    "status": "Eleito (projeção)",
+    "incumbent": true,
+    "prevParty": "PSOL",
+    "prevCurrent": true,
+    "projecao": true
    }
   ],
-  "estadual": []
+  "estadual": [
+   {
+    "uf": "SP",
+    "name": "EDUARDA CAMPOPIANO",
+    "fullName": "MARIA EDUARDA CAMPOPIANO MONTEIRO",
+    "party": "PL",
+    "number": "22011",
+    "votes": 1956238,
+    "pct": 8.39,
+    "status": "Eleito (projeção)",
+    "incumbent": false,
+    "prevParty": null,
+    "prevCurrent": null,
+    "projecao": true
+   },
+   {
+    "uf": "SP",
+    "name": "EDUARDO SUPLICY",
+    "fullName": "EDUARDO MATARAZZO SUPLICY",
+    "party": "PT",
+    "number": "13133",
+    "votes": 654627,
+    "pct": 2.81,
+    "status": "Eleito (projeção)",
+    "incumbent": true,
+    "prevParty": "PT",
+    "prevCurrent": null,
+    "projecao": true
+   },
+   {
+    "uf": "SP",
+    "name": "SOFIA FAVERO",
+    "fullName": "SOFIA FAVERO",
+    "party": "PSOL",
+    "number": "50700",
+    "votes": 407773,
+    "pct": 1.75,
+    "status": "Eleito (projeção)",
+    "incumbent": false,
+    "prevParty": null,
+    "prevCurrent": null,
+    "projecao": true
+   },
+   {
+    "uf": "SP",
+    "name": "CARLOS GIANNAZI",
+    "fullName": "CARLOS ALBERTO GIANNASI",
+    "party": "PSOL",
+    "number": "50789",
+    "votes": 367861,
+    "pct": 1.58,
+    "status": "Eleito (projeção)",
+    "incumbent": true,
+    "prevParty": "PSOL",
+    "prevCurrent": null,
+    "projecao": true
+   },
+   {
+    "uf": "SP",
+    "name": "PAULA DA BANCADA FEMINISTA",
+    "fullName": "PAULA NUNES DOS SANTOS",
+    "party": "PSOL",
+    "number": "50000",
+    "votes": 326190,
+    "pct": 1.4,
+    "status": "Eleito (projeção)",
+    "incumbent": true,
+    "prevParty": "PSOL",
+    "prevCurrent": null,
+    "projecao": true
+   },
+   {
+    "uf": "SP",
+    "name": "GIOVANNI SANCHES",
+    "fullName": "GIOVANNI GIUDICE CALDERON",
+    "party": "PL",
+    "number": "22800",
+    "votes": 235363,
+    "pct": 1.01,
+    "status": "Eleito (projeção)",
+    "incumbent": false,
+    "prevParty": null,
+    "prevCurrent": null,
+    "projecao": true
+   },
+   {
+    "uf": "SP",
+    "name": "ROGERIO LINS",
+    "fullName": "ROGERIO LINS WANDERLEY",
+    "party": "PODE",
+    "number": "20200",
+    "votes": 229928,
+    "pct": 0.99,
+    "status": "Eleito (projeção)",
+    "incumbent": false,
+    "prevParty": null,
+    "prevCurrent": null,
+    "projecao": true
+   },
+   {
+    "uf": "SP",
+    "name": "TENENTE COIMBRA",
+    "fullName": "MATHEUS COIMBRA MARTINS DE AGUIAR",
+    "party": "PL",
+    "number": "22444",
+    "votes": 198342,
+    "pct": 0.85,
+    "status": "Eleito (projeção)",
+    "incumbent": true,
+    "prevParty": "PL",
+    "prevCurrent": null,
+    "projecao": true
+   },
+   {
+    "uf": "SP",
+    "name": "RAFA MINATO",
+    "fullName": "RAFAEL FRANCISCO FERRAZ MINATOGAWA",
+    "party": "MISSÃO",
+    "number": "14014",
+    "votes": 185582,
+    "pct": 0.8,
+    "status": "Eleito (projeção)",
+    "incumbent": false,
+    "prevParty": null,
+    "prevCurrent": null,
+    "projecao": true
+   },
+   {
+    "uf": "SP",
+    "name": "DANILO JOAN",
+    "fullName": "DANILO BARBOSA MACHADO",
+    "party": "PP",
+    "number": "11111",
+    "votes": 182839,
+    "pct": 0.78,
+    "status": "Eleito (projeção)",
+    "incumbent": false,
+    "prevParty": null,
+    "prevCurrent": null,
+    "projecao": true
+   },
+   {
+    "uf": "SP",
+    "name": "THOMAZ HENRIQUE",
+    "fullName": "THOMAZ HENRIQUE BARBOSA DA SILVA",
+    "party": "PL",
+    "number": "22111",
+    "votes": 178164,
+    "pct": 0.76,
+    "status": "Eleito (projeção)",
+    "incumbent": false,
+    "prevParty": null,
+    "prevCurrent": null,
+    "projecao": true
+   },
+   {
+    "uf": "SP",
+    "name": "EDIANE MARIA",
+    "fullName": "EDIANE MARIA DO NASCIMENTO",
+    "party": "PSOL",
+    "number": "50110",
+    "votes": 170844,
+    "pct": 0.73,
+    "status": "Eleito (projeção)",
+    "incumbent": true,
+    "prevParty": "PSOL",
+    "prevCurrent": null,
+    "projecao": true
+   },
+   {
+    "uf": "SP",
+    "name": "LUIZA ERUNDINA",
+    "fullName": "LUIZA ERUNDINA DE SOUSA",
+    "party": "PSOL",
+    "number": "50555",
+    "votes": 169567,
+    "pct": 0.73,
+    "status": "Eleito (projeção)",
+    "incumbent": false,
+    "prevParty": null,
+    "prevCurrent": null,
+    "projecao": true
+   },
+   {
+    "uf": "SP",
+    "name": "DELEGADO OLIM",
+    "fullName": "ANTÔNIO ASSUNÇÃO DE OLIM",
+    "party": "PP",
+    "number": "11777",
+    "votes": 163918,
+    "pct": 0.7,
+    "status": "Eleito (projeção)",
+    "incumbent": true,
+    "prevParty": "PP",
+    "prevCurrent": null,
+    "projecao": true
+   },
+   {
+    "uf": "SP",
+    "name": "RODRIGO ASHIUCHI",
+    "fullName": "RODRIGO KENJI DE SOUZA ASHIUCHI",
+    "party": "PL",
+    "number": "22000",
+    "votes": 162562,
+    "pct": 0.7,
+    "status": "Eleito (projeção)",
+    "incumbent": false,
+    "prevParty": null,
+    "prevCurrent": null,
+    "projecao": true
+   },
+   {
+    "uf": "SP",
+    "name": "MONICA DAS PRETAS",
+    "fullName": "MONICA CRISTINA SEIXAS BONFIM",
+    "party": "PSOL",
+    "number": "50900",
+    "votes": 159100,
+    "pct": 0.68,
+    "status": "Eleito (projeção)",
+    "incumbent": false,
+    "prevParty": null,
+    "prevCurrent": null,
+    "projecao": true
+   },
+   {
+    "uf": "SP",
+    "name": "ITAMAR BORGES",
+    "fullName": "ITAMAR FRANCISCO MACHADO BORGES",
+    "party": "MDB",
+    "number": "15300",
+    "votes": 159058,
+    "pct": 0.68,
+    "status": "Eleito (projeção)",
+    "incumbent": true,
+    "prevParty": "MDB",
+    "prevCurrent": null,
+    "projecao": true
+   },
+   {
+    "uf": "SP",
+    "name": "BRUNA FURLAN",
+    "fullName": "BRUNA DIAS FURLAN VICENTE",
+    "party": "REPUBLICANOS",
+    "number": "10010",
+    "votes": 157381,
+    "pct": 0.67,
+    "status": "Eleito (projeção)",
+    "incumbent": true,
+    "prevParty": "Republicanos",
+    "prevCurrent": null,
+    "projecao": true
+   },
+   {
+    "uf": "SP",
+    "name": "MARCOS DAMASIO",
+    "fullName": "MARCOS ROBERTO DAMASIO DA SILVA",
+    "party": "PL",
+    "number": "22222",
+    "votes": 156691,
+    "pct": 0.67,
+    "status": "Eleito (projeção)",
+    "incumbent": true,
+    "prevParty": "PL",
+    "prevCurrent": null,
+    "projecao": true
+   },
+   {
+    "uf": "SP",
+    "name": "DANI ALONSO",
+    "fullName": "DANIELE MAZUQUELI ALONSO ROSA",
+    "party": "PL",
+    "number": "22322",
+    "votes": 155574,
+    "pct": 0.67,
+    "status": "Eleito (projeção)",
+    "incumbent": true,
+    "prevParty": "PL",
+    "prevCurrent": null,
+    "projecao": true
+   },
+   {
+    "uf": "SP",
+    "name": "REGINA NUNES",
+    "fullName": "REGINA CARNOVALE NUNES",
+    "party": "MDB",
+    "number": "15115",
+    "votes": 154966,
+    "pct": 0.66,
+    "status": "Eleito (projeção)",
+    "incumbent": false,
+    "prevParty": null,
+    "prevCurrent": null,
+    "projecao": true
+   },
+   {
+    "uf": "SP",
+    "name": "DUDA HIDALGO",
+    "fullName": "MARIA EDUARDA ALENCAR HIDALGO",
+    "party": "PT",
+    "number": "13180",
+    "votes": 154953,
+    "pct": 0.66,
+    "status": "Eleito (projeção)",
+    "incumbent": false,
+    "prevParty": null,
+    "prevCurrent": null,
+    "projecao": true
+   },
+   {
+    "uf": "SP",
+    "name": "SARGENTO CASTRO",
+    "fullName": "NILSON CASTRO SILVA",
+    "party": "PP",
+    "number": "11911",
+    "votes": 143422,
+    "pct": 0.61,
+    "status": "Eleito (projeção)",
+    "incumbent": false,
+    "prevParty": null,
+    "prevCurrent": null,
+    "projecao": true
+   },
+   {
+    "uf": "SP",
+    "name": "PROFESSORA BEBEL",
+    "fullName": "MARIA IZABEL AZEVEDO NORONHA",
+    "party": "PT",
+    "number": "13123",
+    "votes": 142001,
+    "pct": 0.61,
+    "status": "Eleito (projeção)",
+    "incumbent": true,
+    "prevParty": "PT",
+    "prevCurrent": null,
+    "projecao": true
+   },
+   {
+    "uf": "SP",
+    "name": "CONTE LOPES",
+    "fullName": "ROBERVAL CONTE LOPES LIMA",
+    "party": "PL",
+    "number": "22138",
+    "votes": 139225,
+    "pct": 0.6,
+    "status": "Eleito (projeção)",
+    "incumbent": false,
+    "prevParty": null,
+    "prevCurrent": null,
+    "projecao": true
+   },
+   {
+    "uf": "SP",
+    "name": "FELIPE SERTANEJO",
+    "fullName": "FELIPE MEDEIROS ARANTES",
+    "party": "PL",
+    "number": "22110",
+    "votes": 138277,
+    "pct": 0.59,
+    "status": "Eleito (projeção)",
+    "incumbent": false,
+    "prevParty": null,
+    "prevCurrent": null,
+    "projecao": true
+   },
+   {
+    "uf": "SP",
+    "name": "ROGERIO NOGUEIRA",
+    "fullName": "ROGERIO NOGUEIRA LOPES CRUZ",
+    "party": "PSD",
+    "number": "55555",
+    "votes": 137335,
+    "pct": 0.59,
+    "status": "Eleito (projeção)",
+    "incumbent": true,
+    "prevParty": "PSD",
+    "prevCurrent": null,
+    "projecao": true
+   },
+   {
+    "uf": "SP",
+    "name": "TELHADINHA - CAPITÃO TELHADA",
+    "fullName": "RAFAEL HENRIQUE CANO TELHADA",
+    "party": "PP",
+    "number": "11190",
+    "votes": 134006,
+    "pct": 0.57,
+    "status": "Eleito (projeção)",
+    "incumbent": false,
+    "prevParty": null,
+    "prevCurrent": null,
+    "projecao": true
+   },
+   {
+    "uf": "SP",
+    "name": "ANA CAROLINA SERRA",
+    "fullName": "ANA CAROLINA ROSSI BARRETO SERRA",
+    "party": "PSDB",
+    "number": "45045",
+    "votes": 132881,
+    "pct": 0.57,
+    "status": "Eleito (projeção)",
+    "incumbent": true,
+    "prevParty": "PSDB",
+    "prevCurrent": null,
+    "projecao": true
+   },
+   {
+    "uf": "SP",
+    "name": "MARIANA CONTI",
+    "fullName": "MARIANA CONTI TAKAHASHI",
+    "party": "PSOL",
+    "number": "50100",
+    "votes": 126344,
+    "pct": 0.54,
+    "status": "Eleito (projeção)",
+    "incumbent": false,
+    "prevParty": null,
+    "prevCurrent": null,
+    "projecao": true
+   },
+   {
+    "uf": "SP",
+    "name": "DELEGADA GRACIELA",
+    "fullName": "GRACIELA DE LOURDES DAVID AMBROSIO",
+    "party": "PL",
+    "number": "22888",
+    "votes": 125624,
+    "pct": 0.54,
+    "status": "Eleito (projeção)",
+    "incumbent": true,
+    "prevParty": "PL",
+    "prevCurrent": null,
+    "projecao": true
+   },
+   {
+    "uf": "SP",
+    "name": "DR. EDSON DA PAIOL",
+    "fullName": "EDSON RODRIGUES",
+    "party": "PODE",
+    "number": "20007",
+    "votes": 124394,
+    "pct": 0.53,
+    "status": "Eleito (projeção)",
+    "incumbent": false,
+    "prevParty": null,
+    "prevCurrent": null,
+    "projecao": true
+   },
+   {
+    "uf": "SP",
+    "name": "ALEX MADUREIRA",
+    "fullName": "ALEXANDER MUNIZ DE OLIVEIRA",
+    "party": "PL",
+    "number": "22777",
+    "votes": 122704,
+    "pct": 0.53,
+    "status": "Eleito (projeção)",
+    "incumbent": false,
+    "prevParty": null,
+    "prevCurrent": null,
+    "projecao": true
+   },
+   {
+    "uf": "SP",
+    "name": "LEONARDO GRANDINI",
+    "fullName": "LEONARDO DOS REIS ADORNO BECKER GRANDINI",
+    "party": "PT",
+    "number": "13633",
+    "votes": 122158,
+    "pct": 0.52,
+    "status": "Eleito (projeção)",
+    "incumbent": false,
+    "prevParty": null,
+    "prevCurrent": null,
+    "projecao": true
+   },
+   {
+    "uf": "SP",
+    "name": "DANILO CAMPETTI",
+    "fullName": "DANILO CESAR CAMPETTI",
+    "party": "REPUBLICANOS",
+    "number": "10222",
+    "votes": 119904,
+    "pct": 0.51,
+    "status": "Eleito (projeção)",
+    "incumbent": false,
+    "prevParty": null,
+    "prevCurrent": null,
+    "projecao": true
+   },
+   {
+    "uf": "SP",
+    "name": "BARROS MUNHOZ",
+    "fullName": "JOSE ANTONIO BARROS MUNHOZ",
+    "party": "PSD",
+    "number": "55855",
+    "votes": 116413,
+    "pct": 0.5,
+    "status": "Eleito (projeção)",
+    "incumbent": true,
+    "prevParty": "PSD",
+    "prevCurrent": null,
+    "projecao": true
+   },
+   {
+    "uf": "SP",
+    "name": "EMÍDIO",
+    "fullName": "EMIDIO PEREIRA DE SOUZA",
+    "party": "PT",
+    "number": "13131",
+    "votes": 108275,
+    "pct": 0.46,
+    "status": "Eleito (projeção)",
+    "incumbent": true,
+    "prevParty": "PT",
+    "prevCurrent": null,
+    "projecao": true
+   },
+   {
+    "uf": "SP",
+    "name": "PAULO MANSUR",
+    "fullName": "PAULO JORGE MANSUR NETO",
+    "party": "PL",
+    "number": "22422",
+    "votes": 107073,
+    "pct": 0.46,
+    "status": "Eleito (projeção)",
+    "incumbent": true,
+    "prevParty": "PL",
+    "prevCurrent": null,
+    "projecao": true
+   },
+   {
+    "uf": "SP",
+    "name": "RAFAEL SARAIVA",
+    "fullName": "RAFAEL SARAIVA GAIA",
+    "party": "UNIÃO",
+    "number": "44077",
+    "votes": 105174,
+    "pct": 0.45,
+    "status": "Eleito (projeção)",
+    "incumbent": true,
+    "prevParty": "UNIÃO",
+    "prevCurrent": null,
+    "projecao": true
+   },
+   {
+    "uf": "SP",
+    "name": "RODRIGO MAR",
+    "fullName": "RODRIGO FRANCISCO SILVA",
+    "party": "PT",
+    "number": "13644",
+    "votes": 104820,
+    "pct": 0.45,
+    "status": "Eleito (projeção)",
+    "incumbent": false,
+    "prevParty": null,
+    "prevCurrent": null,
+    "projecao": true
+   },
+   {
+    "uf": "SP",
+    "name": "ENIO TATTO",
+    "fullName": "ENIO FRANCISCO TATTO",
+    "party": "PT",
+    "number": "13114",
+    "votes": 102892,
+    "pct": 0.44,
+    "status": "Eleito (projeção)",
+    "incumbent": true,
+    "prevParty": "PT",
+    "prevCurrent": null,
+    "projecao": true
+   },
+   {
+    "uf": "SP",
+    "name": "REINALDO ALGUZ",
+    "fullName": "REINALDO DE SOUZA ALGUZ",
+    "party": "MDB",
+    "number": "15363",
+    "votes": 101946,
+    "pct": 0.44,
+    "status": "Eleito (projeção)",
+    "incumbent": false,
+    "prevParty": null,
+    "prevCurrent": null,
+    "projecao": true
+   },
+   {
+    "uf": "SP",
+    "name": "MARTA COSTA",
+    "fullName": "MARTA MARIA FREIRE DA COSTA",
+    "party": "PSD",
+    "number": "55400",
+    "votes": 100083,
+    "pct": 0.43,
+    "status": "Eleito (projeção)",
+    "incumbent": true,
+    "prevParty": "PSD",
+    "prevCurrent": null,
+    "projecao": true
+   },
+   {
+    "uf": "SP",
+    "name": "CAIO FRANÇA",
+    "fullName": "CAIO FRANCA DE GOUVEA GOMES",
+    "party": "PSB",
+    "number": "40640",
+    "votes": 99840,
+    "pct": 0.43,
+    "status": "Eleito (projeção)",
+    "incumbent": true,
+    "prevParty": "PSB",
+    "prevCurrent": null,
+    "projecao": true
+   },
+   {
+    "uf": "SP",
+    "name": "FRANCO SARDELLI",
+    "fullName": "FRANCO RAVERA SARDELLI",
+    "party": "PL",
+    "number": "22001",
+    "votes": 98375,
+    "pct": 0.42,
+    "status": "Eleito (projeção)",
+    "incumbent": false,
+    "prevParty": null,
+    "prevCurrent": null,
+    "projecao": true
+   },
+   {
+    "uf": "SP",
+    "name": "DOUGLAS GARCIA",
+    "fullName": "DOUGLAS GARCIA BISPO DOS SANTOS",
+    "party": "UNIÃO",
+    "number": "44555",
+    "votes": 97410,
+    "pct": 0.42,
+    "status": "Eleito (projeção)",
+    "incumbent": false,
+    "prevParty": null,
+    "prevCurrent": null,
+    "projecao": true
+   },
+   {
+    "uf": "SP",
+    "name": "PAULO FIORILO",
+    "fullName": "PAULO ROBERTO FIORILO",
+    "party": "PT",
+    "number": "13613",
+    "votes": 96370,
+    "pct": 0.41,
+    "status": "Eleito (projeção)",
+    "incumbent": true,
+    "prevParty": "PT",
+    "prevCurrent": null,
+    "projecao": true
+   },
+   {
+    "uf": "SP",
+    "name": "DANILO BALAS",
+    "fullName": "DANILO MASCARENHAS DE BALAS",
+    "party": "PL",
+    "number": "22007",
+    "votes": 96188,
+    "pct": 0.41,
+    "status": "Eleito (projeção)",
+    "incumbent": false,
+    "prevParty": null,
+    "prevCurrent": null,
+    "projecao": true
+   },
+   {
+    "uf": "SP",
+    "name": "LUIZ FERNANDO",
+    "fullName": "LUIZ FERNANDO TEIXEIRA FERREIRA",
+    "party": "PT",
+    "number": "13134",
+    "votes": 94901,
+    "pct": 0.41,
+    "status": "Eleito (projeção)",
+    "incumbent": true,
+    "prevParty": "PT",
+    "prevCurrent": null,
+    "projecao": true
+   },
+   {
+    "uf": "SP",
+    "name": "DÉBORA CAMILO",
+    "fullName": "DEBORA ALVES CAMILO",
+    "party": "PSOL",
+    "number": "50500",
+    "votes": 94895,
+    "pct": 0.41,
+    "status": "Eleito (projeção)",
+    "incumbent": false,
+    "prevParty": null,
+    "prevCurrent": null,
+    "projecao": true
+   },
+   {
+    "uf": "SP",
+    "name": "LETICIA AGUIAR",
+    "fullName": "LETICIA AGUIAR DE BRITO RESENDE",
+    "party": "PL",
+    "number": "22522",
+    "votes": 94832,
+    "pct": 0.41,
+    "status": "Eleito (projeção)",
+    "incumbent": true,
+    "prevParty": "PL",
+    "prevCurrent": null,
+    "projecao": true
+   },
+   {
+    "uf": "SP",
+    "name": "DONATO",
+    "fullName": "ANTONIO DONATO MADORMO",
+    "party": "PT",
+    "number": "13700",
+    "votes": 94779,
+    "pct": 0.41,
+    "status": "Eleito (projeção)",
+    "incumbent": true,
+    "prevParty": "PT",
+    "prevCurrent": null,
+    "projecao": true
+   },
+   {
+    "uf": "SP",
+    "name": "CARLA MORANDO",
+    "fullName": "CARLA SARDANO MORANDO",
+    "party": "PSD",
+    "number": "55155",
+    "votes": 94596,
+    "pct": 0.41,
+    "status": "Eleito (projeção)",
+    "incumbent": true,
+    "prevParty": "PSD",
+    "prevCurrent": null,
+    "projecao": true
+   },
+   {
+    "uf": "SP",
+    "name": "RICARDO MADALENA",
+    "fullName": "RICARDO ROSSI MADALENA",
+    "party": "PL",
+    "number": "22123",
+    "votes": 94319,
+    "pct": 0.4,
+    "status": "Eleito (projeção)",
+    "incumbent": true,
+    "prevParty": "PL",
+    "prevCurrent": null,
+    "projecao": true
+   },
+   {
+    "uf": "SP",
+    "name": "LEANDRO BASSON",
+    "fullName": "LEANDRO JERONIMO BASSON",
+    "party": "PODE",
+    "number": "20000",
+    "votes": 90934,
+    "pct": 0.39,
+    "status": "Eleito (projeção)",
+    "incumbent": false,
+    "prevParty": null,
+    "prevCurrent": null,
+    "projecao": true
+   },
+   {
+    "uf": "SP",
+    "name": "PARDINI",
+    "fullName": "MARIO EDUARDO PARDINI AFFONSECA",
+    "party": "PSD",
+    "number": "55014",
+    "votes": 89558,
+    "pct": 0.38,
+    "status": "Eleito (projeção)",
+    "incumbent": false,
+    "prevParty": null,
+    "prevCurrent": null,
+    "projecao": true
+   },
+   {
+    "uf": "SP",
+    "name": "ROGÉRIO FRANCO",
+    "fullName": "ROGÉRIO CARDOSO FRANCO",
+    "party": "PL",
+    "number": "22999",
+    "votes": 89156,
+    "pct": 0.38,
+    "status": "Eleito (projeção)",
+    "incumbent": false,
+    "prevParty": null,
+    "prevCurrent": null,
+    "projecao": true
+   },
+   {
+    "uf": "SP",
+    "name": "ANALICE FERNANDES",
+    "fullName": "ANALICE FERNANDES",
+    "party": "PSD",
+    "number": "55455",
+    "votes": 88784,
+    "pct": 0.38,
+    "status": "Eleito (projeção)",
+    "incumbent": true,
+    "prevParty": "PSD",
+    "prevCurrent": null,
+    "projecao": true
+   },
+   {
+    "uf": "SP",
+    "name": "DELEGADO MESQUITA",
+    "fullName": "GUSTAVO MESQUITA GALVÃO BUENO",
+    "party": "PP",
+    "number": "11000",
+    "votes": 87918,
+    "pct": 0.38,
+    "status": "Eleito (projeção)",
+    "incumbent": false,
+    "prevParty": null,
+    "prevCurrent": null,
+    "projecao": true
+   },
+   {
+    "uf": "SP",
+    "name": "VALDOMIRO LOPES",
+    "fullName": "VALDOMIRO LOPES DA SILVA JUNIOR",
+    "party": "PSB",
+    "number": "40211",
+    "votes": 86893,
+    "pct": 0.37,
+    "status": "Eleito (projeção)",
+    "incumbent": false,
+    "prevParty": null,
+    "prevCurrent": null,
+    "projecao": true
+   },
+   {
+    "uf": "SP",
+    "name": "THAMMY MIRANDA",
+    "fullName": "THAMMY BRITO DE MIRANDA E SILVA",
+    "party": "PSD",
+    "number": "55000",
+    "votes": 85619,
+    "pct": 0.37,
+    "status": "Eleito (projeção)",
+    "incumbent": false,
+    "prevParty": null,
+    "prevCurrent": null,
+    "projecao": true
+   },
+   {
+    "uf": "SP",
+    "name": "BRUNO ZAMBELLI",
+    "fullName": "BRUNO ZAMBELLI SALGADO",
+    "party": "PL",
+    "number": "22100",
+    "votes": 82946,
+    "pct": 0.36,
+    "status": "Eleito (projeção)",
+    "incumbent": true,
+    "prevParty": "PL",
+    "prevCurrent": null,
+    "projecao": true
+   },
+   {
+    "uf": "SP",
+    "name": "ELY SANTOS",
+    "fullName": "ELIANE DE SOUSA ALVES MACHADO",
+    "party": "REPUBLICANOS",
+    "number": "10023",
+    "votes": 82559,
+    "pct": 0.35,
+    "status": "Eleito (projeção)",
+    "incumbent": false,
+    "prevParty": null,
+    "prevCurrent": null,
+    "projecao": true
+   },
+   {
+    "uf": "SP",
+    "name": "LÉO OLIVEIRA",
+    "fullName": "OCIMAR DONIZETI LEO OLIVEIRA",
+    "party": "MDB",
+    "number": "15123",
+    "votes": 82508,
+    "pct": 0.35,
+    "status": "Eleito (projeção)",
+    "incumbent": true,
+    "prevParty": "MDB",
+    "prevCurrent": null,
+    "projecao": true
+   },
+   {
+    "uf": "SP",
+    "name": "THAINARA FARIA",
+    "fullName": "THAINARA KAROLINE FARIA",
+    "party": "PT",
+    "number": "13016",
+    "votes": 81485,
+    "pct": 0.35,
+    "status": "Eleito (projeção)",
+    "incumbent": true,
+    "prevParty": "PT",
+    "prevCurrent": null,
+    "projecao": true
+   },
+   {
+    "uf": "SP",
+    "name": "MAURO BRAGATO",
+    "fullName": "MAURO BRAGATO",
+    "party": "PSD",
+    "number": "55125",
+    "votes": 79157,
+    "pct": 0.34,
+    "status": "Eleito (projeção)",
+    "incumbent": false,
+    "prevParty": null,
+    "prevCurrent": null,
+    "projecao": true
+   },
+   {
+    "uf": "SP",
+    "name": "MARINA BRAGANTE",
+    "fullName": "MARINA AMADEU BATISTA BRAGANTE",
+    "party": "PSB",
+    "number": "40444",
+    "votes": 78957,
+    "pct": 0.34,
+    "status": "Eleito (projeção)",
+    "incumbent": false,
+    "prevParty": null,
+    "prevCurrent": null,
+    "projecao": true
+   },
+   {
+    "uf": "SP",
+    "name": "CORONEL PAGANOTTO",
+    "fullName": "FABIO PAGANOTTO CARVALHO",
+    "party": "PL",
+    "number": "22190",
+    "votes": 77703,
+    "pct": 0.33,
+    "status": "Eleito (projeção)",
+    "incumbent": false,
+    "prevParty": null,
+    "prevCurrent": null,
+    "projecao": true
+   },
+   {
+    "uf": "SP",
+    "name": "SOLANGE FREITAS",
+    "fullName": "SOLANGE CRISTINA DE FREITAS",
+    "party": "UNIÃO",
+    "number": "44044",
+    "votes": 77524,
+    "pct": 0.33,
+    "status": "Eleito (projeção)",
+    "incumbent": true,
+    "prevParty": "UNIÃO",
+    "prevCurrent": null,
+    "projecao": true
+   },
+   {
+    "uf": "SP",
+    "name": "JOÃO PAULO",
+    "fullName": "JOÃO PAULO DE SOUZA",
+    "party": "PL",
+    "number": "22345",
+    "votes": 76371,
+    "pct": 0.33,
+    "status": "Eleito (projeção)",
+    "incumbent": false,
+    "prevParty": null,
+    "prevCurrent": null,
+    "projecao": true
+   },
+   {
+    "uf": "SP",
+    "name": "CAMILA GODOI",
+    "fullName": "CAMILA GODOI DA SILVA RODRIGUES",
+    "party": "UNIÃO",
+    "number": "44123",
+    "votes": 74733,
+    "pct": 0.32,
+    "status": "Eleito (projeção)",
+    "incumbent": false,
+    "prevParty": null,
+    "prevCurrent": null,
+    "projecao": true
+   },
+   {
+    "uf": "SP",
+    "name": "CARUSO",
+    "fullName": "JORGE LUIS CARUSO",
+    "party": "MDB",
+    "number": "15000",
+    "votes": 74480,
+    "pct": 0.32,
+    "status": "Eleito (projeção)",
+    "incumbent": true,
+    "prevParty": "MDB",
+    "prevCurrent": null,
+    "projecao": true
+   },
+   {
+    "uf": "SP",
+    "name": "KAKA DO AUTISMO",
+    "fullName": "ALVARO COSTA VIEIRA",
+    "party": "PODE",
+    "number": "20777",
+    "votes": 74365,
+    "pct": 0.32,
+    "status": "Eleito (projeção)",
+    "incumbent": false,
+    "prevParty": null,
+    "prevCurrent": null,
+    "projecao": true
+   },
+   {
+    "uf": "SP",
+    "name": "BARBA",
+    "fullName": "TEONILIO MONTEIRO DA COSTA",
+    "party": "PT",
+    "number": "13110",
+    "votes": 74115,
+    "pct": 0.32,
+    "status": "Eleito (projeção)",
+    "incumbent": false,
+    "prevParty": null,
+    "prevCurrent": null,
+    "projecao": true
+   },
+   {
+    "uf": "SP",
+    "name": "RAFAEL SILVA JR",
+    "fullName": "RAFAEL ANTONIO DA SILVA JUNIOR",
+    "party": "PSD",
+    "number": "55055",
+    "votes": 74043,
+    "pct": 0.32,
+    "status": "Eleito (projeção)",
+    "incumbent": true,
+    "prevParty": "PSD",
+    "prevCurrent": null,
+    "projecao": true
+   },
+   {
+    "uf": "SP",
+    "name": "RODRIGO MORAES",
+    "fullName": "RODRIGO AUGUSTO MORAES",
+    "party": "PL",
+    "number": "22411",
+    "votes": 73787,
+    "pct": 0.32,
+    "status": "Eleito (projeção)",
+    "incumbent": true,
+    "prevParty": "PL",
+    "prevCurrent": null,
+    "projecao": true
+   },
+   {
+    "uf": "SP",
+    "name": "RÔMULO",
+    "fullName": "ROMULO CESAR FERNANDES",
+    "party": "PT",
+    "number": "13789",
+    "votes": 73648,
+    "pct": 0.32,
+    "status": "Eleito (projeção)",
+    "incumbent": true,
+    "prevParty": "PT",
+    "prevCurrent": null,
+    "projecao": true
+   },
+   {
+    "uf": "SP",
+    "name": "RENATA SENE",
+    "fullName": "RENATA TORRES DE SENE",
+    "party": "REPUBLICANOS",
+    "number": "10100",
+    "votes": 73526,
+    "pct": 0.32,
+    "status": "Eleito (projeção)",
+    "incumbent": false,
+    "prevParty": null,
+    "prevCurrent": null,
+    "projecao": true
+   },
+   {
+    "uf": "SP",
+    "name": "MARCOLINO",
+    "fullName": "LUIZ CLAUDIO MARCOLINO",
+    "party": "PT",
+    "number": "13310",
+    "votes": 72574,
+    "pct": 0.31,
+    "status": "Eleito (projeção)",
+    "incumbent": true,
+    "prevParty": "PT",
+    "prevCurrent": null,
+    "projecao": true
+   },
+   {
+    "uf": "SP",
+    "name": "JOÃO PAULO RILLO",
+    "fullName": "JOAO PAULO RILLO",
+    "party": "PT",
+    "number": "13622",
+    "votes": 72486,
+    "pct": 0.31,
+    "status": "Eleito (projeção)",
+    "incumbent": false,
+    "prevParty": null,
+    "prevCurrent": null,
+    "projecao": true
+   },
+   {
+    "uf": "SP",
+    "name": "LUCAS BOVE",
+    "fullName": "LUCAS DIEZ BOVE",
+    "party": "PL",
+    "number": "22500",
+    "votes": 71263,
+    "pct": 0.31,
+    "status": "Eleito (projeção)",
+    "incumbent": true,
+    "prevParty": "PL",
+    "prevCurrent": null,
+    "projecao": true
+   },
+   {
+    "uf": "SP",
+    "name": "CAPITÃO MOSART",
+    "fullName": "MOSART ARAGÃO PEREIRA",
+    "party": "PL",
+    "number": "22022",
+    "votes": 70997,
+    "pct": 0.3,
+    "status": "Eleito (projeção)",
+    "incumbent": false,
+    "prevParty": null,
+    "prevCurrent": null,
+    "projecao": true
+   },
+   {
+    "uf": "SP",
+    "name": "ANA PERUGINI",
+    "fullName": "ANA LUCIA LIPPAUS PERUGINI",
+    "party": "PT",
+    "number": "13121",
+    "votes": 70737,
+    "pct": 0.3,
+    "status": "Eleito (projeção)",
+    "incumbent": true,
+    "prevParty": "PT",
+    "prevCurrent": null,
+    "projecao": true
+   },
+   {
+    "uf": "SP",
+    "name": "SEBASTIÃO SANTOS",
+    "fullName": "SEBASTIÃO DOS SANTOS FILHO",
+    "party": "REPUBLICANOS",
+    "number": "10321",
+    "votes": 68118,
+    "pct": 0.29,
+    "status": "Eleito (projeção)",
+    "incumbent": true,
+    "prevParty": "Republicanos",
+    "prevCurrent": null,
+    "projecao": true
+   },
+   {
+    "uf": "SP",
+    "name": "FABIO FARIA DE SÁ",
+    "fullName": "FABIO FARIA DE SA",
+    "party": "PODE",
+    "number": "20520",
+    "votes": 68055,
+    "pct": 0.29,
+    "status": "Eleito (projeção)",
+    "incumbent": false,
+    "prevParty": null,
+    "prevCurrent": null,
+    "projecao": true
+   },
+   {
+    "uf": "SP",
+    "name": "LISBOA",
+    "fullName": "FERNANDO LISBOA DA CONCEICAO",
+    "party": "PL",
+    "number": "22300",
+    "votes": 67413,
+    "pct": 0.29,
+    "status": "Eleito (projeção)",
+    "incumbent": false,
+    "prevParty": null,
+    "prevCurrent": null,
+    "projecao": true
+   },
+   {
+    "uf": "SP",
+    "name": "HENRIQUE KRIGNER",
+    "fullName": "HENRIQUE KRIGNER LAINO",
+    "party": "NOVO",
+    "number": "30123",
+    "votes": 66512,
+    "pct": 0.29,
+    "status": "Eleito (projeção)",
+    "incumbent": false,
+    "prevParty": null,
+    "prevCurrent": null,
+    "projecao": true
+   },
+   {
+    "uf": "SP",
+    "name": "GILMACI SANTOS",
+    "fullName": "GILMACI DOS SANTOS BARBOSA",
+    "party": "REPUBLICANOS",
+    "number": "10123",
+    "votes": 66474,
+    "pct": 0.28,
+    "status": "Eleito (projeção)",
+    "incumbent": true,
+    "prevParty": "Republicanos",
+    "prevCurrent": null,
+    "projecao": true
+   },
+   {
+    "uf": "SP",
+    "name": "ISAAC ANTUNES",
+    "fullName": "ISAAC DAL COL ANTUNES",
+    "party": "PL",
+    "number": "22122",
+    "votes": 61953,
+    "pct": 0.27,
+    "status": "Eleito (projeção)",
+    "incumbent": false,
+    "prevParty": null,
+    "prevCurrent": null,
+    "projecao": true
+   },
+   {
+    "uf": "SP",
+    "name": "FABIANA BOLSONARO",
+    "fullName": "FABIANA DE LIMA BARROSO SOUZA",
+    "party": "PL",
+    "number": "22051",
+    "votes": 61183,
+    "pct": 0.26,
+    "status": "Eleito (projeção)",
+    "incumbent": true,
+    "prevParty": "PL",
+    "prevCurrent": null,
+    "projecao": true
+   },
+   {
+    "uf": "SP",
+    "name": "THIAGO AURICCHIO",
+    "fullName": "THIAGO REIS AURICCHIO",
+    "party": "PL",
+    "number": "22343",
+    "votes": 59942,
+    "pct": 0.26,
+    "status": "Eleito (projeção)",
+    "incumbent": true,
+    "prevParty": "PL",
+    "prevCurrent": null,
+    "projecao": true
+   },
+   {
+    "uf": "SP",
+    "name": "KEIT LIMA",
+    "fullName": "KEITCHELE LIMA DA SILVA",
+    "party": "PSOL",
+    "number": "50300",
+    "votes": 58984,
+    "pct": 0.25,
+    "status": "Eleito (projeção)",
+    "incumbent": false,
+    "prevParty": null,
+    "prevCurrent": null,
+    "projecao": true
+   },
+   {
+    "uf": "SP",
+    "name": "ATILA JACOMUSSI",
+    "fullName": "ATILA CESAR MONTEIRO JACOMUSSI",
+    "party": "PRD",
+    "number": "25000",
+    "votes": 54065,
+    "pct": 0.23,
+    "status": "Eleito (projeção)",
+    "incumbent": true,
+    "prevParty": "PRD",
+    "prevCurrent": null,
+    "projecao": true
+   },
+   {
+    "uf": "SP",
+    "name": "RICARDO FRANÇA",
+    "fullName": "RICARDO LONGATTI FRANÇA",
+    "party": "PODE",
+    "number": "20100",
+    "votes": 53644,
+    "pct": 0.23,
+    "status": "Eleito (projeção)",
+    "incumbent": true,
+    "prevParty": "PODE",
+    "prevCurrent": null,
+    "projecao": true
+   }
+  ]
  },
  "composicao": {
   "governadores": {
@@ -3494,12 +6330,15 @@
   "camara": {
    "ufs": [
     "ES",
+    "MG",
     "PR",
     "RJ",
     "RS",
-    "SC"
+    "SC",
+    "SP"
    ],
-   "pendentes": [
+   "pendentes": [],
+   "projetadas": [
     "MG",
     "SP"
    ],
@@ -3507,122 +6346,133 @@
     {
      "party": "PL",
      "color": "#1F4F9E",
-     "antes": 29,
-     "depois": 37,
-     "saldo": 8,
-     "reeleitos": 18,
-     "novos": 19,
-     "saiu": 14,
-     "entrou": 22
+     "antes": 59,
+     "depois": 77,
+     "saldo": 18,
+     "reeleitos": 41,
+     "novos": 36,
+     "saiu": 24,
+     "entrou": 42
     },
     {
      "party": "PT",
      "color": "#E13037",
-     "antes": 19,
-     "depois": 20,
-     "saldo": 1,
-     "reeleitos": 10,
-     "novos": 10,
-     "saiu": 9,
-     "entrou": 10
+     "antes": 39,
+     "depois": 43,
+     "saldo": 4,
+     "reeleitos": 25,
+     "novos": 18,
+     "saiu": 14,
+     "entrou": 18
     },
     {
      "party": "PP",
      "color": "#4A78B5",
-     "antes": 13,
-     "depois": 15,
-     "saldo": 2,
-     "reeleitos": 10,
-     "novos": 5,
-     "saiu": 4,
+     "antes": 20,
+     "depois": 20,
+     "saldo": 0,
+     "reeleitos": 14,
+     "novos": 6,
+     "saiu": 6,
      "entrou": 6
     },
     {
      "party": "PSD",
      "color": "#00A7A0",
-     "antes": 12,
-     "depois": 11,
-     "saldo": -1,
-     "reeleitos": 6,
-     "novos": 5,
-     "saiu": 4,
-     "entrou": 3
+     "antes": 21,
+     "depois": 19,
+     "saldo": -2,
+     "reeleitos": 11,
+     "novos": 8,
+     "saiu": 11,
+     "entrou": 9
     },
     {
      "party": "REPUBLICANOS",
      "color": "#2E6BD6",
-     "antes": 10,
-     "depois": 7,
-     "saldo": -3,
-     "reeleitos": 5,
-     "novos": 2,
-     "saiu": 8,
-     "entrou": 5
-    },
-    {
-     "party": "NOVO",
-     "color": "#F59E1B",
-     "antes": 3,
-     "depois": 7,
-     "saldo": 4,
-     "reeleitos": 2,
-     "novos": 5,
-     "saiu": 2,
-     "entrou": 6
-    },
-    {
-     "party": "UNIÃO",
-     "color": "#12508A",
-     "antes": 10,
-     "depois": 6,
-     "saldo": -4,
-     "reeleitos": 3,
-     "novos": 3,
-     "saiu": 4,
-     "entrou": 0
-    },
-    {
-     "party": "MDB",
-     "color": "#1B9E5A",
-     "antes": 7,
-     "depois": 6,
+     "antes": 17,
+     "depois": 16,
      "saldo": -1,
-     "reeleitos": 4,
-     "novos": 2,
-     "saiu": 2,
-     "entrou": 1
+     "reeleitos": 10,
+     "novos": 6,
+     "saiu": 10,
+     "entrou": 9
     },
     {
      "party": "PODE",
      "color": "#2B7A78",
-     "antes": 4,
-     "depois": 6,
-     "saldo": 2,
-     "reeleitos": 2,
-     "novos": 4,
-     "saiu": 2,
-     "entrou": 4
+     "antes": 16,
+     "depois": 13,
+     "saldo": -3,
+     "reeleitos": 8,
+     "novos": 5,
+     "saiu": 11,
+     "entrou": 8
+    },
+    {
+     "party": "UNIÃO",
+     "color": "#12508A",
+     "antes": 20,
+     "depois": 12,
+     "saldo": -8,
+     "reeleitos": 7,
+     "novos": 5,
+     "saiu": 9,
+     "entrou": 1
     },
     {
      "party": "PSOL",
      "color": "#C2185B",
-     "antes": 6,
-     "depois": 5,
+     "antes": 13,
+     "depois": 12,
      "saldo": -1,
-     "reeleitos": 4,
-     "novos": 1,
-     "saiu": 2,
-     "entrou": 1
+     "reeleitos": 9,
+     "novos": 3,
+     "saiu": 5,
+     "entrou": 4
+    },
+    {
+     "party": "MDB",
+     "color": "#1B9E5A",
+     "antes": 12,
+     "depois": 11,
+     "saldo": -1,
+     "reeleitos": 7,
+     "novos": 4,
+     "saiu": 3,
+     "entrou": 2
+    },
+    {
+     "party": "NOVO",
+     "color": "#F59E1B",
+     "antes": 5,
+     "depois": 9,
+     "saldo": 4,
+     "reeleitos": 3,
+     "novos": 6,
+     "saiu": 3,
+     "entrou": 7
     },
     {
      "party": "PSDB",
      "color": "#0E86C9",
-     "antes": 8,
-     "depois": 4,
+     "antes": 10,
+     "depois": 6,
      "saldo": -4,
+     "reeleitos": 4,
+     "novos": 2,
+     "saiu": 5,
+     "entrou": 1
+    },
+    {
+     "party": "PSB",
+     "color": "#E8541E",
+     "antes": 5,
+     "depois": 4,
+     "saldo": -1,
      "reeleitos": 3,
      "novos": 1,
-     "saiu": 6,
+     "saiu": 3,
      "entrou": 2
     },
     {
@@ -3639,28 +6489,50 @@
     {
      "party": "PDT",
      "color": "#B23A2E",
-     "antes": 3,
+     "antes": 4,
      "depois": 2,
-     "saldo": -1,
+     "saldo": -2,
      "reeleitos": 2,
      "novos": 0,
      "saiu": 1,
-     "entrou": 0
-    },
-    {
-     "party": "PSB",
-     "color": "#E8541E",
-     "antes": 3,
-     "depois": 1,
-     "saldo": -2,
-     "reeleitos": 0,
-     "novos": 1,
-     "saiu": 3,
-     "entrou": 1
+     "entrou": -1
     },
     {
      "party": "PV",
      "color": "hsl(350 38% 48%)",
+     "antes": 2,
+     "depois": 2,
+     "saldo": 0,
+     "reeleitos": 1,
+     "novos": 1,
+     "saiu": 1,
+     "entrou": 1
+    },
+    {
+     "party": "PRD",
+     "color": "hsl(26 38% 48%)",
+     "antes": 1,
+     "depois": 2,
+     "saldo": 1,
+     "reeleitos": 1,
+     "novos": 1,
+     "saiu": 1,
+     "entrou": 2
+    },
+    {
+     "party": "REDE",
+     "color": "hsl(116 38% 48%)",
+     "antes": 2,
+     "depois": 1,
+     "saldo": -1,
+     "reeleitos": 1,
+     "novos": 0,
+     "saiu": 2,
+     "entrou": 1
+    },
+    {
+     "party": "SOLIDARIEDADE",
+     "color": "hsl(334 38% 48%)",
      "antes": 2,
      "depois": 1,
      "saldo": -1,
@@ -3670,8 +6542,184 @@
      "entrou": 0
     },
     {
-     "party": "SOLIDARIEDADE",
-     "color": "hsl(334 38% 48%)",
+     "party": "MISSÃO",
+     "color": "#7C4DD1",
+     "antes": 1,
+     "depois": 1,
+     "saldo": 0,
+     "reeleitos": 1,
+     "novos": 0,
+     "saiu": 1,
+     "entrou": 1
+    },
+    {
+     "party": "AVANTE",
+     "color": "#6E8B3D",
+     "antes": 1,
+     "depois": 1,
+     "saldo": 0,
+     "reeleitos": 1,
+     "novos": 0,
+     "saiu": 0,
+     "entrou": -4
+    },
+    {
+     "party": "PCdoB",
+     "color": "#A31D1D",
+     "antes": 4,
+     "depois": 0,
+     "saldo": -4,
+     "reeleitos": 0,
+     "novos": 0,
+     "saiu": 2,
+     "entrou": -2
+    },
+    {
+     "party": "CIDADANIA",
+     "color": "hsl(310 38% 48%)",
+     "antes": 2,
+     "depois": 0,
+     "saldo": -2,
+     "reeleitos": 0,
+     "novos": 0,
+     "saiu": 1,
+     "entrou": -1
+    }
+   ]
+  },
+  "alesp": {
+   "ufs": [
+    "SP"
+   ],
+   "pendentes": [],
+   "projetadas": [
+    "SP"
+   ],
+   "rows": [
+    {
+     "party": "PL",
+     "color": "#1F4F9E",
+     "antes": 21,
+     "depois": 27,
+     "saldo": 6,
+     "reeleitos": 12,
+     "novos": 15,
+     "saiu": 9,
+     "entrou": 15
+    },
+    {
+     "party": "PT",
+     "color": "#E13037",
+     "antes": 17,
+     "depois": 16,
+     "saldo": -1,
+     "reeleitos": 11,
+     "novos": 5,
+     "saiu": 6,
+     "entrou": 5
+    },
+    {
+     "party": "PSD",
+     "color": "#00A7A0",
+     "antes": 10,
+     "depois": 9,
+     "saldo": -1,
+     "reeleitos": 6,
+     "novos": 3,
+     "saiu": 4,
+     "entrou": 3
+    },
+    {
+     "party": "PSOL",
+     "color": "#C2185B",
+     "antes": 5,
+     "depois": 9,
+     "saldo": 4,
+     "reeleitos": 3,
+     "novos": 6,
+     "saiu": 2,
+     "entrou": 6
+    },
+    {
+     "party": "PODE",
+     "color": "#2B7A78",
+     "antes": 6,
+     "depois": 6,
+     "saldo": 0,
+     "reeleitos": 1,
+     "novos": 5,
+     "saiu": 5,
+     "entrou": 5
+    },
+    {
+     "party": "REPUBLICANOS",
+     "color": "#2E6BD6",
+     "antes": 0,
+     "depois": 6,
+     "saldo": 6,
+     "reeleitos": 3,
+     "novos": 3,
+     "saiu": 0,
+     "entrou": 3
+    },
+    {
+     "party": "MDB",
+     "color": "#1B9E5A",
+     "antes": 4,
+     "depois": 5,
+     "saldo": 1,
+     "reeleitos": 3,
+     "novos": 2,
+     "saiu": 1,
+     "entrou": 2
+    },
+    {
+     "party": "PP",
+     "color": "#4A78B5",
+     "antes": 2,
+     "depois": 5,
+     "saldo": 3,
+     "reeleitos": 1,
+     "novos": 4,
+     "saiu": 1,
+     "entrou": 4
+    },
+    {
+     "party": "UNIÃO",
+     "color": "#12508A",
+     "antes": 8,
+     "depois": 4,
+     "saldo": -4,
+     "reeleitos": 2,
+     "novos": 2,
+     "saiu": 6,
+     "entrou": 2
+    },
+    {
+     "party": "PSB",
+     "color": "#E8541E",
+     "antes": 5,
+     "depois": 3,
+     "saldo": -2,
+     "reeleitos": 1,
+     "novos": 2,
+     "saiu": 4,
+     "entrou": 2
+    },
+    {
+     "party": "PSDB",
+     "color": "#0E86C9",
+     "antes": 2,
+     "depois": 1,
+     "saldo": -1,
+     "reeleitos": 1,
+     "novos": 0,
+     "saiu": 1,
+     "entrou": 0
+    },
+    {
+     "party": "PRD",
+     "color": "hsl(26 38% 48%)",
      "antes": 1,
      "depois": 1,
      "saldo": 0,
@@ -3681,56 +6729,26 @@
      "entrou": 0
     },
     {
-     "party": "PCdoB",
-     "color": "#A31D1D",
-     "antes": 3,
-     "depois": 0,
-     "saldo": -3,
+     "party": "NOVO",
+     "color": "#F59E1B",
+     "antes": 1,
+     "depois": 1,
+     "saldo": 0,
      "reeleitos": 0,
-     "novos": 0,
+     "novos": 1,
      "saiu": 1,
-     "entrou": -2
-    }
-   ]
-  },
-  "alesp": {
-   "ufs": [],
-   "pendentes": [
-    "SP"
-   ],
-   "rows": [
-    {
-     "party": "PL",
-     "color": "#1F4F9E",
-     "antes": 21,
-     "depois": 0,
-     "saldo": -21,
-     "reeleitos": 0,
-     "novos": 0,
-     "saiu": 21,
-     "entrou": 0
+     "entrou": 1
     },
     {
-     "party": "PT",
-     "color": "#E13037",
-     "antes": 17,
-     "depois": 0,
-     "saldo": -17,
+     "party": "MISSÃO",
+     "color": "#7C4DD1",
+     "antes": 1,
+     "depois": 1,
+     "saldo": 0,
      "reeleitos": 0,
-     "novos": 0,
-     "saiu": 17,
-     "entrou": 0
-    },
-    {
-     "party": "PSD",
-     "color": "#00A7A0",
-     "antes": 10,
-     "depois": 0,
-     "saldo": -10,
-     "reeleitos": 0,
-     "novos": 0,
-     "saiu": 10,
-     "entrou": 0
+     "novos": 1,
+     "saiu": 1,
+     "entrou": 1
     },
     {
      "party": "Republicanos",
@@ -3740,122 +6758,12 @@
      "saldo": -9,
      "reeleitos": 0,
      "novos": 0,
-     "saiu": 9,
-     "entrou": 0
-    },
-    {
-     "party": "UNIÃO",
-     "color": "#12508A",
-     "antes": 8,
-     "depois": 0,
-     "saldo": -8,
-     "reeleitos": 0,
-     "novos": 0,
-     "saiu": 8,
-     "entrou": 0
-    },
-    {
-     "party": "PODE",
-     "color": "#2B7A78",
-     "antes": 6,
-     "depois": 0,
-     "saldo": -6,
-     "reeleitos": 0,
-     "novos": 0,
      "saiu": 6,
-     "entrou": 0
-    },
-    {
-     "party": "PSOL",
-     "color": "#C2185B",
-     "antes": 5,
-     "depois": 0,
-     "saldo": -5,
-     "reeleitos": 0,
-     "novos": 0,
-     "saiu": 5,
-     "entrou": 0
-    },
-    {
-     "party": "PSB",
-     "color": "#E8541E",
-     "antes": 5,
-     "depois": 0,
-     "saldo": -5,
-     "reeleitos": 0,
-     "novos": 0,
-     "saiu": 5,
-     "entrou": 0
-    },
-    {
-     "party": "MDB",
-     "color": "#1B9E5A",
-     "antes": 4,
-     "depois": 0,
-     "saldo": -4,
-     "reeleitos": 0,
-     "novos": 0,
-     "saiu": 4,
-     "entrou": 0
-    },
-    {
-     "party": "PSDB",
-     "color": "#0E86C9",
-     "antes": 2,
-     "depois": 0,
-     "saldo": -2,
-     "reeleitos": 0,
-     "novos": 0,
-     "saiu": 2,
-     "entrou": 0
-    },
-    {
-     "party": "PP",
-     "color": "#4A78B5",
-     "antes": 2,
-     "depois": 0,
-     "saldo": -2,
-     "reeleitos": 0,
-     "novos": 0,
-     "saiu": 2,
-     "entrou": 0
+     "entrou": -3
     },
     {
      "party": "PCdoB",
      "color": "#A31D1D",
-     "antes": 1,
-     "depois": 0,
-     "saldo": -1,
-     "reeleitos": 0,
-     "novos": 0,
-     "saiu": 1,
-     "entrou": 0
-    },
-    {
-     "party": "PRD",
-     "color": "hsl(26 38% 48%)",
-     "antes": 1,
-     "depois": 0,
-     "saldo": -1,
-     "reeleitos": 0,
-     "novos": 0,
-     "saiu": 1,
-     "entrou": 0
-    },
-    {
-     "party": "NOVO",
-     "color": "#F59E1B",
-     "antes": 1,
-     "depois": 0,
-     "saldo": -1,
-     "reeleitos": 0,
-     "novos": 0,
-     "saiu": 1,
-     "entrou": 0
-    },
-    {
-     "party": "MISSÃO",
-     "color": "#7C4DD1",
      "antes": 1,
      "depois": 0,
      "saldo": -1,
@@ -3881,29 +6789,28 @@
  "metricas": {
   "governadores": {
    "n": 20,
-   "mulheres": 5,
-   "negros": 25,
    "reeleitos": 11,
    "renovacaoPct": 45,
    "trocaramPartido": 0
   },
   "senado": {
    "n": 54,
-   "mulheres": 22.2,
-   "negros": 29.6,
    "reeleitos": 14,
    "renovacaoPct": 74.1,
    "trocaramPartido": 0
   },
   "camara": {
-   "n": 133,
-   "mulheres": 20.3,
-   "negros": 13.5,
-   "reeleitos": 73,
-   "renovacaoPct": 45.1,
-   "trocaramPartido": 18
+   "n": 256,
+   "reeleitos": 152,
+   "renovacaoPct": 40.6,
+   "trocaramPartido": 35
   },
-  "alesp": null
+  "alesp": {
+   "n": 94,
+   "reeleitos": 45,
+   "renovacaoPct": 52.1,
+   "trocaramPartido": 0
+  }
  },
- "metodo": "Eleitos: apuração oficial do TSE. “Já ocupava o cargo” = nome encontrado na 57ª legislatura (Câmara/Senado, APIs oficiais), no Alesp atual (Wikipédia) ou como governador atual — cruzamento por nome, pode errar em homônimos. Cor/raça e gênero: cadastro de candidaturas do TSE (autodeclarados)."
+ "metodo": "Eleitos: apuração oficial do TSE. “Já ocupava o cargo” = nome encontrado na 57ª legislatura (Câmara/Senado, APIs oficiais), no Alesp atual (Wikipédia) ou como governador atual — cruzamento por nome, pode errar em homônimos."
 }

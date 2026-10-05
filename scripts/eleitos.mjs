@@ -2,15 +2,12 @@
 // Escopo (definido com o usuário): gov/senado = todos os estados; dep. federal = Sul+Sudeste; dep. estadual = só SP.
 // Roda depois do aggregate; best-effort (qualquer falha = pula, o site fica com o último dado).
 import fs from "node:fs";
-import path from "node:path";
 import { getCargo, CARGO, UFS } from "./lib/tse.mjs";
-import { unzip, parseTseCSV } from "./lib/zip.mjs";
 import { PARTY } from "./races.mjs";
 
 const ROOT = new URL("../", import.meta.url);
 const SCOPE_FED = ["sp", "rj", "mg", "es", "pr", "sc", "rs"]; // Sul + Sudeste
 const SCOPE_EST = ["sp"];
-const offline = process.argv.includes("--offline");
 
 // ---------- utilidades ----------
 const strip = (s) => String(s || "").normalize("NFD").replace(/[̀-ͯ]/g, "").toLowerCase().replace(/[^a-z0-9 ]+/g, " ").replace(/\s+/g, " ").trim();
@@ -32,32 +29,6 @@ const colorOf = (p) => {
   return `hsl(${h} 38% 48%)`;
 };
 const inc = (o, k, n = 1) => (o[k] = (o[k] || 0) + n);
-
-// ---------- cadastro de candidatos (gênero, cor/raça…) ----------
-async function loadRegistry() {
-  const cache = new URL(".cache/consulta_cand_2026.zip", ROOT);
-  let buf;
-  if (fs.existsSync(cache)) buf = fs.readFileSync(cache);
-  else if (!offline) {
-    const r = await fetch("https://cdn.tse.jus.br/estatistica/sead/odsele/consulta_cand/consulta_cand_2026.zip", { headers: { "User-Agent": "Mozilla/5.0 (agregador-br)" } });
-    if (!r.ok) throw new Error("cadastro HTTP " + r.status);
-    buf = Buffer.from(await r.arrayBuffer());
-    fs.mkdirSync(path.dirname(cache.pathname), { recursive: true });
-    fs.writeFileSync(cache, buf);
-  } else throw new Error("sem cadastro em cache");
-  const files = unzip(buf);
-  const reg = new Map();
-  for (const [name, data] of files) {
-    if (!/consulta_cand_2026_(BRASIL|[A-Z]{2})\.csv$/i.test(name)) continue;
-    const uf = name.match(/_([A-Z]{2,6})\.csv$/i)[1].toLowerCase();
-    if (uf !== "brasil" && !UFS.includes(uf)) continue;
-    for (const r of parseTseCSV(data)) {
-      if (!["1", "3", "5", "6", "7"].includes(r.CD_CARGO)) continue;
-      reg.set(r.SQ_CANDIDATO, { gender: r.DS_GENERO, race: r.DS_COR_RACA, job: r.DS_OCUPACAO, born: r.DT_NASCIMENTO });
-    }
-  }
-  return reg;
-}
 
 // ---------- coleta TSE ----------
 async function collect() {
@@ -152,41 +123,35 @@ async function main() {
   const antes = JSON.parse(fs.readFileSync(antesPath, "utf8"));
   const M = makeMatchers(antes);
   const R = await collect();
-  let reg = new Map();
-  try {
-    reg = await loadRegistry();
-  } catch (e) {
-    console.warn("  cadastro de candidatos indisponível (" + e.message + ") — sem gênero/raça");
-  }
-
   const out = { updated: new Date().toISOString(), scope: { federal: SCOPE_FED, estadual: SCOPE_EST }, status: {}, eleitos: {}, composicao: {}, metricas: {} };
   const mk = (kind, uf, c) => {
-    const rg = reg.get(c.sq) || {};
     const prev = kind === "governador" || kind === "senador" || kind === "federal" || kind === "estadual" ? M[kind](uf, c) : null;
     return {
       uf: uf.toUpperCase(), name: c.urna, fullName: c.name, party: c.party, number: c.number, votes: c.votes, pct: c.pct, status: c.status,
       incumbent: !!prev, prevParty: prev?.party || null, prevCurrent: prev?.current ?? null,
-      gender: rg.gender || null, race: rg.race || null,
+      projecao: /proje[çc][ãa]o/i.test(c.status),
     };
   };
   const isElected = (kind, c) => (kind === "governador" ? c.status === "Eleito" : c.elected);
   for (const kind of ["governador", "senador", "federal", "estadual"]) {
     const list = [];
-    let done = 0, total = 0, pendingUF = [], runoff = [];
+    let done = 0, total = 0, pendingUF = [], runoff = [], projUF = [];
     for (const [uf, r] of Object.entries(R[kind]).sort(([a], [b]) => a.localeCompare(b))) {
       if (!r) { pendingUF.push(uf); total++; continue; }
       total++;
-      if (r.final) done++; else pendingUF.push(uf);
+      if (r.final) done++;
+      else if (r.projected) projUF.push(uf);
+      else pendingUF.push(uf);
       if (kind === "governador" && r.cands.some((c) => /2º turno/i.test(c.status))) runoff.push(uf);
       for (const c of r.cands) if (isElected(kind, c)) list.push(mk(kind, uf, c));
     }
     out.eleitos[kind] = list.sort((a, b) => a.uf.localeCompare(b.uf) || b.votes - a.votes);
-    out.status[kind] = { ufsFinais: done, ufsTotal: total, pendentes: pendingUF.map((u) => u.toUpperCase()).sort(), segundoTurno: runoff.map((u) => u.toUpperCase()).sort(), vagas: Object.values(R[kind]).reduce((s, r) => s + (r?.vagas || 0), 0) };
+    out.status[kind] = { ufsFinais: done, ufsTotal: total, pendentes: pendingUF.map((u) => u.toUpperCase()).sort(), projetadas: projUF.map((u) => u.toUpperCase()).sort(), segundoTurno: runoff.map((u) => u.toUpperCase()).sort(), vagas: Object.values(R[kind]).reduce((s, r) => s + (r?.vagas || 0), 0) };
   }
   out.status.presidente = R.presidente ? { final: R.presidente.final, apuradas: R.presidente.sectionsPct } : null;
 
   // ---- composição antes × depois por casa ----
-  const finalUF = (kind) => Object.entries(R[kind]).filter(([, r]) => r?.final).map(([u]) => u).sort();
+  const finalUF = (kind) => Object.entries(R[kind]).filter(([, r]) => r?.final || r?.projected).map(([u]) => u).sort(); // fechadas + projetadas
   const build = (antesCounts, elected, extra = {}) => {
     const parties = new Set([...Object.keys(antesCounts), ...elected.map((e) => e.party)]);
     const rows = [];
@@ -229,25 +194,22 @@ async function main() {
     const ufs = finalUF("federal");
     const el = out.eleitos.federal.filter((e) => ufs.includes(e.uf.toLowerCase()));
     const antesC = countBy(antes.camara.current.filter((d) => ufs.includes(d.uf.toLowerCase())), (d) => d.party);
-    out.composicao.camara = build(antesC, el, { ufs: ufs.map((u) => u.toUpperCase()), pendentes: out.status.federal.pendentes });
+    out.composicao.camara = build(antesC, el, { ufs: ufs.map((u) => u.toUpperCase()), pendentes: out.status.federal.pendentes, projetadas: out.status.federal.projetadas });
   }
   // alesp (SP)
   {
     const ufs = finalUF("estadual");
     const el = ufs.length ? out.eleitos.estadual : [];
-    out.composicao.alesp = build(antes.alesp.seats, el, { ufs: ufs.map((u) => u.toUpperCase()), pendentes: out.status.estadual.pendentes });
+    out.composicao.alesp = build(antes.alesp.seats, el, { ufs: ufs.map((u) => u.toUpperCase()), pendentes: out.status.estadual.pendentes, projetadas: out.status.estadual.projetadas });
   }
 
   // ---- métricas ----
   const metr = (list) => {
     const n = list.length;
     if (!n) return null;
-    const f = list.filter((x) => x.gender === "FEMININO").length;
-    const ng = list.filter((x) => /PRETA|PARDA/.test(x.race || "")).length;
-    const known = list.filter((x) => x.gender).length;
     const reel = list.filter((x) => x.incumbent).length;
     const troca = list.filter((x) => x.incumbent && x.prevParty && canon(x.prevParty) !== canon(x.party)).length;
-    return { n, mulheres: known ? +((f / known) * 100).toFixed(1) : null, negros: known ? +((ng / known) * 100).toFixed(1) : null, reeleitos: reel, renovacaoPct: +(((n - reel) / n) * 100).toFixed(1), trocaramPartido: troca };
+    return { n, reeleitos: reel, renovacaoPct: +(((n - reel) / n) * 100).toFixed(1), trocaramPartido: troca };
   };
   out.metricas = {
     governadores: metr(out.eleitos.governador.filter((g) => g.status === "Eleito")),
@@ -256,7 +218,7 @@ async function main() {
     alesp: metr(finalUF("estadual").length ? out.eleitos.estadual : []),
   };
   // qualidade do cruzamento nome×nome (transparência)
-  out.metodo = "Eleitos: apuração oficial do TSE. “Já ocupava o cargo” = nome encontrado na 57ª legislatura (Câmara/Senado, APIs oficiais), no Alesp atual (Wikipédia) ou como governador atual — cruzamento por nome, pode errar em homônimos. Cor/raça e gênero: cadastro de candidaturas do TSE (autodeclarados).";
+  out.metodo = "Eleitos: apuração oficial do TSE. “Já ocupava o cargo” = nome encontrado na 57ª legislatura (Câmara/Senado, APIs oficiais), no Alesp atual (Wikipédia) ou como governador atual — cruzamento por nome, pode errar em homônimos.";
 
   // data/ é versionado e commitado pelo bot: sem timestamp, pra só mudar quando o TSE mudar de fato
   const { updated, ...stable } = out;
@@ -264,7 +226,7 @@ async function main() {
   fs.mkdirSync(new URL("site/data/", ROOT), { recursive: true });
   fs.writeFileSync(new URL("site/data/eleitos.json", ROOT), JSON.stringify(out) + "\n");
   const s = out.status;
-  console.log(`  governadores ${out.eleitos.governador.length}/27 (${s.governador.segundoTurno.length} em 2º turno) · senadores ${out.eleitos.senador.length}/54 · federais ${out.eleitos.federal.length}/${s.federal.vagas} (pend. ${s.federal.pendentes}) · estaduais SP ${out.eleitos.estadual.length}/94`);
+  console.log(`  governadores ${out.eleitos.governador.length}/27 (${s.governador.segundoTurno.length} em 2º turno) · senadores ${out.eleitos.senador.length}/54 · federais ${out.eleitos.federal.length}/${s.federal.vagas} (projeção ${s.federal.projetadas}; pend. ${s.federal.pendentes}) · estaduais SP ${out.eleitos.estadual.length}/94 (projeção ${s.estadual.projetadas})`);
   console.log("  -> data/eleitos.json");
 }
 main().catch((e) => {

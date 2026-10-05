@@ -26,7 +26,7 @@ export async function fetchUnified(uf, cargo) {
 }
 
 // -> { final, andamento, updated, vagas, totals, cands:[{name,urna,party,number,votes,pct,elected,status,sq}] }
-export function parseUnified(j) {
+export function parseUnified(j, cargo) {
   if (!j) return null;
   const c = j.carg?.[0];
   if (!c) return null;
@@ -55,6 +55,26 @@ export function parseUnified(j) {
       parties.set(p.sg, pe);
     }
   }
+  // PROJEÇÃO enquanto o TSE não fecha: o arquivo já traz as vagas de cada partido/federação (`vag`),
+  // mas ainda não marca os candidatos eleitos. Pego os mais votados de cada um. Validado contra os
+  // estados já fechados (RJ, ES, PR, SC, RS: 133 de 133 idênticos ao resultado oficial).
+  let projected = false;
+  if (!(j.tf === "s") && (cargo === CARGO.federal || cargo === CARGO.estadual) && !cands.some((x) => x.elected)) {
+    const nv = +c.nv || 0;
+    const seats = (c.agr || []).reduce((n, a) => n + (+a.vag || 0), 0);
+    if (nv && seats === nv) {
+      const bySq = new Map(cands.map((x) => [x.sq, x]));
+      for (const a of c.agr) {
+        const own = a.par.flatMap((p) => p.cand.map((d) => bySq.get(d.sqcand))).filter((x) => x && x.valid).sort((x, y) => y.votes - x.votes);
+        own.slice(0, +a.vag || 0).forEach((x) => { x.elected = true; x.status = "Eleito (projeção)"; });
+      }
+      projected = true;
+    }
+  }
+  // presidente sem ninguém acima de 50% dos válidos: os dois mais votados vão ao 2º turno (TSE só marca ao fechar)
+  if (!(j.tf === "s") && cargo === CARGO.presidente && cands.length > 2 && !cands.some((x) => x.pct > 50)) {
+    [...cands].sort((a, b) => b.votes - a.votes).slice(0, 2).forEach((x) => { if (!x.status) x.status = "2º turno (projeção)"; });
+  }
   const E = j.e || {}, V = j.v || {};
   const totals = {
     inscritos: { votes: +E.te || 0 },
@@ -68,6 +88,7 @@ export function parseUnified(j) {
     totals,
     sectionsPct: f1(j.s?.pst),
     final: j.tf === "s",
+    projected,
     andamento: j.and, // f = finalizado, p = em andamento
     updated: `${j.dt || j.dg} ${j.ht || j.hg}`,
     vagas: +c.nv || 0,
@@ -77,5 +98,5 @@ export function parseUnified(j) {
 }
 
 export async function getCargo(uf, cargo) {
-  return parseUnified(await fetchUnified(uf, cargo));
+  return parseUnified(await fetchUnified(uf, cargo), cargo);
 }
