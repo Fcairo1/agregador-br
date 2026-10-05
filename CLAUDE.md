@@ -195,6 +195,24 @@ npm run serve      # http://localhost:5173  (servidor estático, Node puro)
 - Corridas `optional: true` (2º turno de estado sem pesquisa ainda) são puladas sem quebrar o build.
   Sub-abas por `round`: `1T` / `2T` / `SEN` (ROUND_LABEL no app.js). Estados gerados por `stateRaces()`.
 
+## Pós-eleição (resultados + eleitos)
+
+- `scripts/lib/tse.mjs`: apuração oficial do TSE. Padrão achado no front deles:
+  `https://resultados.tse.jus.br/oficial/ele2026/<eleicao>/dados/<uf>/<uf>-c<cargo4>-e<eleicao6>-u.json`
+  (eleição 6257 = federal/presidente `br` cargo 1; 6259 = estadual: 3 gov, 5 sen, 6 dep.fed, 7 dep.est.).
+  Campos: `tf`="s" = finalizado; candidato `e`="s" eleito, `st` ("Eleito", "2º turno", "Eleito por QP"…),
+  `vap`/`pvap` votos/%; `e`/`v` do topo = abstenção/brancos/nulos. Config geral: `/oficial/comum/config/ele-c.json`.
+  (A API Dados Abertos/CKAN e o CDN do TSE responderam 200 localmente em out/2026; ST_REELEICAO vem `#NE`.)
+- `scripts/results.mjs` (roda após o aggregate): TSE primário (Wikipédia reserva) → `data/results.<corrida>.json`
+  + `site/data/resultados.json` (tendência final+faixa × resultado, renormalizado entre os exibidos; erro por instituto
+  das últimas pesquisas ≤14d). Página `site/resultados.html`.
+- `scripts/antes.mjs` → `data/antes.json`: **foto única** de quem ocupava os cargos (Câmara/Senado: APIs oficiais com nome
+  civil; governadores/Alesp: Wikipédia). Não refaz se existir (use `--refresh` SÓ antes da posse; depois as APIs devolvem os novos).
+- `scripts/eleitos.mjs` → `data/eleitos.json` (determinístico, sem timestamp) + `site/data/eleitos.json`; página
+  `site/eleitos.html`. Escopo: gov/senado todos os estados; dep. federal Sul+Sudeste (`SCOPE_FED`); dep. estadual só SP.
+  "Já ocupava" = cruzamento por nome (nome civil > nome de urna > nome parlamentar ⊂ completo). Gênero/cor-raça: cadastro
+  `consulta_cand_2026.zip` (leitor de zip próprio em `lib/zip.mjs`, cache em `.cache/`).
+
 ## TODO / fase 2
 
 - **Backtest público**: página mostrando `data/ratings.csv` (como cada instituto se saiu).

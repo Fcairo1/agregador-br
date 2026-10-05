@@ -5,34 +5,24 @@ Esforço é relativo a "tudo que já foi construído" = 100%. Nada aqui está em
 
 ---
 
-## 0. PÓS-ELEIÇÃO (1º turno 04/10/2026) — fazer a partir de 05/10
+## 0. PÓS-ELEIÇÃO (1º turno 04/10/2026) — ✅ feito em 05/10, falta o resto
 
-Escopo fechado com o usuário em 2026-10-04. Página nova "Resultados" (`site/resultados.html`).
+**Feito (no ar):** `resultados.html` (pesquisa × resultado: líder certo, erro, % na faixa, maior surpresa,
+erro por instituto com viés, abstenção/nulos/brancos vs. 2022) e `eleitos.html` (governadores, senado,
+dep. federais Sul+Sudeste, dep. estaduais SP: antes × depois por partido, quem é novo no cargo,
+renovação, mulheres, pretos e pardos, troca de partido). Fonte primária: JSON público do TSE
+(`scripts/lib/tse.mjs`). "Antes" = foto única em `data/antes.json` (não refazer após a posse!).
 
-**Escopo de cargos**
-- Presidente, governadores e senadores: **todos os estados** (os que o agregador cobre + eleitos de todos).
-- Deputados federais: **só Sul e Sudeste** (SP, RJ, MG, ES, PR, SC, RS).
-- Deputados estaduais: **só São Paulo**.
-
-**Fonte (risco principal):** TSE Dados Abertos respondeu 200 da máquina local em 04/10 (CI dava 403 por
-Akamai) → coleta de deputados provavelmente local/manual, não no cron. Feed de resultados do TSE: caminho
-real ainda desconhecido (404 no palpite) — descobrir em 05/10. Wikipédia cobre presidente/gov/senado em horas.
-
-**Ordem**
-1. Pesquisa × resultado (presidente, gov, senado): último ponto da tendência + faixa vs. voto válido
-   oficial; erro em p.p., dentro/fora da faixa, vencedor certo. Reaproveita `ratings.mjs`/backtest.
-2. Eleitos de governador/senador + quem é novo no cargo (antes × depois).
-3. Deputados (escopo acima): eleitos, quem é novo, saldo por partido, composição antes × depois por casa
-   (Câmara federal recortada ao Sul/Sudeste, Alesp, Senado).
-4. Comparativo por partido: entrou/saiu; gráfico antes × depois por casa.
-
-**Métricas extras (todas aprovadas):** acerto de vencedor por instituto e erro médio na eleição real
-(atualiza ratings); calibração da faixa (% de resultados dentro dos ~90%); maiores surpresas vs. pesquisas;
-abstenção/brancos/nulos vs. 2022; renovação (% reeleitos por casa e partido); mulheres e pessoas negras
-eleitas (se a base do TSE trouxer as colunas).
-
-**Cuidados:** homônimos/duplicatas ao cruzar legislatura anterior; votos válidos vs. totais (usar `toValidVotes`);
-não prometer deputados via Wikipédia (incompleto).
+**Falta / próximos passos**
+- **SP e MG** (dep. federal) e **Alesp**: o TSE ainda não fechou a apuração; entram sozinhos.
+- **2º turno (25/10):** presidente (Flávio × Lula), 7 governos (AC, AM, DF, ES, RJ, RN, TO). Estender
+  `RACES`/`results.mjs`/`eleitos.mjs` pro turno 2 (o TSE usa outro código de eleição) e comparar com as pesquisas de 2T.
+- **Recalibrar o modelo:** a faixa de 90% cobriu só ~31% dos resultados (presidente 83%, estados ~25%).
+  Estados: erro médio ~4,5 p.p. → `sysHalf` (1,1) é pequeno demais fora do presidente; testar por tipo de corrida.
+- **Ratings com a eleição real:** incluir 2026 (por instituto) no `ratings.mjs` (hoje só 2018/22).
+- **"Antes" mais fino:** Alesp usa a composição da eleição (Wikipédia); governadores/Alesp cruzam por nome.
+  Câmara/Senado têm nome civil → confiável. Revisar homônimos se algo parecer errado.
+- Mulheres/negros "antes" (só temos "depois").
 
 ## 1. Previsão (o maior salto de utilidade)
 
