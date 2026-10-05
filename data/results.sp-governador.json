@@ -1,0 +1,63 @@
+{
+  "race": "sp-governador",
+  "kind": "governador",
+  "source": "Eleições estaduais em São Paulo em 2026",
+  "complete": true,
+  "totals": {
+    "valid": {
+      "votes": 23128676,
+      "pct": 87.63
+    },
+    "nulos": {
+      "votes": 1915351,
+      "pct": 7.26
+    },
+    "brancos": {
+      "votes": 1348190,
+      "pct": 5.11
+    },
+    "comparecimento": {
+      "votes": 26392217,
+      "pct": 77.44
+    },
+    "abstencoes": {
+      "votes": 7686000,
+      "pct": 22.56
+    },
+    "inscritos": {
+      "votes": 34105333
+    }
+  },
+  "candidates": [
+    {
+      "name": "Carlos Machado",
+      "party": "PCB",
+      "votes": 58861,
+      "pct": 0.25
+    },
+    {
+      "name": "Fernando Haddad",
+      "party": "PT",
+      "votes": 8423014,
+      "pct": 36.42
+    },
+    {
+      "name": "Tarcísio",
+      "party": "Republicanos",
+      "votes": 14490683,
+      "pct": 62.65
+    },
+    {
+      "name": "Vera Lúcia",
+      "party": "PSTU",
+      "votes": 75640,
+      "pct": 0.33
+    },
+    {
+      "name": "Vivian Mendes",
+      "party": "UP",
+      "votes": 80478,
+      "pct": 0.35
+    }
+  ]
+}

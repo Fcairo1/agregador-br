@@ -213,14 +213,14 @@ const ENT = {
   "&nbsp;": " ", "&#160;": " ", "&thinsp;": " ", "&#8201;": " ",
   "&ndash;": "–", "&#8211;": "–", "&mdash;": "—", "&#8212;": "—", "&minus;": "−",
 };
-function decode(s) {
+export function decode(s) {
   return s
     .replace(/&#(\d+);/g, (_, n) => String.fromCodePoint(+n))
     .replace(/&#x([0-9a-f]+);/gi, (_, n) => String.fromCodePoint(parseInt(n, 16)))
     .replace(/&[a-z]+;/gi, (m) => ENT[m.toLowerCase()] ?? m);
 }
 
-function cellText(html) {
+export function cellText(html) {
   return decode(
     html
       .replace(/<sup\b[^>]*>[\s\S]*?<\/sup>/gi, "") // notas de rodapé

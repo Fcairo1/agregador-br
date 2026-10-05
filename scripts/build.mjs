@@ -12,5 +12,8 @@ if (run("ratings.mjs") !== 0) console.warn("ratings.mjs falhou — usando rating
 
 if (run("aggregate.mjs") !== 0) process.exit(1);
 
+// resultados oficiais + pesquisa × resultado (best-effort; sem resultado ainda = pula)
+run("results.mjs");
+
 // trava de sanidade: barra dado claramente errado antes de commitar/publicar
 if (run("check.mjs") !== 0) process.exit(1);

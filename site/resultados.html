@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Resultados · Agregador de pesquisas Brasil 2026</title>
+    <meta name="description" content="Pesquisas × resultado oficial do 1º turno de 2026: presidente, governadores e senado." />
+    <link rel="stylesheet" href="style.css" />
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Ctext y='26' font-size='26'%3E%F0%9F%93%88%3C/text%3E%3C/svg%3E" />
+  </head>
+  <body>
+    <header class="top">
+      <div class="wrap">
+        <h1><a href="./" class="backlink">← Agregador</a> <span>· resultados</span></h1>
+      </div>
+    </header>
+
+    <main class="wrap bt">
+      <h2>Pesquisas × resultado — 1º turno 2026</h2>
+      <p class="lead">
+        Comparo a <b>tendência final</b> do agregador (com a faixa de ~90%) com o <b>resultado oficial</b>.
+        Estimativa e resultado são renormalizados entre os candidatos exibidos, para ficarem na mesma base
+        (votos válidos). Corridas sem resultado publicado ainda aparecem como pendentes.
+      </p>
+
+      <div id="headline" class="bt-headline"></div>
+      <div id="races"></div>
+
+      <h3>Institutos — erro da última pesquisa</h3>
+      <p class="lead">
+        Erro médio (p.p.) da última pesquisa de cada instituto, feita até 14 dias antes da eleição, contra o
+        resultado. “Viés” = quanto o instituto errou no vencedor real (negativo = subestimou).
+      </p>
+      <div class="table-scroll"><table id="pollsters"></table></div>
+
+      <h3>Abstenção, brancos e nulos</h3>
+      <div id="turnout" class="table-scroll"></div>
+
+      <p class="foot" id="foot"></p>
+    </main>
+
+    <script src="resultados.js" type="module"></script>
+  </body>
+</html>

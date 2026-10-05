@@ -1,0 +1,105 @@
+{
+  "race": "presidente",
+  "kind": "presidente",
+  "source": "Eleição presidencial no Brasil em 2026",
+  "complete": true,
+  "totals": {
+    "valid": {
+      "votes": 119174992,
+      "pct": 95.23
+    },
+    "nulos": {
+      "votes": 3669695,
+      "pct": 2.93
+    },
+    "brancos": {
+      "votes": 2299168,
+      "pct": 1.84
+    },
+    "comparecimento": {
+      "votes": 125151796,
+      "pct": 78.92
+    },
+    "abstencoes": {
+      "votes": 33423539,
+      "pct": 21.08
+    },
+    "inscritos": {
+      "votes": 158745502
+    }
+  },
+  "candidates": [
+    {
+      "name": "Flávio Bolsonaro",
+      "party": "PL",
+      "votes": 56073037,
+      "pct": 47.06
+    },
+    {
+      "name": "Lula da Silva",
+      "party": "PT",
+      "votes": 53776393,
+      "pct": 45.13
+    },
+    {
+      "name": "Augusto Cury",
+      "party": "Avante",
+      "votes": 3446030,
+      "pct": 2.89
+    },
+    {
+      "name": "Renan Santos",
+      "party": "MISSÃO",
+      "votes": 2674758,
+      "pct": 2.24
+    },
+    {
+      "name": "Ronaldo Caiado",
+      "party": "PSD",
+      "votes": 2603862,
+      "pct": 2.19
+    },
+    {
+      "name": "Zema",
+      "party": "NOVO",
+      "votes": 326376,
+      "pct": 0.27
+    },
+    {
+      "name": "Samara",
+      "party": "UP",
+      "votes": 122867,
+      "pct": 0.1
+    },
+    {
+      "name": "Hertz Dias",
+      "party": "PSTU",
+      "votes": 43085,
+      "pct": 0.04
+    },
+    {
+      "name": "Clariana Barão",
+      "party": "DC",
+      "votes": 40022,
+      "pct": 0.03
+    },
+    {
+      "name": "Edmilson Costa",
+      "party": "PCB",
+      "votes": 22666,
+      "pct": 0.02
+    },
+    {
+      "name": "Veterinário Wilson Grassi",
+      "party": "Democrata",
+      "votes": 16866,
+      "pct": 0.01
+    },
+    {
+      "name": "Rui Costa Pimenta",
+      "party": "PCO",
+      "votes": 15018,
+      "pct": 0.01
+    }
+  ]
+}
