@@ -168,6 +168,13 @@ Estado-espaço 1-D por candidato, grade **diária** (dias desde a 1ª pesquisa):
   fator). Só os gráficos — a tabela de pesquisas não muda. Preferência em `localStorage["base"]`; `state.raw` guarda o dado sem normalizar.
   No modo válidos o ◎ usa `real` (já em votos válidos) em vez de `realRaw`.
 
+- **2º turno como continuação do gráfico do 1º** (`twinOf`/`mergeTwin`/`setData` em `app.js`): na corrida `presidente` (e `X-governador` que
+  tenham `X-governador-2t`), os pontos do 2T "gêmeo" posteriores ao dia da eleição (`resultados.json → day`) são anexados aos finalistas
+  (mesma chave), com `brk` na virada (o `segments()` quebra a linha) e divisória cheia "◂ 1º turno | 2º turno ▸". Os ◎ dos dois turnos
+  ficam no gráfico (`resultSets`/`drawMarks`); a tabela ganha as pesquisas de 2T com etiqueta "2T"; a legenda mostra o valor do 2T
+  e deixa de mostrar delta. A aba "2º turno" segue existindo (com ◎ próprio). Sem pesquisa de 2T pós-eleição, nada muda no gráfico.
+  Testado com pesquisas simuladas (nenhuma pesquisa pós-04/10 existia na Wikipédia em 07/10).
+
 ## Matemática compartilhada
 
 `site/kalman.js` é a fonte de `trendKalman`; `scripts/lib/kalman.mjs` só reexporta. `site/agg.js`

@@ -28,6 +28,7 @@ const tip = $("#tooltip");
 const state = {
   valid: false, // base dos gráficos: false = % das pesquisas (com indecisos/brancos/nulos); true = votos válidos
   raw: null, // dado do servidor já com filtros (antes da normalização)
+  twinBase: null, // JSON do 2º turno "gêmeo" da corrida atual (continuação do gráfico após a eleição)
   results: {}, // resultados oficiais por corrida (data/resultados.json) — viram ◎ no gráfico
   index: [],
   group: null,
@@ -66,10 +67,11 @@ function buildGeom(data) {
   const t0 = parseT(data.xDomain[0]);
   let t1 = parseT(data.xDomain[1]);
   const visible = data.candidates.filter((c) => !state.hidden.has(c.key));
-  const R = state.results[state.race];
-  if (R) t1 = Math.max(t1, parseT(R.day)); // abre espaço pro dia da eleição
   let hiMax = 0;
-  if (R) for (const rc of R.candidates) if (visible.some((c) => c.key === rc.key)) hiMax = Math.max(hiMax, state.valid ? rc.real : rc.realRaw);
+  for (const R of resultSets()) {
+    t1 = Math.max(t1, parseT(R.day)); // abre espaço pro dia da eleição
+    for (const rc of R.candidates) if (visible.some((c) => c.key === rc.key)) hiMax = Math.max(hiMax, state.valid ? rc.real : rc.realRaw);
+  }
   for (const c of visible) for (const b of c.band) hiMax = Math.max(hiMax, b.hi);
   for (const c of visible) for (const p of c.line) hiMax = Math.max(hiMax, p.y);
   const step = hiMax <= 24 ? 5 : hiMax <= 60 ? 10 : 20;
@@ -102,7 +104,7 @@ function segments(arr) {
   const segs = [];
   let cur = [];
   for (let i = 0; i < arr.length; i++) {
-    if (i > 0 && parseT(arr[i].t) - parseT(arr[i - 1].t) > GAP_DAYS * DAY) {
+    if (i > 0 && (arr[i].brk || parseT(arr[i].t) - parseT(arr[i - 1].t) > GAP_DAYS * DAY)) {
       if (cur.length) segs.push(cur);
       cur = [];
     }
@@ -296,25 +298,87 @@ function toValid(d) {
     })),
   };
 }
+// 2º turno como CONTINUAÇÃO do gráfico do 1º: pega os pontos do "gêmeo" (ex.: presidente -> Lula × Flávio)
+// posteriores ao dia da eleição e os anexa aos finalistas, com uma quebra (`brk`) na virada de turno.
+const twinOf = (key) => (key === "presidente" ? "presidente-2t-flavio" : /-governador$/.test(key) ? key + "-2t" : null);
+function twinFor() {
+  const tb = state.twinBase;
+  if (!tb) return null;
+  if (state.excluded.size === 0 && !state.sinceDays) return tb;
+  const rc = recompute(tb, { excluded: state.excluded, sinceDays: state.sinceDays });
+  return rc.empty || !rc.candidates.length ? null : { ...tb, ...rc };
+}
+function mergeTwin(d, tw, day) {
+  if (!tw) return d;
+  let any = false;
+  const candidates = d.candidates.map((c) => {
+    const t = tw.candidates.find((x) => x.key === c.key);
+    if (!t) return c;
+    const after = (arr) => arr.filter((p) => p.t > day);
+    const L = after(t.line), B = after(t.band), P = after(t.polls);
+    if (!L.length) return c;
+    any = true;
+    L[0] = { ...L[0], brk: true };
+    if (B.length) B[0] = { ...B[0], brk: true };
+    return { ...c, line: [...c.line, ...L], band: [...c.band, ...B], polls: [...c.polls, ...P], cont: true };
+  });
+  if (!any) return d;
+  return { ...d, candidates, cont: true, divider: day, xDomain: [d.xDomain[0], tw.xDomain[1] > d.xDomain[1] ? tw.xDomain[1] : d.xDomain[1]], lastPoll: tw.lastPoll > d.lastPoll ? tw.lastPoll : d.lastPoll };
+}
 function setData(d) {
   state.raw = d;
-  state.data = state.valid ? toValid(d) : d;
+  const norm = (x) => (state.valid ? toValid(x) : x);
+  const tw = twinFor();
+  const day = state.results[state.race]?.day || d.xDomain?.[1];
+  state.data = mergeTwin(norm(d), tw ? norm(tw) : null, day);
 }
 
 // ---------- resultado oficial no gráfico (◎ no dia da eleição) ----------
 const fmtPct = (v) => v.toFixed(1).replace(".", ",") + "%";
+// resultados oficiais a plotar: o da corrida atual e, se houver, o do 2º turno "gêmeo" (continuação)
+function resultSets() {
+  const sets = [];
+  const R = state.results[state.race];
+  if (R) sets.push(R);
+  const tk = twinOf(state.race);
+  if (tk && state.twinBase && state.results[tk]) sets.push(state.results[tk]);
+  return sets;
+}
 function drawResult(g, visible) {
   const note = $("#res-note");
-  const R = state.results[state.race];
-  const cs = R ? R.candidates.filter((rc) => visible.some((c) => c.key === rc.key)) : [];
-  if (!R || !cs.length) {
+  const sets = resultSets();
+  const grp = el("g", { class: "resultmarks" });
+  let n = 0;
+  const cont = !!state.data.cont;
+  if (cont) {
+    // divisória entre os turnos: linha cheia + rótulos dos dois lados
+    const xd = g.x(parseT(state.data.divider));
+    grp.append(el("line", { class: "divider", x1: xd, x2: xd, y1: M.t - 4, y2: M.t + PH }));
+    grp.append(el("text", { class: "divlbl", x: xd - 8, y: M.t + 12, "text-anchor": "end" }, [txt("◂ 1º turno")]));
+    grp.append(el("text", { class: "divlbl", x: xd + 8, y: M.t + 12 }, [txt("2º turno ▸")]));
+  }
+  for (const R of sets) {
+    const cs = R.candidates.filter((rc) => visible.some((c) => c.key === rc.key));
+    if (!cs.length) continue;
+    const xe = g.x(parseT(R.day));
+    if (!(cont && R.round !== "2T")) grp.append(el("line", { class: "voteline", x1: xe, x2: xe, y1: M.t, y2: M.t + PH }));
+    if (!cont || R.round === "2T") grp.append(el("text", { class: "votelbl", x: xe, y: M.t - 8, "text-anchor": "middle" }, [txt("eleição " + fmtDate(R.day))]));
+    drawMarks(grp, g, visible, R, cs, xe);
+    n++;
+  }
+  if (!n) {
     if (note) note.hidden = true;
     return;
   }
-  const xe = g.x(parseT(R.day));
-  const grp = el("g", { class: "resultmarks" });
-  grp.append(el("line", { class: "voteline", x1: xe, x2: xe, y1: M.t, y2: M.t + PH }));
-  grp.append(el("text", { class: "votelbl", x: xe, y: M.t - 8, "text-anchor": "middle" }, [txt("eleição " + fmtDate(R.day))]));
+  svg.append(grp);
+  if (note) {
+    note.hidden = false;
+    note.innerHTML = state.valid
+      ? `◎ = resultado oficial (TSE), em votos válidos entre os candidatos exibidos — a mesma base das linhas neste modo. <a href="#resultados">Ver a comparação completa →</a>`
+      : `◎ = resultado oficial (TSE), convertido para a base das pesquisas — elas incluem indecisos, brancos e nulos; o resultado oficial é em votos válidos. Passe o mouse para ver os dois números. <a href="#resultados">Ver a comparação completa →</a>`;
+  }
+}
+function drawMarks(grp, g, visible, R, cs, xe) {
   const label = R.round === "2T" ? "2º turno" : "1º turno";
   for (const rc of cs) {
     const color = visible.find((c) => c.key === rc.key).color;
@@ -342,13 +406,6 @@ function drawResult(g, visible) {
     m.addEventListener("blur", () => (tip.hidden = true));
     grp.append(m);
   }
-  svg.append(grp);
-  if (note) {
-    note.hidden = false;
-    note.innerHTML = state.valid
-      ? `◎ = resultado oficial do ${label} (TSE), em votos válidos entre os candidatos exibidos — a mesma base das linhas neste modo. <a href="#resultados">Ver a comparação completa →</a>`
-      : `◎ = resultado oficial do ${label} (TSE), convertido para a base das pesquisas — elas incluem indecisos, brancos e nulos; o resultado oficial é em votos válidos. Passe o mouse para ver os dois números. <a href="#resultados">Ver a comparação completa →</a>`;
-  }
 }
 
 // ---------- tabela de pesquisas ----------
@@ -367,7 +424,11 @@ function renderTable() {
   const d = state.baseData; // tabela sempre mostra todas as pesquisas
   const shown = d.shown;
   const table = document.querySelector("#polltable");
-  const rows = state.showAllPolls ? d.polls : d.polls.slice(0, 12);
+  // 2º turno (continuação do gráfico): as pesquisas posteriores à eleição entram no topo, com a etiqueta "2T"
+  const day = state.results[state.race]?.day;
+  const extra = state.data?.cont && state.twinBase ? state.twinBase.polls.filter((p) => p.end > day).map((p) => ({ ...p, t2: true })) : [];
+  const all = [...extra, ...d.polls].sort((a, b) => (a.end < b.end ? 1 : a.end > b.end ? -1 : 0));
+  const rows = state.showAllPolls ? all : all.slice(0, 12);
 
   const head =
     "<thead><tr><th>Instituto</th><th>Período</th><th>Amostra</th>" +
@@ -406,7 +467,7 @@ function renderTable() {
         const rtTag = rt
           ? `<span class="rt ${rt.weight >= 1.03 ? "up" : rt.weight <= 0.97 ? "down" : ""}" title="acerto nas finais de 2018/22 — erro médio ${rt.maeFinal} p.p. (${rt.cycles} ciclo${rt.cycles > 1 ? "s" : ""}); peso ${rt.weight.toFixed(2)}×">${rt.weight.toFixed(2)}×</span>`
           : "";
-        return `<tr class="${out ? "excluded" : ""}"><td class="poll-name">${p.pollster}${rtTag}</td><td class="muted">${fmtRange(
+        return `<tr class="${out ? "excluded" : ""}"><td class="poll-name">${p.pollster}${p.t2 ? ' <span class="t2tag" title="pesquisa de 2º turno">2T</span>' : ""}${rtTag}</td><td class="muted">${fmtRange(
           p.start,
           p.end
         )}</td><td class="muted">${p.n ? p.n.toLocaleString("pt-BR") : "–"}</td>${cells}${src}</tr>`;
@@ -420,8 +481,8 @@ function renderTable() {
     `· ${d.nPolls} no total, ${d.nWithSource} com link de fonte` +
     (nOut ? ` · ${nOut} instituto${nOut > 1 ? "s" : ""} desconsiderado${nOut > 1 ? "s" : ""}` : "");
   const tg = document.querySelector("#polls-toggle");
-  tg.textContent = state.showAllPolls ? "ver menos" : `ver todas (${d.polls.length})`;
-  tg.hidden = d.polls.length <= 12;
+  tg.textContent = state.showAllPolls ? "ver menos" : `ver todas (${all.length})`;
+  tg.hidden = all.length <= 12;
   tg.onclick = () => {
     state.showAllPolls = !state.showAllPolls;
     renderTable();
@@ -532,7 +593,7 @@ function currentValue(c, refT) {
 }
 function deltaHTML(c, refT) {
   const last = currentValue(c, refT);
-  if (!last || c.line.length < 2) return "";
+  if (!last || c.line.length < 2 || c.cont) return "";
   const cur = last.y;
   const ago = yAt(c.line, parseT(last.t) - 30 * DAY);
   if (ago == null) return "";
@@ -654,6 +715,13 @@ async function load() {
   try {
     const res = await fetch(`data/${state.race}.json`, { cache: "no-cache" });
     state.baseData = await res.json();
+    state.twinBase = null;
+    const tk = twinOf(state.race);
+    if (tk && state.index.some((r) => r.key === tk)) {
+      try {
+        state.twinBase = await (await fetch(`data/${tk}.json`, { cache: "no-cache" })).json();
+      } catch (e) {}
+    }
     state.excluded = new Set();
     state.sinceDays = 0;
     const psel = $("#period-sel");
