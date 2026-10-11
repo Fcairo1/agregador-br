@@ -24,7 +24,6 @@
     "AM",
     "DF",
     "ES",
-    "RJ",
     "RN",
     "TO"
    ],
@@ -284,6 +283,20 @@
     "number": "22",
     "votes": 3127911,
     "pct": 50.1,
+    "status": "Eleito",
+    "incumbent": false,
+    "prevParty": null,
+    "prevCurrent": null,
+    "projecao": false
+   },
+   {
+    "uf": "RJ",
+    "name": "DOUGLAS RUAS",
+    "fullName": "DOUGLAS RUAS DOS SANTOS",
+    "party": "PL",
+    "number": "22",
+    "votes": 4271199,
+    "pct": 50.88,
     "status": "Eleito",
     "incumbent": false,
     "prevParty": null,
@@ -6040,18 +6053,18 @@
  },
  "composicao": {
   "governadores": {
-   "nota": "20 de 27 já definidos; 7 vão a 2º turno",
+   "nota": "21 de 27 já definidos; 6 vão a 2º turno",
    "rows": [
     {
      "party": "PL",
      "color": "#1F4F9E",
      "antes": 1,
-     "depois": 5,
-     "saldo": 4,
+     "depois": 6,
+     "saldo": 5,
      "reeleitos": 1,
-     "novos": 4,
+     "novos": 5,
      "saiu": 0,
-     "entrou": 4
+     "entrou": 5
     },
     {
      "party": "PSD",
@@ -6778,9 +6791,9 @@
  },
  "metricas": {
   "governadores": {
-   "n": 20,
+   "n": 21,
    "reeleitos": 11,
-   "renovacaoPct": 45,
+   "renovacaoPct": 47.6,
    "trocaramPartido": 0
   },
   "senado": {

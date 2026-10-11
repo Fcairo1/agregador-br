@@ -3,7 +3,7 @@
   "kind": "governador",
   "source": "TSE (resultados.tse.jus.br)",
   "complete": true,
-  "updated": "04/10/2026 22:19:52",
+  "updated": "10/10/2026 15:07:39",
   "sectionsPct": 100,
   "totals": {
     "inscritos": {
@@ -18,16 +18,16 @@
       "pct": 23.33
     },
     "valid": {
-      "votes": 8669038,
-      "pct": 88.05
+      "votes": 8394627,
+      "pct": 85.26
     },
     "brancos": {
       "votes": 501537,
       "pct": 5.09
     },
     "nulos": {
-      "votes": 675292,
-      "pct": 6.86
+      "votes": 949703,
+      "pct": 9.65
     }
   },
   "candidates": [
@@ -36,18 +36,9 @@
       "urna": "DOUGLAS RUAS",
       "party": "PL",
       "votes": 4271199,
-      "pct": 49.27,
+      "pct": 50.88,
       "elected": true,
-      "status": "2º turno"
-    },
-    {
-      "name": "ANDRÉ BOURGUIGNON MARINHO",
-      "urna": "ANDRÉ MARINHO",
-      "party": "NOVO",
-      "votes": 45359,
-      "pct": 0.52,
-      "elected": false,
-      "status": "Não eleito"
+      "status": "Eleito"
     },
     {
       "name": "LUAN MONTEIRO PASCHOAL PIRES",
@@ -59,20 +50,29 @@
       "status": "Não eleito"
     },
     {
+      "name": "ANDRÉ BOURGUIGNON MARINHO",
+      "urna": "ANDRÉ MARINHO",
+      "party": "NOVO",
+      "votes": 45359,
+      "pct": 0.54,
+      "elected": false,
+      "status": "Não eleito"
+    },
+    {
       "name": "EDUARDO DA COSTA PAES",
       "urna": "EDUARDO PAES",
       "party": "PSD",
       "votes": 3706984,
-      "pct": 42.76,
-      "elected": true,
-      "status": "2º turno"
+      "pct": 44.16,
+      "elected": false,
+      "status": "Não eleito"
     },
     {
       "name": "JULIETE PANTOJA ALVES",
       "urna": "JULIETE",
       "party": "UP",
       "votes": 33430,
-      "pct": 0.39,
+      "pct": 0.4,
       "elected": false,
       "status": "Não eleito"
     },
@@ -81,7 +81,7 @@
       "urna": "WILLIAM SIRI",
       "party": "PSOL",
       "votes": 235347,
-      "pct": 2.71,
+      "pct": 2.8,
       "elected": false,
       "status": "Não eleito"
     },
@@ -90,7 +90,7 @@
       "urna": "CORONEL BUSNELLO",
       "party": "MISSÃO",
       "votes": 84889,
-      "pct": 0.98,
+      "pct": 1.01,
       "elected": false,
       "status": "Não eleito"
     },

@@ -3,7 +3,7 @@
   "kind": "senado",
   "source": "TSE (resultados.tse.jus.br)",
   "complete": true,
-  "updated": "04/10/2026 22:19:52",
+  "updated": "10/10/2026 15:07:39",
   "sectionsPct": 100,
   "totals": {
     "inscritos": {
@@ -113,15 +113,6 @@
       "status": "Não eleito"
     },
     {
-      "name": "LUCIANO OLIVEIRA MATTOS DE SOUZA",
-      "urna": "LUCIANO MATTOS",
-      "party": "PRTB",
-      "votes": 23911,
-      "pct": 0.15,
-      "elected": false,
-      "status": "Não eleito"
-    },
-    {
       "name": "MARCELO BEZERRA CRIVELLA",
       "urna": "MARCELO CRIVELLA",
       "party": "REPUBLICANOS",
@@ -136,6 +127,15 @@
       "party": "REPUBLICANOS",
       "votes": 116453,
       "pct": 0.73,
+      "elected": false,
+      "status": "Não eleito"
+    },
+    {
+      "name": "LUCIANO OLIVEIRA MATTOS DE SOUZA",
+      "urna": "LUCIANO MATTOS",
+      "party": "PRTB",
+      "votes": 23911,
+      "pct": 0.15,
       "elected": false,
       "status": "Não eleito"
     },
