@@ -384,11 +384,12 @@ function floatFrom(s) {
 const POLLSTER_ALIASES = [
   [/atlas ?in?stel|atlas ?intel|^atlas$/i, "AtlasIntel"],
   [/genial ?\/? ?quaest|^quaest$/i, "Genial/Quaest"],
-  [/nexus ?\/? ?btg|^nexus$/i, "Nexus/BTG Pactual"],
+  [/nexus ?\/? ?btg|btg ?\/? ?(pactual ?\/? ?)?nexus|^nexus$/i, "Nexus/BTG Pactual"],
   [/^poderdata/i, "PoderData"],
   [/real ?time ?big ?data|^rtbd$/i, "Real Time Big Data"],
   [/paran[aá] pesquisas/i, "Paraná Pesquisas"],
-  [/^ipec$|ipespe?c?$/i, "Ipec"],
+  [/^ipec$|^ipsos[- ]?ipec$/i, "Ipec"],
+  [/^ipespe$/i, "Ipespe"], // outro instituto (não confundir com Ipec)
   [/^datafolha$/i, "Datafolha"],
   [/^cnt ?\/? ?mda$|^mda$/i, "CNT/MDA"],
   [/^vox\b|vox brasil/i, "Vox Brasil"],
@@ -397,7 +398,7 @@ const POLLSTER_ALIASES = [
   [/american analytics/i, "American Analytics"],
   [/meio ?\/? ?ideia/i, "Meio/Ideia"],
   [/apex ?\/? ?futura/i, "Apex/Futura"],
-  [/^ipespe$|^ibope$|^ipec$/i, "Ipec"], // Ibope virou Ipec/Ipespe
+  [/^ibope$/i, "Ipec"], // Ibope virou Ipec
   [/^ver[ií]t[aá]/i, "Veritá"],
   [/^modalmais$|^futura\b/i, "Modalmais/Futura"],
 ];
