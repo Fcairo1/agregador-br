@@ -3,7 +3,7 @@
   "kind": "senado",
   "source": "TSE (resultados.tse.jus.br)",
   "complete": true,
-  "updated": "05/10/2026 00:50:04",
+  "updated": "15/10/2026 19:07:05",
   "sectionsPct": 100,
   "totals": {
     "inscritos": {
@@ -68,20 +68,20 @@
       "status": "Não eleito"
     },
     {
-      "name": "AÉCIO NEVES DA CUNHA",
-      "urna": "AÉCIO NEVES",
-      "party": "PSDB",
-      "votes": 836595,
-      "pct": 4.08,
-      "elected": false,
-      "status": "Não eleito"
-    },
-    {
       "name": "MARCO ANTÔNIO MOREIRA DA COSTA",
       "urna": "MARCO ANTÔNIO SUPERMAN",
       "party": "NOVO",
       "votes": 1895603,
       "pct": 9.24,
+      "elected": false,
+      "status": "Não eleito"
+    },
+    {
+      "name": "AÉCIO NEVES DA CUNHA",
+      "urna": "AÉCIO NEVES",
+      "party": "PSDB",
+      "votes": 836595,
+      "pct": 4.08,
       "elected": false,
       "status": "Não eleito"
     },
