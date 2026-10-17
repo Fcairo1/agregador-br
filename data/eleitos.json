@@ -6318,7 +6318,7 @@
     },
     {
      "party": "REDE",
-     "color": "hsl(116 38% 48%)",
+     "color": "#2E9E5B",
      "antes": 0,
      "depois": 1,
      "saldo": 1,
@@ -6526,7 +6526,7 @@
     },
     {
      "party": "PV",
-     "color": "hsl(350 38% 48%)",
+     "color": "#2E9E5B",
      "antes": 2,
      "depois": 2,
      "saldo": 0,
@@ -6548,7 +6548,7 @@
     },
     {
      "party": "REDE",
-     "color": "hsl(116 38% 48%)",
+     "color": "#2E9E5B",
      "antes": 2,
      "depois": 1,
      "saldo": -1,

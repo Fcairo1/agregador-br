@@ -100,7 +100,7 @@ export async function mount(root) {
 
 async function render() {
   const d = await (await fetch("data/resultados.json", { cache: "no-store" })).json();
-  const all = d.races || [];
+  const all = (d.races || []).filter((r) => !r.historic); // as presidenciais passadas só aparecem nos gráficos
   const r1 = all.filter((r) => r.round !== "2T");
   const r2 = all.filter((r) => r.round === "2T");
   if (!r1.length) {

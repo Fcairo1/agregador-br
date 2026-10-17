@@ -27,6 +27,12 @@ export const PARTY = {
   PCO: { label: "PCO", color: "#611010" },
   UP: { label: "UP", color: "#941B1B" },
   DC: { label: "DC", color: "#3F7E44" },
+  PV: { label: "PV", color: "#2E9E5B" },
+  PSL: { label: "PSL", color: "#1F4F9E" },
+  REDE: { label: "REDE", color: "#2E9E5B" },
+  "UNIÃO": { label: "UNIÃO", color: "#12508A" },
+  UNIAO: { label: "UNIÃO", color: "#12508A" },
+  PODE: { label: "PODE", color: "#2B7A78" },
 };
 export function partyInfo(p) {
   if (!p) return null;
@@ -171,6 +177,24 @@ function stateRaces(slug, uf, group, suffix, display = []) {
       optional: true,
     }),
   };
+}
+
+// ---- presidenciais passadas (só pesquisas de presidente; dados estáticos em data/polls.presidente-<ano>*.csv) ----
+// Extraídas UMA vez por scripts/historico.mjs (não rodam no cron). Sem rating/viés de instituto de 2018/22 (seria vazamento do resultado).
+// 2002 e 2006 não têm tabela de pesquisas em nenhuma Wikipédia — ficam de fora.
+const BLUE = "#2B64C4";
+const HIST = {
+  2022: { day1: "2022-10-02", day2: "2022-10-30", page: 2022, f: [C("lula", "Lula", "PT"), C("bolsonaro", "Bolsonaro", "PL"), C("ciro", "Ciro", "PDT", { color: "#F2A33A" }), C("tebet", "Tebet", "MDB")], s: [C("lula", "Lula", "PT"), C("bolsonaro", "Bolsonaro", "PL")] },
+  2018: { day1: "2018-10-07", day2: "2018-10-28", page: 2018, f: [C("bolsonaro", "Bolsonaro", "PSL"), C("haddad", "Haddad", "PT"), C("ciro", "Ciro", "PDT", { color: "#F2A33A" }), C("alckmin", "Alckmin", "PSDB"), C("marina", "Marina", "REDE")], s: [C("haddad", "Haddad", "PT"), C("bolsonaro", "Bolsonaro", "PSL")] },
+  2014: { day1: "2014-10-05", day2: "2014-10-26", page: 2014, f: [C("dilma", "Dilma", "PT"), C("aecio", "Aécio", "PSDB", { color: BLUE }), C("marina", "Marina", "PSB", { color: "#2E9E5B" })], s: [C("dilma", "Dilma", "PT"), C("aecio", "Aécio", "PSDB", { color: BLUE })] },
+  2010: { day1: "2010-10-03", day2: "2010-10-31", page: 2010, f: [C("dilma", "Dilma", "PT"), C("serra", "Serra", "PSDB", { color: BLUE }), C("marina", "Marina", "PV")], s: [C("dilma", "Dilma", "PT"), C("serra", "Serra", "PSDB", { color: BLUE })] },
+};
+export const HIST_YEARS = Object.keys(HIST).map(Number).sort((a, b) => b - a);
+for (const [y, h] of Object.entries(HIST)) {
+  const base = { group: "Presidente", year: +y, historic: +y, noRatings: true, sysHalf: SYS_HALF.presidente, wikiPage: PRES_PAGE.replace("2026", y), pathRule: () => false };
+  // 2014: Campos (PSB) morreu em 13/ago e Marina assumiu a vaga — a coluna "marina" junta os dois; o modelo roda separado nas duas fases
+  RACES[`presidente-${y}`] = race({ ...base, label: `Presidente ${y} — 1º turno`, display: h.f, electionDay: h.day1, ...(+y === 2014 ? { splits: { marina: "2014-08-14" } } : {}) });
+  RACES[`presidente-${y}-2t`] = race({ ...base, round: "2T", label: `Presidente ${y} — 2º turno`, display: h.s, electionDay: h.day2 });
 }
 
 // Um candidato só entra no gráfico se tiver pelo menos isto:

@@ -175,6 +175,16 @@ Estado-espaço 1-D por candidato, grade **diária** (dias desde a 1ª pesquisa):
   e deixa de mostrar delta. A aba "2º turno" segue existindo (com ◎ próprio). Sem pesquisa de 2T pós-eleição, nada muda no gráfico.
   Testado com pesquisas simuladas (nenhuma pesquisa pós-04/10 existia na Wikipédia em 07/10).
 
+- **Presidenciais passadas (menu "Eleição" no topo: 2026 atual · 2022 · 2018 · 2014 · 2010):** corridas `presidente-<ano>` e
+  `presidente-<ano>-2t` em `RACES` (`historic: <ano>`, `noRatings`, `sysHalf` de presidente). Os CSVs `data/polls.presidente-<ano>*.csv`
+  são ESTÁTICOS: gerados à mão por `node scripts/historico.mjs` (fetch.mjs pula `historic`; use `--historic` pra forçar) a partir da Wikipédia
+  (2022: PT + EN pro 2T; 2018: PT, colunas por partido; 2014: EN cenário principal + PT; 2010: PT, sem amostra). Resultados oficiais em
+  `data/historico-resultados.json` (tabela "Resultados" do artigo) → `results.mjs` compara (entradas `historic:true`, que a aba Resultados
+  esconde) e o gráfico mostra os ◎, a continuação do 2T e a divisória como em 2026. `index.json` ganha `year`/`day`; `state.indexAll`/`state.year`
+  em `app.js`. **2014:** a coluna `marina` junta Campos (até 13/ago) e Marina; `race.splits = { marina: "2014-08-14" }` roda o modelo separado
+  nas duas fases (`trendKalmanSplit`, `brk` na linha; espelhado em `agg.js` via `params.splits`). **2002 e 2006 não existem**: nenhuma Wikipédia
+  (pt/en/es/fr) tem tabela de pesquisas dessas eleições — precisaria de outra fonte (ex.: arquivo histórico do Datafolha).
+
 ## Matemática compartilhada
 
 `site/kalman.js` é a fonte de `trendKalman`; `scripts/lib/kalman.mjs` só reexporta. `site/agg.js`

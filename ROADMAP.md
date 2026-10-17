@@ -23,6 +23,12 @@ renovação, mulheres, pretos e pardos, troca de partido). Fonte primária: JSON
 - Quando o TSE fechar SP/MG/Alesp, a projeção é substituída pelo oficial sozinha (conferir se bateu).
 - Demais 6 governos em 2º turno (AC, AM, DF, ES, RN, TO) não são acompanhados.
 
+## 0b. Presidenciais antes de 2010
+- **2002 e 2006** não estão no menu de ano: não achei tabela de pesquisas em nenhuma Wikipédia (pt/en/es/fr). Fonte candidata: arquivo
+  histórico do Datafolha (séries de intenção de voto 2002/2006) — raspar com cuidado e conferir contra o resultado. Quando houver CSV,
+  é só adicionar o ano em `HIST` (races.mjs) e em `scripts/historico.mjs` (resultados) — o front já aceita qualquer ano do índice.
+- 2010 não tem 2º turno (a Wikipédia PT não registra pesquisas de 2T) e as pesquisas não trazem amostra (n assumido ~1.200).
+
 ## 1. Previsão (o maior salto de utilidade)
 
 - [ ] **Probabilidade de ir ao 2º turno / de liderar / de vencer no 1º turno** — simulação de

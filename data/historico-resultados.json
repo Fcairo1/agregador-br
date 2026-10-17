@@ -1,0 +1,346 @@
+{
+ "2010": {
+  "day1": "2010-10-03",
+  "day2": "2010-10-31",
+  "first": [
+   {
+    "name": "Dilma Rousseff",
+    "party": "PT",
+    "pct": 46.91,
+    "votes": 47651434
+   },
+   {
+    "name": "José Serra",
+    "party": "PSDB",
+    "pct": 32.61,
+    "votes": 33132283
+   },
+   {
+    "name": "Marina Silva",
+    "party": "PV",
+    "pct": 19.33,
+    "votes": 19636359
+   },
+   {
+    "name": "Plínio de Arruda Sampaio",
+    "party": "PSOL",
+    "pct": 0.87,
+    "votes": 886816
+   },
+   {
+    "name": "José Maria Eymael",
+    "party": "PSDC",
+    "pct": 0.09,
+    "votes": 89350
+   },
+   {
+    "name": "José Maria de Almeida",
+    "party": "PSTU",
+    "pct": 0.08,
+    "votes": 84609
+   },
+   {
+    "name": "Levy Fidélix",
+    "party": "PRTB",
+    "pct": 0.06,
+    "votes": 57960
+   },
+   {
+    "name": "Ivan Pinheiro",
+    "party": "PCB",
+    "pct": 0.04,
+    "votes": 39136
+   },
+   {
+    "name": "Rui Costa Pimenta",
+    "party": "PCO",
+    "pct": 0.01,
+    "votes": 12206
+   }
+  ],
+  "second": [
+   {
+    "name": "Dilma Rousseff",
+    "party": "PT",
+    "pct": 56.05,
+    "votes": 55752529
+   },
+   {
+    "name": "José Serra",
+    "party": "PSDB",
+    "pct": 43.95,
+    "votes": 43711388
+   }
+  ]
+ },
+ "2014": {
+  "day1": "2014-10-05",
+  "day2": "2014-10-26",
+  "first": [
+   {
+    "name": "Dilma Rousseff",
+    "party": "PT",
+    "pct": 41.59,
+    "votes": 43267668
+   },
+   {
+    "name": "Aécio Neves",
+    "party": "PSDB",
+    "pct": 33.55,
+    "votes": 34897211
+   },
+   {
+    "name": "Marina Silva",
+    "party": "PSB",
+    "pct": 21.32,
+    "votes": 22176619
+   },
+   {
+    "name": "Luciana Genro",
+    "party": "PSOL",
+    "pct": 1.55,
+    "votes": 1612186
+   },
+   {
+    "name": "Pastor Everaldo",
+    "party": "PSC",
+    "pct": 0.75,
+    "votes": 780513
+   },
+   {
+    "name": "Eduardo Jorge",
+    "party": "PV",
+    "pct": 0.61,
+    "votes": 630099
+   },
+   {
+    "name": "Levy Fidélix",
+    "party": "PRTB",
+    "pct": 0.43,
+    "votes": 446878
+   },
+   {
+    "name": "José Maria de Almeida",
+    "party": "PSTU",
+    "pct": 0.09,
+    "votes": 91209
+   },
+   {
+    "name": "José Maria Eymael",
+    "party": "PSDC",
+    "pct": 0.06,
+    "votes": 61250
+   },
+   {
+    "name": "Mauro Iasi",
+    "party": "PCB",
+    "pct": 0.05,
+    "votes": 47845
+   },
+   {
+    "name": "Rui Costa Pimenta",
+    "party": "PCO",
+    "pct": 0.01,
+    "votes": 12324
+   }
+  ],
+  "second": [
+   {
+    "name": "Dilma Rousseff",
+    "party": "PT",
+    "pct": 51.64,
+    "votes": 54501118
+   },
+   {
+    "name": "Aécio Neves",
+    "party": "PSDB",
+    "pct": 48.36,
+    "votes": 51041155
+   }
+  ]
+ },
+ "2018": {
+  "day1": "2018-10-07",
+  "day2": "2018-10-28",
+  "first": [
+   {
+    "name": "Jair Bolsonaro",
+    "party": "PSL",
+    "pct": 46.03,
+    "votes": 49276990
+   },
+   {
+    "name": "Fernando Haddad",
+    "party": "PT",
+    "pct": 29.28,
+    "votes": 31342051
+   },
+   {
+    "name": "Ciro Gomes",
+    "party": "PDT",
+    "pct": 12.47,
+    "votes": 13344371
+   },
+   {
+    "name": "Geraldo Alckmin",
+    "party": "PSDB",
+    "pct": 4.76,
+    "votes": 5096350
+   },
+   {
+    "name": "João Amoêdo",
+    "party": "NOVO",
+    "pct": 2.5,
+    "votes": 2679745
+   },
+   {
+    "name": "Cabo Daciolo",
+    "party": "PATRI",
+    "pct": 1.26,
+    "votes": 1348323
+   },
+   {
+    "name": "Henrique Meirelles",
+    "party": "MDB",
+    "pct": 1.2,
+    "votes": 1288950
+   },
+   {
+    "name": "Marina Silva",
+    "party": "REDE",
+    "pct": 1,
+    "votes": 1069578
+   },
+   {
+    "name": "Álvaro Dias",
+    "party": "PODE",
+    "pct": 0.8,
+    "votes": 859601
+   },
+   {
+    "name": "Guilherme Boulos",
+    "party": "PSOL",
+    "pct": 0.58,
+    "votes": 617122
+   },
+   {
+    "name": "Vera Lúcia",
+    "party": "PSTU",
+    "pct": 0.05,
+    "votes": 55762
+   },
+   {
+    "name": "José Maria Eymael",
+    "party": "DC",
+    "pct": 0.04,
+    "votes": 41710
+   },
+   {
+    "name": "João Goulart Filho",
+    "party": "PPL",
+    "pct": 0.03,
+    "votes": 30176
+   }
+  ],
+  "second": [
+   {
+    "name": "Jair Bolsonaro",
+    "party": "PSL",
+    "pct": 55.13,
+    "votes": 57797847
+   },
+   {
+    "name": "Fernando Haddad",
+    "party": "PT",
+    "pct": 44.87,
+    "votes": 47040906
+   }
+  ]
+ },
+ "2022": {
+  "day1": "2022-10-02",
+  "day2": "2022-10-30",
+  "first": [
+   {
+    "name": "Lula",
+    "party": "PT",
+    "pct": 48.43,
+    "votes": 57259504
+   },
+   {
+    "name": "Jair Bolsonaro",
+    "party": "PL",
+    "pct": 43.2,
+    "votes": 51072345
+   },
+   {
+    "name": "Simone Tebet",
+    "party": "MDB",
+    "pct": 4.16,
+    "votes": 4915423
+   },
+   {
+    "name": "Ciro Gomes",
+    "party": "PDT",
+    "pct": 3.04,
+    "votes": 3599287
+   },
+   {
+    "name": "Soraya Thronicke",
+    "party": "UNIÃO",
+    "pct": 0.51,
+    "votes": 600955
+   },
+   {
+    "name": "Felipe d'Avila",
+    "party": "NOVO",
+    "pct": 0.47,
+    "votes": 559708
+   },
+   {
+    "name": "Padre Kelmon",
+    "party": "PTB",
+    "pct": 0.07,
+    "votes": 81129
+   },
+   {
+    "name": "Léo Péricles",
+    "party": "UP",
+    "pct": 0.05,
+    "votes": 53519
+   },
+   {
+    "name": "Sofia Manzano",
+    "party": "PCB",
+    "pct": 0.04,
+    "votes": 45620
+   },
+   {
+    "name": "Vera",
+    "party": "PSTU",
+    "pct": 0.02,
+    "votes": 25625
+   },
+   {
+    "name": "Constituinte Eymael",
+    "party": "DC",
+    "pct": 0.01,
+    "votes": 16604
+   }
+  ],
+  "second": [
+   {
+    "name": "Lula",
+    "party": "PT",
+    "pct": 50.9,
+    "votes": 60345999
+   },
+   {
+    "name": "Jair Bolsonaro",
+    "party": "PL",
+    "pct": 49.1,
+    "votes": 58206354
+   }
+  ]
+ }
+}

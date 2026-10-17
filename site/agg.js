@@ -1,6 +1,6 @@
 // Recomputo da tendência no cliente, pro filtro de institutos / período.
 // Espelha a matemática de scripts/aggregate.mjs (mesmo Kalman + house effects).
-import { trendKalman } from "./kalman.js";
+import { trendKalman, trendKalmanSplit } from "./kalman.js";
 
 const DAY = 86400000;
 const T = (iso) => new Date(iso + "T00:00:00Z").getTime();
@@ -83,8 +83,11 @@ export function recompute(data, { excluded = new Set(), sinceDays = null } = {})
     .map((s) => {
       const pts = series[s.key];
       if (pts.length < 3) return null;
-      const { line, band } = trendKalman(pts, gridDaily, kOpts);
-      const L = outIdx.map((x, i) => (line[x] == null ? null : { t: gd[i], y: r2(line[x]) })).filter(Boolean);
+      const cutDate = P.splits?.[s.key];
+      const cut = cutDate ? xOf(Date.parse(cutDate + "T00:00:00Z")) : null;
+      const { line, band } = cut == null ? trendKalman(pts, gridDaily, kOpts) : trendKalmanSplit(pts, gridDaily, kOpts, cut);
+      const brkAt = (arr) => { const j = arr.findIndex((q) => q.x >= cut); if (cut != null && j >= 0) arr[j] = { ...arr[j], brk: true }; return arr; };
+      const L = brkAt(outIdx.map((x, i) => (line[x] == null ? null : { x, t: gd[i], y: r2(line[x]) })).filter(Boolean)).map(({ x, ...q }) => q);
       if (!L.length) return null;
       return {
         key: s.key,
@@ -93,9 +96,9 @@ export function recompute(data, { excluded = new Set(), sinceDays = null } = {})
         party: s.party,
         partyLabel: s.partyLabel,
         line: L,
-        band: outIdx
-          .map((x, i) => (band[x] == null ? null : { t: gd[i], lo: r2(band[x].lo), hi: r2(band[x].hi) }))
-          .filter(Boolean),
+        band: brkAt(outIdx
+          .map((x, i) => (band[x] == null ? null : { x, t: gd[i], lo: r2(band[x].lo), hi: r2(band[x].hi) }))
+          .filter(Boolean)).map(({ x, ...q }) => q),
         polls: rawSeries[s.key]
           .slice()
           .sort((a, b) => a.t - b.t)

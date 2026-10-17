@@ -13,7 +13,7 @@ import {
 } from "./races.mjs";
 import { readCSV } from "./lib/csv.mjs";
 import { moeFromN } from "./lib/wiki.mjs";
-import { trendKalman } from "./lib/kalman.mjs";
+import { trendKalman, trendKalmanSplit } from "./lib/kalman.mjs";
 
 const DATA = new URL("../data/", import.meta.url);
 const OUT = new URL("../site/data/", import.meta.url);
@@ -24,7 +24,7 @@ let RATINGS = {};
 try {
   RATINGS = JSON.parse(fs.readFileSync(new URL("ratings.json", DATA), "utf8")).byPollster || {};
 } catch {}
-const ratingW = (pollster) => RATINGS[pollster]?.weight ?? 1;
+const ratingW = (pollster, race) => (race?.noRatings ? 1 : RATINGS[pollster]?.weight ?? 1);
 
 const DAY = 86400000;
 const toDate = (iso) => new Date(iso + "T00:00:00Z");
@@ -73,7 +73,7 @@ function aggregateRace(raceKey) {
     const x = xOf(t);
     const n = p.n ? parseInt(p.n, 10) : null;
     const moe = p.moe ? parseFloat(p.moe) : moeFromN(n) || 2.0;
-    const rW = ratingW(p.pollster);
+    const rW = ratingW(p.pollster, race);
     for (const k of candKeys) {
       const raw = p[k];
       if (raw === "" || raw == null) continue;
@@ -152,8 +152,11 @@ function aggregateRace(raceKey) {
       series[k] = series[k].map((p) => ({ ...p, y: p.y - (house[p.pollster]?.[k] || 0) }));
   }
 
+  const splitX = (k) => (race.splits?.[k] ? xOf(Date.parse(race.splits[k] + "T00:00:00Z")) : null);
   const candidates = plotable.map(({ k }, i) => {
-    const { line, band } = trendKalman(series[k], gridDaily, kOpts);
+    const cut = splitX(k);
+    const { line, band } = cut == null ? trendKalman(series[k], gridDaily, kOpts) : trendKalmanSplit(series[k], gridDaily, kOpts, cut);
+    const brkAt = (arr) => { const j = arr.findIndex((q) => q.x >= cut); if (cut != null && j >= 0) arr[j] = { ...arr[j], brk: true }; return arr; };
     const party = partyFor(race, nameMap, k);
     const pi = partyInfo(party);
     return {
@@ -162,10 +165,10 @@ function aggregateRace(raceKey) {
       party,
       partyLabel: pi?.label || party || "",
       color: colorFor(race, nameMap, k, i),
-      line: outIdx.map((x, gi) => (line[x] == null ? null : { t: gridDates[gi], y: r2(line[x]) })).filter(Boolean),
-      band: outIdx
-        .map((x, gi) => (band[x] == null ? null : { t: gridDates[gi], lo: r2(band[x].lo), hi: r2(band[x].hi) }))
-        .filter(Boolean),
+      line: brkAt(outIdx.map((x, gi) => (line[x] == null ? null : { x, t: gridDates[gi], y: r2(line[x]) })).filter(Boolean)).map(({ x, ...q }) => q),
+      band: brkAt(outIdx
+        .map((x, gi) => (band[x] == null ? null : { x, t: gridDates[gi], lo: r2(band[x].lo), hi: r2(band[x].hi) }))
+        .filter(Boolean)).map(({ x, ...q }) => q),
       polls: rawSeries[k]
         .slice()
         .sort((a, b) => a.t - b.t)
@@ -217,6 +220,7 @@ function aggregateRace(raceKey) {
       designEffect: kOpts.designEffect,
       nCap: kOpts.nCap,
       sysHalf: kOpts.sysHalf,
+      splits: race.splits || null,
       z: kOpts.z,
       gridStepDays: AGG.gridStepDays,
       houseMaxShift: AGG.houseMaxShift,
@@ -232,7 +236,7 @@ function aggregateRace(raceKey) {
     })),
     // ratings (peso por acerto histórico) só dos institutos presentes nesta corrida
     ratings: Object.fromEntries(
-      pollsters.filter((p) => RATINGS[p]).map((p) => [p, { weight: RATINGS[p].weight, maeFinal: RATINGS[p].maeFinal, cycles: RATINGS[p].cycles }])
+      pollsters.filter((p) => RATINGS[p] && !race.noRatings).map((p) => [p, { weight: RATINGS[p].weight, maeFinal: RATINGS[p].maeFinal, cycles: RATINGS[p].cycles }])
     ),
     candidates,
     houseEffects: applyHouse
@@ -276,6 +280,8 @@ for (const k of keys) {
     label: r.label,
     wiki: r.wikiUrl,
     nPolls: out.nPolls,
+    year: r.year,
+    day: r.electionDay || null,
   });
   const names = out.candidates.map((c) => `${c.name} ${c.line.at(-1)?.y ?? "?"}%`).join(", ");
   console.log(`  ${k}: ${out.nPolls} pesquisas, ${out.candidates.length} linhas -> ${names}`);

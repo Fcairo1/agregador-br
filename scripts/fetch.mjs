@@ -111,7 +111,8 @@ function titleCase(k) {
   return k.replace(/-/g, " ").replace(/\b\w/g, (m) => m.toUpperCase());
 }
 
-const keys = only ? [only] : Object.keys(RACES);
+// presidenciais passadas são estáticas (CSV commitado, gerado por historico.mjs): o cron não refaz
+const keys = only ? [only] : Object.keys(RACES).filter((k) => !RACES[k].historic || args.includes("--historic"));
 for (const k of keys) {
   if (!RACES[k]) {
     console.error(`corrida desconhecida: ${k}`);

@@ -8,7 +8,8 @@ const idx = JSON.parse(fs.readFileSync(new URL("index.json", OUT), "utf8"));
 const today = new Date();
 const errs = [];
 
-for (const { key } of idx) {
+for (const { key, year } of idx) {
+  const hist = year && year < 2026; // presidenciais passadas: dados estáticos, sem as regras de data de 2026
   let d;
   try {
     d = JSON.parse(fs.readFileSync(new URL(`${key}.json`, OUT), "utf8"));
@@ -22,7 +23,7 @@ for (const { key } of idx) {
 
   if (d.nPolls > 600) errs.push(`${key}: ${d.nPolls} pesquisas (esperado < 600 — contaminação de anos anteriores?)`);
   if (d.nPolls < 3) errs.push(`${key}: só ${d.nPolls} pesquisas`);
-  if (!(y0 >= 2026)) errs.push(`${key}: xDomain começa em ${x0} (esperado >= 2026)`);
+  if (!hist && !(y0 >= 2026)) errs.push(`${key}: xDomain começa em ${x0} (esperado >= 2026)`);
   // mesma pesquisa (instituto + datas) repetida = tabela lida duas vezes (ex.: mês transcluído em dobro)
   const vistos = new Map();
   for (const p of d.polls || []) {
@@ -30,7 +31,7 @@ for (const { key } of idx) {
     vistos.set(k, (vistos.get(k) || 0) + 1);
   }
   const dup = [...vistos.values()].filter((v) => v > 1).length;
-  if (dup > Math.max(2, 0.03 * d.nPolls)) errs.push(`${key}: ${dup} pesquisas duplicadas (tabela lida duas vezes?)`);
+  if (!hist && dup > Math.max(2, 0.03 * d.nPolls)) errs.push(`${key}: ${dup} pesquisas duplicadas (tabela lida duas vezes?)`);
   if (Number.isFinite(lastT) && lastT > today.getTime() + 8 * 86400000)
     errs.push(`${key}: lastPoll ${d.lastPoll} está no futuro`);
   if (!d.candidates?.length) errs.push(`${key}: sem candidatos`);

@@ -181,8 +181,8 @@ function compare(key, res, agg, race) {
       rawEst: +(est / f).toFixed(2), realRaw: +(real / f).toFixed(2),
     };
   });
-  const day = dayOf(race.round);
-  if (!frozen && Date.now() > Date.parse(day + "T23:59:59-03:00") && agg.lastPoll <= day) {
+  const day = race.electionDay || dayOf(race.round);
+  if (!frozen && !race.historic && Date.now() > Date.parse(day + "T23:59:59-03:00") && agg.lastPoll <= day) {
     snapshot[key] = { lastPoll: agg.lastPoll, f: +f.toFixed(5), candidates: Object.fromEntries(out.map((c) => [c.key, { est: c.est, lo: c.lo, hi: c.hi }])) };
     snapDirty = true;
   }
@@ -274,6 +274,28 @@ async function main() {
     const sorted = Object.fromEntries(Object.entries(snapshot).sort(([a], [b]) => a.localeCompare(b)));
     fs.writeFileSync(SNAP, JSON.stringify(sorted, null, 1) + "\n");
     console.log("  -> data/estimativas.json (estimativas do 1º turno congeladas)");
+  }
+  // presidenciais passadas: resultado oficial (TSE via Wikipédia, extraído por historico.mjs) × tendência do modelo
+  try {
+    const HR = JSON.parse(fs.readFileSync(new URL("historico-resultados.json", DATA), "utf8"));
+    for (const [key, race] of Object.entries(RACES)) {
+      if (!race.historic) continue;
+      const rr = HR[race.historic];
+      let agg;
+      try {
+        agg = JSON.parse(fs.readFileSync(new URL(`${key}.json`, OUT), "utf8"));
+      } catch {
+        continue; // sem pesquisas pra esse turno (ex.: 2º turno de 2010)
+      }
+      const list = race.round === "2T" ? rr.second : rr.first;
+      const res = { cands: list.map((c) => ({ name: c.name, urna: c.name, party: c.party, votes: c.votes, pct: c.pct, status: "", elected: false })), tot: {}, final: true, source: "TSE" };
+      const cmp = compare(key, res, agg, race);
+      if (!cmp) continue;
+      Object.assign(cmp, { kind: "presidente", round: race.round || "1T", complete: true, source: "TSE", historic: true, year: race.historic, group: "Presidente " + race.historic });
+      summary.races.push(cmp);
+    }
+  } catch (e) {
+    console.warn("  aviso: resultados históricos indisponíveis (" + e.message + ")");
   }
   summary.turnout = turnout;
   // 2022 (1º turno presidencial) pra comparar abstenção/brancos/nulos

@@ -109,3 +109,14 @@ export function trendKalman(polls, gridDays, opts = {}) {
   }
   return { line, band };
 }
+
+// Troca de candidato no meio da série (ex.: Campos -> Marina em 2014 são, de fato, duas pessoas): roda o modelo
+// separado antes/depois de `cutX` (dia) pra a linha não "inventar" uma rampa entre os dois. Devolve line/band
+// no mesmo formato de trendKalman; quem consome marca a quebra no 1º ponto com dia >= cutX.
+export function trendKalmanSplit(polls, gridDays, opts, cutX) {
+  const a = trendKalman(polls.filter((p) => p.x < cutX), gridDays, opts);
+  const b = trendKalman(polls.filter((p) => p.x >= cutX), gridDays, opts);
+  const line = gridDays.map((d, i) => (d < cutX ? a.line[i] : b.line[i]));
+  const band = gridDays.map((d, i) => (d < cutX ? a.band[i] : b.band[i]));
+  return { line, band };
+}

@@ -29,6 +29,8 @@ const state = {
   valid: false, // base dos gráficos: false = % das pesquisas (com indecisos/brancos/nulos); true = votos válidos
   raw: null, // dado do servidor já com filtros (antes da normalização)
   twinBase: null, // JSON do 2º turno "gêmeo" da corrida atual (continuação do gráfico após a eleição)
+  year: 2026, // eleição escolhida no menu do topo (2026 = a atual; as outras são presidenciais passadas)
+  indexAll: [], // índice completo (todos os anos); state.index = só as corridas do ano escolhido
   results: {}, // resultados oficiais por corrida (data/resultados.json) — viram ◎ no gráfico
   index: [],
   group: null,
@@ -42,6 +44,7 @@ const state = {
   geom: null,
   showAllPolls: false,
 };
+const yearOf = (r) => r.year || 2026;
 const groupsOf = () => [...new Set(state.index.map((r) => r.group))];
 const racesIn = (g) => state.index.filter((r) => r.group === g);
 const roundsIn = (g) => [...new Set(racesIn(g).map((r) => r.round))];
@@ -300,7 +303,8 @@ function toValid(d) {
 }
 // 2º turno como CONTINUAÇÃO do gráfico do 1º: pega os pontos do "gêmeo" (ex.: presidente -> Lula × Flávio)
 // posteriores ao dia da eleição e os anexa aos finalistas, com uma quebra (`brk`) na virada de turno.
-const twinOf = (key) => (key === "presidente" ? "presidente-2t-flavio" : /-governador$/.test(key) ? key + "-2t" : null);
+const twinOf = (key) =>
+  key === "presidente" ? "presidente-2t-flavio" : /^presidente-\d{4}$/.test(key) || /-governador$/.test(key) ? key + "-2t" : null;
 function twinFor() {
   const tb = state.twinBase;
   if (!tb) return null;
@@ -633,11 +637,26 @@ function renderLegend() {
     box.append(b);
   }
 }
+// notas das presidenciais passadas (o que a fonte tem / não tem)
+const HIST_NOTES = {
+  2022: "Presidenciais passadas: pesquisas registradas na Wikipédia (PT/EN); sem ajuste por acerto histórico dos institutos (seria vazamento do resultado). 2º turno: pesquisas de 3 a 29/out.",
+  2018: "Presidenciais passadas: pesquisas registradas na Wikipédia (PT); as colunas vêm rotuladas por partido (PSL = Bolsonaro, PT = Haddad…). Sem ajuste por acerto histórico dos institutos.",
+  2014: "Marina reúne Eduardo Campos (candidato do PSB até morrer, em 13/ago) e Marina Silva, que assumiu a vaga: o modelo roda separado nas duas fases e a linha quebra na troca. Fonte: Wikipédia EN (cenário principal) + PT.",
+  2010: "A tabela da Wikipédia não traz tamanho de amostra nem margem de erro: assumi ~1.200 entrevistas para todas as pesquisas, então a faixa de incerteza é aproximada. Não há pesquisas de 2º turno registradas.",
+};
 const ROUND_LABEL = { "1T": "1º turno", "2T": "2º turno", SEN: "Senado" };
 function renderMeta() {
   const d = state.data;
   const rc = state.index.find((r) => r.key === state.race);
-  $("#race-title").textContent = rc.group;
+  $("#race-title").textContent = state.year === 2026 ? rc.group : `${rc.group} ${state.year}`;
+  const h1s = document.querySelector("header.top h1 span");
+  if (h1s) h1s.textContent = `· Brasil ${state.year}`;
+  document.title = `Agregador de pesquisas · Brasil ${state.year}`;
+  const hn = $("#hist-note");
+  if (hn) {
+    hn.hidden = state.year === 2026;
+    hn.textContent = state.year === 2026 ? "" : HIST_NOTES[state.year] || "";
+  }
   const nOut = state.excluded.size;
   const bits = [
     `${d.nPolls} pesquisas${nOut ? ` (−${nOut} inst.)` : ""}`,
@@ -655,6 +674,7 @@ function renderMeta() {
 function renderTabs() {
   const box = $("#races");
   box.textContent = "";
+  box.hidden = groupsOf().length < 2;
   for (const g of groupsOf()) {
     const b = document.createElement("button");
     b.textContent = g;
@@ -826,10 +846,35 @@ async function boot() {
   } catch (e) {
     state.results = {};
   }
+  state.indexAll = state.index;
+  state.index = state.indexAll.filter((r) => yearOf(r) === 2026);
+  initYearMenu();
   state.group = state.index[0].group;
   state.race = state.index[0].key;
   renderTabs();
   load();
+}
+
+// ---------- menu de ano (presidenciais passadas) ----------
+function setYear(y) {
+  state.year = y;
+  state.index = state.indexAll.filter((r) => yearOf(r) === y);
+  state.group = state.index[0].group;
+  state.race = state.index[0].key;
+  state.hidden.clear();
+  renderTabs();
+  load();
+}
+function initYearMenu() {
+  const years = [...new Set(state.indexAll.map(yearOf))].sort((a, b) => b - a);
+  const sel = $("#year-sel");
+  if (!sel || years.length < 2) {
+    if ($("#yearsel")) $("#yearsel").hidden = true;
+    return;
+  }
+  sel.innerHTML = years.map((y) => `<option value="${y}">${y}${y === 2026 ? " (atual)" : ""}</option>`).join("");
+  sel.value = String(state.year);
+  sel.onchange = () => setYear(+sel.value);
 }
 
 // ---------- toggle de base (% das pesquisas × votos válidos) ----------
