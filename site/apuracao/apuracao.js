@@ -403,6 +403,6 @@ export async function mount(root) {
 
   // modo inicial: ao vivo (a partir do início da apuração) ou o último escolhido; antes do início, o replay é o mais útil
   let m0 = "vivo";
-  try { m0 = localStorage.getItem("apuracao:modo") || (Date.now() < Date.parse(CONFIG.inicio) ? "replay" : "vivo"); } catch (e) {}
+  try { const antes = Date.now() < Date.parse(CONFIG.inicio); m0 = antes ? localStorage.getItem("apuracao:modo") || "replay" : "vivo"; } catch (e) {} // depois do início, sempre abre ao vivo (mesmo quem deixou o replay selecionado)
   setModo(m0);
 }
