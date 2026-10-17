@@ -50,6 +50,15 @@
       "status": "Não eleito"
     },
     {
+      "name": "GERMANO ANTONIO RIGOTTO",
+      "urna": "RIGOTTO",
+      "party": "MDB",
+      "votes": 420722,
+      "pct": 3.67,
+      "elected": false,
+      "status": "Não eleito"
+    },
+    {
       "name": "FREDERICO CANTORI ANTUNES",
       "urna": "FREDERICO ANTUNES",
       "party": "PSD",
@@ -59,11 +68,20 @@
       "status": "Não eleito"
     },
     {
-      "name": "GERMANO ANTONIO RIGOTTO",
-      "urna": "RIGOTTO",
-      "party": "MDB",
-      "votes": 420722,
-      "pct": 3.67,
+      "name": "DANIELA MAIDANA DA SILVA",
+      "urna": "DANIELA MULHERES SOCIALISTAS",
+      "party": "PSTU",
+      "votes": 26844,
+      "pct": 0.23,
+      "elected": false,
+      "status": "Não eleito"
+    },
+    {
+      "name": "REGIS BATISTA ETHUR",
+      "urna": "REGIS ETHUR",
+      "party": "PSTU",
+      "votes": 3991,
+      "pct": 0.03,
       "elected": false,
       "status": "Não eleito"
     },
@@ -86,20 +104,11 @@
       "status": "Eleito"
     },
     {
-      "name": "DANIELA MAIDANA DA SILVA",
-      "urna": "DANIELA MULHERES SOCIALISTAS",
-      "party": "PSTU",
-      "votes": 26844,
+      "name": "MILTON BATISTA CARDOSO",
+      "urna": "MILTON CARDOSO",
+      "party": "PSDB",
+      "votes": 25937,
       "pct": 0.23,
-      "elected": false,
-      "status": "Não eleito"
-    },
-    {
-      "name": "REGIS BATISTA ETHUR",
-      "urna": "REGIS ETHUR",
-      "party": "PSTU",
-      "votes": 3991,
-      "pct": 0.03,
       "elected": false,
       "status": "Não eleito"
     },
@@ -109,15 +118,6 @@
       "party": "CIDADANIA",
       "votes": 16428,
       "pct": 0.14,
-      "elected": false,
-      "status": "Não eleito"
-    },
-    {
-      "name": "MILTON BATISTA CARDOSO",
-      "urna": "MILTON CARDOSO",
-      "party": "PSDB",
-      "votes": 25937,
-      "pct": 0.23,
       "elected": false,
       "status": "Não eleito"
     },
