@@ -134,6 +134,7 @@ export async function mount(root) {
     const frase = fraseEstado(ch, lado);
     const stale = u.desatualizado;
     const horaTxt = u.modoVivo ? fmtHoraSeg(r.t) : fmtHora(r.t, true);
+    const ctrlAntigo = u.replay ? cont.querySelector(".ap-ctrl") : null; // o slider precisa sobreviver ao redesenho, senão o arraste é cortado
     cont.innerHTML = `
       <div class="ap-banner" data-estado="${ch.estado}" data-lado="${lado}">
         <div class="ap-estado">${estadoNome}${["favorito", "forte", "projetado", "eleito"].includes(ch.estado) ? ` <span class="ap-quem" style="--c:${nomeDe(lado).cor}">${nomeDe(lado).nome}</span>` : ""}</div>
@@ -190,6 +191,13 @@ export async function mount(root) {
       ${explicacao()}
       ${u.modoVivo ? `<p class="ap-peq muted">Snapshots guardados neste navegador: ${(u.historico || []).length}. <button type="button" class="ap-link" id="ap-export">Exportar JSON</button></p>` : ""}
     `;
+    const ctrlNovo = cont.querySelector(".ap-ctrl");
+    if (ctrlAntigo && ctrlNovo) {
+      ctrlNovo.replaceWith(ctrlAntigo);
+      const sl = ctrlAntigo.querySelector("#ap-slider"); if (sl && +sl.value !== S.idx) sl.value = S.idx;
+      ctrlAntigo.querySelector("#ap-tempo").textContent = fmtHora(S.replay.linha[S.idx].t, true);
+      ctrlAntigo.querySelector("#ap-play").textContent = S.tocando ? "❚❚ Pausar" : "▶ Reproduzir";
+    }
     desenharGraficos(u);
     const ex = $(root, "#ap-export"); if (ex) ex.onclick = () => baixar(S.motor.exportar());
     ligarReplay();
