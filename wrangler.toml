@@ -1,8 +1,11 @@
-# Cloudflare Workers servindo a pasta estática `site/` (sem código de Worker).
-# O Cloudflare roda `node scripts/build.mjs` (Build command) e depois `npx wrangler deploy`,
-# que sobe o diretório de assets abaixo.
+# Cloudflare Workers: serve a pasta estática `site/` (binding ASSETS) e o proxy com cache /tse/* (worker/index.js)
+# para os JSONs oficiais do TSE da projeção da apuração. O Cloudflare roda `node scripts/build.mjs` (Build command)
+# e depois `npx wrangler deploy`.
 name = "agregador-eleicoes-2026"
+main = "worker/index.js"
 compatibility_date = "2026-09-06"
 
 [assets]
 directory = "./site"
+binding = "ASSETS"
+run_worker_first = ["/tse/*"]

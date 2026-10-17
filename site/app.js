@@ -908,7 +908,8 @@ function initBaseToggle() {
 initBaseToggle();
 
 // ---------- seções (Pesquisas · Resultados · Eleitos) ----------
-const VIEWS = ["pesquisas", "resultados", "eleitos"];
+const VIEWS = ["pesquisas", "resultados", "eleitos", "apuracao"];
+const MODULO = { resultados: "./resultados.js", eleitos: "./eleitos.js", apuracao: "./apuracao/apuracao.js" };
 const mounted = {};
 function route() {
   const h = location.hash.slice(1).split("/")[0];
@@ -916,7 +917,7 @@ function route() {
   for (const name of VIEWS) $("#view-" + name).hidden = name !== v;
   $("#tabsets").hidden = v !== "pesquisas";
   for (const a of document.querySelectorAll("#views a[data-v]")) a.setAttribute("aria-current", String(a.dataset.v === v));
-  if (v !== "pesquisas" && !mounted[v]) mounted[v] = import(`./${v}.js`).then((m) => m.mount($("#view-" + v)));
+  if (v !== "pesquisas" && !mounted[v]) mounted[v] = import(MODULO[v]).then((m) => m.mount($("#view-" + v)));
   if (v === "pesquisas" && state.data) render(); // volta ao gráfico já medido
   window.scrollTo(0, 0);
 }

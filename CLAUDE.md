@@ -253,6 +253,40 @@ npm run serve      # http://localhost:5173  (servidor estático, Node puro)
 - **2º turno (25/10):** só presidente (Flávio × Lula) e governador do RJ. TSE: eleições 6258 (federal) e 6260 (estadual); os arquivos só
   existem depois da votação (404 → null). `results.mjs` e `eleitos.mjs` já tratam (testado com dados simulados). Demais governos em 2T ficam "em aberto".
 
+## Apuração (projeção do 2º turno ao vivo) — aba `#apuracao`
+
+Projeção **independente e não oficial** do vencedor Flávio × Lula durante a totalização (a partir das 17h BRT de 25/10/2026).
+Botão laranja "● Apuração" no menu. Módulo carregado sob demanda (`app.js` → `MODULO`).
+
+**Arquitetura** (`site/apuracao/`, sem dependências, módulos ES)
+- `config.js` — único lugar com horário de início, proxy, códigos de eleição (6257 1T / 6258 2T), candidatos, UFs e caminhos. `?inicio=<ISO>` na URL sobrescreve o início (só pra teste local).
+- `adapter.js` — **camada de adaptação ao TSE**: `normalizarResultado` / `normalizarAcompanhamento` transformam o JSON do TSE num formato interno; `TseClient` faz GET com timeout, backoff exponencial, pool de requisições e `snapshot()`. Se o TSE mudar o formato, só este arquivo muda.
+- `model.js` — modelo e máquina de estados (puro, roda no Node e no navegador). `replay.js` — replay histórico. `motor.js` — ciclo ao vivo (`MotorAoVivo`), histórico, prior de pesquisa. `apuracao.js` — UI.
+- `dados/` (versionado): `mun-1t-2026.json` (votos + ordem/horário de totalização por município no 1T), `mun-2022.json` (2º turno 2022 por município, referência), `replay-1t-2026.json`.
+- `worker/proxy.js` + `worker/index.js` — proxy `/tse/<eleição>/…` (o TSE não manda CORS): allowlist, cache 30 s (6 h com `?f=1` p/ arquivos que não mudam), stale-if-error. Usado também em `scripts/serve.mjs`. `wrangler.toml`: `main` + binding `ASSETS` + `run_worker_first = ["/tse/*"]`.
+
+**Fontes/campos do TSE** (`resultados.tse.jus.br/oficial/ele2026/<eleição>/dados/…`): `<uf>-c0001-e<eleição>-u.json` (nacional/UF/município: `cand[].vap`, `v.vvc`, `s.ts/st` seções, `e.te` eleitorado, `and` f/p/n, `dt/ht`), `<uf>-e<eleição>-ab.json` (acompanhamento por município: status, horário, seções), `mun-e<eleição>-cm.json` (config de municípios). `cache-control: max-age=27`.
+
+**Modelo.** Razão de votos por município: `logit(p_m) = x_m·β + u_UF + δ_região + ε_m` (x = parcela de Flávio no 2T 2022 e no 1T 2026 no município; WLS + ridge; bootstrap por UF; efeito de UF encolhido; razão de válidos 2T/referência). Remanescente por UF = esperado − contado. Choque nacional de seleção `selK·(1−contado)` (calibrado no replay: sem ele o intervalo de 90% cobria 36%). Prior fraco de pesquisa com peso `exp(−contado/0,08)`. 2.400 simulações determinísticas (mulberry32, semente fixa). Cenários conservadores determinísticos. "Matematicamente eleito" = margem > teto de votos restantes (eleitores de seções não totalizadas).
+Estados: Apuração inicial → Resultado em aberto (<90% contado) → Favorito (90–99%) → Projeção forte (99–99,5%) → Vencedor projetado (>99,5% + cenários conservadores + estabilidade + cobertura regional) → Matematicamente eleito.
+
+**Limitações.** O modelo assume que o 2T de 2026 se comporta como 2T 2022 + 1T 2026 por município; mudança grande de padrão (ex.: abstenção diferencial) aparece só com a apuração em curso. A calibração (selK, ridge) vem de um único replay.
+
+**Executar**
+```
+node scripts/serve.mjs                  # site + proxy /tse/ (live de verdade, só responde após 25/10 17h)
+node scripts/serve.mjs 5199 --mock-tse  # TSE falso: reproduz o 1T em 60×; abra /?inicio=2026-01-01T00:00:00-03:00#apuracao e clique "Ao vivo"
+node scripts/apuracao-test.mjs [passoMin] [S]   # replay 1T 2026: erro, cobertura do IC, chamadas erradas (falha grave se houver)
+node scripts/apuracao-adapter-test.mjs          # adapter + proxy contra o TSE real (1T)
+node scripts/apuracao-integracao-test.mjs       # ciclo ao vivo completo com TSE falso (inclui queda de rede)
+node scripts/apuracao-dados.mjs / apuracao-2022.mjs <votacao_secao_2022_BR.zip>   # regenera os dados de `dados/`
+```
+Sem linter configurado no projeto; `npm run build` continua valendo.
+
+**Resultado do replay (1T 2026, passo de 10 min):** 0 chamadas erradas/revertidas, cobertura do IC90 ≈ 0,93, erro médio da projeção ≈ 0,9 p.p. (ingênuo ≈ 4,7 p.p.). 2T 2022 minuto a minuto **não** é reproduzível (sem horários estruturados).
+
+**Depende de confirmar em 25/10:** que a eleição 6258 use os mesmos nomes de arquivo/campos do 6257 (esperado; só o adapter mudaria), e o nome dos candidatos no JSON (`CONFIG.A/B.re` casam por `nmu`).
+
 ## TODO / fase 2
 
 - **Backtest público**: página mostrando `data/ratings.csv` (como cada instituto se saiu).
