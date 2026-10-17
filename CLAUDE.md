@@ -285,7 +285,7 @@ Sem linter configurado no projeto; `npm run build` continua valendo.
 
 **Resultado do replay (1T 2026, passo de 10 min):** 0 chamadas erradas/revertidas, cobertura do IC90 ≈ 0,93, erro médio da projeção ≈ 0,9 p.p. (ingênuo ≈ 4,7 p.p.). 2T 2022 minuto a minuto **não** é reproduzível (sem horários estruturados).
 
-**Depende de confirmar em 25/10:** que a eleição 6258 use os mesmos nomes de arquivo/campos do 6257 (esperado; só o adapter mudaria), e o nome dos candidatos no JSON (`CONFIG.A/B.re` casam por `nmu`).
+**Formato do 2T:** o TSE já publica os arquivos da eleição 6258 como *stub* zerado (conferido em 17/10: mesmos nomes e campos do 6257, 28 UFs, 5.757 municípios no `-ab`, 499.248 seções; `ELE=6258 node scripts/apuracao-adapter-test.mjs` passa). **Ainda depende de 25/10:** ver os campos de votos/horário preenchidos de fato (o stub tem `votos=0`, `dt/ht` vazios) e a ordem real de chegada; `mun-e006258-cm.json` dá 404 (o adapter não depende dele).
 
 ## TODO / fase 2
 

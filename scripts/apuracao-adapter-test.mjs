@@ -5,7 +5,7 @@ import { TseClient } from "../site/apuracao/adapter.js";
 import { CONFIG } from "../site/apuracao/config.js";
 
 const fetchFn = async (url) => tseProxy(new Request("http://localhost" + url), { cache: null });
-const cli = new TseClient({ ele: "6257", base: "/tse", fetchFn, maxParalelo: 8, log: (n, m) => console.log(`  [${n}] ${m}`) });
+const cli = new TseClient({ ele: process.env.ELE || "6257", base: "/tse", fetchFn, maxParalelo: 8, log: (n, m) => console.log(`  [${n}] ${m}`) });
 const t0 = Date.now();
 const snap = await cli.snapshot({ maxMunicipios: 400 });
 console.log(`snapshot em ${((Date.now() - t0) / 1000).toFixed(1)}s · ${cli.requisicoes} requisições`);
