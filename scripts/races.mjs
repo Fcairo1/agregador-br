@@ -33,6 +33,7 @@ export const PARTY = {
   "UNIÃO": { label: "UNIÃO", color: "#12508A" },
   UNIAO: { label: "UNIÃO", color: "#12508A" },
   PODE: { label: "PODE", color: "#2B7A78" },
+  PPS: { label: "PPS", color: "#E24A8D" },
 };
 export function partyInfo(p) {
   if (!p) return null;
@@ -181,13 +182,15 @@ function stateRaces(slug, uf, group, suffix, display = []) {
 
 // ---- presidenciais passadas (só pesquisas de presidente; dados estáticos em data/polls.presidente-<ano>*.csv) ----
 // Extraídas UMA vez por scripts/historico.mjs (não rodam no cron). Sem rating/viés de instituto de 2018/22 (seria vazamento do resultado).
-// 2002 e 2006 não têm tabela de pesquisas em nenhuma Wikipédia — ficam de fora.
+// 2002/2006/2010: arquivo de pesquisas do jornalista Fernando Rodrigues (UOL, via Wayback Machine); 2010-2022 também pela Wikipédia.
 const BLUE = "#2B64C4";
 const HIST = {
+  2010: { day1: "2010-10-03", day2: "2010-10-31", page: 2010, f: [C("dilma", "Dilma", "PT"), C("serra", "Serra", "PSDB", { color: BLUE }), C("marina", "Marina", "PV")], s: [C("dilma", "Dilma", "PT"), C("serra", "Serra", "PSDB", { color: BLUE })] },
+  2006: { day1: "2006-10-01", day2: "2006-10-29", page: 2006, f: [C("lula", "Lula", "PT"), C("alckmin", "Alckmin", "PSDB", { color: BLUE }), C("heloisa", "Heloísa Helena", "PSOL")], s: [C("lula", "Lula", "PT"), C("alckmin", "Alckmin", "PSDB", { color: BLUE })] },
+  2002: { day1: "2002-10-06", day2: "2002-10-27", page: 2002, f: [C("lula", "Lula", "PT"), C("serra", "Serra", "PSDB", { color: BLUE }), C("garotinho", "Garotinho", "PSB"), C("ciro", "Ciro", "PPS", { color: "#F2A33A" })], s: [C("lula", "Lula", "PT"), C("serra", "Serra", "PSDB", { color: BLUE })] },
   2022: { day1: "2022-10-02", day2: "2022-10-30", page: 2022, f: [C("lula", "Lula", "PT"), C("bolsonaro", "Bolsonaro", "PL"), C("ciro", "Ciro", "PDT", { color: "#F2A33A" }), C("tebet", "Tebet", "MDB")], s: [C("lula", "Lula", "PT"), C("bolsonaro", "Bolsonaro", "PL")] },
   2018: { day1: "2018-10-07", day2: "2018-10-28", page: 2018, f: [C("bolsonaro", "Bolsonaro", "PSL"), C("haddad", "Haddad", "PT"), C("ciro", "Ciro", "PDT", { color: "#F2A33A" }), C("alckmin", "Alckmin", "PSDB"), C("marina", "Marina", "REDE")], s: [C("haddad", "Haddad", "PT"), C("bolsonaro", "Bolsonaro", "PSL")] },
   2014: { day1: "2014-10-05", day2: "2014-10-26", page: 2014, f: [C("dilma", "Dilma", "PT"), C("aecio", "Aécio", "PSDB", { color: BLUE }), C("marina", "Marina", "PSB", { color: "#2E9E5B" })], s: [C("dilma", "Dilma", "PT"), C("aecio", "Aécio", "PSDB", { color: BLUE })] },
-  2010: { day1: "2010-10-03", day2: "2010-10-31", page: 2010, f: [C("dilma", "Dilma", "PT"), C("serra", "Serra", "PSDB", { color: BLUE }), C("marina", "Marina", "PV")], s: [C("dilma", "Dilma", "PT"), C("serra", "Serra", "PSDB", { color: BLUE })] },
 };
 export const HIST_YEARS = Object.keys(HIST).map(Number).sort((a, b) => b - a);
 for (const [y, h] of Object.entries(HIST)) {

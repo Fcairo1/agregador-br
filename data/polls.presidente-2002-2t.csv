@@ -1,0 +1,13 @@
+id,pollster,start,end,n,moe,source,section,lula,serra
+datafolha-2002-10-11,Datafolha,2002-10-11,2002-10-11,,,,uol,58,32
+vox-populi-2002-10-11,Vox Populi,2002-10-10,2002-10-11,,,,uol,60,30
+ibope-2002-10-14,Ibope,2002-10-12,2002-10-14,,,,uol,60,31
+vox-populi-2002-10-15,Vox Populi,2002-10-14,2002-10-15,,,,uol,60,30
+cnt-sensus-2002-10-16,CNT/Sensus,2002-10-14,2002-10-16,,,,uol,65.8,34.2
+datafolha-2002-10-18,Datafolha,2002-10-18,2002-10-18,,,,uol,61,32
+ibope-2002-10-21,Ibope,2002-10-19,2002-10-21,,,,uol,60,32
+datafolha-2002-10-23,Datafolha,2002-10-23,2002-10-23,,,,uol,59,31
+cnt-sensus-2002-10-24,CNT/Sensus,2002-10-22,2002-10-24,,,,uol,57.8,31
+vox-populi-2002-10-24,Vox Populi,2002-10-23,2002-10-24,,,,uol,58,32
+datafolha-2002-10-26,Datafolha,2002-10-26,2002-10-26,,,,uol,58,32
+ibope-2002-10-26,Ibope,2002-10-26,2002-10-26,,,,uol,58,36

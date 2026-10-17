@@ -175,15 +175,19 @@ Estado-espaço 1-D por candidato, grade **diária** (dias desde a 1ª pesquisa):
   e deixa de mostrar delta. A aba "2º turno" segue existindo (com ◎ próprio). Sem pesquisa de 2T pós-eleição, nada muda no gráfico.
   Testado com pesquisas simuladas (nenhuma pesquisa pós-04/10 existia na Wikipédia em 07/10).
 
-- **Presidenciais passadas (menu "Eleição" no topo: 2026 atual · 2022 · 2018 · 2014 · 2010):** corridas `presidente-<ano>` e
+- **Presidenciais passadas (menu "Eleição" no topo: 2026 atual · 2022 · 2018 · 2014 · 2010 · 2006 · 2002):** corridas `presidente-<ano>` e
   `presidente-<ano>-2t` em `RACES` (`historic: <ano>`, `noRatings`, `sysHalf` de presidente). Os CSVs `data/polls.presidente-<ano>*.csv`
-  são ESTÁTICOS: gerados à mão por `node scripts/historico.mjs` (fetch.mjs pula `historic`; use `--historic` pra forçar) a partir da Wikipédia
-  (2022: PT + EN pro 2T; 2018: PT, colunas por partido; 2014: EN cenário principal + PT; 2010: PT, sem amostra). Resultados oficiais em
-  `data/historico-resultados.json` (tabela "Resultados" do artigo) → `results.mjs` compara (entradas `historic:true`, que a aba Resultados
-  esconde) e o gráfico mostra os ◎, a continuação do 2T e a divisória como em 2026. `index.json` ganha `year`/`day`; `state.indexAll`/`state.year`
-  em `app.js`. **2014:** a coluna `marina` junta Campos (até 13/ago) e Marina; `race.splits = { marina: "2014-08-14" }` roda o modelo separado
-  nas duas fases (`trendKalmanSplit`, `brk` na linha; espelhado em `agg.js` via `params.splits`). **2002 e 2006 não existem**: nenhuma Wikipédia
-  (pt/en/es/fr) tem tabela de pesquisas dessas eleições — precisaria de outra fonte (ex.: arquivo histórico do Datafolha).
+  são ESTÁTICOS: gerados à mão por `node scripts/historico.mjs` (fetch.mjs pula `historic`; use `--historic` pra forçar). Fontes:
+  **2022**: Wikipédia PT (1T) + EN (2T); **2018**: PT (colunas por partido); **2014**: EN (cenário principal, com Campos) + PT;
+  **2002/2006/2010**: arquivo de pesquisas do jornalista Fernando Rodrigues (UOL; 2002 direto, 2006/2010 via Wayback Machine — URLs fixas em
+  `UOL` no `historico.mjs`, páginas em cache `.cache/uol/`), cenário principal = 1ª linha com os candidatos principais; linhas "(votos
+  válidos)" ficam de fora (a base é "% das pesquisas"). Nenhuma Wikipédia tem tabela de pesquisas de 2002/2006. Até 2018 o `eraName()` troca
+  Ipec→Ibope e Vox Brasil→Vox Populi. Resultados oficiais em `data/historico-resultados.json` (tabela "Resultados" do artigo PT) →
+  `results.mjs` compara (entradas `historic:true`, que a aba Resultados esconde); o gráfico mostra ◎, continuação do 2T e divisória como em 2026.
+  `index.json` ganha `year`/`day`; `state.indexAll`/`state.year` em `app.js`. **2014:** a coluna `marina` junta Campos (até 13/ago) e Marina;
+  `race.splits = { marina: "2014-08-14" }` roda o modelo separado nas duas fases (`trendKalmanSplit`, `brk` na linha; espelhado em `agg.js`).
+  Sem tamanho de amostra (2002/2006/2010) o modelo assume n=1.200. Erro médio do agregador (1T → 2T): 2002 1,6→3,8 · 2006 5,4→1,0 ·
+  2010 5,3→0,4 · 2014 6,5→0,1 · 2018 2,8→1,6 · 2022 1,6→1,2.
 
 ## Matemática compartilhada
 

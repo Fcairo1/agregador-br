@@ -23,11 +23,11 @@ renovação, mulheres, pretos e pardos, troca de partido). Fonte primária: JSON
 - Quando o TSE fechar SP/MG/Alesp, a projeção é substituída pelo oficial sozinha (conferir se bateu).
 - Demais 6 governos em 2º turno (AC, AM, DF, ES, RN, TO) não são acompanhados.
 
-## 0b. Presidenciais antes de 2010
-- **2002 e 2006** não estão no menu de ano: não achei tabela de pesquisas em nenhuma Wikipédia (pt/en/es/fr). Fonte candidata: arquivo
-  histórico do Datafolha (séries de intenção de voto 2002/2006) — raspar com cuidado e conferir contra o resultado. Quando houver CSV,
-  é só adicionar o ano em `HIST` (races.mjs) e em `scripts/historico.mjs` (resultados) — o front já aceita qualquer ano do índice.
-- 2010 não tem 2º turno (a Wikipédia PT não registra pesquisas de 2T) e as pesquisas não trazem amostra (n assumido ~1.200).
+## 0b. Presidenciais passadas (2002–2022 no menu de ano)
+- Feito: 2002, 2006 e 2010 vieram do arquivo de pesquisas do Fernando Rodrigues (UOL/Wayback); 2014–2022 da Wikipédia. Dá pra ampliar:
+  o mesmo arquivo tem **pesquisas por estado** (governador/senado 2002, 2006, 2010) e **1998/1994** (outra estrutura de página).
+- Limites: 2002–2010 sem tamanho de amostra (n assumido 1.200 → faixa aproximada); cenário principal apenas; o Wayback pode mudar/sumir
+  (as páginas ficam em `.cache/uol/`, que é gitignored — se quiser garantir, commitar os CSVs já está feito, a fonte não é refeita no cron).
 
 ## 1. Previsão (o maior salto de utilidade)
 

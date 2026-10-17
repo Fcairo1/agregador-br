@@ -642,7 +642,9 @@ const HIST_NOTES = {
   2022: "Presidenciais passadas: pesquisas registradas na Wikipédia (PT/EN); sem ajuste por acerto histórico dos institutos (seria vazamento do resultado). 2º turno: pesquisas de 3 a 29/out.",
   2018: "Presidenciais passadas: pesquisas registradas na Wikipédia (PT); as colunas vêm rotuladas por partido (PSL = Bolsonaro, PT = Haddad…). Sem ajuste por acerto histórico dos institutos.",
   2014: "Marina reúne Eduardo Campos (candidato do PSB até morrer, em 13/ago) e Marina Silva, que assumiu a vaga: o modelo roda separado nas duas fases e a linha quebra na troca. Fonte: Wikipédia EN (cenário principal) + PT.",
-  2010: "A tabela da Wikipédia não traz tamanho de amostra nem margem de erro: assumi ~1.200 entrevistas para todas as pesquisas, então a faixa de incerteza é aproximada. Não há pesquisas de 2º turno registradas.",
+  2010: "Fonte: arquivo de pesquisas do jornalista Fernando Rodrigues (UOL, preservado no Wayback Machine). As pesquisas não trazem tamanho de amostra: assumi ~1.200 entrevistas, então a faixa de incerteza é aproximada.",
+  2006: "Fonte: arquivo de pesquisas do jornalista Fernando Rodrigues (UOL, preservado no Wayback Machine). Sem tamanho de amostra (assumi ~1.200), então a faixa é aproximada. Pesquisas de março a setembro; o 2º turno tem poucas pesquisas.",
+  2002: "Fonte: arquivo de pesquisas do jornalista Fernando Rodrigues (UOL). Sem tamanho de amostra (assumi ~1.200), então a faixa é aproximada. Pesquisas de abril a outubro de 2002 (Datafolha, Ibope, Vox Populi, CNT/Sensus e outros).",
 };
 const ROUND_LABEL = { "1T": "1º turno", "2T": "2º turno", SEN: "Senado" };
 function renderMeta() {

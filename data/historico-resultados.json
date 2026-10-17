@@ -1,4 +1,128 @@
 {
+ "2002": {
+  "day1": "2002-10-06",
+  "day2": "2002-10-27",
+  "first": [
+   {
+    "name": "Lula da Silva",
+    "party": "PT",
+    "pct": 46.44,
+    "votes": 39455233
+   },
+   {
+    "name": "José Serra",
+    "party": "PSDB",
+    "pct": 23.2,
+    "votes": 19705445
+   },
+   {
+    "name": "Anthony Garotinho",
+    "party": "PSB",
+    "pct": 17.87,
+    "votes": 15180097
+   },
+   {
+    "name": "Ciro Gomes",
+    "party": "PPS",
+    "pct": 11.97,
+    "votes": 10170882
+   },
+   {
+    "name": "Zé Maria",
+    "party": "PSTU",
+    "pct": 0.47,
+    "votes": 402236
+   },
+   {
+    "name": "Rui Costa Pimenta",
+    "party": "PCO",
+    "pct": 0.05,
+    "votes": 38619
+   }
+  ],
+  "second": [
+   {
+    "name": "Lula da Silva",
+    "party": "PT",
+    "pct": 61.27,
+    "votes": 52793364
+   },
+   {
+    "name": "José Serra",
+    "party": "PSDB",
+    "pct": 38.73,
+    "votes": 33370739
+   }
+  ]
+ },
+ "2006": {
+  "day1": "2006-10-01",
+  "day2": "2006-10-29",
+  "first": [
+   {
+    "name": "Luiz Inácio Lula da Silva",
+    "party": "PT",
+    "pct": 48.61,
+    "votes": 46662365
+   },
+   {
+    "name": "Geraldo Alckmin",
+    "party": "PSDB",
+    "pct": 41.64,
+    "votes": 39968369
+   },
+   {
+    "name": "Heloísa Helena",
+    "party": "PSOL",
+    "pct": 6.85,
+    "votes": 6575393
+   },
+   {
+    "name": "Cristovam Buarque",
+    "party": "PDT",
+    "pct": 2.64,
+    "votes": 2538844
+   },
+   {
+    "name": "Ana Maria Rangel",
+    "party": "PRP",
+    "pct": 0.13,
+    "votes": 126404
+   },
+   {
+    "name": "José Maria Eymael",
+    "party": "PSDC",
+    "pct": 0.07,
+    "votes": 63294
+   },
+   {
+    "name": "Luciano Bivar",
+    "party": "PSL",
+    "pct": 0.06,
+    "votes": 62064
+   },
+   {
+    "name": "Rui Costa Pimenta",
+    "party": "PCO",
+    "pct": 0,
+    "votes": 0
+   }
+  ],
+  "second": [
+   {
+    "name": "Luiz Inácio Lula da Silva",
+    "party": "PT",
+    "pct": 60.83,
+    "votes": 58295042
+   },
+   {
+    "name": "Geraldo Alckmin",
+    "party": "PSDB",
+    "pct": 39.17,
+    "votes": 37543178
+   }
+  ]
+ },
  "2010": {
   "day1": "2010-10-03",
   "day2": "2010-10-31",

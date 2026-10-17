@@ -11,7 +11,11 @@ const UA = { "User-Agent": "agregador-br (github.com/Fcairo1/agregador-br)" };
 const PAGE = (y) => `Pesquisas de opinião para a eleição presidencial no Brasil em ${y}`;
 const slugP = (s) => String(s).normalize("NFD").replace(/[̀-ͯ]/g, "").toLowerCase().replace(/[^\w]+/g, "-").replace(/^-+|-+$/g, "");
 
+// nomes da época: até 2018 o Ibope ainda era Ibope (o Ipec só nasce depois) e "Vox Populi" não é o "Vox Brasil" de 2026
+const eraName = (name, year) => (year <= 2018 ? name.replace(/^Ipec$/, "Ibope").replace(/^Vox Brasil$/, "Vox Populi") : name);
 function save(key, polls, names) {
+  const yr = +key.match(/presidente-(\d{4})/)[1];
+  polls = polls.map((p) => ({ ...p, pollster: eraName(p.pollster, yr) }));
   const freq = new Map();
   for (const p of polls) for (const k of Object.keys(p.values)) freq.set(k, (freq.get(k) || 0) + 1);
   const keys = [...freq.keys()].sort((a, b) => freq.get(b) - freq.get(a));
@@ -142,32 +146,100 @@ async function enSecondRound(page, heading, year, keys, from, to) {
   save("presidente-2014-2t", within(p2, "2014-10-05", "2014-10-25"), names);
 }
 
-// ---------- 2010: tabela "Pesquisas" da Wikipédia PT (uma data por linha; sem amostra) ----------
-{
-  const tb = tablesWithHeadings(await getPageHTML(PAGE(2010))).tables.find((x) => x.path[0] === "Pesquisas");
-  const rows = [...tb.html.matchAll(/<tr\b[\s\S]*?<\/tr>/gi)].map((m) => [...m[0].matchAll(/<t[dh]\b[^>]*>([\s\S]*?)<\/t[dh]>/gi)].map((c) => cellText(c[1])));
-  console.log("  2010: cabeçalho", JSON.stringify(rows[0]), "| 1ª linha", JSON.stringify(rows[1]));
-  const head = rows[0].map((h) => h.toLowerCase());
-  const col = (rx) => head.findIndex((h) => rx.test(h));
-  const ci = { dilma: col(/dilma/), serra: col(/serra/), marina: col(/marina/), ciro: col(/ciro/), hh: col(/helo/), outros: col(/outros/) };
-  const p1 = [];
-  for (const r of rows.slice(1)) {
-    const m = (r[0] || "").match(/(\d{1,2}) de ([a-zç]+) de (\d{4})/i);
-    if (!m) continue;
-    const mon = { janeiro: 1, fevereiro: 2, "março": 3, abril: 4, maio: 5, junho: 6, julho: 7, agosto: 8, setembro: 9, outubro: 10, novembro: 11, dezembro: 12 }[m[2].toLowerCase()];
-    const end = `${m[3]}-${String(mon).padStart(2, "0")}-${String(+m[1]).padStart(2, "0")}`;
-    if (end < "2010-01-01" || end > "2010-10-03") continue;
-    const v = { dilma: pctv(r[ci.dilma]), serra: pctv(r[ci.serra]), marina: pctv(r[ci.marina]) };
-    if (v.dilma == null || v.serra == null) continue;
-    if (v.marina == null) v.marina = 0;
-    p1.push({ pollster: normPollster(r[1]), start: end, end, n: null, moe: "", source: "", section: "pesquisas", values: v });
+// ---------- 2002, 2006 e 2010: arquivo de pesquisas do jornalista Fernando Rodrigues (UOL) ----------
+// Página que reunia TODAS as pesquisas registradas, por instituto (hoje só no Wayback Machine, exceto 2002). Uma linha por pesquisa
+// no cenário principal (a 1ª linha de cada instituto+data que tenha todos os candidatos principais; as demais são cenários).
+const CACHE = new URL("../.cache/uol/", import.meta.url);
+const WB = "http://web.archive.org/web";
+const UOL = {
+  2002: { f: "http://www1.uol.com.br/fernandorodrigues/arquivos/pesquisas/eleicoes2002/pres.shl", s: "http://www1.uol.com.br/fernandorodrigues/arquivos/pesquisas/eleicoes2002/2o_turno/pres.shl" },
+  2006: { f: `${WB}/20111227101027id_/http://noticias.uol.com.br/fernandorodrigues/arquivos/pesquisas/pais/2006/1turno/pe_presidente-2006.jhtm`, s: `${WB}/20101015224040id_/http://noticias.uol.com.br/fernandorodrigues/arquivos/pesquisas/pais/2006/2turno/presidente.jhtm` },
+  2010: { f: `${WB}/20210126105518id_/https://noticias.uol.com.br/fernandorodrigues/pesquisas/2010/1turno/presidente.jhtm%20%20`, s: `${WB}/20210506233947id_/https://noticias.uol.com.br/fernandorodrigues/pesquisas/2010/2turno/presidente.jhtm` },
+};
+async function uolPage(year, turn) {
+  const file = new URL(`${year}-${turn}.html`, CACHE);
+  if (fs.existsSync(file)) return fs.readFileSync(file);
+  const r = await fetch(UOL[year][turn], { headers: { "User-Agent": "Mozilla/5.0 (agregador-br)" } });
+  if (!r.ok) throw new Error(`UOL ${year}/${turn}: HTTP ${r.status}`);
+  const buf = Buffer.from(await r.arrayBuffer());
+  fs.mkdirSync(CACHE, { recursive: true });
+  fs.writeFileSync(file, buf);
+  await new Promise((res) => setTimeout(res, 1500)); // educado com o Wayback
+  return buf;
+}
+const decodeHtml = (buf) => { const t = buf.toString("utf8"); return t.includes("\uFFFD") ? buf.toString("latin1") : t; };
+const ENT = { "&nbsp;": " ", "&amp;": "&", "&ccedil;": "ç", "&atilde;": "ã", "&eacute;": "é", "&iacute;": "í", "&oacute;": "ó", "&uacute;": "ú", "&aacute;": "á", "&ecirc;": "ê", "&ocirc;": "ô", "&deg;": "°", "&otilde;": "õ", "&Eacute;": "É", "&Aacute;": "Á" };
+const plain = (h) => h.replace(/<[^>]+>/g, " ").replace(/&[a-zA-Z]+;|&#\d+;/g, (m) => ENT[m] ?? (m.startsWith("&#") ? String.fromCodePoint(+m.slice(2, -1)) : " ")).replace(/\s+/g, " ").trim();
+const htmlTables = (html) => (html.match(/<table[\s\S]*?<\/table>/gi) || []).map((tb) => (tb.match(/<tr[\s\S]*?<\/tr>/gi) || []).map((tr) => (tr.match(/<t[dh][\s\S]*?<\/t[dh]>/gi) || []).map(plain)));
+const PTMON = { jan: 1, fev: 2, mar: 3, abr: 4, mai: 5, jun: 6, jul: 7, ago: 8, set: 9, out: 10, nov: 11, dez: 12 };
+// "4-5/out/02" | "04/out/02" | "29-30.set.06" | "20-22.set" | "1°-2.out.2010*"
+function uolDate(raw, defYear) {
+  const t = raw.toLowerCase().replace(/[°º*]/g, "").replace(/\s+/g, "");
+  const m = t.match(/^(\d{1,2})(?:-(\d{1,2}))?[./]([a-zç]{3})[a-z]*(?:[./](\d{2,4}))?/);
+  if (!m) return null;
+  const mon = PTMON[m[3]], yr = m[4] ? (m[4].length === 2 ? 2000 + +m[4] : +m[4]) : defYear;
+  if (!mon) return null;
+  const pad = (n) => String(n).padStart(2, "0");
+  return { start: `${yr}-${pad(mon)}-${pad(+m[1])}`, end: `${yr}-${pad(mon)}-${pad(+(m[2] || m[1]))}` };
+}
+// Extrai de uma tabela (header-driven): cols = { chave: regex do cabeçalho }
+function uolPolls(rows, { cols, need, year, from, to, section }) {
+  const hi = rows.findIndex((r) => r.some((c) => /^instituto$/i.test(c)) && r.some((c) => /^data/i.test(c)));
+  if (hi < 0) return [];
+  const head = rows[hi].map((c) => c.toLowerCase());
+  const iP = head.findIndex((c) => c === "instituto"), iD = head.findIndex((c) => c.startsWith("data"));
+  const idx = Object.fromEntries(Object.entries(cols).map(([k, rx]) => [k, head.findIndex((c) => rx.test(c))]));
+  const out = [], seen = new Set();
+  for (const r of rows.slice(hi + 1)) {
+    if (r.length < head.length - 6) continue;
+    const name = r[iP];
+    if (!name || /v[oó]tos v[aá]lidos/i.test(name)) continue; // versão renormalizada (só válidos): fica fora, a base é "% das pesquisas"
+    const dr = uolDate(r[iD] || "", year);
+    if (!dr || dr.end < from || dr.end > to) continue;
+    const values = {};
+    for (const [k, i] of Object.entries(idx)) { const v = i >= 0 ? pctv(r[i]) : null; if (v != null) values[k] = v; }
+    if (!need.every((k) => k in values)) continue;
+    const pollster = normPollster(name.replace(/\s*\(votos totais\)/i, ""));
+    const key = pollster + "|" + dr.end;
+    if (seen.has(key)) continue; // demais linhas do mesmo instituto+data são cenários alternativos
+    seen.add(key);
+    out.push({ pollster, ...dr, n: null, moe: "", source: "", section, values });
   }
-  save("presidente-2010", p1, { dilma: { name: "Dilma", party: "PT" }, serra: { name: "Serra", party: "PSDB" }, marina: { name: "Marina", party: "PV" } });
+  return out;
+}
+{
+  const C = {
+    2002: { cols: { lula: /^lula/, serra: /serra/, garotinho: /garotinho/, ciro: /ciro gomes/ }, need: ["lula", "serra", "garotinho", "ciro"], t: ["lula", "serra"], f: ["2002-04-01", "2002-10-05"], s: ["2002-10-07", "2002-10-26"], names: { lula: ["Lula", "PT"], serra: ["Serra", "PSDB"], garotinho: ["Garotinho", "PSB"], ciro: ["Ciro", "PPS"] } },
+    2006: { cols: { lula: /^lula/, alckmin: /alckmin/, heloisa: /helo[ií]sa/, cristovam: /cristovam/ }, need: ["lula", "alckmin"], t: ["lula", "alckmin"], f: ["2006-03-01", "2006-09-30"], s: ["2006-10-02", "2006-10-28"], names: { lula: ["Lula", "PT"], alckmin: ["Alckmin", "PSDB"], heloisa: ["Heloísa Helena", "PSOL"], cristovam: ["Cristovam", "PDT"] } },
+    2010: { cols: { dilma: /dilma/, serra: /serra/, marina: /marina/ }, need: ["dilma", "serra"], t: ["dilma", "serra"], f: ["2010-01-01", "2010-10-02"], s: ["2010-10-04", "2010-10-30"], names: { dilma: ["Dilma", "PT"], serra: ["Serra", "PSDB"], marina: ["Marina", "PV"] } },
+  };
+  for (const [year, c] of Object.entries(C)) {
+    const nm = Object.fromEntries(Object.entries(c.names).map(([k, [name, party]]) => [k, { name, party }]));
+    const T1 = htmlTables(decodeHtml(await uolPage(year, "f")));
+    // 1º turno: 2002 tabela estimulada (a 1ª com cabeçalho "Instituto"); 2006 a 1ª; 2010 as que trazem coluna de brancos/indecisos (base total) + a da Vox Populi
+    const pick1 = T1.filter((rows) => rows.some((r) => r.some((x) => /^instituto$/i.test(x)) && r.some((x) => /^data/i.test(x))));
+    let p1 = [];
+    if (year === "2010") {
+      for (const rows of pick1) {
+        const head = (rows.find((r) => r.some((x) => /^instituto$/i.test(x))) || []).join("|").toLowerCase();
+        if (/brancos|indecisos/.test(head) && /dilma/.test(head) && /serra/.test(head) && head.indexOf("dilma") < head.indexOf("serra") && !/outros|candidato do lula|rejeita/.test(head) && rows.length > 25) p1.push(...uolPolls(rows, { ...c, year: +year, from: c.f[0], to: c.f[1], section: "uol" }));
+      }
+    } else p1 = uolPolls(pick1[0], { ...c, year: +year, from: c.f[0], to: c.f[1], section: "uol" });
+    // dedupe entre tabelas
+    const seen1 = new Set(); p1 = p1.filter((p) => { const k = p.pollster + "|" + p.end; if (seen1.has(k)) return false; seen1.add(k); return true; });
+    save(`presidente-${year}`, p1, nm);
+    const T2 = htmlTables(decodeHtml(await uolPage(year, "s")));
+    const pick2 = T2.filter((rows) => rows.some((r) => r.some((x) => /^instituto$/i.test(x)) && r.some((x) => /^data/i.test(x))));
+    const need2 = c.t;
+    const cols2 = Object.fromEntries(need2.map((k) => [k, c.cols[k]]));
+    const p2 = uolPolls(pick2[0], { cols: cols2, need: need2, year: +year, from: c.s[0], to: c.s[1], section: "uol" });
+    save(`presidente-${year}-2t`, p2, nm);
+  }
 }
 
 // ---------- resultados oficiais (tabela "Resultados" do artigo da eleição, PT) -> data/historico-resultados.json ----------
 {
-  const DAYS = { 2010: ["2010-10-03", "2010-10-31"], 2014: ["2014-10-05", "2014-10-26"], 2018: ["2018-10-07", "2018-10-28"], 2022: ["2022-10-02", "2022-10-30"] };
+  const DAYS = { 2002: ["2002-10-06", "2002-10-27"], 2006: ["2006-10-01", "2006-10-29"], 2010: ["2010-10-03", "2010-10-31"], 2014: ["2014-10-05", "2014-10-26"], 2018: ["2018-10-07", "2018-10-28"], 2022: ["2022-10-02", "2022-10-30"] };
   const out = {};
   for (const y of Object.keys(DAYS)) {
     const { tables } = tablesWithHeadings(await getPageHTML(`Eleição presidencial no Brasil em ${y}`));
