@@ -24,7 +24,7 @@ renovação, mulheres, pretos e pardos, troca de partido). Fonte primária: JSON
 - Demais 6 governos em 2º turno (AC, AM, DF, ES, RN, TO) não são acompanhados.
 
 ## 0b. Presidenciais passadas (2002–2022 no menu de ano)
-- Feito: 2002, 2006 e 2010 vieram do arquivo de pesquisas do Fernando Rodrigues (UOL/Wayback); 2014–2022 da Wikipédia. Dá pra ampliar:
+- Feito (1989–2022): 1989/1994/1998 só têm Datafolha (única série pública consolidada); mais institutos exigiriam os microdados do CESOP/Unicamp (cada pesquisa tem ficha, mas é trabalho pesado). 2002, 2006 e 2010 vieram do arquivo de pesquisas do Fernando Rodrigues (UOL/Wayback); 2014–2022 da Wikipédia. Dá pra ampliar:
   o mesmo arquivo tem **pesquisas por estado** (governador/senado 2002, 2006, 2010) e **1998/1994** (outra estrutura de página).
 - Limites: 2002–2010 sem tamanho de amostra (n assumido 1.200 → faixa aproximada); cenário principal apenas; o Wayback pode mudar/sumir
   (as páginas ficam em `.cache/uol/`, que é gitignored — se quiser garantir, commitar os CSVs já está feito, a fonte não é refeita no cron).

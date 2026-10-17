@@ -34,6 +34,10 @@ export const PARTY = {
   UNIAO: { label: "UNIÃO", color: "#12508A" },
   PODE: { label: "PODE", color: "#2B7A78" },
   PPS: { label: "PPS", color: "#E24A8D" },
+  PRN: { label: "PRN", color: "#6A5ACD" },
+  PMDB: { label: "PMDB", color: "#1B9E5A" },
+  PRONA: { label: "PRONA", color: "#8A6A3B" },
+  PDS: { label: "PDS", color: "#8C8C8C" },
 };
 export function partyInfo(p) {
   if (!p) return null;
@@ -185,6 +189,9 @@ function stateRaces(slug, uf, group, suffix, display = []) {
 // 2002/2006/2010: arquivo de pesquisas do jornalista Fernando Rodrigues (UOL, via Wayback Machine); 2010-2022 também pela Wikipédia.
 const BLUE = "#2B64C4";
 const HIST = {
+  1998: { day1: "1998-10-04", day2: null, f: [C("fhc", "FHC", "PSDB", { color: BLUE, aliases: ["fernando-henrique"] }), C("lula", "Lula", "PT"), C("ciro", "Ciro", "PPS", { color: "#F2A33A" }), C("eneas", "Enéas", "PRONA", { color: "#8A6A3B" })] },
+  1994: { day1: "1994-10-03", day2: null, f: [C("fhc", "FHC", "PSDB", { color: BLUE, aliases: ["fernando-henrique"] }), C("lula", "Lula", "PT"), C("quercia", "Quércia", "PMDB"), C("brizola", "Brizola", "PDT", { color: "#F2A33A" })] },
+  1989: { day1: "1989-11-15", day2: "1989-12-17", f: [C("collor", "Collor", "PRN", { color: "#6A5ACD" }), C("lula", "Lula", "PT"), C("brizola", "Brizola", "PDT", { color: "#F2A33A" }), C("covas", "Covas", "PSDB", { color: BLUE }), C("maluf", "Maluf", "PDS", { color: "#8C8C8C" }), C("afif", "Afif", "PL", { color: "#C9A227" })], s: [C("collor", "Collor", "PRN", { color: "#6A5ACD" }), C("lula", "Lula", "PT")] },
   2010: { day1: "2010-10-03", day2: "2010-10-31", page: 2010, f: [C("dilma", "Dilma", "PT"), C("serra", "Serra", "PSDB", { color: BLUE }), C("marina", "Marina", "PV")], s: [C("dilma", "Dilma", "PT"), C("serra", "Serra", "PSDB", { color: BLUE })] },
   2006: { day1: "2006-10-01", day2: "2006-10-29", page: 2006, f: [C("lula", "Lula", "PT"), C("alckmin", "Alckmin", "PSDB", { color: BLUE }), C("heloisa", "Heloísa Helena", "PSOL")], s: [C("lula", "Lula", "PT"), C("alckmin", "Alckmin", "PSDB", { color: BLUE })] },
   2002: { day1: "2002-10-06", day2: "2002-10-27", page: 2002, f: [C("lula", "Lula", "PT"), C("serra", "Serra", "PSDB", { color: BLUE }), C("garotinho", "Garotinho", "PSB"), C("ciro", "Ciro", "PPS", { color: "#F2A33A" })], s: [C("lula", "Lula", "PT"), C("serra", "Serra", "PSDB", { color: BLUE })] },
@@ -197,7 +204,7 @@ for (const [y, h] of Object.entries(HIST)) {
   const base = { group: "Presidente", year: +y, historic: +y, noRatings: true, sysHalf: SYS_HALF.presidente, wikiPage: PRES_PAGE.replace("2026", y), pathRule: () => false };
   // 2014: Campos (PSB) morreu em 13/ago e Marina assumiu a vaga — a coluna "marina" junta os dois; o modelo roda separado nas duas fases
   RACES[`presidente-${y}`] = race({ ...base, label: `Presidente ${y} — 1º turno`, display: h.f, electionDay: h.day1, ...(+y === 2014 ? { splits: { marina: "2014-08-14" } } : {}) });
-  RACES[`presidente-${y}-2t`] = race({ ...base, round: "2T", label: `Presidente ${y} — 2º turno`, display: h.s, electionDay: h.day2 });
+  if (h.s) RACES[`presidente-${y}-2t`] = race({ ...base, round: "2T", label: `Presidente ${y} — 2º turno`, display: h.s, electionDay: h.day2 }); // 1994 e 1998 foram decididas no 1º turno
 }
 
 // Um candidato só entra no gráfico se tiver pelo menos isto:

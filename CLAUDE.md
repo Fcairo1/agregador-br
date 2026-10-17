@@ -175,7 +175,7 @@ Estado-espaço 1-D por candidato, grade **diária** (dias desde a 1ª pesquisa):
   e deixa de mostrar delta. A aba "2º turno" segue existindo (com ◎ próprio). Sem pesquisa de 2T pós-eleição, nada muda no gráfico.
   Testado com pesquisas simuladas (nenhuma pesquisa pós-04/10 existia na Wikipédia em 07/10).
 
-- **Presidenciais passadas (menu "Eleição" no topo: 2026 atual · 2022 · 2018 · 2014 · 2010 · 2006 · 2002):** corridas `presidente-<ano>` e
+- **Presidenciais passadas (menu "Eleição" no topo: 2026 atual · 2022 · 2018 · 2014 · 2010 · 2006 · 2002 · 1998 · 1994 · 1989):** corridas `presidente-<ano>` e
   `presidente-<ano>-2t` em `RACES` (`historic: <ano>`, `noRatings`, `sysHalf` de presidente). Os CSVs `data/polls.presidente-<ano>*.csv`
   são ESTÁTICOS: gerados à mão por `node scripts/historico.mjs` (fetch.mjs pula `historic`; use `--historic` pra forçar). Fontes:
   **2022**: Wikipédia PT (1T) + EN (2T); **2018**: PT (colunas por partido); **2014**: EN (cenário principal, com Campos) + PT;
@@ -186,7 +186,7 @@ Estado-espaço 1-D por candidato, grade **diária** (dias desde a 1ª pesquisa):
   `results.mjs` compara (entradas `historic:true`, que a aba Resultados esconde); o gráfico mostra ◎, continuação do 2T e divisória como em 2026.
   `index.json` ganha `year`/`day`; `state.indexAll`/`state.year` em `app.js`. **2014:** a coluna `marina` junta Campos (até 13/ago) e Marina;
   `race.splits = { marina: "2014-08-14" }` roda o modelo separado nas duas fases (`trendKalmanSplit`, `brk` na linha; espelhado em `agg.js`).
-  Sem tamanho de amostra (2002/2006/2010) o modelo assume n=1.200. Erro médio do agregador (1T → 2T): 2002 1,6→3,8 · 2006 5,4→1,0 ·
+  **1989/1994/1998: só a série do Datafolha** (1989: Wikipédia EN, 14 rodadas de 1T + 6 de 2T, sem a boca de urna do dia 15/11; 1994 e 1998: tabelas "Evolução da intenção de voto" dos PDFs do próprio Datafolha, digitadas em `historico.mjs` — 17 e 10 rodadas; 1994/1998 não tiveram 2T). Não achei série multi-instituto dessas eleições (Wikipédia/UOL não têm; CESOP só microdados). Sem tamanho de amostra (1994–2010) o modelo assume n=1.200. Erro médio do agregador (1T → 2T): 2002 1,6→3,8 · 2006 5,4→1,0 ·
   2010 5,3→0,4 · 2014 6,5→0,1 · 2018 2,8→1,6 · 2022 1,6→1,2.
 
 ## Matemática compartilhada

@@ -639,6 +639,9 @@ function renderLegend() {
 }
 // notas das presidenciais passadas (o que a fonte tem / não tem)
 const HIST_NOTES = {
+  1998: "Só há a série do Datafolha (10 rodadas, de março a outubro; tabela do próprio Datafolha, total de votos). Sem tamanho de amostra: assumi ~1.200, então a faixa é bem aproximada. Não houve 2º turno.",
+  1994: "Só há a série do Datafolha (17 rodadas, de abril a outubro; tabela do próprio Datafolha, total de votos). Sem tamanho de amostra: assumi ~1.200, então a faixa é bem aproximada. Não houve 2º turno.",
+  1989: "Só há a série do Datafolha (14 rodadas de 1º turno e 6 de 2º; Wikipédia em inglês). Não incluí a pesquisa do dia da eleição (boca de urna). Primeira eleição direta pós-ditadura: o 1º turno tinha 22 candidatos.",
   2022: "Presidenciais passadas: pesquisas registradas na Wikipédia (PT/EN); sem ajuste por acerto histórico dos institutos (seria vazamento do resultado). 2º turno: pesquisas de 3 a 29/out.",
   2018: "Presidenciais passadas: pesquisas registradas na Wikipédia (PT); as colunas vêm rotuladas por partido (PSL = Bolsonaro, PT = Haddad…). Sem ajuste por acerto histórico dos institutos.",
   2014: "Marina reúne Eduardo Campos (candidato do PSB até morrer, em 13/ago) e Marina Silva, que assumiu a vaga: o modelo roda separado nas duas fases e a linha quebra na troca. Fonte: Wikipédia EN (cenário principal) + PT.",
@@ -663,7 +666,7 @@ function renderMeta() {
   const bits = [
     `${d.nPolls} pesquisas${nOut ? ` (−${nOut} inst.)` : ""}`,
     `última em ${fmtDate(d.lastPoll)}`,
-    `${d.pollsters.length} institutos`,
+    `${d.pollsters.length} instituto${d.pollsters.length > 1 ? "s" : ""}`,
   ];
   if (state.sinceDays) bits.push(`só os últimos ${state.sinceDays} dias`);
   if (state.baseData.houseEffects && Object.keys(state.baseData.houseEffects).length)

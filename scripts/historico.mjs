@@ -237,9 +237,55 @@ function uolPolls(rows, { cols, need, year, from, to, section }) {
   }
 }
 
+// ---------- 1989, 1994, 1998: só há a série do Datafolha (única fonte pública consolidada que achei) ----------
+// 1989: Wikipédia EN (Datafolha, 15 rodadas de 1º turno + 7 de 2º). 1994 e 1998: tabelas "Evolução da intenção de voto para presidente"
+// (resposta estimulada, total de votos) dos PDFs do próprio Datafolha — digitadas das tabelas dos PDFs:
+//   1994 https://media.folha.uol.com.br/datafolha/2022/09/01/intencao_de_voto_e_rejeicao_para_presidente_94.pdf
+//   1998 https://media.folha.uol.com.br/datafolha/2022/12/28/brasil-1998-1t.pdf
+{
+  const nm89 = { collor: { name: "Collor", party: "PRN" }, lula: { name: "Lula", party: "PT" }, brizola: { name: "Brizola", party: "PDT" }, covas: { name: "Covas", party: "PSDB" }, maluf: { name: "Maluf", party: "PDS" }, afif: { name: "Afif", party: "PL" }, guimaraes: { name: "Ulysses", party: "PMDB" } };
+  const en = await (await fetch("https://en.wikipedia.org/w/api.php?action=parse&prop=text&redirects=1&format=json&formatversion=2&page=" + encodeURIComponent("1989 Brazilian presidential election"), { headers: UA })).json();
+  const tabs = en.parse.text.match(/<table[\s\S]*?<\/table>/g);
+  const rowsE = (tb) => [...tb.matchAll(/<tr[\s\S]*?<\/tr>/g)].map((m) => [...m[0].matchAll(/<t[dh]([^>]*)>([\s\S]*?)<\/t[dh]>/g)].map((c) => clean(c[2])));
+  const t1 = tabs.find((t) => /Collor/.test(t) && /Brizola/.test(t) && /Maluf/.test(t) && /Pollster/.test(t)), t2 = tabs.find((t) => /Pollster/.test(t) && /Collor/.test(t) && !/Brizola/.test(t));
+  const keys1 = ["collor", "lula", "brizola", "covas", "maluf", "afif", "guimaraes"];
+  const mk = (rows, keys, from, to) => rows.filter((r) => r.length === 3 + keys.length + 3 || r.length === 3 + keys.length + 2).map((r) => {
+    if (/election/i.test(r[0])) return null;
+    const dr = parseRange(r[1].replace(/[–−]/g, " a "), 1989);
+    const vals = Object.fromEntries(keys.map((k, i) => [k, pctv(r[3 + i])]).filter(([, v]) => v != null));
+    const abst = pctv(r[3 + keys.length + (keys.length > 2 && r.length === 3 + keys.length + 3 ? 1 : 0)]);
+    if (!dr || dr.end < from || dr.end > to || !keys.slice(0, 2).every((k) => k in vals)) return null;
+    return { pollster: "Datafolha", ...dr, n: +r[2].replace(/,/g, "") || null, moe: "", source: "", section: "en", values: vals, abst };
+  }).filter(Boolean);
+  const p1 = mk(rowsE(t1), keys1, "1989-01-01", "1989-11-14"); // 15/11 (dia da eleição) é boca de urna: fora
+  const p2 = mk(rowsE(t2), ["collor", "lula"], "1989-11-16", "1989-12-16").filter((p) => p.abst != null); // linha sem indecisos = versão "só válidos"
+  save("presidente-1989", p1.map(({ abst, ...p }) => p), nm89);
+  save("presidente-1989-2t", p2.map(({ abst, ...p }) => p), nm89);
+
+  const D94 = {
+    d: ["04-05", "05-03", "05-24", "06-13", "07-05", "07-13", "07-26", "08-09", "08-18", "08-22", "08-30", "09-05", "09-09", "09-15", "09-22", "09-28", "10-01"],
+    fhc: [21, 16, 17, 19, 21, 25, 29, 36, 41, 43, 45, 44, 44, 45, 47, 47, 48],
+    lula: [37, 42, 40, 41, 38, 34, 32, 29, 24, 23, 23, 23, 23, 21, 22, 23, 22],
+    quercia: [8, 7, 8, 6, 7, 7, 7, 6, 5, 4, 5, 5, 5, 6, 6, 5, 5],
+    brizola: [10, 8, 7, 7, 7, 7, 7, 6, 5, 5, 5, 4, 4, 4, 4, 3, 4],
+  };
+  const polls94 = D94.d.map((d, i) => ({ pollster: "Datafolha", start: `1994-${d}`, end: `1994-${d}`, n: null, moe: "", source: "https://media.folha.uol.com.br/datafolha/2022/09/01/intencao_de_voto_e_rejeicao_para_presidente_94.pdf", section: "datafolha-pdf", values: { fhc: D94.fhc[i], lula: D94.lula[i], quercia: D94.quercia[i], brizola: D94.brizola[i] } }));
+  save("presidente-1994", polls94, { fhc: { name: "FHC", party: "PSDB" }, lula: { name: "Lula", party: "PT" }, quercia: { name: "Quércia", party: "PMDB" }, brizola: { name: "Brizola", party: "PDT" } });
+
+  const D98 = {
+    d: ["03-11", "04-30", "05-28", "06-08", "07-09", "08-14", "09-02", "09-18", "09-25", "10-02"],
+    fhc: [41, 41, 34, 33, 40, 42, 48, 48, 46, 49],
+    lula: [25, 24, 30, 30, 28, 26, 26, 25, 25, 26],
+    ciro: [10, 8, 9, 8, 7, 7, 7, 8, 9, 10],
+    eneas: [7, 6, 5, 5, 4, 4, 3, 3, 3, 2],
+  };
+  const polls98 = D98.d.map((d, i) => ({ pollster: "Datafolha", start: `1998-${d}`, end: `1998-${d}`, n: null, moe: "", source: "https://media.folha.uol.com.br/datafolha/2022/12/28/brasil-1998-1t.pdf", section: "datafolha-pdf", values: { fhc: D98.fhc[i], lula: D98.lula[i], ciro: D98.ciro[i], eneas: D98.eneas[i] } }));
+  save("presidente-1998", polls98, { fhc: { name: "FHC", party: "PSDB" }, lula: { name: "Lula", party: "PT" }, ciro: { name: "Ciro", party: "PPS" }, eneas: { name: "Enéas", party: "PRONA" } });
+}
+
 // ---------- resultados oficiais (tabela "Resultados" do artigo da eleição, PT) -> data/historico-resultados.json ----------
 {
-  const DAYS = { 2002: ["2002-10-06", "2002-10-27"], 2006: ["2006-10-01", "2006-10-29"], 2010: ["2010-10-03", "2010-10-31"], 2014: ["2014-10-05", "2014-10-26"], 2018: ["2018-10-07", "2018-10-28"], 2022: ["2022-10-02", "2022-10-30"] };
+  const DAYS = { 1989: ["1989-11-15", "1989-12-17"], 1994: ["1994-10-03", null], 1998: ["1998-10-04", null], 2002: ["2002-10-06", "2002-10-27"], 2006: ["2006-10-01", "2006-10-29"], 2010: ["2010-10-03", "2010-10-31"], 2014: ["2014-10-05", "2014-10-26"], 2018: ["2018-10-07", "2018-10-28"], 2022: ["2022-10-02", "2022-10-30"] };
   const out = {};
   for (const y of Object.keys(DAYS)) {
     const { tables } = tablesWithHeadings(await getPageHTML(`Eleição presidencial no Brasil em ${y}`));

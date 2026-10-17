@@ -1,4 +1,290 @@
 {
+ "1989": {
+  "day1": "1989-11-15",
+  "day2": "1989-12-17",
+  "first": [
+   {
+    "name": "Fernando Collor",
+    "party": "PRN",
+    "pct": 30.48,
+    "votes": 20611030
+   },
+   {
+    "name": "Luiz Inácio Lula da Silva",
+    "party": "PT",
+    "pct": 17.19,
+    "votes": 11622321
+   },
+   {
+    "name": "Leonel Brizola",
+    "party": "PDT",
+    "pct": 16.51,
+    "votes": 11167665
+   },
+   {
+    "name": "Mário Covas",
+    "party": "PSDB",
+    "pct": 11.52,
+    "votes": 7790381
+   },
+   {
+    "name": "Paulo Maluf",
+    "party": "PDS",
+    "pct": 8.85,
+    "votes": 5986585
+   },
+   {
+    "name": "Guilherme Afif Domingos",
+    "party": "PL",
+    "pct": 4.84,
+    "votes": 3272520
+   },
+   {
+    "name": "Ulysses Guimarães",
+    "party": "PMDB",
+    "pct": 4.74,
+    "votes": 3204996
+   },
+   {
+    "name": "Roberto Freire",
+    "party": "PCB",
+    "pct": 1.14,
+    "votes": 769117
+   },
+   {
+    "name": "Aureliano Chaves",
+    "party": "PFL",
+    "pct": 0.89,
+    "votes": 600821
+   },
+   {
+    "name": "Ronaldo Caiado",
+    "party": "PSD",
+    "pct": 0.72,
+    "votes": 488893
+   },
+   {
+    "name": "Affonso Camargo Neto",
+    "party": "PTB",
+    "pct": 0.56,
+    "votes": 379284
+   },
+   {
+    "name": "Enéas Carneiro",
+    "party": "PRONA",
+    "pct": 0.53,
+    "votes": 360578
+   },
+   {
+    "name": "José Marronzinho",
+    "party": "PSP",
+    "pct": 0.35,
+    "votes": 238408
+   },
+   {
+    "name": "Paulo Gontijo",
+    "party": "PP",
+    "pct": 0.29,
+    "votes": 198710
+   },
+   {
+    "name": "Zamir Teixeira",
+    "party": "PCN",
+    "pct": 0.28,
+    "votes": 187164
+   },
+   {
+    "name": "Lívia Maria Pio",
+    "party": "PN",
+    "pct": 0.27,
+    "votes": 179925
+   },
+   {
+    "name": "Eudes Mattar",
+    "party": "PLP",
+    "pct": 0.24,
+    "votes": 162343
+   },
+   {
+    "name": "Fernando Gabeira",
+    "party": "PV",
+    "pct": 0.19,
+    "votes": 125844
+   },
+   {
+    "name": "Celso Brant",
+    "party": "PMN",
+    "pct": 0.16,
+    "votes": 109903
+   },
+   {
+    "name": "Antônio Pedreira",
+    "party": "PPB",
+    "pct": 0.13,
+    "votes": 86107
+   },
+   {
+    "name": "Manoel Horta",
+    "party": "PDCdoB",
+    "pct": 0.12,
+    "votes": 83291
+   },
+   {
+    "name": "Armando Corrêa",
+    "party": "PMB",
+    "pct": 0,
+    "votes": 4363
+   }
+  ],
+  "second": [
+   {
+    "name": "Fernando Collor",
+    "party": "PRN",
+    "pct": 53.03,
+    "votes": 35090206
+   },
+   {
+    "name": "Luiz Inácio Lula da Silva",
+    "party": "PT",
+    "pct": 46.97,
+    "votes": 31075803
+   }
+  ]
+ },
+ "1994": {
+  "day1": "1994-10-03",
+  "day2": null,
+  "first": [
+   {
+    "name": "Fernando Henrique Cardoso",
+    "party": "PSDB",
+    "pct": 54.28,
+    "votes": 34364961
+   },
+   {
+    "name": "Luiz Inácio Lula da Silva",
+    "party": "PT",
+    "pct": 27.04,
+    "votes": 17122127
+   },
+   {
+    "name": "Enéas Carneiro",
+    "party": "PRONA",
+    "pct": 7.38,
+    "votes": 4671457
+   },
+   {
+    "name": "Orestes Quércia",
+    "party": "PMDB",
+    "pct": 4.38,
+    "votes": 2772121
+   },
+   {
+    "name": "Leonel Brizola",
+    "party": "PDT",
+    "pct": 3.18,
+    "votes": 2015836
+   },
+   {
+    "name": "Esperidião Amin",
+    "party": "PPR",
+    "pct": 2.75,
+    "votes": 1739894
+   },
+   {
+    "name": "Carlos Antônio Gomes",
+    "party": "PRN",
+    "pct": 0.61,
+    "votes": 387738
+   },
+   {
+    "name": "Hernani Fortuna",
+    "party": "PSC",
+    "pct": 0.38,
+    "votes": 238197
+   }
+  ],
+  "second": []
+ },
+ "1998": {
+  "day1": "1998-10-04",
+  "day2": null,
+  "first": [
+   {
+    "name": "Fernando Henrique",
+    "party": "PSDB",
+    "pct": 53.06,
+    "votes": 35936382
+   },
+   {
+    "name": "Lula da Silva",
+    "party": "PT",
+    "pct": 31.71,
+    "votes": 21475211
+   },
+   {
+    "name": "Ciro Gomes",
+    "party": "PPS",
+    "pct": 10.97,
+    "votes": 7426187
+   },
+   {
+    "name": "Enéas Carneiro",
+    "party": "PRONA",
+    "pct": 2.14,
+    "votes": 1447089
+   },
+   {
+    "name": "Ivan Frota",
+    "party": "PMN",
+    "pct": 0.37,
+    "votes": 251336
+   },
+   {
+    "name": "Alfredo Sirkis",
+    "party": "PV",
+    "pct": 0.31,
+    "votes": 212983
+   },
+   {
+    "name": "Zé Maria",
+    "party": "PSTU",
+    "pct": 0.3,
+    "votes": 202659
+   },
+   {
+    "name": "João de Deus",
+    "party": "PTdoB",
+    "pct": 0.29,
+    "votes": 198915
+   },
+   {
+    "name": "José Maria Eymael",
+    "party": "PSDC",
+    "pct": 0.25,
+    "votes": 171831
+   },
+   {
+    "name": "Thereza Ruiz",
+    "party": "PTN",
+    "pct": 0.25,
+    "votes": 166053
+   },
+   {
+    "name": "Sérgio Bueno",
+    "party": "PSC",
+    "pct": 0.18,
+    "votes": 124569
+   },
+   {
+    "name": "Vasco Azevedo Neto",
+    "party": "PSN",
+    "pct": 0.16,
+    "votes": 109003
+   }
+  ],
+  "second": []
+ },
  "2002": {
   "day1": "2002-10-06",
   "day2": "2002-10-27",
