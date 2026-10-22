@@ -80,7 +80,8 @@ function race(cfg) {
 const C = (key, name, party, extra = {}) => ({ key, name, party, ...extra });
 
 const LULA = C("lula", "Lula", "PT");
-const runoff = (oppKey, oppName, oppParty, pathRule, scenario) =>
+// optional: cenários hipotéticos de 2º turno somem da Wikipédia quando os finalistas são definidos — não derrubam o build
+const runoff = (oppKey, oppName, oppParty, pathRule, scenario, optional = false) =>
   race({
     group: "Presidente",
     round: "2T",
@@ -89,6 +90,7 @@ const runoff = (oppKey, oppName, oppParty, pathRule, scenario) =>
     wikiPage: PRES_PAGE,
     pathRule,
     display: [LULA, C(oppKey, oppName, oppParty)],
+    optional,
   });
 
 export const RACES = {
@@ -109,9 +111,9 @@ export const RACES = {
   }),
 
   "presidente-2t-flavio": runoff("flavio", "Flávio", "PL", lulaVs(/fl[aá]vio/i), "Flávio"),
-  "presidente-2t-zema": runoff("zema", "Zema", "NOVO", lulaVs(/zema/i), "Zema"),
-  "presidente-2t-caiado": runoff("caiado", "Caiado", "PSD", lulaVs(/caiado/i), "Caiado"),
-  "presidente-2t-renan": runoff("renan", "Renan", "MISSÃO", lulaVs(/renan/i), "Renan"),
+  "presidente-2t-zema": runoff("zema", "Zema", "NOVO", lulaVs(/zema/i), "Zema", true),
+  "presidente-2t-caiado": runoff("caiado", "Caiado", "PSD", lulaVs(/caiado/i), "Caiado", true),
+  "presidente-2t-renan": runoff("renan", "Renan", "MISSÃO", lulaVs(/renan/i), "Renan", true),
 
   "sp-governador": race({
     group: "São Paulo",
