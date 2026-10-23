@@ -15,11 +15,9 @@
  },
  "status": {
   "governador": {
-   "ufsFinais": 26,
+   "ufsFinais": 27,
    "ufsTotal": 27,
-   "pendentes": [
-    "PB"
-   ],
+   "pendentes": [],
    "projetadas": [],
    "segundoTurno": [
     "AC",
@@ -33,11 +31,9 @@
    "rjDecidido2T": false
   },
   "senador": {
-   "ufsFinais": 26,
+   "ufsFinais": 27,
    "ufsTotal": 27,
-   "pendentes": [
-    "PB"
-   ],
+   "pendentes": [],
    "projetadas": [],
    "segundoTurno": [],
    "vagas": 54
@@ -234,6 +230,20 @@
     "status": "Eleito",
     "incumbent": false,
     "prevParty": null,
+    "prevCurrent": null,
+    "projecao": false
+   },
+   {
+    "uf": "PB",
+    "name": "LUCAS RIBEIRO",
+    "fullName": "LUCAS RIBEIRO NOVAIS DE ARAUJO",
+    "party": "PP",
+    "number": "11",
+    "votes": 1470252,
+    "pct": 64.3,
+    "status": "Eleito",
+    "incumbent": true,
+    "prevParty": "PP",
     "prevCurrent": null,
     "projecao": false
    },
@@ -767,6 +777,34 @@
     "pct": 22.45,
     "status": "Eleito",
     "incumbent": false,
+    "prevParty": null,
+    "prevCurrent": null,
+    "projecao": false
+   },
+   {
+    "uf": "PB",
+    "name": "JOAO AZEVÊDO",
+    "fullName": "JOÃO AZEVÊDO LINS FILHO",
+    "party": "PSB",
+    "number": "400",
+    "votes": 1391994,
+    "pct": 32.5,
+    "status": "Eleito",
+    "incumbent": false,
+    "prevParty": null,
+    "prevCurrent": null,
+    "projecao": false
+   },
+   {
+    "uf": "PB",
+    "name": "VENEZIANO",
+    "fullName": "VENEZIANO VITAL DO RÊGO SEGUNDO NETO",
+    "party": "MDB",
+    "number": "155",
+    "votes": 974550,
+    "pct": 22.76,
+    "status": "Eleito",
+    "incumbent": true,
     "prevParty": null,
     "prevCurrent": null,
     "projecao": false
@@ -6015,7 +6053,7 @@
  },
  "composicao": {
   "governadores": {
-   "nota": "20 de 27 já definidos; 6 vão a 2º turno",
+   "nota": "21 de 27 já definidos; 6 vão a 2º turno",
    "rows": [
     {
      "party": "PL",
@@ -6062,6 +6100,17 @@
      "entrou": 1
     },
     {
+     "party": "PP",
+     "color": "#4A78B5",
+     "antes": 4,
+     "depois": 2,
+     "saldo": -2,
+     "reeleitos": 2,
+     "novos": 0,
+     "saiu": 2,
+     "entrou": 0
+    },
+    {
      "party": "MDB",
      "color": "#1B9E5A",
      "antes": 5,
@@ -6070,17 +6119,6 @@
      "reeleitos": 1,
      "novos": 0,
      "saiu": 4,
-     "entrou": 0
-    },
-    {
-     "party": "PP",
-     "color": "#4A78B5",
-     "antes": 4,
-     "depois": 1,
-     "saldo": -3,
-     "reeleitos": 1,
-     "novos": 0,
-     "saiu": 3,
      "entrou": 0
     },
     {
@@ -6120,7 +6158,7 @@
   },
   "senado": {
    "vagasEmDisputa": 54,
-   "definidos": 52,
+   "definidos": 54,
    "rows": [
     {
      "party": "PL",
@@ -6139,14 +6177,14 @@
      "party": "MDB",
      "color": "#1B9E5A",
      "antes": 8,
-     "depois": 6,
-     "saldo": -2,
-     "reeleitos": 3,
+     "depois": 7,
+     "saldo": -1,
+     "reeleitos": 4,
      "novos": 3,
      "saiu": 8,
-     "entrou": 6,
+     "entrou": 7,
      "casaAntes": 9,
-     "casaDepois": 7
+     "casaDepois": 8
     },
     {
      "party": "PT",
@@ -6160,6 +6198,19 @@
      "entrou": 6,
      "casaAntes": 9,
      "casaDepois": 9
+    },
+    {
+     "party": "PSB",
+     "color": "#E8541E",
+     "antes": 5,
+     "depois": 3,
+     "saldo": -2,
+     "reeleitos": 1,
+     "novos": 2,
+     "saiu": 5,
+     "entrou": 3,
+     "casaAntes": 6,
+     "casaDepois": 4
     },
     {
      "party": "PP",
@@ -6212,19 +6263,6 @@
      "entrou": 2,
      "casaAntes": 14,
      "casaDepois": 5
-    },
-    {
-     "party": "PSB",
-     "color": "#E8541E",
-     "antes": 5,
-     "depois": 2,
-     "saldo": -3,
-     "reeleitos": 1,
-     "novos": 1,
-     "saiu": 5,
-     "entrou": 2,
-     "casaAntes": 6,
-     "casaDepois": 3
     },
     {
      "party": "PSDB",
@@ -6753,15 +6791,15 @@
  },
  "metricas": {
   "governadores": {
-   "n": 20,
-   "reeleitos": 10,
-   "renovacaoPct": 50,
+   "n": 21,
+   "reeleitos": 11,
+   "renovacaoPct": 47.6,
    "trocaramPartido": 0
   },
   "senado": {
-   "n": 52,
-   "reeleitos": 13,
-   "renovacaoPct": 75,
+   "n": 54,
+   "reeleitos": 14,
+   "renovacaoPct": 74.1,
    "trocaramPartido": 0
   },
   "camara": {
