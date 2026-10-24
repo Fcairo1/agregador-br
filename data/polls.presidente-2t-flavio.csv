@@ -150,8 +150,8 @@ palver-2026-10-01,Palver,2026-09-30,2026-10-01,5000,4,https://www.cartacapital.c
 vox-brasil-2026-10-01,Vox Brasil,2026-09-29,2026-10-01,2100,2.15,https://www.metropoles.com/brasil/vox-brasil-flavio-bolsonaro-tem-412-e-lula-marca-404-no-1o-turno,2026,45.2,48.2
 atlasintel-2026-10-02,AtlasIntel,2026-09-27,2026-10-02,5000,1,https://www.gazetadopovo.com.br/eleicoes/2026/pesquisa-eleitoral-2026/atlasintel-presidente-outubro-2026/,2026,50.1,49.9
 cnt-mda-2026-10-02,CNT/MDA,2026-09-30,2026-10-02,2007,2.2,https://exame.com/brasil/pesquisa-cnt-mda-para-presidente-lula-tem-478-e-flavio-421-dos-votos-validos-no-1o-turno/,2026,47.3,43.1
+franca-2026-10-02,França,2026-09-29,2026-10-02,2000,2.2,https://www.poder360.com.br/poder-eleicoes-2026/lula-tem-4588-contra-4501-de-flavio-no-2o-turno-diz-pesquisa/,2026,45.88,45.01
 gerp-2026-10-02,Gerp,2026-09-30,2026-10-02,2400,2.04,https://www.poder360.com.br/poder-eleicoes-2026/flavio-tem-49-contra-44-de-lula-no-2o-turno-diz-gerp/,2026,44,49
-ifp-2026-10-02,IFP,2026-09-29,2026-10-02,2000,2.2,https://www.poder360.com.br/poder-eleicoes-2026/lula-tem-4588-contra-4501-de-flavio-no-2o-turno-diz-pesquisa/,2026,45.88,45.01
 poderdata-2026-10-02,PoderData,2026-09-30,2026-10-02,4000,1.5,https://www.poder360.com.br/poderdata/lula-e-flavio-tem-46-cada-um-no-2o-turno-diz-poderdata-aya/,2026,46,46
 verita-2026-10-02,Veritá,2026-09-26,2026-10-02,40500,1,,2026,48.44,51.56
 datafolha-2026-10-03,Datafolha,2026-10-03,2026-10-03,4006,2,https://g1.globo.com/politica/eleicoes/2026/pesquisa-eleitoral/noticia/2026/10/03/datafolha-presidente-3-outubro.ghtml,2026,47,46
@@ -191,9 +191,9 @@ gerp-2026-10-19,Gerp,2026-10-15,2026-10-19,2400,2,,2026,45,50
 meio-ideia-2026-10-19,Meio/Ideia,2026-10-15,2026-10-19,1500,2.5,,2026,46,48
 real-time-big-data-2026-10-19,Real Time Big Data,2026-10-15,2026-10-19,2000,2,,2026,45,48
 verita-2026-10-19,Veritá,2026-10-15,2026-10-19,15554,1,,2026,49.3,50.7
+franca-2026-10-20,França,2026-10-16,2026-10-20,3000,1.8,,2026,39.65,40.95
 genial-quaest-2026-10-20,Genial/Quaest,2026-10-17,2026-10-20,2154,2,,2026,44,45
 gerp-2026-10-20,Gerp,2026-10-17,2026-10-20,2400,2.04,,2026,45,50
-ifp-2026-10-20,IFP,2026-10-16,2026-10-20,3000,1.8,,2026,39.65,40.95
 modalmais-futura-2026-10-20,Modalmais/Futura,2026-10-19,2026-10-20,2000,2.2,,2026,46.8,48.9
 palver-2026-10-20,Palver,2026-10-18,2026-10-20,5000,2.4,,2026,48,50
 datatrends-2026-10-21,DataTrends,2026-10-19,2026-10-21,2000,2.19,,2026,46,50
@@ -205,5 +205,7 @@ ipespe-2026-10-22,Ipespe,2026-10-20,2026-10-22,1500,2.6,,2026,47,48
 real-time-big-data-2026-10-22,Real Time Big Data,2026-10-19,2026-10-22,2000,2,,2026,45,49
 verita-2026-10-22,Veritá,2026-10-18,2026-10-22,15554,1,,2026,47.5,50.2
 vox-brasil-2026-10-22,Vox Brasil,2026-10-20,2026-10-22,2100,2.15,,2026,45.4,44.3
-instituto-franca-2026-10-23,Instituto França,2026-10-21,2026-10-23,1537,2.5,,2026,43.1,45.6
+cnt-mda-2026-10-23,CNT/MDA,2026-10-21,2026-10-23,2002,2.2,,2026,45,46.3
+colectta-2026-10-23,Colectta,2026-10-23,2026-10-23,3000,2,,2026,46.5,46
+franca-2026-10-23,França,2026-10-21,2026-10-23,1537,2.5,,2026,43.1,45.6
 vetor-arrow-2026-10-23,Vetor Arrow,2026-10-22,2026-10-23,6867,1.2,,2026,44.9,50
